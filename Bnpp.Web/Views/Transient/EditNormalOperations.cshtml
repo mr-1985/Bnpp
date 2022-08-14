@@ -1,0 +1,76 @@
+﻿@model Bnpp.DataLayer.Entities.OperationalData
+
+@{
+    ViewData["Title"] = "EditNormalOperations";
+    Layout = null;
+}
+
+<form asp-action="CreateNormalOperations" method="post">
+    <input type="hidden" asp-for="OperationalId"/>
+    <table cellpadding="3" cellspacing="0">
+        <tbody>
+        <tr>
+            <td>
+                Name of Conditions:
+            </td>
+            <td>
+                <input asp-for="NameofConditions" type="text" id="iName" style="direction: ltr; text-align: left;">
+            </td>
+            <td>
+                <span asp-validation-for="NameofConditions"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Allowable Num.:
+            </td>
+            <td>
+                <input asp-for="AllowableNumber" type="text" id="iAZK" style="direction: ltr; text-align: left;">
+            </td>
+            <td>
+                <span asp-validation-for="AllowableNumber"></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Dates:
+            </td>
+            <td>
+                <input name="Dates" id="Dates" style="direction: ltr; text-align: left;">
+            </td>
+            <td>
+                <span asp-validation-for="AllowableNumber"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Occurrances:
+            </td>
+            <td>
+                <input asp-for="Occurrance" value="1" type="text" id="iPosition" style="direction: ltr; text-align: left;">
+            </td>
+            <td>
+                <span asp-validation-for="Occurrance"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Save" class="butn-save" style="direction: ltr; text-align: left;">
+                <input type="button" onclick="showPage1()"  value="Cancel" id="Button2" class="butn-cancel" style="direction: ltr; text-align: left;">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+
+<link href="/css/kendo.common.min.css" rel="stylesheet" />
+<link href="/css/kendo.default.min.css" rel="stylesheet" />
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/kendo.all.min.js"></script>
+<script>
+    // create DatePicker from input HTML element
+    $("#Dates").kendoDatePicker();
+</script>
+

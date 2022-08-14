@@ -1,0 +1,55 @@
+﻿@model Bnpp.Core.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="dcontent">
+    @if (ViewBag.IsSuccess != null)
+    {
+        <script>
+             // Your delay in milliseconds
+             var delay = 1000;
+             setTimeout(function () { window.location = "https://localhost:44340/Admin"; }, delay);
+            @*setTimeout(function () { window.location = "https://ageingnew.behbodsanatco.com/Admin"; }, delay);*@
+        </script>
+    }
+
+    <h1>login</h1>
+    <div id="iError"></div>
+    <form asp-action="Login" method="post">
+        <table cellpadding="3" cellspacing="0">
+
+            <tbody>
+                <tr>
+                    <td>
+                        UserName:
+                    </td>
+                    <td>
+                        <input asp-for="UserName" type="text" style="direction: ltr; text-align: left;">
+                    </td>
+                    <td>
+                        <span asp-validation-for="UserName"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Password:
+                    </td>
+                    <td>
+                        <input asp-for="Password" type="password" style="direction: ltr; text-align: left;">
+                    </td>
+                    <td>
+                        <span asp-validation-for="Password"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Login" style="direction: rtl; text-align: right;">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
