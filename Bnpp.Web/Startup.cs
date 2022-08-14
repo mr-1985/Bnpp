@@ -74,19 +74,15 @@ namespace Bnpp.Web
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //Not Found Page
-            app.Use(async (context, next) =>
-            {
-                await next();
+            //app.Use(async (context, next) =>
+            //{
+            //    await next();
 
-                //if (!context.User.Identity.IsAuthenticated)
-                //{
-                //    context.Response.Redirect("/Login");
-                //}
-                if (context.Response.StatusCode == 404)
-                {
-                    context.Response.Redirect("Access Denied");
-                }
-            });
+            //    if (context.Response.StatusCode == 404)
+            //    {
+            //        context.Response.Redirect("Access Denied");
+            //    }
+            //});
 
             if (env.IsDevelopment())
             {
