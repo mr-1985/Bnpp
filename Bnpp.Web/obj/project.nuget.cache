@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7cRXoXw+8OX3qpTWIiv+TCET9Fw6Je/mvzgsT507PJ81PKzI5nQr9V+VRQxH9OTJ32b2SO2Jau61T9m0s+K12A==",
+  "dgSpecHash": "wwMxUymSezqen/BerquaZ4g+LRCvTeihFFWXCC8KJR8T2ldm69ZEfKAu9Z10Y34+fe4nGdcr0taYJ3MSTu3a2w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\payetakht\\source\\repos\\Example06\\Bnpp\\Bnpp.Web\\Bnpp.Web.csproj",
+  "projectFilePath": "C:\\Users\\payetakht\\Source\\Repos\\Bnpp\\Bnpp.Web\\Bnpp.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\payetakht\\.nuget\\packages\\corecompat.system.drawing.v2\\5.2.0-preview1-r131\\corecompat.system.drawing.v2.5.2.0-preview1-r131.nupkg.sha512",
     "C:\\Users\\payetakht\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
@@ -199,8 +199,7 @@
     "C:\\Users\\payetakht\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\payetakht\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\payetakht\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\payetakht\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\payetakht\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
+    "C:\\Users\\payetakht\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

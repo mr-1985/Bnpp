@@ -5764,11 +5764,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\payetakht\\source\\repos\\Example06\\Bnpp\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj",
+      "projectUniqueName": "C:\\Users\\payetakht\\Source\\Repos\\Bnpp\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj",
       "projectName": "Bnpp.DataLayer",
-      "projectPath": "C:\\Users\\payetakht\\source\\repos\\Example06\\Bnpp\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj",
+      "projectPath": "C:\\Users\\payetakht\\Source\\Repos\\Bnpp\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj",
       "packagesPath": "C:\\Users\\payetakht\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\payetakht\\source\\repos\\Example06\\Bnpp\\Bnpp.DataLayer\\obj\\",
+      "outputPath": "C:\\Users\\payetakht\\Source\\Repos\\Bnpp\\Bnpp.DataLayer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -5831,7 +5831,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.108\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
