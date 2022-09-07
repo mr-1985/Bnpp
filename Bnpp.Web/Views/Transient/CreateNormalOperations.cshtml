@@ -77,7 +77,7 @@
 <script type="text/javascript">
     function submitNormal() {
         var data = $("#normalForm").serialize();
-        console.log(data);
+        //console.log(data);
         alert(data);
         $.ajax({
             type: 'POST',
@@ -90,7 +90,7 @@
 
             error: function() {
                 alert('Failed to receive the Data');
-                console.log('Failed ');
+                //console.log('Failed ');
             }
         });
 

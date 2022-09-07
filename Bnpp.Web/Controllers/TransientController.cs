@@ -58,13 +58,47 @@ namespace Bnpp.Web.Controllers
 
             
             _operational.AddNormalOperation(NormalOperation);
-            
-            return RedirectToAction("Transient");
+
+            return new JsonResult("success");
         }
 
-        public IActionResult EditNormalOperations(int id)
+        public IActionResult EditNormalOperations(int id, string StartDates = "")
         {
+            if (StartDates != "")
+            {
+                string[] std = StartDates.Split('/');
+                NormalOperation.CreateDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
             return View(_operational.GetNormalOperationalById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditNormalOperations(string StartDates = "")
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(NormalOperation);
+            }
+
+            if (StartDates != "")
+            {
+                string[] std = StartDates.Split('/');
+                NormalOperation.CreateDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+
+            _operational.UpdateNormalOperational(NormalOperation);
+
+            return Json(" Diesel Generators Successfully Deleted.");
         }
 
         #endregion
