@@ -37,6 +37,7 @@ namespace Bnpp.DataLayer.Context
         #endregion
         public DbSet<Strcture> Strctures { get; set; }
         public DbSet<OperationalData> OperationalData { get; set; }
+        public DbSet<Occurance> Occurances { get; set; }
 
 
     }

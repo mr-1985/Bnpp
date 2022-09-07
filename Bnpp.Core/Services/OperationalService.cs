@@ -55,5 +55,43 @@ namespace Bnpp.Core.Services
             normalOperation.IsDelete = true;
             UpdateNormalOperational(normalOperation);
         }
+
+        public List<OccuranceListViewModel> GetAllOccurances()
+        {
+            return _context.Occurances.Where(e => e.IsDelete == false).
+                Select(e => new OccuranceListViewModel()
+                {
+                    OccuranceId = e.OccuranceId,
+                    AllowableNumber = e.AllowableNumber,
+                    NameOfCondition = e.NameofConditions,
+                    Occurrances = e.Occurrances,
+                    CreateDate = e.CreateDate
+                }).ToList();
+        }
+
+        public Occurance GetOccuranceById(int occuranceId)
+        {
+            return _context.Occurances.Find(occuranceId);
+        }
+
+        public int AddOccurance(Occurance occurance)
+        {
+            _context.Add(occurance);
+            _context.SaveChanges();
+            return occurance.OccuranceId;
+        }
+
+        public void UpdateOccurance(Occurance occurance)
+        {
+            _context.Occurances.Update(occurance);
+            _context.SaveChanges();
+        }
+
+        public void DeleteOccurance(int occuranceId)
+        {
+            var occurance = GetOccuranceById(occuranceId);
+            occurance.IsDelete = true;
+            UpdateOccurance(occurance);
+        }
     }
 }
