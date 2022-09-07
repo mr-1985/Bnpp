@@ -49,14 +49,14 @@ namespace Bnpp.Web.Controllers
             if (StartDates != "")
             {
                 string[] std = StartDates.Split('/');
-                NormalOperation.CreateDate= new DateTime(int.Parse(std[2]),
+                NormalOperation.CreateDate = new DateTime(int.Parse(std[2]),
                     int.Parse(std[0]),
                     int.Parse(std[1]),
                     new GregorianCalendar()
                 );
             }
 
-            
+
             _operational.AddNormalOperation(NormalOperation);
 
             return new JsonResult("success");
@@ -64,7 +64,7 @@ namespace Bnpp.Web.Controllers
 
         public IActionResult EditNormalOperations(int id)
         {
-            
+
 
             return View(_operational.GetNormalOperationalById(id));
         }
@@ -105,11 +105,37 @@ namespace Bnpp.Web.Controllers
 
         #endregion
 
-            #region OperationalOccurence
+        #region OperationalOccurence
 
-            public IActionResult OperationalOccurence()
+        public IActionResult OperationalOccurence()
+        {
+            return View(_operational.GetAllOccurances());
+        }
+
+        [BindProperty] public Occurance Occurance { get; set; }
+
+        public IActionResult CreateOccurence()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateOccurence(string StartDates = "")
+        {
+            if (StartDates != "")
+            {
+                string[] std = StartDates.Split('/');
+                NormalOperation.CreateDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+
+            _operational.AddOccurance(Occurance);
+
+            return new JsonResult("success");
         }
 
         #endregion
@@ -120,6 +146,8 @@ namespace Bnpp.Web.Controllers
         {
             return View();
         }
+
+        
 
         #endregion
 

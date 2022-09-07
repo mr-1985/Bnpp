@@ -550,3 +550,4 @@ C:\Users\payetakht\Source\Repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Bnpp.Web.dll
 C:\Users\payetakht\Source\Repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\ref\Bnpp.Web.dll
 C:\Users\payetakht\Source\Repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Bnpp.Web.pdb
 C:\Users\payetakht\Source\Repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Bnpp.Web.genruntimeconfig.cache
+C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Transient\CreateOccurence.cshtml.g.cs
