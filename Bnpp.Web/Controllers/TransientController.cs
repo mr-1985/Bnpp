@@ -31,10 +31,7 @@ namespace Bnpp.Web.Controllers
             return View(_operational.GetAllNormalOperations());
         }
 
-        //public IActionResult ShowListOfNormalOperations()
-        //{
-        //    return View(_electrical.GetAllDiesels());
-        //}
+       
         [BindProperty]
         public OperationalData NormalOperation { get; set; }
         public IActionResult CreateNormalOperations()
@@ -64,8 +61,6 @@ namespace Bnpp.Web.Controllers
 
         public IActionResult EditNormalOperations(int id)
         {
-
-
             return View(_operational.GetNormalOperationalById(id));
         }
 
@@ -125,19 +120,55 @@ namespace Bnpp.Web.Controllers
             if (StartDates != "")
             {
                 string[] std = StartDates.Split('/');
-                NormalOperation.CreateDate = new DateTime(int.Parse(std[2]),
+                Occurance.CreateDate = new DateTime(int.Parse(std[2]),
                     int.Parse(std[0]),
                     int.Parse(std[1]),
                     new GregorianCalendar()
                 );
             }
 
-
             _operational.AddOccurance(Occurance);
 
             return new JsonResult("success");
         }
 
+        public IActionResult EditOccurence(int id)
+        {
+            return View(_operational.GetOccuranceById(id));
+        }
+        
+        [HttpPost]
+        public IActionResult EditOccurence(string StartDates = "")
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(Occurance);
+            }
+
+            if (StartDates != "")
+            {
+                string[] std = StartDates.Split('/');
+                Occurance.CreateDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+            _operational.UpdateOccurance(Occurance);
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+        
+
+        public IActionResult DeleteOccurence(string[] occurenceId)
+        {
+            foreach (string id in occurenceId)
+            {
+                _operational.DeleteOccurance(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
         #endregion
 
         #region DesignBasisAccidents

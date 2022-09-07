@@ -6,8 +6,6 @@
 
 }
 
-
-
 <div class="dcontent">
     <div style="margin-top: 10px; background-color: #6b8d9e; padding-top: 5px; padding-bottom: 5px; padding-right: 10px; border-radius: 5px; border: solid 1px #cccccc; background: repeating-linear-gradient(-45deg, #7fa1b3, #6b8d9e 1px, #6b8d9e 1px, #6b8d9e 20px);">
         &nbsp;
@@ -24,7 +22,7 @@
                         » <b id="subTitle22a">Transients</b>
                     </td>
                     <td>
-                        » <b style="color: #ff0000;" id="subTitle22">Normal Operations</b>
+                        » <b style="color: #ff0000;" id="subTitle22">Operational Occurence</b>
                     </td>
                 </tr>
             </tbody>
@@ -232,7 +230,7 @@
     }
 
     function Edit(id) {
-        $("#newPage").load("/Transient/EditNormalOperations/"+id);
+        $("#newPage").load("/Transient/EditOccurence/"+id);
     }
 
 
@@ -243,16 +241,10 @@
 
     function showPage2() {
         $("#Tabs").load("/Transient/OperationalOccurence/");
-        //$("li").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-        //$("li").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-
     }
 
     function showPage3() {
         $("#Tabs").load("/Transient/DesignBasisAccidents/");
-        //,function() {
-        //    $("li #tab-button3").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-        //}
     }
 
 
@@ -273,11 +265,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+            url: "/Transient/DeleteOccurence",
+            data: { "occurenceId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
+                $("#Tabs").load("/Transient/OperationalOccurence/");
             },
             failure: function (response) {
                 alert(response.responseText);
