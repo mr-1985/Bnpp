@@ -1,4 +1,4 @@
-﻿@*@page "{id}"*@
+﻿
 @model Bnpp.DataLayer.Entities.OperationalData
 
 @{
@@ -6,7 +6,7 @@
     Layout = null;
 }
 
-<form asp-action="EditNormalOperations" method="post">
+<form id="normalForm" asp-action="EditNormalOperations" method="post">
     <input type="hidden" asp-for="OperationalId"/>
     <table cellpadding="3" cellspacing="0">
         <tbody>
@@ -57,7 +57,7 @@
         </tr>
         <tr>
             <td>
-                <input type="button" onclick="submitNormal()" value="Save" class="butn-save" style="direction: ltr; text-align: left;">
+                <input type="button" onclick="edititNormal()" value="Save" class="butn-save" style="direction: ltr; text-align: left;">
                 <input type="button" onclick="showPage1()"  value="Cancel" id="Button2" class="butn-cancel" style="direction: ltr; text-align: left;">
             </td>
         </tr>
@@ -76,11 +76,11 @@
 </script>
 
 <script type="text/javascript">
-    function submitNormal() {
+    function edititNormal() {
         var data = $("#normalForm").serialize();
         //console.log(data);
        
-        alert(data);
+        //alert(data);
         $.ajax({
             type: 'POST',
             url: '/Transient/EditNormalOperations',
@@ -91,7 +91,7 @@
             },
             
             error: function() {
-                alert('Failed to receive the Data');
+                //alert('Failed to receive the Data');
                 //console.log('Failed ');
             }
         });

@@ -62,17 +62,9 @@ namespace Bnpp.Web.Controllers
             return new JsonResult("success");
         }
 
-        public IActionResult EditNormalOperations(int id, string StartDates = "")
+        public IActionResult EditNormalOperations(int id)
         {
-            if (StartDates != "")
-            {
-                string[] std = StartDates.Split('/');
-                NormalOperation.CreateDate = new DateTime(int.Parse(std[2]),
-                    int.Parse(std[0]),
-                    int.Parse(std[1]),
-                    new GregorianCalendar()
-                );
-            }
+            
 
             return View(_operational.GetNormalOperationalById(id));
         }

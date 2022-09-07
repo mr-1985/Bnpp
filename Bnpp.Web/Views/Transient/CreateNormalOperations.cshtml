@@ -25,7 +25,7 @@
                     Allowable Num.:
                 </td>
                 <td>
-                    <input asp-for="AllowableNumber" type="text" id="iAZK" style="direction: ltr; text-align: left;">
+                    <input asp-for="AllowableNumber" type="text" id="iAZK" required="" style="direction: ltr; text-align: left;">
                 </td>
                 <td>
                     <span asp-validation-for="AllowableNumber"></span>
@@ -78,7 +78,7 @@
     function submitNormal() {
         var data = $("#normalForm").serialize();
         //console.log(data);
-        alert(data);
+        //alert(data);
         $.ajax({
             type: 'POST',
             url: '/Transient/CreateNormalOperations',
@@ -89,7 +89,7 @@
             },
 
             error: function() {
-                alert('Failed to receive the Data');
+                //alert('Failed to receive the Data');
                 //console.log('Failed ');
             }
         });
