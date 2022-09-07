@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<div id="Tabs">
+
+</div>
+
+@section Scripts
+{
+    <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+
+    $( document ).ready(function() {
+        $("#Tabs").load("/Technical/GeneralData/");
+    });
+
+     function showPage1() {
+        $("#Tabs").load("/Technical/GeneralData/");
+    }
+
+    function showPage2() {
+        $("#Tabs").load("/Technical/DesignData/");
+    }
+
+    function showPage3() {
+        $("#Tabs").load("/Technical/Documents/");
+    }
+    
+    function showPage4() {
+        $("#Tabs").load("/Technical/Safety/");
+    }
+    
+    function showPage5() {
+        $("#Tabs").load("/Technical/Components/");
+    }
+
+</script>
+
+}
+
+

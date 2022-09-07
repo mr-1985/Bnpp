@@ -1,11 +1,8 @@
 ﻿
 @{
-    ViewData["Title"] = "OperationalOccurence";
+    ViewData["Title"] = "Components";
     Layout = null;
-
 }
-
-
 
 <div class="dcontent">
     <div style="margin-top: 10px; background-color: #6b8d9e; padding-top: 5px; padding-bottom: 5px; padding-right: 10px; border-radius: 5px; border: solid 1px #cccccc; background: repeating-linear-gradient(-45deg, #7fa1b3, #6b8d9e 1px, #6b8d9e 1px, #6b8d9e 20px);">
@@ -20,10 +17,11 @@
                         <b><a class="breadcumb2-link" href="#">Mechanical Equipments</a></b>
                     </td>
                     <td style="">
-                        » <b id="subTitle22a">Transients</b>
+                        » <b id="subTitle22a"></b>
                     </td>
                     <td>
-                        » <b style="color: #ff0000;" id="subTitle22">Normal Operations</b>
+                        » Basic Data<b style="color: #ff0000;" id="subTitle22"> » Components
+                        </b>
                     </td>
                 </tr>
             </tbody>
@@ -33,7 +31,8 @@
         </a>
     </div>
 
-    <h1 id="iH1">Operational Data</h1>
+    <h1 id="iH1">Basic Data
+    </h1>
     <div id="iContent">
 
         <div class="tab-buttons">
@@ -41,18 +40,32 @@
                 <li id="tab-button1" class="tab-buttons-li" @*style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;"*@ @*style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;"*@>
                     <a id="tab-button-a1"
                        onclick="showPage1()" style="cursor:pointer;color: rgb(0, 113, 158);">
-                        Normal Operations
+                        General Data
                     </a>
                 </li>
                 <li id="tab-button2" @*class="tab-buttons-li"*@ style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
                     <a id="tab-buttona2" onclick="showPage2()" style="cursor:pointer;color: rgb(110, 110, 255);">
-                        Operational Occurances
+                        Design Data
                     </a>
 
                 </li>
                 <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
                     <a id="tab-button-a3" onclick="showPage3()" style="cursor:pointer;color: rgb(110, 110, 255);">
-                        Design Basis accidents
+                        Documents
+
+                    </a>
+                </li>
+                <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
+                    <a id="tab-button-a3" onclick="showPage4()" style="cursor:pointer;color: rgb(110, 110, 255);">
+                        Safety class & Seismic category
+
+                    </a>
+                </li>
+                
+                <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
+                    <a id="tab-button-a3" onclick="showPage5()" style="cursor:pointer;color: rgb(110, 110, 255);">
+                        Components
+
                     </a>
                 </li>
             </ul>
@@ -62,7 +75,7 @@
 
         <div id="tab1" class="tab-item" style="display: block;">
 
-            <h1 id="iH1">Operational Occurances</h1>
+            <h1 id="iH1">Components</h1>
 
             <div class="bevel-box">
                 <table cellpadding="3" cellspacing="0">
@@ -127,7 +140,7 @@
                     </table>*@
             </div>
 
-            <div id="newPage">
+            <div  id="newPage">
                 <div>
 
                     <div id="iLoading22" style="display: none;">
@@ -136,7 +149,7 @@
 
 
                     <a class="btn-new-equip" onclick="Create()">New</a>
-                    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
+                    <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
                     <br />
                     @{
                         int rowCount = 1;
@@ -149,28 +162,41 @@
                                 </th>
                                 <th></th>
                                 <th style="width: 150px">
-                                    <b>Date</b>
+                                    <b>Element Name</b>
                                 </th>
                                 <th style="width: 250px">
-                                    <b>Name of Conditions</b>
+                                    <b>Designation</b>
+                                </th>
+                               
+                                <th style="width: 120px">
+                                    <b>Serial No.	 </b>
+                                </th>
+                                
+                                <th style="width: 120px">
+                                    <b>	 Diameter</b>
                                 </th>
                                 <th style="width: 120px">
-                                    <b>Allowable Num.</b>
+                                    <b>	Thickness</b>
                                 </th>
                                 <th style="width: 120px">
-                                    <b>Occurrances</b>
+                                    <b>	Length</b>
                                 </th>
+                                <th style="width: 120px">
+                                    <b>	Material Grade</b>
+                                </th>
+
+                                	
                                 <th style="width: 120px">
                                     <b>Actions</b>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
+                            @*@foreach (var item in Model)
                             {
                                 <tr role="row">
                                     <td>
-                                        <input type="checkbox" class="checkBox" value="@item.OccuranceId" />
+                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
                                     </td>
                                     <td>
                                         @rowCount
@@ -188,13 +214,13 @@
                                         @item.Occurrances
                                     </td>
                                     <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.OccuranceId)">
+                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
                                             Edit
                                         </a>
                                     </td>
                                 </tr>
                                 rowCount++;
-                            }
+                            }*@
                         </tbody>
                     </table>
 
@@ -227,35 +253,36 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/Transient/CreateOccurence");
+        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
     }
 
     function Edit(id) {
-        $("#newPage").load("/Transient/EditNormalOperations/"+id);
+        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
     }
 
+    
 
-
-    function showPage1() {
-        $("#Tabs").load("/Transient/NormalOperations/");
+  function showPage1() {
+        $("#Tabs").load("/Technical/GeneralData/");
     }
 
     function showPage2() {
-        $("#Tabs").load("/Transient/OperationalOccurence/");
-        //$("li").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-        //$("li").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-
+        $("#Tabs").load("/Technical/DesignData/");
     }
 
     function showPage3() {
-        $("#Tabs").load("/Transient/DesignBasisAccidents/");
-        
-        //,function() {
-        //    $("li #tab-button3").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-        }
+        $("#Tabs").load("/Technical/Documents/");
+    }
+    
+    function showPage4() {
+        $("#Tabs").load("/Technical/Safety/");
+    }
+    
+    function showPage5() {
+        $("#Tabs").load("/Technical/Components/");
     }
 
-
+    
 
     $("#checkAll").click(function () {
         $(".checkBox").prop('checked',
@@ -292,5 +319,7 @@
 
 
 </script>
+
+
 
 
