@@ -251,9 +251,9 @@
         }
     }
 
-    $(function() {
-        $("#listOShowListOfNormalOperations").load("/Transient/ShowListOfNormalOperations/");
-    });
+    //$(function() {
+    //    $("#listOShowListOfNormalOperations").load("/Transient/ShowListOfNormalOperations/");
+    //});
 
 
     $("#checkAll").click(function () {
@@ -272,11 +272,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Diesel/DeleteDiesel",
-            data: { "dieselId": selectedIDs },
+            url: "/Transient/DeleteNormalOperations",
+            data: { "operationalId": selectedIDs },
 
             success: function (response) {
-                window.location.href = "/Diesel";
+                $("#Tabs").load("/Transient/NormalOperations/");
             },
             failure: function (response) {
                 alert(response.responseText);

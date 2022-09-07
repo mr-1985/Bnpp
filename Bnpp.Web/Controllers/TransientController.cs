@@ -93,11 +93,21 @@ namespace Bnpp.Web.Controllers
             return Json(" Diesel Generators Successfully Deleted.");
         }
 
+        public IActionResult DeleteNormalOperations(string[] operationalId)
+        {
+            foreach (string id in operationalId)
+            {
+                _operational.DeleteNormalOperational(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
         #endregion
 
-        #region OperationalOccurence
+            #region OperationalOccurence
 
-        public IActionResult OperationalOccurence()
+            public IActionResult OperationalOccurence()
         {
             return View();
         }
