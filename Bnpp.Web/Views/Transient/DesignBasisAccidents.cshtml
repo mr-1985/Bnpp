@@ -189,7 +189,7 @@
     }
 
     function Edit(id) {
-        $("#newPage").load("/Transient/EditNormalOperations/"+id);
+        $("#newPage").load("/Transient/EditDesignBasisAccidents/"+id);
     }
 
     function showPage1() {
@@ -222,11 +222,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+            url: "/Transient/DeleteDesignBasisAccidents",
+            data: { "basisId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
+                $("#Tabs").load("/Transient/DesignBasisAccidents/");
             },
             failure: function (response) {
                 alert(response.responseText);

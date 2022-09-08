@@ -203,6 +203,47 @@ namespace Bnpp.Web.Controllers
 
             return new JsonResult("success");
         }
+
+        public IActionResult EditDesignBasisAccidents(int id)
+        {
+            return View(_operational.GetBasisAccidentById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditDesignBasisAccidents(string StartDates = "")
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(Basis);
+            }
+
+            if (StartDates != "")
+            {
+                string[] std = StartDates.Split('/');
+                Basis.CreateDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+            _operational.UpdateBasisAccident(Basis);
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        public IActionResult DeleteDesignBasisAccidents(string[] basisId)
+        {
+            foreach (string id in basisId)
+            {
+                _operational.DeleteBasisAccident(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+
+        
+
         #endregion
 
     }
