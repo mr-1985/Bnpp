@@ -69,6 +69,31 @@
 
                     </a>
                 </li>
+                <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
+                    <a id="tab-button-a3" onclick="showPage6()" style="cursor:pointer;color: rgb(110, 110, 255);">
+                        Chemical Norms
+                    </a>
+                </li>
+                <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
+                    <a id="tab-button-a3" onclick="showPage7()" style="cursor:pointer;color: rgb(110, 110, 255);">
+                        Technical Programs
+                    </a>
+                </li>
+                <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
+                    <a id="tab-button-a3" onclick="showPage8()" style="cursor:pointer;color: rgb(110, 110, 255);">
+                        Sensors
+                    </a>
+                </li>
+                <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
+                    <a id="tab-button-a3" onclick="showPage9()" style="cursor:pointer;color: rgb(110, 110, 255);">
+                        Control Points
+                    </a>
+                </li>
+                <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
+                    <a id="tab-button-a3" onclick="showPage10()" style="cursor:pointer;color: rgb(110, 110, 255);">
+                        H-Forms
+                    </a>
+                </li>
 
             </ul>
 
@@ -277,6 +302,26 @@
     
     function showPage5() {
         $("#Tabs").load("/Technical/Components/");
+    }
+    
+     function showPage6() {
+        $("#Tabs").load("/Technical/ChemicalNorms");
+    }
+
+    function showPage7() {
+        $("#Tabs").load("/Technical/TechnicalPrograms/");
+    }
+
+    function showPage8() {
+        $("#Tabs").load("/Technical/Sensors");
+    }
+    
+    function showPage9() {
+        $("#Tabs").load("/Technical/ControlPoints/");
+    }
+    
+    function showPage10() {
+        $("#Tabs").load("/Technical/HForms/");
     }
 
 
