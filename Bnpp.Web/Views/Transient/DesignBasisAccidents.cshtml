@@ -1,11 +1,8 @@
-﻿
+﻿@model IEnumerable<Bnpp.Core.ViewModels.DesignBasisListViewModel>
 @{
     ViewData["Title"] = "OperationalOccurence";
     Layout = null;
-
 }
-
-
 
 <div class="dcontent">
     <div style="margin-top: 10px; background-color: #6b8d9e; padding-top: 5px; padding-bottom: 5px; padding-right: 10px; border-radius: 5px; border: solid 1px #cccccc; background: repeating-linear-gradient(-45deg, #7fa1b3, #6b8d9e 1px, #6b8d9e 1px, #6b8d9e 20px);">
@@ -23,7 +20,7 @@
                         » <b id="subTitle22a">Transients</b>
                     </td>
                     <td>
-                        » <b style="color: #ff0000;" id="subTitle22">Normal Operations</b>
+                        » <b style="color: #ff0000;" id="subTitle22">Design Basis accidents</b>
                     </td>
                 </tr>
             </tbody>
@@ -62,27 +59,13 @@
 
         <div id="tab1" class="tab-item" style="display: block;">
 
-            <h1 id="iH1">Operational Occurances</h1>
+            <h1 id="iH1">Design Basis accidents</h1>
 
             <div class="bevel-box">
                 <table cellpadding="3" cellspacing="0">
                     <tbody>
                         <tr>
-                            @*<td>
-                                Search:
-                                </td>
-                                <td>
-                                <input name="iSearch" type="text" id="iSearch" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td>
-                                <input type="submit" name="Button11" value="Search" id="Button11" class="butn-search" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td>
-                                <input type="submit" name="Button1" value="Export Excel" id="Button1" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td style="width: 60px;">
-                                &nbsp;
-                                </td>*@
+                           
                             <td>
                                 <input type="file" name="uploadedFile" id="uploadedFile" style="direction: ltr; text-align: left;">
                                 <input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">
@@ -99,35 +82,10 @@
                         </tr>
                     </tbody>
                 </table>
-                @* <table cellpadding="3" cellspacing="0">
-                    <tbody>
-                    <tr>
-                    <td>Sort:</td>
-                    <td>
-                    <select name="iSort" onchange="javascript:setTimeout('__doPostBack(\'iSort\',\'\')', 0)" id="iSort">
-                    <option selected="selected" value="Asc">Asc</option>
-                    <option value="Desc">Desc</option>
-
-                    </select>
-                    </td>
-                    <td>Records to Show:</td>
-                    <td>
-                    <select name="iShowNum" onchange="javascript:setTimeout('__doPostBack(\'iShowNum\',\'\')', 0)" id="iShowNum">
-                    <option value="10">10</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <option value="500">500</option>
-                    <option selected="selected" value="1000">
-                    1000
-                    </option>
-                    </select>
-                    </td>
-                    </tr>
-                    </tbody>
-                    </table>*@
+               
             </div>
 
-            <div id="newPage">
+            <div  id="newPage">
                 <div>
 
                     <div id="iLoading22" style="display: none;">
@@ -170,7 +128,7 @@
                             {
                                 <tr role="row">
                                     <td>
-                                        <input type="checkbox" class="checkBox" value="@item.OccuranceId" />
+                                        <input type="checkbox" class="checkBox" value="@item.DesigneId" />
                                     </td>
                                     <td>
                                         @rowCount
@@ -188,7 +146,7 @@
                                         @item.Occurrances
                                     </td>
                                     <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.OccuranceId)">
+                                        <a class="btn-edit-equip" onclick="Edit(@item.DesigneId)">
                                             Edit
                                         </a>
                                     </td>
@@ -227,14 +185,12 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/Transient/CreateOccurence");
+        $("#newPage").load("/Transient/CreateDesignBasisAccidents/");
     }
 
     function Edit(id) {
         $("#newPage").load("/Transient/EditNormalOperations/"+id);
     }
-
-
 
     function showPage1() {
         $("#Tabs").load("/Transient/NormalOperations/");
@@ -242,20 +198,13 @@
 
     function showPage2() {
         $("#Tabs").load("/Transient/OperationalOccurence/");
-        //$("li").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-        //$("li").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-
     }
 
     function showPage3() {
         $("#Tabs").load("/Transient/DesignBasisAccidents/");
-        
-        //,function() {
-        //    $("li #tab-button3").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-        }
     }
 
-
+    
 
     $("#checkAll").click(function () {
         $(".checkBox").prop('checked',

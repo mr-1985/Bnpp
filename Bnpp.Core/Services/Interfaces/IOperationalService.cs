@@ -30,5 +30,15 @@ namespace Bnpp.Core.Services.Interfaces
 
 
         #endregion
+
+        #region Design Basis accidents
+
+        List<DesignBasisListViewModel> GetAllBasisAccident();
+        DesignBasis GetBasisAccidentById(int basisId);
+        int AddBasisAccident(DesignBasis designBasis);
+        void UpdateBasisAccident(DesignBasis designBasis);
+        void DeleteBasisAccident(int basisId);
+
+        #endregion
     }
 }

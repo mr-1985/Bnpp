@@ -38,6 +38,7 @@ namespace Bnpp.DataLayer.Context
         public DbSet<Strcture> Strctures { get; set; }
         public DbSet<OperationalData> OperationalData { get; set; }
         public DbSet<Occurance> Occurances { get; set; }
+        public DbSet<DesignBasis> DesignBasis { get; set; }
 
 
     }

@@ -107,7 +107,8 @@ namespace Bnpp.Web.Controllers
             return View(_operational.GetAllOccurances());
         }
 
-        [BindProperty] public Occurance Occurance { get; set; }
+        [BindProperty]
+        public Occurance Occurance { get; set; }
 
         public IActionResult CreateOccurence()
         {
@@ -172,14 +173,36 @@ namespace Bnpp.Web.Controllers
         #endregion
 
         #region DesignBasisAccidents
-
+        [BindProperty]
+        public DesignBasis Basis { get; set; }
         public IActionResult DesignBasisAccidents()
+        {
+            return View(_operational.GetAllBasisAccident());
+        }
+
+
+        public IActionResult CreateDesignBasisAccidents()
         {
             return View();
         }
 
-        
+        [HttpPost]
+        public IActionResult CreateDesignBasisAccidents(string StartDates = "")
+        {
+            if (StartDates != "")
+            {
+                string[] std = StartDates.Split('/');
+                Basis.CreateDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
 
+            _operational.AddBasisAccident(Basis);
+
+            return new JsonResult("success");
+        }
         #endregion
 
     }

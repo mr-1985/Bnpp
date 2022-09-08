@@ -10,7 +10,7 @@ using Bnpp.DataLayer.Entities;
 
 namespace Bnpp.Core.Services
 {
-    public class OperationalService:IOperationalService
+    public class OperationalService : IOperationalService
     {
         private BnppContext _context;
 
@@ -23,10 +23,10 @@ namespace Bnpp.Core.Services
             return _context.OperationalData.Where(e => e.IsDelete == false).
                 Select(e => new NormalOperationListViewModel()
                 {
-                   OperationalId = e.OperationalId,
-                   AllowableNumber = e.AllowableNumber,
-                   NameOfCondition = e.NameofConditions,
-                   Occurrances = e.Occurrance,
+                    OperationalId = e.OperationalId,
+                    AllowableNumber = e.AllowableNumber,
+                    NameOfCondition = e.NameofConditions,
+                    Occurrances = e.Occurrance,
                     CreateDate = e.CreateDate
                 }).ToList();
         }
@@ -93,5 +93,45 @@ namespace Bnpp.Core.Services
             occurance.IsDelete = true;
             UpdateOccurance(occurance);
         }
+
+        public List<DesignBasisListViewModel> GetAllBasisAccident()
+        {
+            return _context.DesignBasis.Where(e => e.IsDelete == false).
+                Select(e => new DesignBasisListViewModel()
+                {
+                    DesigneId = e.BasislId,
+                    AllowableNumber = e.AllowableNumber,
+                    NameOfCondition = e.NameofConditions,
+                    Occurrances = e.Occurrance,
+                    CreateDate = e.CreateDate
+                }).ToList();
+        }
+        public DesignBasis GetBasisAccidentById(int basisId)
+        {
+            return _context.DesignBasis.Find(basisId);
+        }
+
+        public int AddBasisAccident(DesignBasis designBasis)
+        {
+            _context.Add(designBasis);
+            _context.SaveChanges();
+            return designBasis.BasislId;
+        }
+
+        public void UpdateBasisAccident(DesignBasis designBasis)
+        {
+            _context.DesignBasis.Update(designBasis);
+            _context.SaveChanges();
+        }
+
+        public void DeleteBasisAccident(int basisId)
+        {
+            var accident = GetBasisAccidentById(basisId);
+            accident.IsDelete = true;
+            UpdateBasisAccident(accident);
+        }
     }
+
+
 }
+
