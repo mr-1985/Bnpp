@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "AgeingDocuments";
+﻿
+@{
+    ViewData["Title"] = "ChemicalWater";
     Layout = null;
 }
 
@@ -16,11 +17,11 @@
                         <b><a class="breadcumb2-link" href="#">Mechanical Equipments</a></b>
                     </td>
                     <td style="">
-                        »  Ageing Document <b id="subTitle22a"></b>
+                        »  Operational Data <b id="subTitle22a"></b>
                     </td>
                     <td>
                         » <b style="color: #ff0000;" id="subTitle22">
-                            Ageing Documents
+                            Chemical Water Data
                         </b>
                     </td>
                 </tr>
@@ -32,7 +33,7 @@
     </div>
 
     <h1 id="iH1">
-        Ageing Document
+        Operational Data
     </h1>
     <div id="iContent">
 
@@ -41,43 +42,19 @@
                 <li id="tab-button1" class="tab-buttons-li" @*style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;"*@ @*style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;"*@>
                     <a id="tab-button-a1"
                        onclick="showPage1()" style="cursor:pointer;color: rgb(0, 113, 158);">
-                        Operational Documents
+                        Sensors Data
                     </a>
                 </li>
                 <li id="tab-button2" @*class="tab-buttons-li"*@ style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
                     <a id="tab-buttona2" onclick="showPage2()" style="cursor:pointer;color: rgb(110, 110, 255);">
-                        Drawing
+                        Water Chemical Data
                     </a>
-
                 </li>
                 <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
                     <a id="tab-button-a3" onclick="showPage3()" style="cursor:pointer;color: rgb(110, 110, 255);">
-                        Standards
-
+                        Environmental Data
                     </a>
                 </li>
-                <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
-                    <a id="tab-button-a3" onclick="showPage4()" style="cursor:pointer;color: rgb(110, 110, 255);">
-                        Manufacturer Documents
-                    </a>
-                </li>
-
-                <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
-                    <a id="tab-button-a3" onclick="showPage5()" style="cursor:pointer;color: rgb(110, 110, 255);">
-                        Installation Documents
-                    </a>
-                </li>
-                <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
-                    <a id="tab-button-a3" onclick="showPage6()" style="cursor:pointer;color: rgb(110, 110, 255);">
-                        Maintenance Documents
-                    </a>
-                </li>
-                <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
-                    <a id="tab-button-a3" onclick="showPage7()" style="cursor:pointer;color: rgb(110, 110, 255);">
-                        Ageing Documents
-                    </a>
-                </li>
-
             </ul>
 
             <div style="clear:both;"></div>
@@ -86,7 +63,7 @@
         <div id="tab1" class="tab-item" style="display: block;">
 
             <h1 id="iH1">
-                Ageing Documents
+                Chemical Water Data
             </h1>
 
             <div class="bevel-box">
@@ -174,25 +151,25 @@
                                 </th>
                                 <th></th>
                                 <th style="width: 150px">
-                                    <b>Code</b>
+                                    <b>Sensor Name</b>
                                 </th>
                                 <th style="width: 250px">
-                                    <b>File Name</b>
+                                    <b>AKZ</b>
                                 </th>
                                 <th style="width: 120px">
-                                    <b>Doc. Name</b>
+                                    <b>Unit</b>
                                 </th>
-                                @*
-                                    <th style="width: 120px">
-                                    <b>Prepaired by</b>
-                                    </th>
 
-                                    <th style="width: 120px">
-                                    <b>	Approved</b>
-                                    </th>
-                                    <th style="width: 120px">
-                                    <b>	Authorized</b>
-                                    </th>*@
+                                <th style="width: 120px">
+                                    <b>Minimum</b>
+                                </th>
+
+                                <th style="width: 120px">
+                                    <b>	Maximum</b>
+                                </th>
+                                <th style="width: 120px">
+                                    <b>	Normal Value</b>
+                                </th>
 
                                 <th style="width: 120px">
                                     <b>Actions</b>
@@ -270,34 +247,16 @@
 
 
     function showPage1() {
-        $("#Tabs").load("/Documents/OperationalDocuments/");
+        $("#Tabs").load("/Operational/Sensors/");
     }
 
     function showPage2() {
-        $("#Tabs").load("/Documents/Drawing/");
+        $("#Tabs").load("/Operational/ChemicalWater/");
     }
 
     function showPage3() {
-        $("#Tabs").load("/Documents/Standards/");
+        $("#Tabs").load("/Operational/Environmental/");
     }
-
-    function showPage4() {
-        $("#Tabs").load("/Documents/ManufacturerDocuments/");
-    }
-
-    function showPage5() {
-        $("#Tabs").load("/Documents/InstallationDocuments/");
-    }
-
-     function showPage6() {
-        $("#Tabs").load("/Documents/MaintenanceDocuments");
-    }
-
-    function showPage7() {
-        $("#Tabs").load("/Documents/AgeingDocuments/");
-    }
-
-
 
 
     $("#checkAll").click(function () {
