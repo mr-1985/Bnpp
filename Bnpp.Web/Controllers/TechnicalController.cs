@@ -14,21 +14,19 @@ namespace Bnpp.Web.Controllers
         {
             return View();
         }
-        
+
 
         public IActionResult DesignData()
         {
             return View();
         }
 
-        
+
 
         public IActionResult Documents()
         {
             return View();
         }
-
-        
 
         public IActionResult Safety()
         {
@@ -39,6 +37,30 @@ namespace Bnpp.Web.Controllers
         {
             return View();
         }
-        
+
+        public IActionResult ChemicalNorms()
+        {
+            return View();
+        }
+
+        public IActionResult TechnicalPrograms()
+        {
+            return View();
+        }
+
+        public IActionResult Sensors()
+        {
+            return View();
+        }
+
+        public IActionResult ControlPoints()
+        {
+            return View();
+        }
+
+        public IActionResult HForms()
+        {
+            return View();
+        }
     }
 }
