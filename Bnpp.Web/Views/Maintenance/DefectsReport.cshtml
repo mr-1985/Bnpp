@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewData["Title"] = "ChemicalWater";
-    Layout = null;
+    ViewData["Title"] = "DefectsReport";
+     Layout = null;
 }
 
 <div class="dcontent">
@@ -17,11 +17,10 @@
                         <b><a class="breadcumb2-link" href="#">Mechanical Equipments</a></b>
                     </td>
                     <td style="">
-                        »  Operational Data <b id="subTitle22a"></b>
+                        »  Maintenance <b id="subTitle22a"></b>
                     </td>
                     <td>
-                        » <b style="color: #ff0000;" id="subTitle22">
-                            Chemical Water Data
+                        » <b style="color: #ff0000;" id="subTitle22">Defection Reports
                         </b>
                     </td>
                 </tr>
@@ -32,9 +31,9 @@
         </a>
     </div>
 
-    <h1 id="iH1">
-        Operational Data
-    </h1>
+<h1 id="iH1">
+    Maintenance
+</h1>
     <div id="iContent">
 
         <div class="tab-buttons">
@@ -42,19 +41,37 @@
                 <li id="tab-button1" class="tab-buttons-li" @*style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;"*@ @*style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;"*@>
                     <a id="tab-button-a1"
                        onclick="showPage1()" style="cursor:pointer;color: rgb(0, 113, 158);">
-                        Sensors Data
+                        Maintenance Programs
                     </a>
                 </li>
                 <li id="tab-button2" @*class="tab-buttons-li"*@ style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
                     <a id="tab-buttona2" onclick="showPage2()" style="cursor:pointer;color: rgb(110, 110, 255);">
-                        Water Chemical Data
+                        List of Defections
                     </a>
+
                 </li>
                 <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
                     <a id="tab-button-a3" onclick="showPage3()" style="cursor:pointer;color: rgb(110, 110, 255);">
-                        Environmental Data
+                        Spare Parts List
                     </a>
                 </li>
+                <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
+                    <a id="tab-button-a3" onclick="showPage4()" style="cursor:pointer;color: rgb(110, 110, 255);">
+                        Maintenance Forms
+                    </a>
+                </li>
+                
+                <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
+                    <a id="tab-button-a3" onclick="showPage5()" style="cursor:pointer;color: rgb(110, 110, 255);">
+                        Controls & Measurements before & after Maintenance
+                    </a>
+                </li>
+                <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
+                    <a id="tab-button-a3" onclick="showPage6()" style="cursor:pointer;color: rgb(110, 110, 255);">
+                        Defection Reports
+                    </a>
+                </li>
+                
             </ul>
 
             <div style="clear:both;"></div>
@@ -62,8 +79,7 @@
 
         <div id="tab1" class="tab-item" style="display: block;">
 
-            <h1 id="iH1">
-                Chemical Water Data
+            <h1 id="iH1">Defection Reports
             </h1>
 
             <div class="bevel-box">
@@ -129,7 +145,7 @@
                     </table>*@
             </div>
 
-            <div id="newPage">
+            <div  id="newPage">
                 <div>
 
                     <div id="iLoading22" style="display: none;">
@@ -151,26 +167,26 @@
                                 </th>
                                 <th></th>
                                 <th style="width: 150px">
-                                    <b>Parameter Name</b>
+                                    <b>Code</b>
                                 </th>
                                 <th style="width: 250px">
-                                    <b>AKZ</b>
+                                    <b>File Name</b>
                                 </th>
                                 <th style="width: 120px">
-                                    <b>Unit</b>
+                                    <b>Doc. Name</b>
                                 </th>
-
+                                @*
                                 <th style="width: 120px">
-                                    <b>Minimum</b>
+                                    <b>Prepaired by</b>
                                 </th>
-
+                                
                                 <th style="width: 120px">
-                                    <b>	Maximum</b>
+                                    <b>	Approved</b>
                                 </th>
                                 <th style="width: 120px">
-                                    <b>	Normal Value</b>
-                                </th>
-
+                                    <b>	Authorized</b>
+                                </th>*@
+                               
                                 <th style="width: 120px">
                                     <b>Actions</b>
                                 </th>
@@ -178,34 +194,34 @@
                         </thead>
                         <tbody>
                             @*@foreach (var item in Model)
-                                {
+                            {
                                 <tr role="row">
-                                <td>
-                                <input type="checkbox" class="checkBox" value="@item.OperationalId" />
-                                </td>
-                                <td>
-                                @rowCount
-                                </td>
-                                <td>
-                                @item.CreateDate.ToString("yyyy/MM/dd")
-                                </td>
-                                <td>
-                                @item.NameOfCondition
-                                </td>
-                                <td>
-                                @item.AllowableNumber
-                                </td>
-                                <td>
-                                @item.Occurrances
-                                </td>
-                                <td>
-                                <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
-                                Edit
-                                </a>
-                                </td>
+                                    <td>
+                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
+                                    </td>
+                                    <td>
+                                        @rowCount
+                                    </td>
+                                    <td>
+                                        @item.CreateDate.ToString("yyyy/MM/dd")
+                                    </td>
+                                    <td>
+                                        @item.NameOfCondition
+                                    </td>
+                                    <td>
+                                        @item.AllowableNumber
+                                    </td>
+                                    <td>
+                                        @item.Occurrances
+                                    </td>
+                                    <td>
+                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
+                                            Edit
+                                        </a>
+                                    </td>
                                 </tr>
                                 rowCount++;
-                                }*@
+                            }*@
                         </tbody>
                     </table>
 
@@ -245,19 +261,30 @@
         $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
     }
 
-
-    function showPage1() {
-        $("#Tabs").load("/Operational/Sensors/");
+    
+     function showPage1() {
+        $("#Tabs").load("/Maintenance/MaintenancePrograms/");
     }
 
     function showPage2() {
-        $("#Tabs").load("/Operational/ChemicalWater/");
+        $("#Tabs").load("/Maintenance/Defections/");
     }
 
     function showPage3() {
-        $("#Tabs").load("/Operational/Environmental/");
+        $("#Tabs").load("/Maintenance/SpareParts/");
     }
-
+    
+    function showPage4() {
+        $("#Tabs").load("/Maintenance/MaintenanceForms/");
+    }
+    
+    function showPage5() {
+        $("#Tabs").load("/Maintenance/Measurements/");
+    }
+    
+     function showPage6() {
+        $("#Tabs").load("/Maintenance/DefectsReport");
+    }
 
     $("#checkAll").click(function () {
         $(".checkBox").prop('checked',
@@ -294,6 +321,8 @@
 
 
 </script>
+
+
 
 
 
