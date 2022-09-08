@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewData["Title"] = "Mechanism";
-     Layout = null;
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
 <div class="dcontent">
@@ -17,10 +17,10 @@
                         <b><a class="breadcumb2-link" href="#">Mechanical Equipments</a></b>
                     </td>
                     <td style="">
-                        » Ageing Mechanism<b id="subTitle22a"></b>
+                        » Installation & Commissioning<b id="subTitle22a"></b>
                     </td>
                     <td>
-                        » <b style="color: #ff0000;" id="subTitle22">Ageing Mechanism</b>
+                        <b style="color: #ff0000;" id="subTitle22"></b>
                     </td>
                 </tr>
             </tbody>
@@ -30,34 +30,16 @@
         </a>
     </div>
 
-    <h1 id="iH1">
-        Ageing Mechanism
-    </h1>
+<h1 id="iH1">
+    Installation & Commissioning
+</h1>
     <div id="iContent">
 
-        <div class="tab-buttons">
-            <ul>
-                <li id="tab-button1" class="tab-buttons-li" @*style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;"*@ @*style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;"*@>
-                    <a id="tab-button-a1"
-                       onclick="showPage1()" style="cursor:pointer;color: rgb(0, 113, 158);">
-                        Ageing Mechanism
-                    </a>
-                </li>
-                <li id="tab-button2" @*class="tab-buttons-li"*@ style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
-                    <a id="tab-buttona2" onclick="showPage2()" style="cursor:pointer;color: rgb(110, 110, 255);">
-                         Documents
-                    </a>
-
-                </li>
-               
-            </ul>
-
-            <div style="clear:both;"></div>
-        </div>
+       
 
         <div id="tab1" class="tab-item" style="display: block;">
 
-            <h1 id="iH1">Ageing Mechanism</h1>
+            
 
             <div class="bevel-box">
                 <table cellpadding="3" cellspacing="0">
@@ -144,19 +126,16 @@
                                 </th>
                                 <th></th>
                                 <th style="width: 150px">
-                                    <b>Degradation Mechanism</b>
+                                    <b>Parameter1</b>
                                 </th>
                                 <th style="width: 250px">
-                                    <b>Component</b>
+                                    <b>Parameter2</b>
                                 </th>
                                 <th style="width: 120px">
-                                    <b>Region</b>
+                                    <b>Parameter3</b>
                                 </th>
                                 <th style="width: 120px">
-                                    <b>Critical point</b>
-                                </th>
-                                <th style="width: 120px">
-                                    <b>Consequences</b>
+                                    <b>Parameter4</b>
                                 </th>
                                 <th style="width: 120px">
                                     <b>Actions</b>
@@ -233,26 +212,6 @@
     }
 
     
-
-    function showPage1() {
-        $("#Tabs").load("/AgeingMechanism/Mechanism/");
-    }
-
-    function showPage2() {
-        $("#Tabs").load("/AgeingMechanism/Documents/");
-        //$("li").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-        //$("li").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-
-    }
-
-    function showPage3() {
-        $("#Tabs").load("/ManagementDocuments/ManagementReviews/"),function() {
-            $("li #tab-button3").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-        }
-    }
-
-    
-
     $("#checkAll").click(function () {
         $(".checkBox").prop('checked',
             $(this).prop('checked'));
@@ -288,6 +247,13 @@
 
 
 </script>
+
+
+
+
+
+
+
 
 
 
