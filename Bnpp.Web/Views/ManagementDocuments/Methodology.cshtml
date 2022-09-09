@@ -132,7 +132,7 @@
                     </div>
 
 
-                    <a class="btn-new-equip" onclick="Create()">New</a>
+                    <a class="btn-new-equip" onclick="Create()" style="cursor: pointer">New</a>
                     <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
                     <br />
                     @{
@@ -224,7 +224,7 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
+        $("#newPage").load("/ManagementDocuments/CreateMethodology/");
     }
 
     function Edit(id) {

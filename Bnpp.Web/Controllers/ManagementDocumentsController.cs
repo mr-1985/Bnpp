@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Bnpp.Web.Controllers
 {
@@ -12,12 +13,27 @@ namespace Bnpp.Web.Controllers
         }
 
 
+        #region Methodology
+
         public IActionResult Methodology()
         {
             return View();
         }
 
-        
+        public IActionResult CreateMethodology()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateMethodology(IFormFile imgMetholodyUp)
+        {
+            return View();
+        }
+
+        #endregion
+
+
 
         public IActionResult OtherDocuments()
         {
