@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<div id="Tabs">
+
+</div>
+
+@section Scripts
+{
+    <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+
+    $( document ).ready(function() {
+        $("#Tabs").load("/Inspection/InspectionReports/");
+    });
+
+    function showPage1() {
+        $("#Tabs").load("/Inspection/InspectionReports/");
+    }
+
+    function showPage2() {
+        $("#Tabs").load("/Inspection/InspectionInstructions/");
+    }
+
+    function showPage3() {
+        $("#Tabs").load("/Inspection/InspectionPrograms/");
+    }
+    
+     function showPage4() {
+        $("#Tabs").load("/Inspection/ManagementReviews/");
+    }
+</script>
+
+}
+
+
+
+
