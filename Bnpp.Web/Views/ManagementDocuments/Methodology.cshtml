@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.AgeingManagementDocuments.Methodology>
 @{
     ViewData["Title"] = "Methodology";
     Layout = null;
@@ -124,7 +124,7 @@
                     </table>*@
             </div>
 
-            <div  id="newPage">
+            <div id="newPage">
                 <div>
 
                     <div id="iLoading22" style="display: none;">
@@ -133,7 +133,7 @@
 
 
                     <a class="btn-new-equip" onclick="Create()" style="cursor: pointer">New</a>
-                    <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
+                    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
                     <br />
                     @{
                         int rowCount = 1;
@@ -154,44 +154,39 @@
                                 <th style="width: 120px">
                                     <b>Doc. Name</b>
                                 </th>
-                               @* <th style="width: 120px">
-                                    <b>Occurrances</b>
-                                </th>*@
                                 <th style="width: 120px">
                                     <b>Actions</b>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr role="row">
                                     <td>
-                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
+                                        <input type="checkbox" class="checkBox" value="@item.MethodologyId" />
                                     </td>
                                     <td>
                                         @rowCount
                                     </td>
+
                                     <td>
-                                        @item.CreateDate.ToString("yyyy/MM/dd")
+                                        @item.Code
                                     </td>
                                     <td>
-                                        @item.NameOfCondition
+                                        @item.Filename
                                     </td>
                                     <td>
-                                        @item.AllowableNumber
+                                        @item.DocumentName
                                     </td>
                                     <td>
-                                        @item.Occurrances
-                                    </td>
-                                    <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
+                                        <a class="btn-edit-equip" onclick="Edit(@item.MethodologyId)">
                                             Edit
                                         </a>
                                     </td>
                                 </tr>
                                 rowCount++;
-                            }*@
+                            }
                         </tbody>
                     </table>
 
@@ -228,10 +223,10 @@
     }
 
     function Edit(id) {
-        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
+        $("#newPage").load("/ManagementDocuments/EditMethodology/"+id);
     }
 
-    
+
 
     function showPage1() {
         $("#Tabs").load("/ManagementDocuments/Methodology/");
@@ -250,7 +245,7 @@
         }
     }
 
-    
+
 
     $("#checkAll").click(function () {
         $(".checkBox").prop('checked',
@@ -268,11 +263,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+            url: "/ManagementDocuments/DeleteMethodology",
+            data: { "methodolgyId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
+                $("#Tabs").load("/ManagementDocuments/Methodology/");
             },
             failure: function (response) {
                 alert(response.responseText);

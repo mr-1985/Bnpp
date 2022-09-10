@@ -13,6 +13,7 @@ namespace Bnpp.Core.Services.Interfaces
         List<Methodology> GetAllMethodolgies();
         int AddMethodology(Methodology methodology,IFormFile imgMethodolgy);
         Methodology GetMethodolgyById(int methodologyId);
-        void UpdateMethodolgy(Methodology methodology);
+        void UpdateMethodolgy(Methodology methodology, IFormFile imgMethodolgy);
+        void DeleteMethodolgy(int methodologyId);
     }
 }

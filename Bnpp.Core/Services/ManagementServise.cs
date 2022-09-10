@@ -8,6 +8,7 @@ using Bnpp.Core.Convertors;
 using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Context;
 using Bnpp.DataLayer.Entities.AgeingManagementDocuments;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
 namespace Bnpp.Core.Services
@@ -15,16 +16,18 @@ namespace Bnpp.Core.Services
     public class ManagementServise:IManagementServise
     {
         private BnppContext _context;
+        private IHostingEnvironment _environment;
 
-        public ManagementServise(BnppContext context)
+        public ManagementServise(BnppContext context, IHostingEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
 
         public List<Methodology> GetAllMethodolgies()
         {
-            throw new NotImplementedException();
+            return _context.Methodologies.Where(m => m.IsDelete == false).ToList();
         }
 
         public int AddMethodology(Methodology methodology, IFormFile imgMethodolgy)
@@ -34,7 +37,7 @@ namespace Bnpp.Core.Services
             if (imgMethodolgy != null )
             {
                 methodology.MethodologyImage = Guid.NewGuid() + Path.GetExtension(imgMethodolgy.FileName);
-                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", methodology.MethodologyImage);
+                string imagePath = Path.Combine(_environment.WebRootPath, "wwwroot/DocumentImage", methodology.MethodologyImage);
 
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
@@ -49,12 +52,32 @@ namespace Bnpp.Core.Services
 
         public Methodology GetMethodolgyById(int methodologyId)
         {
-            throw new NotImplementedException();
+            return _context.Methodologies.Find(methodologyId);
         }
 
-        public void UpdateMethodolgy(Methodology methodology)
+        public void UpdateMethodolgy(Methodology methodology,IFormFile imgMethodolgy)
         {
-            throw new NotImplementedException();
+            if (imgMethodolgy != null)
+            {
+                methodology.MethodologyImage = Guid.NewGuid() + Path.GetExtension(imgMethodolgy.FileName);
+                string imagePath = Path.Combine(_environment.WebRootPath, "wwwroot/DocumentImage", methodology.MethodologyImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgMethodolgy.CopyTo(stream);
+                }
+            }
+
+            _context.Update(methodology);
+            _context.SaveChanges();
+        }
+
+        public void DeleteMethodolgy(int methodologyId)
+        {
+            var methodology = GetMethodolgyById(methodologyId);
+            methodology.IsDelete = true;
+            _context.Update(methodology);
+            _context.SaveChanges();
         }
     }
 }

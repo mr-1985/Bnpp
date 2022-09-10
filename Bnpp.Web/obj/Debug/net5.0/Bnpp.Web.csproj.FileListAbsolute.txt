@@ -602,3 +602,4 @@ C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Inspe
 C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Inspection\SubMenu.cshtml.g.cs
 C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Inspection\TypicalPrograms.cshtml.g.cs
 C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\ManagementDocuments\CreateMethodology.cshtml.g.cs
+C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\ManagementDocuments\EditMethodology.cshtml.g.cs
