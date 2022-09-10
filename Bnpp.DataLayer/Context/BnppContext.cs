@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bnpp.DataLayer.Entities;
+using Bnpp.DataLayer.Entities.AgeingManagementDocuments;
 using Bnpp.DataLayer.Entities.Electrical;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,6 +40,7 @@ namespace Bnpp.DataLayer.Context
         public DbSet<OperationalData> OperationalData { get; set; }
         public DbSet<Occurance> Occurances { get; set; }
         public DbSet<DesignBasis> DesignBasis { get; set; }
+        public DbSet<Methodology> Methodologies { get; set; }
 
 
     }

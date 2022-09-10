@@ -1,11 +1,11 @@
-﻿@model Bnpp.DataLayer.Entities.DesignBasis
+﻿@model Bnpp.DataLayer.Entities.AgeingManagementDocuments.Methodology
 @{
     ViewData["Title"] = "CreateMethodology";
     Layout = null;
 }
 
 <div id="normal">
-    <form id="normalForm" asp-action="CreateMethodology" method="post">
+    <form id="myForm" asp-action="CreateMethodology" method="post" enctype="multipart/form-data">
 
         <table cellpadding="3" cellspacing="0">
             <tbody>
@@ -14,10 +14,10 @@
                     Code:
                 </td>
                 <td>
-                    <input asp-for="NameofConditions" type="text" id="iName" style="direction: ltr; text-align: left;">
+                    <input asp-for="Code" type="text" id="txtCode" style="direction: ltr; text-align: left;">
                 </td>
                 <td>
-                    <span asp-validation-for="NameofConditions"></span>
+                    <span asp-validation-for="Code"></span>
                 </td>
             </tr>
             <tr>
@@ -26,10 +26,10 @@
                 </td>
                 <div id="thumbs"></div>
                 <td>
-                    <input asp-for="AllowableNumber" type="text" id="fileName" value="" required="" style="direction: ltr; text-align: left;">
+                    <input asp-for="Filename" type="text" id="fileName" value="" required="" style="direction: ltr; text-align: left;">
                 </td>
                 <td>
-                    <span asp-validation-for="AllowableNumber"></span>
+                    <span asp-validation-for="Filename"></span>
                 </td>
             </tr>
             <tr>
@@ -45,13 +45,13 @@
                     Doc. Name:
                 </td>
                 <td>
-                    <input type="text" style="direction: ltr; text-align: left;">
+                    <input type="text" id="txtDoc" style="direction: ltr; text-align: left;">
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    <input type="button" onclick="submitNormal()" value="Save" class="butn-save" style="direction: ltr; text-align: left;">
+                    <input type="button" onclick="AjaxFormSubmit()" value="Save" class="butn-save" style="direction: ltr; text-align: left;">
                     <input type="button" onclick="showPage1()" value="Cancel" id="Button2" class="butn-cancel" style="direction: ltr; text-align: left;">
                 </td>
             </tr>
@@ -67,25 +67,28 @@
 <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
 
 <script type="text/javascript">
-        function submitNormal() {
-            var data = $("#normalForm").serialize();
-
-
+       function AjaxFormSubmit() {
+            //Set the URL.
+            var url = $("#myForm").attr("action");
+            //Add the Field values to FormData object.
+            var formData = new FormData();
+            formData.append("code", $("#txtCode").val());
+            formData.append("doc", $("#txtDoc").val());
+            formData.append("name", $("#fileName").val());
+            formData.append("filemetholody", $("#imgMetholodyUp")[0].files[0]);
+            
+ 
             $.ajax({
                 type: 'POST',
-                url: '/ManagementDocuments/CreateMethodology',
-                contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // when we use .serialize() this generates the data in query string format. this needs the default contentType (default content type is: contentType: 'application/x-www-form-urlencoded; charset=UTF-8') so it is optional, you can remove it
-                data: data,
-                success: function() {
-                   $("#Tabs").load("/ManagementDocuments/Methodology/");
-                },
-
-                error: function() {
-                    //alert('Failed to receive the Data');
-                    //console.log('Failed ');
+                url: url,
+                data: formData,
+                processData: false,
+                contentType: false
+            }).done(function (response) {
+                if (response.Status === "success") {
+                    $("#Tabs").load("/ManagementDocuments/Methodology/");
                 }
             });
-
         }
 
 

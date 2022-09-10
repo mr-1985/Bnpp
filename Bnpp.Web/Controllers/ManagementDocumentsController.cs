@@ -1,10 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Bnpp.Core.Services.Interfaces;
+using Bnpp.DataLayer.Entities.AgeingManagementDocuments;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bnpp.Web.Controllers
 {
     public class ManagementDocumentsController : Controller
     {
+        private IManagementServise _management;
+
+        public ManagementDocumentsController(IManagementServise management)
+        {
+            _management = management;
+        }
+
 
         [Route("ManagementDocuments")]
         public IActionResult Index()
@@ -14,6 +23,8 @@ namespace Bnpp.Web.Controllers
 
 
         #region Methodology
+        [BindProperty]
+        public Methodology Methodologies { get; set; }
 
         public IActionResult Methodology()
         {
@@ -26,9 +37,15 @@ namespace Bnpp.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateMethodology(IFormFile imgMetholodyUp)
+        public IActionResult CreateMethodology(IFormFile filemetholody, string code,string doc,string name)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            _management.AddMethodology(Methodologies, filemetholody);
+            return Json(" Electormotors Successfully Deleted.");
         }
 
         #endregion

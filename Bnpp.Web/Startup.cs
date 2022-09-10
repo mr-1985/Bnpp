@@ -67,6 +67,7 @@ namespace Bnpp.Web
             services.AddTransient<IElectricalService, ElectricalService>();
             services.AddTransient<IStructureService, StructureService>();
             services.AddTransient<IOperationalService, OperationalService>();
+            services.AddTransient<IManagementServise, ManagementServise>();
             #endregion
         }
 
