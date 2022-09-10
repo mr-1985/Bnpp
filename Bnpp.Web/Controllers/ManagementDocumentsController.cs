@@ -37,7 +37,7 @@ namespace Bnpp.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateMethodology(IFormFile filemetholody, string code,string doc,string name)
+        public IActionResult CreateMethodology(IFormFile filemetholody)
         {
             if (!ModelState.IsValid)
             {

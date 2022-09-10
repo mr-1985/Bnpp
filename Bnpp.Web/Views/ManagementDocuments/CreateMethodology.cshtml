@@ -24,9 +24,9 @@
                 <td>
                     File Name:
                 </td>
-                <div id="thumbs"></div>
+                
                 <td>
-                    <input asp-for="Filename" type="text" id="fileName" value="" required="" style="direction: ltr; text-align: left;">
+                    <input asp-for="Filename"  type="text" id="fileName" value="" required="" style="direction: ltr; text-align: left;">
                 </td>
                 <td>
                     <span asp-validation-for="Filename"></span>
@@ -45,7 +45,7 @@
                     Doc. Name:
                 </td>
                 <td>
-                    <input type="text" id="txtDoc" style="direction: ltr; text-align: left;">
+                    <input asp-for="DocumentName" type="text"  id="txtDoc" style="direction: ltr; text-align: left;">
                 </td>
             </tr>
 
@@ -73,8 +73,13 @@
             //Add the Field values to FormData object.
             var formData = new FormData();
             formData.append("code", $("#txtCode").val());
-            formData.append("doc", $("#txtDoc").val());
-            formData.append("name", $("#fileName").val());
+            formData.append("Filename", $("#fileName").val());
+            formData.append("DocumentName", $("#txtDoc").val());
+
+            //formData.append("doc. name", $("#txtDoc").val());
+            debugger;
+            
+            //formData.append("file name", $("#fileName").val());
             formData.append("filemetholody", $("#imgMetholodyUp")[0].files[0]);
             
  
@@ -84,10 +89,8 @@
                 data: formData,
                 processData: false,
                 contentType: false
-            }).done(function (response) {
-                if (response.Status === "success") {
-                    $("#Tabs").load("/ManagementDocuments/Methodology/");
-                }
+            }).done(function() {
+               $("#Tabs").load("/ManagementDocuments/Methodology/");
             });
         }
 
