@@ -40,7 +40,7 @@ namespace Bnpp.Web.Controllers
         public IActionResult CreateGeneralData(GeneralData generalData)
         {
             if (!ModelState.IsValid)
-                return View(generalData);
+                return View();
 
             _dataService.AddGeneralData(data);
             return new JsonResult("success");
