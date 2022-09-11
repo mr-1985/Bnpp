@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.BasicData.GeneralData>
 @{
     ViewData["Title"] = "GeneralData";
       Layout = null;
@@ -176,8 +176,8 @@
                     </div>
 
 
-                    <a class="btn-new-equip" onclick="Create()">New</a>
-                    <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
+                    <a class="btn-new-equip" style="cursor: pointer" onclick="Create()">New</a>
+                    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
                     <br />
                     @{
                         int rowCount = 1;
@@ -195,19 +195,6 @@
                                 <th style="width: 250px">
                                     <b>Value</b>
                                 </th>
-                                @*<th style="width: 120px">
-                                    <b>Frequency</b>
-                                </th>
-                                <th style="width: 120px">
-                                    <b>Prepaired by</b>
-                                </th>
-                                
-                                <th style="width: 120px">
-                                    <b>	Approved</b>
-                                </th>
-                                <th style="width: 120px">
-                                    <b>	Authorized</b>
-                                </th>*@
                                
                                 <th style="width: 120px">
                                     <b>Actions</b>
@@ -215,35 +202,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr role="row">
                                     <td>
-                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
+                                        <input type="checkbox" class="checkBox" value="@item.GeneralId" />
                                     </td>
                                     <td>
                                         @rowCount
                                     </td>
+                                   
                                     <td>
-                                        @item.CreateDate.ToString("yyyy/MM/dd")
+                                        @item.DesignationOfParameters
                                     </td>
                                     <td>
-                                        @item.NameOfCondition
+                                        @item.Value
                                     </td>
                                     <td>
-                                        @item.AllowableNumber
-                                    </td>
-                                    <td>
-                                        @item.Occurrances
-                                    </td>
-                                    <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
+                                        <a class="btn-edit-equip" onclick="Edit(@item.GeneralId)">
                                             Edit
                                         </a>
                                     </td>
                                 </tr>
                                 rowCount++;
-                            }*@
+                            }
                         </tbody>
                     </table>
 
@@ -276,11 +258,11 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
+        $("#newPage").load("/Technical/CreateGeneralData/");
     }
 
     function Edit(id) {
-        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
+        $("#newPage").load("/Technical/EditGeneralData/"+id);
     }
 
     
@@ -341,11 +323,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+            url: "/Technical/DeleteGeneralData",
+            data: { "generalId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
+                $("#Tabs").load("/Technical/GeneralData/");
             },
             failure: function (response) {
                 alert(response.responseText);
