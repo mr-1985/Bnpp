@@ -1,12 +1,12 @@
-﻿@model Bnpp.DataLayer.Entities.AgeingManagementDocuments.Methodology
+﻿@model Bnpp.DataLayer.Entities.AgeingManagementDocuments.AgeingDocuments
 @{
-    ViewData["Title"] = "EditMethodology";
-     Layout = null;
+    ViewData["Title"] = "EditAgeingDocuments";
+    Layout = null;
 }
 
 <div id="normal">
-    <form id="myForm" asp-action="EditMethodology" method="post" enctype="multipart/form-data">
-<input type="hidden" asp-for="MethodologyId"/>
+    <form id="myForm" asp-action="EditAgeingDocuments" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="AgeingDocumentsId"/>
         <table cellpadding="3" cellspacing="0">
             <tbody>
             <tr>
@@ -37,8 +37,7 @@
                     Select File:
                 </td>
                 <td>
-                    @*<img class="thumbnail" src="/DocumentImage/@Model.MethodologyImage"/>*@
-                    <input type="file" name="imgMetholodyUp" id="imgMetholodyUp" style="direction: ltr; text-align: left;">
+                    <input type="file" name="imgDocumentUp" id="imgDocumentUp" style="direction: ltr; text-align: left;">
                 </td>
             </tr>
             <tr>
@@ -53,7 +52,7 @@
             <tr>
                 <td>
                     <input type="button" onclick="AjaxFormSubmit()" value="Save" class="butn-save" style="direction: ltr; text-align: left;">
-                    <input type="button" onclick="showPage1()" value="Cancel" id="Button2" class="butn-cancel" style="direction: ltr; text-align: left;">
+                    <input type="button" onclick="showPage2()" value="Cancel" id="Button2" class="butn-cancel" style="direction: ltr; text-align: left;">
                 </td>
             </tr>
             </tbody>
@@ -73,16 +72,15 @@
             var url = $("#myForm").attr("action");
             //Add the Field values to FormData object.
             var formData = new FormData();
+
             formData.append("code", $("#txtCode").val());
             formData.append("Filename", $("#fileName").val());
             formData.append("DocumentName", $("#txtDoc").val());
-            formData.append("MethodologyId", $("#MethodologyId").val());
-
-            //formData.append("doc. name", $("#txtDoc").val());
-            debugger;
+            formData.append("AgeingDocumentsId", $("#AgeingDocumentsId").val());
+           
             
-            //formData.append("file name", $("#fileName").val());
-            formData.append("filemetholody", $("#imgMetholodyUp")[0].files[0]);
+
+            formData.append("filedocument", $("#imgDocumentUp")[0].files[0]);
             
  
             $.ajax({
@@ -92,7 +90,7 @@
                 processData: false,
                 contentType: false
             }).done(function() {
-               $("#Tabs").load("/ManagementDocuments/Methodology/");
+               $("#Tabs").load("/ManagementDocuments/OtherDocuments/");
             });
         }
 

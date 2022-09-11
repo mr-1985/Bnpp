@@ -37,7 +37,7 @@ namespace Bnpp.Core.Services
             if (imgMethodolgy != null )
             {
                 methodology.MethodologyImage = Guid.NewGuid() + Path.GetExtension(imgMethodolgy.FileName);
-                string imagePath = Path.Combine(_environment.WebRootPath, "wwwroot/DocumentImage", methodology.MethodologyImage);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", methodology.MethodologyImage);
 
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
@@ -57,10 +57,11 @@ namespace Bnpp.Core.Services
 
         public void UpdateMethodolgy(Methodology methodology,IFormFile imgMethodolgy)
         {
+            methodology.CreateDate=DateTime.Now;
             if (imgMethodolgy != null)
             {
                 methodology.MethodologyImage = Guid.NewGuid() + Path.GetExtension(imgMethodolgy.FileName);
-                string imagePath = Path.Combine(_environment.WebRootPath, "wwwroot/DocumentImage", methodology.MethodologyImage);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", methodology.MethodologyImage);
 
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
@@ -77,6 +78,62 @@ namespace Bnpp.Core.Services
             var methodology = GetMethodolgyById(methodologyId);
             methodology.IsDelete = true;
             _context.Update(methodology);
+            _context.SaveChanges();
+        }
+
+        public List<AgeingDocuments> GetAllAgeingDocuments()
+        {
+            return _context.AgeingDocuments.Where(m => m.IsDelete == false).ToList();
+        }
+
+        public int AddAgeingDocuments(AgeingDocuments documents, IFormFile imgAgeingDocuments)
+        {
+            documents.CreateDate = DateTime.Now;
+
+            if (imgAgeingDocuments != null)
+            {
+                documents.AgeingImage = Guid.NewGuid() + Path.GetExtension(imgAgeingDocuments.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/AgeingDocuments", documents.AgeingImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgAgeingDocuments.CopyTo(stream);
+                }
+            }
+
+            _context.Add(documents);
+            _context.SaveChanges();
+            return documents.AgeingDocumentsId;
+        }
+
+        public AgeingDocuments GetAgeingDocumentsById(int documentId)
+        {
+            return _context.AgeingDocuments.Find(documentId);
+        }
+
+        public void UpdateAgeingDocuments(AgeingDocuments documents, IFormFile imgAgeingDocuments)
+        {
+            documents.CreateDate=DateTime.Now;
+            if (imgAgeingDocuments != null)
+            {
+                documents.AgeingImage = Guid.NewGuid() + Path.GetExtension(imgAgeingDocuments.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/AgeingDocuments", documents.AgeingImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgAgeingDocuments.CopyTo(stream);
+                }
+            }
+
+            _context.Update(documents);
+            _context.SaveChanges();
+        }
+
+        public void DeleteimgAgeingDocuments(int documentId)
+        {
+            var document = GetAgeingDocumentsById(documentId);
+            document.IsDelete = true;
+            _context.Update(document);
             _context.SaveChanges();
         }
     }

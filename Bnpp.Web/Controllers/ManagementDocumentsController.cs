@@ -80,14 +80,65 @@ namespace Bnpp.Web.Controllers
 
 
 
+        #region MyRegion
+
+        [BindProperty] 
+        public AgeingDocuments Documents { get; set; }
+
         public IActionResult OtherDocuments()
+        {
+            return View(_management.GetAllAgeingDocuments());
+        }
+
+        public IActionResult CreateAgeingDocuments()
         {
             return View();
         }
 
-         
+        [HttpPost]
+        public IActionResult CreateAgeingDocuments(IFormFile filedocument)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
 
-        public IActionResult ManagementReviews()
+            _management.AddAgeingDocuments(Documents, filedocument);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult EditAgeingDocuments(int id)
+        {
+            return View(_management.GetAgeingDocumentsById(id));
+        }
+
+
+        [HttpPost]
+        public IActionResult EditAgeingDocuments(IFormFile filedocument)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            _management.UpdateAgeingDocuments(Documents, filedocument);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult DeleteDocuments(string[] documentId)
+        {
+            foreach (string id in documentId)
+            {
+                _management.DeleteimgAgeingDocuments(Convert.ToInt32(id));
+            }
+
+            return Json(" Equipments Successfully Deleted.");
+        }
+
+        #endregion
+
+
+            public IActionResult ManagementReviews()
         {
             return View();
         }

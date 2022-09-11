@@ -41,6 +41,7 @@ namespace Bnpp.DataLayer.Context
         public DbSet<Occurance> Occurances { get; set; }
         public DbSet<DesignBasis> DesignBasis { get; set; }
         public DbSet<Methodology> Methodologies { get; set; }
+        public DbSet<AgeingDocuments> AgeingDocuments { get; set; }
 
 
     }

@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\DocumentImage\" />
+    <Folder Include="wwwroot\AgeingDocuments\" />
   </ItemGroup>
 
 </Project>
