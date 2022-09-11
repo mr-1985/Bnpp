@@ -136,5 +136,38 @@ namespace Bnpp.Core.Services
             _context.Update(document);
             _context.SaveChanges();
         }
+
+        public List<ManagementReviews> GetAllManagementReviews()
+        {
+            return _context.ManagementReviews.Where(r => r.IsDelete == false).ToList();
+        }
+
+        public int AddManagementReviews(ManagementReviews reviews)
+        {
+            reviews.CreateDate=DateTime.Now;
+            
+            _context.Add(reviews);
+            _context.SaveChanges();
+            return reviews.ReviewsId;
+        }
+
+        public ManagementReviews GetManagementReviewsById(int reviewsId)
+        {
+            return _context.ManagementReviews.Find(reviewsId);
+        }
+
+        public void UpdateManagementReviews(ManagementReviews reviews)
+        {
+            reviews.CreateDate=DateTime.Now;
+            _context.Update(reviews);
+            _context.SaveChanges();
+        }
+
+        public void DeleteManagementReviews(int reviewsId)
+        {
+            var reviews = GetManagementReviewsById(reviewsId);
+            reviews.IsDelete = true;
+            UpdateManagementReviews(reviews);
+        }
     }
 }

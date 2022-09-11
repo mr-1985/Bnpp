@@ -30,5 +30,14 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteimgAgeingDocuments(int documentId);
 
         #endregion
+
+        #region Management Reviews
+        List<ManagementReviews> GetAllManagementReviews();
+        int AddManagementReviews(ManagementReviews reviews);
+        ManagementReviews GetManagementReviewsById(int reviewsId);
+        void UpdateManagementReviews(ManagementReviews reviews);
+        void DeleteManagementReviews(int reviewsId);
+
+        #endregion
     }
 }

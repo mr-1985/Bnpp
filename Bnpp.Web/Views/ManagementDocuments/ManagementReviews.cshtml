@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.AgeingManagementDocuments.ManagementReviews>
 @{
     ViewData["Title"] = "ManagementReviews";
      Layout = null;
@@ -133,8 +133,8 @@
                     </div>
 
 
-                    <a class="btn-new-equip" onclick="Create()">New</a>
-                    <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
+                    <a class="btn-new-equip" style="cursor: pointer" onclick="Create()">New</a>
+                    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
                     <br />
                     @{
                         int rowCount = 1;
@@ -172,35 +172,41 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr role="row">
                                     <td>
-                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
+                                        <input type="checkbox" class="checkBox" value="@item.ReviewsId" />
                                     </td>
                                     <td>
                                         @rowCount
                                     </td>
                                     <td>
-                                        @item.CreateDate.ToString("yyyy/MM/dd")
+                                        @item.Type
                                     </td>
                                     <td>
-                                        @item.NameOfCondition
+                                        @item.Date.ToString("yyyy/MM/dd")
                                     </td>
                                     <td>
-                                        @item.AllowableNumber
+                                        @item.Frequency
                                     </td>
                                     <td>
-                                        @item.Occurrances
+                                        @item.Prepared
                                     </td>
                                     <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
+                                        @item.Approved
+                                    </td>
+                                    <td>
+                                        @item.Authorized
+                                    </td>
+                                    <td>
+                                        <a class="btn-edit-equip" onclick="Edit(@item.ReviewsId)">
                                             Edit
                                         </a>
                                     </td>
                                 </tr>
                                 rowCount++;
-                            }*@
+                            }
                         </tbody>
                     </table>
 
@@ -233,11 +239,11 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
+        $("#newPage").load("/ManagementDocuments/CreateManagementReviews/");
     }
 
     function Edit(id) {
-        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
+        $("#newPage").load("/ManagementDocuments/EditManagementReviews/"+id);
     }
 
     
@@ -248,15 +254,12 @@
 
     function showPage2() {
         $("#Tabs").load("/ManagementDocuments/OtherDocuments/");
-        //$("li").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-        //$("li").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
 
     }
 
     function showPage3() {
-        $("#Tabs").load("/ManagementDocuments/ManagementReviews/"),function() {
-            $("li #tab-button3").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-        }
+        $("#Tabs").load("/ManagementDocuments/ManagementReviews/");
+        
     }
 
     
@@ -277,11 +280,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+            url: "/ManagementDocuments/DeleteManagementReviews",
+            data: { "reviewsId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
+                $("#Tabs").load("/ManagementDocuments/ManagementReviews/");
             },
             failure: function (response) {
                 alert(response.responseText);

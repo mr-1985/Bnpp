@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Entities.AgeingManagementDocuments;
 using Microsoft.AspNetCore.Http;
@@ -62,8 +63,8 @@ namespace Bnpp.Web.Controllers
                 return View();
             }
 
-            _management.UpdateMethodolgy(Methodologies,filemetholody);
-            return Json(" Electormotors Successfully Deleted."); 
+            _management.UpdateMethodolgy(Methodologies, filemetholody);
+            return Json(" Electormotors Successfully Deleted.");
         }
 
         public IActionResult DeleteMethodology(string[] methodolgyId)
@@ -82,7 +83,7 @@ namespace Bnpp.Web.Controllers
 
         #region MyRegion
 
-        [BindProperty] 
+        [BindProperty]
         public AgeingDocuments Documents { get; set; }
 
         public IActionResult OtherDocuments()
@@ -138,9 +139,71 @@ namespace Bnpp.Web.Controllers
         #endregion
 
 
-            public IActionResult ManagementReviews()
+        #region ManagementReviews
+        [BindProperty]
+        public ManagementReviews Reviews { get; set; }
+
+        public IActionResult ManagementReviews()
+        {
+            return View(_management.GetAllManagementReviews());
+        }
+
+
+        public IActionResult CreateManagementReviews()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult CreateManagementReviews(string StartDates = "")
+        {
+            if (StartDates != "")
+            {
+                string[] std = StartDates.Split('/');
+                Reviews.Date = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+
+            _management.AddManagementReviews(Reviews);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditManagementReviews(int id)
+        {
+            return View(_management.GetManagementReviewsById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditManagementReviews(string StartDates = "")
+        {
+            if (StartDates != "")
+            {
+                string[] std = StartDates.Split('/');
+                Reviews.Date = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _management.UpdateManagementReviews(Reviews);
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteManagementReviews(string[] reviewsId)
+        {
+            foreach (string id in reviewsId)
+            {
+                _management.DeleteManagementReviews(Convert.ToInt32(id));
+            }
+
+            return Json(" Equipments Successfully Deleted.");
+        }
+        #endregion
     }
 }

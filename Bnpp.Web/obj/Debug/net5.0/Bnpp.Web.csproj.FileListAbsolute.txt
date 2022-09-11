@@ -605,3 +605,5 @@ C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Manag
 C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\ManagementDocuments\EditMethodology.cshtml.g.cs
 C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\ManagementDocuments\CreateAgeingDocuments.cshtml.g.cs
 C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\ManagementDocuments\EditAgeingDocuments.cshtml.g.cs
+C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\ManagementDocuments\CreateManagementReviews.cshtml.g.cs
+C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\ManagementDocuments\EditManagementReviews.cshtml.g.cs
