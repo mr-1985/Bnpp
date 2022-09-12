@@ -23,7 +23,7 @@ namespace Bnpp.Web.Controllers
 
         #region General Data
 
-        [BindProperty] 
+        [BindProperty]
         public GeneralData data { get; set; }
 
 
@@ -168,7 +168,7 @@ namespace Bnpp.Web.Controllers
             return Json(" Electormotors Successfully Deleted.");
         }
 
-        
+
         public IActionResult DeleteDesignDocument(string[] documentId)
         {
             foreach (string id in documentId)
@@ -189,10 +189,59 @@ namespace Bnpp.Web.Controllers
             return View();
         }
 
+        #region ChemicalNorms
+
+        [BindProperty] public ChemicalNorms Chemical { get; set; }
+
+
         public IActionResult ChemicalNorms()
+        {
+            return View(_dataService.GetAllChemicalNorms());
+        }
+
+
+        public IActionResult CreateChemicalNorms()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult CreateChemicalNorms(ChemicalNorms chemicalNorms)
+        {
+            //if (!ModelState.IsValid)
+            //    return View();
+
+            _dataService.AddChemicalNorms(Chemical);
+            return new JsonResult("success");
+        }
+
+
+        public IActionResult EditChemicalNorms(int id)
+        {
+            return View(_dataService.GetChemicalNormsById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditChemicalNorms()
+        {
+            //if (!ModelState.IsValid)
+            //    return View();
+
+            _dataService.UpdateChemicalNorms(Chemical);
+            return new JsonResult("success");
+        }
+
+        
+        public IActionResult DeleteChemicalNorms(string[] chemicalId)
+        {
+            foreach (string id in chemicalId)
+            {
+                _dataService.DeleteChemicalNorms(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
+
+        #endregion
 
         public IActionResult TechnicalPrograms()
         {

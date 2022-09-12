@@ -13,6 +13,7 @@ namespace Bnpp.DataLayer.Entities
         public int OperationalId { get; set; }
 
         [MaxLength(200)]
+
         public string NameofConditions { get; set; }
 
         [MaxLength(200)]

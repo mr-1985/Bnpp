@@ -43,10 +43,10 @@ namespace Bnpp.Web.Controllers
         [HttpPost]
         public IActionResult CreateNormalOperations(string StartDates = "")
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
             if (StartDates != "")
             {
                 string[] std = StartDates.Split('/');
@@ -71,10 +71,10 @@ namespace Bnpp.Web.Controllers
         [HttpPost]
         public IActionResult EditNormalOperations(string StartDates = "")
         {
-            if (!ModelState.IsValid)
-            {
-                return View(NormalOperation);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(NormalOperation);
+            //}
 
             if (StartDates != "")
             {

@@ -4,14 +4,16 @@ using Bnpp.DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Bnpp.DataLayer.Migrations
 {
     [DbContext(typeof(BnppContext))]
-    partial class BnppContextModelSnapshot : ModelSnapshot
+    [Migration("20220912190934_uodayedesignbis")]
+    partial class uodayedesignbis
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,40 +115,6 @@ namespace Bnpp.DataLayer.Migrations
                     b.HasKey("MethodologyId");
 
                     b.ToTable("Methodologies");
-                });
-
-            modelBuilder.Entity("Bnpp.DataLayer.Entities.BasicData.ChemicalNorms", b =>
-                {
-                    b.Property<int>("ChemicalId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("IndexDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Limit")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Unit")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ChemicalId");
-
-                    b.ToTable("ChemicalNorms");
                 });
 
             modelBuilder.Entity("Bnpp.DataLayer.Entities.BasicData.DesignData", b =>

@@ -139,5 +139,37 @@ namespace Bnpp.Core.Services
             _context.Update(document);
             _context.SaveChanges();
         }
+
+        public List<ChemicalNorms> GetAllChemicalNorms()
+        {
+            return _context.ChemicalNorms.Where(c => c.IsDelete == false).ToList();
+        }
+
+        public int AddChemicalNorms(ChemicalNorms chemical)
+        {
+           chemical.CreateDate=DateTime.Now;
+           _context.Add(chemical);
+           _context.SaveChanges();
+           return chemical.ChemicalId;
+        }
+
+        public ChemicalNorms GetChemicalNormsById(int chemicalId)
+        {
+            return _context.ChemicalNorms.Find(chemicalId);
+        }
+
+        public void UpdateChemicalNorms(ChemicalNorms chemical)
+        {
+            chemical.CreateDate=DateTime.Now;
+            _context.Update(chemical);
+            _context.SaveChanges();
+        }
+
+        public void DeleteChemicalNorms(int chemicalId)
+        {
+            var chemicals = GetChemicalNormsById(chemicalId);
+            chemicals.IsDelete = true;
+            UpdateChemicalNorms(chemicals);
+        }
     }
 }

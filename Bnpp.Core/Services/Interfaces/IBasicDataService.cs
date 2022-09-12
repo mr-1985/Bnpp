@@ -42,5 +42,15 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteDesignDocument(int designDocumentId);
 
         #endregion
+
+        #region Chemical Norms
+
+        List<ChemicalNorms> GetAllChemicalNorms();
+        int AddChemicalNorms(ChemicalNorms chemical);
+        ChemicalNorms GetChemicalNormsById(int chemicalId);
+        void UpdateChemicalNorms(ChemicalNorms chemical);
+        void DeleteChemicalNorms(int chemicalId);
+
+        #endregion
     }
 }
