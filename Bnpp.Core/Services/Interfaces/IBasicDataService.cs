@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bnpp.DataLayer.Entities.AgeingManagementDocuments;
 using Bnpp.DataLayer.Entities.BasicData;
+using Microsoft.AspNetCore.Http;
 
 namespace Bnpp.Core.Services.Interfaces
 {
@@ -29,6 +31,16 @@ namespace Bnpp.Core.Services.Interfaces
         DesignData GetDesignDataById(int designId);
 
         void DeleteDesignData(int designId);
+        #endregion
+
+        #region Documents
+
+        List<DesignDocument> GetAllDesignDocument();
+        int AddDesignDocument(DesignDocument designDocument, IFormFile imgDesignDocument);
+        DesignDocument GetDesignDocumentById(int designDocumentId);
+        void UpdateDesignDocument(DesignDocument designDocument, IFormFile imgDesignDocument);
+        void DeleteDesignDocument(int designDocumentId);
+
         #endregion
     }
 }

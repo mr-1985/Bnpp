@@ -1,6 +1,7 @@
 ﻿using System;
 using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Entities.BasicData;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bnpp.Web.Controllers
@@ -91,8 +92,8 @@ namespace Bnpp.Web.Controllers
         [HttpPost]
         public IActionResult CreateDesignData(DesignData design)
         {
-            //if (!ModelState.IsValid)
-            //    return View();
+            if (!ModelState.IsValid)
+                return View();
 
             _dataService.AddDesignData(DesignDatas);
             return new JsonResult("success");
@@ -123,10 +124,60 @@ namespace Bnpp.Web.Controllers
         }
         #endregion
 
+        #region Documents
+        [BindProperty] public DesignDocument Document { get; set; }
+
+
         public IActionResult Documents()
+        {
+            return View(_dataService.GetAllDesignDocument());
+        }
+
+        public IActionResult CreateDesignDocument()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult CreateDesignDocument(IFormFile fileDocument)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _dataService.AddDesignDocument(Document, fileDocument);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult EditDesignDocument(int id)
+        {
+            return View(_dataService.GetDesignDocumentById(id));
+        }
+
+
+        [HttpPost]
+        public IActionResult EditDesignDocument(IFormFile fileDocument)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _dataService.UpdateDesignDocument(Document, fileDocument);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        
+        public IActionResult DeleteDesignDocument(string[] documentId)
+        {
+            foreach (string id in documentId)
+            {
+                _dataService.DeleteDesignDocument(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
+        #endregion
 
         public IActionResult Safety()
         {
