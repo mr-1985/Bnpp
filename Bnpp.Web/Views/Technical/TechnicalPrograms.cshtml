@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.BasicData.InspectionProgram>
 @{
     ViewData["Title"] = "TechnicalPrograms";
     Layout = null;
@@ -20,7 +20,8 @@
                         » <b id="subTitle22a"></b>
                     </td>
                     <td>
-                        » Basic Data<b style="color: #ff0000;" id="subTitle22"> » Technical Programs
+                        » Basic Data<b style="color: #ff0000;" id="subTitle22">
+                            » Technical Programs
 
                         </b>
                     </td>
@@ -32,7 +33,8 @@
         </a>
     </div>
 
-    <h1 id="iH1">Basic Data
+    <h1 id="iH1">
+        Basic Data
     </h1>
     <div id="iContent">
 
@@ -62,7 +64,7 @@
 
                     </a>
                 </li>
-                
+
                 <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
                     <a id="tab-button-a3" onclick="showPage5()" style="cursor:pointer;color: rgb(110, 110, 255);">
                         Components
@@ -101,7 +103,8 @@
 
         <div id="tab1" class="tab-item" style="display: block;">
 
-            <h1 id="iH1">Technical Programs
+            <h1 id="iH1">
+                Technical Programs
             </h1>
 
             <div class="bevel-box">
@@ -167,7 +170,7 @@
                     </table>*@
             </div>
 
-            <div  id="newPage">
+            <div id="newPage">
                 <div>
 
                     <div id="iLoading22" style="display: none;">
@@ -175,8 +178,8 @@
                     </div>
 
 
-                    <a class="btn-new-equip" onclick="Create()">New</a>
-                    <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
+                    <a class="btn-new-equip" style="cursor: pointer" onclick="Create()">New</a>
+                    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
                     <br />
                     @{
                         int rowCount = 1;
@@ -190,14 +193,30 @@
                                 <th></th>
                                 <th style="width: 150px">
                                     <b>
-                                        Code</b>
+                                        Code
+                                    </b>
                                 </th>
                                 <th style="width: 250px">
-                                    <b>File Name</b>
+                                    <b>Equipment & Component</b>
                                 </th>
-                               
+
                                 <th style="width: 120px">
-                                    <b>Doc. Name</b>
+                                    <b>Test Method</b>
+                                </th>
+                                <th style="width: 120px">
+                                    <b>Technical Documents</b>
+                                </th>
+                                <th style="width: 120px">
+                                    <b>Scope of Inspection %</b>
+                                </th>
+                                <th style="width: 120px">
+                                    <b>Period of Inspection</b>
+                                </th>
+                                <th style="width: 120px">
+                                    <b>Category of Welded joints</b>
+                                </th>
+                                <th style="width: 120px">
+                                    <b>Note</b>
                                 </th>
 
                                 <th style="width: 120px">
@@ -206,35 +225,47 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr role="row">
                                     <td>
-                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
+                                        <input type="checkbox" class="checkBox" value="@item.InspectionProgramId" />
                                     </td>
                                     <td>
                                         @rowCount
                                     </td>
                                     <td>
-                                        @item.CreateDate.ToString("yyyy/MM/dd")
+                                        @item.Code
                                     </td>
                                     <td>
-                                        @item.NameOfCondition
+                                        @item.EquipmentDocument
                                     </td>
                                     <td>
-                                        @item.AllowableNumber
+                                        @item.TestMethod
                                     </td>
                                     <td>
-                                        @item.Occurrances
+                                        @item.TechnicalDocuments
                                     </td>
                                     <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
+                                        @item.ScopeofInspection
+                                    </td>
+                                    <td>
+                                        @item.PeriodofInspection
+                                    </td>
+                                    <td>
+                                        @item.CategoryofWeldedjoints
+                                    </td>
+                                    <td>
+                                        @item.Note
+                                    </td>
+                                    <td>
+                                        <a class="btn-edit-equip" onclick="Edit(@item.InspectionProgramId)">
                                             Edit
                                         </a>
                                     </td>
                                 </tr>
                                 rowCount++;
-                            }*@
+                            }
                         </tbody>
                     </table>
 
@@ -266,88 +297,88 @@
 </script>
 <script>
 
-    function Create() {
-        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
-    }
+      function Create() {
+          $("#newPage").load("/Technical/CreateTechnicalInspectionProgram/");
+      }
 
-    function Edit(id) {
-        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
-    }
+      function Edit(id) {
+          $("#newPage").load("/Technical/EditTechnicalInspectionProgram/"+id);
+      }
 
-    
 
-  function showPage1() {
-        $("#Tabs").load("/Technical/GeneralData/");
-    }
 
-    function showPage2() {
-        $("#Tabs").load("/Technical/DesignData/");
-    }
+    function showPage1() {
+          $("#Tabs").load("/Technical/GeneralData/");
+      }
 
-    function showPage3() {
-        $("#Tabs").load("/Technical/Documents/");
-    }
-    
-    function showPage4() {
-        $("#Tabs").load("/Technical/Safety/");
-    }
-    
-    function showPage5() {
-        $("#Tabs").load("/Technical/Components/");
-    }
+      function showPage2() {
+          $("#Tabs").load("/Technical/DesignData/");
+      }
 
-     function showPage6() {
-        $("#Tabs").load("/Technical/ChemicalNorms");
-    }
+      function showPage3() {
+          $("#Tabs").load("/Technical/Documents/");
+      }
 
-    function showPage7() {
-        $("#Tabs").load("/Technical/TechnicalPrograms/");
-    }
+      function showPage4() {
+          $("#Tabs").load("/Technical/Safety/");
+      }
 
-    function showPage8() {
-        $("#Tabs").load("/Technical/Sensors");
-    }
-    
-    function showPage9() {
-        $("#Tabs").load("/Technical/ControlPoints/");
-    }
-    
-    function showPage10() {
-        $("#Tabs").load("/Technical/HForms/");
-    }
+      function showPage5() {
+          $("#Tabs").load("/Technical/Components/");
+      }
 
-    $("#checkAll").click(function () {
-        $(".checkBox").prop('checked',
-            $(this).prop('checked'));
-    });
+       function showPage6() {
+          $("#Tabs").load("/Technical/ChemicalNorms");
+      }
 
-    $("#delete").click(function () {
-        var selectedIDs = new Array();
+      function showPage7() {
+          $("#Tabs").load("/Technical/TechnicalPrograms/");
+      }
 
-        $('input:checkbox.checkBox').each(function () {
-            if ($(this).prop('checked')) {
-                selectedIDs.push($(this).val());
-            }
-        });
+      function showPage8() {
+          $("#Tabs").load("/Technical/Sensors");
+      }
 
-        $.ajax({
-            type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+      function showPage9() {
+          $("#Tabs").load("/Technical/ControlPoints/");
+      }
 
-            success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
-            },
-            failure: function (response) {
-                alert(response.responseText);
-            },
-            error: function (response) {
-                alert(response.responseText);
-            }
+      function showPage10() {
+          $("#Tabs").load("/Technical/HForms/");
+      }
 
-        });
+      $("#checkAll").click(function () {
+          $(".checkBox").prop('checked',
+              $(this).prop('checked'));
+      });
 
-    });
+      $("#delete").click(function () {
+          var selectedIDs = new Array();
+
+          $('input:checkbox.checkBox').each(function () {
+              if ($(this).prop('checked')) {
+                  selectedIDs.push($(this).val());
+              }
+          });
+
+          $.ajax({
+              type: "POST",
+              url: "/Technical/DeleteTechnicalInspectionProgram",
+              data: { "inspectionsId": selectedIDs },
+
+              success: function (response) {
+                  $("#Tabs").load("/Technical/TechnicalPrograms/");
+              },
+              failure: function (response) {
+                  alert(response.responseText);
+              },
+              error: function (response) {
+                  alert(response.responseText);
+              }
+
+          });
+
+      });
 
 
 </script>

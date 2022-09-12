@@ -243,10 +243,55 @@ namespace Bnpp.Web.Controllers
 
         #endregion
 
+        #region Technical Inspection Program
+        [BindProperty]
+        public InspectionProgram Program { get; set; }
+
         public IActionResult TechnicalPrograms()
+        {
+            return View(_dataService.GetAllInspectionProgram());
+        }
+
+        public IActionResult CreateTechnicalInspectionProgram()
         {
             return View();
         }
+
+        [HttpPost]
+
+        public IActionResult CreateTechnicalInspectionProgram(InspectionProgram inspection)
+        {
+            //if (!ModelState.IsValid)
+            //    return View();
+
+            _dataService.AddInspectionProgram(Program);
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditTechnicalInspectionProgram(int id)
+        {
+            return View(_dataService.GetInspectionProgramById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditTechnicalInspectionProgram()
+        {
+            //if (!ModelState.IsValid)
+            //    return View();
+
+            _dataService.UpdateInspectionProgram(Program);
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteTechnicalInspectionProgram(string[] inspectionsId)
+        {
+            foreach (string id in inspectionsId)
+            {
+                _dataService.DeleteInspectionProgram(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
+        #endregion
 
         public IActionResult Sensors()
         {

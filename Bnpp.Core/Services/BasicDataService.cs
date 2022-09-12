@@ -171,5 +171,38 @@ namespace Bnpp.Core.Services
             chemicals.IsDelete = true;
             UpdateChemicalNorms(chemicals);
         }
+
+        public List<InspectionProgram> GetAllInspectionProgram()
+        {
+            return _context.InspectionPrograms.Where(p=>p.IsDelete==false).ToList();
+        }
+
+        public int AddInspectionProgram(InspectionProgram program)
+        {
+            program.CreateDate=DateTime.Now;
+            _context.Add(program);
+            _context.SaveChanges();
+            return program.InspectionProgramId;
+        }
+
+        public InspectionProgram GetInspectionProgramById(int programId)
+        {
+            return _context.InspectionPrograms.Find(programId);
+        }
+
+        public void UpdateInspectionProgram(InspectionProgram program)
+        {
+            program.CreateDate=DateTime.Now;
+            _context.Update(program);
+            _context.SaveChanges();
+        }
+
+        public void DeleteInspectionProgram(int programId)
+        {
+            var inspectionProgram = GetInspectionProgramById(programId);
+            inspectionProgram.IsDelete=true;
+            _context.Update(inspectionProgram);
+            _context.SaveChanges();
+        }
     }
 }

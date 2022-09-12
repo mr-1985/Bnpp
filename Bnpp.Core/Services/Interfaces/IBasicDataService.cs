@@ -52,5 +52,15 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteChemicalNorms(int chemicalId);
 
         #endregion
+
+        #region Technical Inspection Program
+
+        List<InspectionProgram> GetAllInspectionProgram();
+        int AddInspectionProgram(InspectionProgram program);
+        InspectionProgram GetInspectionProgramById(int programId);
+        void UpdateInspectionProgram(InspectionProgram program);
+        void DeleteInspectionProgram(int programId);
+
+        #endregion
     }
 }
