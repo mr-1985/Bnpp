@@ -5,7 +5,7 @@
 }
 
 <div id="normal">
-    <form id="myForm" asp-action="CreateDesignDocument" method="post" enctype="multipart/form-data">
+    <form id="DesignDocumentForm" asp-action="CreateDesignDocument" method="post" enctype="multipart/form-data">
 
         <table cellpadding="3" cellspacing="0">
             <tbody>
@@ -26,7 +26,7 @@
                 </td>
                 
                 <td>
-                    <input asp-for="Filename"  type="text" id="fileName" value="" required="" style="direction: ltr; text-align: left;">
+                    <input asp-for="Filename"  type="text" id="fileName" value="" style="direction: ltr; text-align: left;">
                 </td>
                 <td>
                     <span asp-validation-for="Filename"></span>
@@ -51,7 +51,7 @@
 
             <tr>
                 <td>
-                    <input type="button" onclick="AjaxFormSubmit()" value="Save" class="butn-save" style="direction: ltr; text-align: left;">
+                    <input type="button" onclick="AjaxdocumentFormSubmit()" value="Save" class="butn-save" style="direction: ltr; text-align: left;">
                     <input type="button" onclick="showPage3()" value="Cancel" id="Button2" class="butn-cancel" style="direction: ltr; text-align: left;">
                 </td>
             </tr>
@@ -67,9 +67,9 @@
 <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
 
 <script type="text/javascript">
-       function AjaxFormSubmit() {
+       function AjaxdocumentFormSubmit() {
             //Set the URL.
-            var url = $("#myForm").attr("action");
+            var url = $("#DesignDocumentForm").attr("action");
             //Add the Field values to FormData object.
             var formData = new FormData();
             formData.append("code", $("#txtCode").val());
@@ -79,6 +79,7 @@
            
             formData.append("fileDocument", $("#imgDocumentUp")[0].files[0]);
             
+            debugger;
  
             $.ajax({
                 type: 'POST',

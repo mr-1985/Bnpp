@@ -11,8 +11,9 @@ namespace Bnpp.DataLayer.Entities.BasicData
     {
         [Key]
         public int DocumentId { get; set; }
-        [Required]
+        
         public string DesignDocumentImage { get; set; }
+
         [Required]
         public string Code { get; set; }
         public bool IsDelete { get; set; }

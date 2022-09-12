@@ -40,8 +40,8 @@ namespace Bnpp.Web.Controllers
         [HttpPost]
         public IActionResult CreateGeneralData(GeneralData generalData)
         {
-            if (!ModelState.IsValid)
-                return View();
+            //if (!ModelState.IsValid)
+            //    return View();
 
             _dataService.AddGeneralData(data);
             return new JsonResult("success");
@@ -55,8 +55,8 @@ namespace Bnpp.Web.Controllers
         [HttpPost]
         public IActionResult EditGeneralData()
         {
-            if (!ModelState.IsValid)
-                return View();
+            //if (!ModelState.IsValid)
+            //    return View();
 
             _dataService.UpdateGeneralData(data);
             return new JsonResult("success");
@@ -92,8 +92,8 @@ namespace Bnpp.Web.Controllers
         [HttpPost]
         public IActionResult CreateDesignData(DesignData design)
         {
-            if (!ModelState.IsValid)
-                return View();
+            //if (!ModelState.IsValid)
+            //    return View();
 
             _dataService.AddDesignData(DesignDatas);
             return new JsonResult("success");

@@ -13,11 +13,12 @@ namespace Bnpp.DataLayer.Entities.BasicData
         [Key]
         public int  GeneralId { get; set; }
 
-        [Display(Name = "Designation Of Parameters")]
-        [Required(ErrorMessage = "please insert {0}")]
+        [Required]
         public string DesignationOfParameters { get; set; }
+
         [Required]
         public string Value { get; set; }
+
         public DateTime CreateDate { get; set; }
         public bool IsDelete { get; set; }
     }
