@@ -47,7 +47,9 @@ namespace Bnpp.DataLayer.Context
 
         #region Basic Data
 
-        public DbSet<GeneralData> GeneralData { get; set; } 
+        public DbSet<GeneralData> GeneralData { get; set; }
+        public DbSet<DesignData> DesignData { get; set; }
+        
 
         #endregion
     }

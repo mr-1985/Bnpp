@@ -48,5 +48,37 @@ namespace Bnpp.Core.Services
             general.IsDelete = true;
             UpdateGeneralData(general);
         }
+
+        public List<DesignData> GetAllDesignData()
+        {
+            return _context.DesignData.Where(g => g.IsDelete == false).ToList();
+        }
+
+        public int AddDesignData(DesignData design)
+        {
+            design.CreateDate = DateTime.Now;
+            _context.DesignData.Add(design);
+            _context.SaveChanges();
+            return design.DesignId;
+        }
+
+        public void UpdateDesignData(DesignData design)
+        {
+            design.CreateDate = DateTime.Now;
+            _context.Update(design);
+            _context.SaveChanges();
+        }
+
+        public DesignData GetDesignDataById(int designId)
+        {
+            return _context.DesignData.Find(designId);
+        }
+
+        public void DeleteDesignData(int designId)
+        {
+            var design = GetDesignDataById(designId);
+            design.IsDelete = true;
+            UpdateDesignData(design);
+        }
     }
 }

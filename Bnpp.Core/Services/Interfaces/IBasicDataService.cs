@@ -18,5 +18,17 @@ namespace Bnpp.Core.Services.Interfaces
 
         void DeleteGeneralData(int generalId);
         #endregion
+
+
+        #region Design Data
+        List<DesignData> GetAllDesignData();
+
+        int AddDesignData(DesignData design);
+
+        void UpdateDesignData(DesignData design);
+        DesignData GetDesignDataById(int designId);
+
+        void DeleteDesignData(int designId);
+        #endregion
     }
 }

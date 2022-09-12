@@ -73,12 +73,55 @@ namespace Bnpp.Web.Controllers
         #endregion
 
 
+        #region Design Data
+
+        [BindProperty]
+        public DesignData DesignDatas { get; set; }
+
         public IActionResult DesignData()
+        {
+            return View(_dataService.GetAllDesignData());
+        }
+
+        public IActionResult CreateDesignData()
         {
             return View();
         }
 
+        [HttpPost]
+        public IActionResult CreateDesignData(DesignData design)
+        {
+            //if (!ModelState.IsValid)
+            //    return View();
 
+            _dataService.AddDesignData(DesignDatas);
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditDesignData(int id)
+        {
+            return View(_dataService.GetDesignDataById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditDesignData()
+        {
+            //if (!ModelState.IsValid)
+            //    return View();
+
+            _dataService.UpdateDesignData(DesignDatas);
+            return new JsonResult("success");
+        }
+
+        public IActionResult DleteDesignData(string[] designId)
+        {
+            foreach (string id in designId)
+            {
+                _dataService.DeleteDesignData(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
+        #endregion
 
         public IActionResult Documents()
         {
