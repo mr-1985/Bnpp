@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.AgeingDocuments.OperationalDocuments>
+
+@{
     ViewData["Title"] = "AgeingDocuments";
     Layout = null;
 }
@@ -93,21 +95,7 @@
                 <table cellpadding="3" cellspacing="0">
                     <tbody>
                         <tr>
-                            @*<td>
-                                Search:
-                                </td>
-                                <td>
-                                <input name="iSearch" type="text" id="iSearch" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td>
-                                <input type="submit" name="Button11" value="Search" id="Button11" class="butn-search" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td>
-                                <input type="submit" name="Button1" value="Export Excel" id="Button1" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td style="width: 60px;">
-                                &nbsp;
-                                </td>*@
+
                             <td>
                                 <input type="file" name="uploadedFile" id="uploadedFile" style="direction: ltr; text-align: left;">
                                 <input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">
@@ -124,32 +112,7 @@
                         </tr>
                     </tbody>
                 </table>
-                @* <table cellpadding="3" cellspacing="0">
-                    <tbody>
-                    <tr>
-                    <td>Sort:</td>
-                    <td>
-                    <select name="iSort" onchange="javascript:setTimeout('__doPostBack(\'iSort\',\'\')', 0)" id="iSort">
-                    <option selected="selected" value="Asc">Asc</option>
-                    <option value="Desc">Desc</option>
 
-                    </select>
-                    </td>
-                    <td>Records to Show:</td>
-                    <td>
-                    <select name="iShowNum" onchange="javascript:setTimeout('__doPostBack(\'iShowNum\',\'\')', 0)" id="iShowNum">
-                    <option value="10">10</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <option value="500">500</option>
-                    <option selected="selected" value="1000">
-                    1000
-                    </option>
-                    </select>
-                    </td>
-                    </tr>
-                    </tbody>
-                    </table>*@
             </div>
 
             <div id="newPage">
@@ -161,7 +124,7 @@
 
 
                     <a class="btn-new-equip" onclick="Create()">New</a>
-                    <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
+                    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
                     <br />
                     @{
                         int rowCount = 1;
@@ -173,26 +136,16 @@
                                     <input type="checkbox" id="checkAll" />
                                 </th>
                                 <th></th>
-                                <th style="width: 150px">
+                                <th>
                                     <b>Code</b>
                                 </th>
-                                <th style="width: 250px">
+                                <th>
                                     <b>File Name</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th>
                                     <b>Doc. Name</b>
                                 </th>
-                                @*
-                                    <th style="width: 120px">
-                                    <b>Prepaired by</b>
-                                    </th>
 
-                                    <th style="width: 120px">
-                                    <b>	Approved</b>
-                                    </th>
-                                    <th style="width: 120px">
-                                    <b>	Authorized</b>
-                                    </th>*@
 
                                 <th style="width: 120px">
                                     <b>Actions</b>
@@ -200,35 +153,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model)
-                                {
+                            @foreach (var item in Model)
+                            {
                                 <tr role="row">
-                                <td>
-                                <input type="checkbox" class="checkBox" value="@item.OperationalId" />
-                                </td>
-                                <td>
-                                @rowCount
-                                </td>
-                                <td>
-                                @item.CreateDate.ToString("yyyy/MM/dd")
-                                </td>
-                                <td>
-                                @item.NameOfCondition
-                                </td>
-                                <td>
-                                @item.AllowableNumber
-                                </td>
-                                <td>
-                                @item.Occurrances
-                                </td>
-                                <td>
-                                <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
-                                Edit
-                                </a>
-                                </td>
+                                    <td>
+                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
+                                    </td>
+                                    <td>
+                                        @rowCount
+                                    </td>
+                                    <td>
+                                        @item.Code
+                                    </td>
+                                    <td>
+                                        @item.Filename
+                                    </td>
+                                    <td>
+                                        @item.DocumentName
+                                    </td>
+                                    <td>
+                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
+                                            Edit
+                                        </a>
+                                    </td>
                                 </tr>
                                 rowCount++;
-                                }*@
+                            }
                         </tbody>
                     </table>
 
@@ -261,11 +211,11 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
+        $("#newPage").load("/Documents/CreateOperationalDocuments/");
     }
 
     function Edit(id) {
-        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
+        $("#newPage").load("/Documents/EditNormalOperations/"+id);
     }
 
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bnpp.DataLayer.Entities;
+using Bnpp.DataLayer.Entities.AgeingDocuments;
 using Bnpp.DataLayer.Entities.AgeingManagementDocuments;
 using Bnpp.DataLayer.Entities.BasicData;
 using Bnpp.DataLayer.Entities.Electrical;
@@ -55,7 +56,13 @@ namespace Bnpp.DataLayer.Context
         public DbSet<Sensors> Sensors { get; set; }
         public DbSet<ControlPoints> ControlPoints { get; set; }
         public DbSet<HForms> HForms { get; set; }
-        
+
+
+        #endregion
+
+        #region Ageing Document
+
+        public DbSet<OperationalDocuments> OperationalDocuments { get; set; }
 
         #endregion
     }
