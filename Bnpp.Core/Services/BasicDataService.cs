@@ -236,5 +236,38 @@ namespace Bnpp.Core.Services
             ssensor.IsDelete = true;
             UpdateSensors(ssensor);
         }
+
+        public List<ControlPoints> GetAllControlPoints()
+        {
+            return _context.ControlPoints.Where(p => p.IsDelete == false).ToList();
+        }
+
+        public int AddControlPoints(ControlPoints points)
+        {
+            points.CreateDate=DateTime.Now;
+            _context.Add(points);
+            _context.SaveChanges();
+            return points.PointId;
+        }
+
+        public ControlPoints GetControlPointsById(int pointId)
+        {
+            return _context.ControlPoints.Find(pointId);
+        }
+
+        public void UpdateControlPoints(ControlPoints points)
+        {
+            points.CreateDate=DateTime.Now;
+            _context.Update(points);
+            _context.SaveChanges();
+        }
+
+        public void DeleteControlPoints(int pointId)
+        {
+            var controlPoints = GetControlPointsById(pointId);
+            controlPoints.IsDelete=true;
+
+            UpdateControlPoints(controlPoints);
+        }
     }
 }

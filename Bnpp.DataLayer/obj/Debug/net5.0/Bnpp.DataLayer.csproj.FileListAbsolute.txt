@@ -42,4 +42,3 @@ C:\Users\payetakht\Source\Repos\Bnpp\Bnpp.DataLayer\obj\Debug\net5.0\Bnpp.DataLa
 C:\Users\payetakht\Source\Repos\Bnpp\Bnpp.DataLayer\obj\Debug\net5.0\ref\Bnpp.DataLayer.dll
 C:\Users\payetakht\Source\Repos\Bnpp\Bnpp.DataLayer\obj\Debug\net5.0\Bnpp.DataLayer.pdb
 C:\Users\payetakht\Source\Repos\Bnpp\Bnpp.DataLayer\obj\Debug\net5.0\Bnpp.DataLayer.genruntimeconfig.cache
-C:\Users\payetakht\source\repos\Bnpp\Bnpp.DataLayer\obj\Debug\net5.0\Bnpp.DataLayer.csproj.AssemblyReference.cache

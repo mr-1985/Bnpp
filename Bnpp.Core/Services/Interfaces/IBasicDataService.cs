@@ -72,5 +72,15 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteSensors(int sensorId);
 
         #endregion
+
+        #region Control Points
+
+        List<ControlPoints> GetAllControlPoints();
+        int AddControlPoints(ControlPoints points);
+        ControlPoints GetControlPointsById(int pointId);
+        void UpdateControlPoints(ControlPoints points);
+        void DeleteControlPoints(int pointId);
+
+        #endregion
     }
 }

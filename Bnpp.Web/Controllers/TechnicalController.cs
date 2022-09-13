@@ -231,7 +231,7 @@ namespace Bnpp.Web.Controllers
             return new JsonResult("success");
         }
 
-        
+
         public IActionResult DeleteChemicalNorms(string[] chemicalId)
         {
             foreach (string id in chemicalId)
@@ -341,12 +341,29 @@ namespace Bnpp.Web.Controllers
             }
             return new JsonResult("success");
         }
-#endregion
+        #endregion
 
-public IActionResult ControlPoints()
+        #region Control Points
+        [BindProperty] public ControlPoints ControlPoint { get; set; }
+        public IActionResult ControlPoints()
+        {
+            return View(_dataService.GetAllControlPoints());
+        }
+
+        public IActionResult CreateControlPoints()
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult CreateControlPoints(ControlPoints points)
+        {
+            //if (!ModelState.IsValid)
+            //    return View();
+
+            _dataService.AddControlPoints(ControlPoint);
+            return new JsonResult("success");
+        }
+        #endregion
 
         public IActionResult HForms()
         {

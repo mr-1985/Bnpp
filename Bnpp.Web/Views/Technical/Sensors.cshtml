@@ -20,7 +20,8 @@
                         » <b id="subTitle22a"></b>
                     </td>
                     <td>
-                        » Basic Data<b style="color: #ff0000;" id="subTitle22"> » Sensors
+                        » Basic Data<b style="color: #ff0000;" id="subTitle22">
+                            » Sensors
                         </b>
                     </td>
                 </tr>
@@ -31,7 +32,8 @@
         </a>
     </div>
 
-    <h1 id="iH1">Basic Data
+    <h1 id="iH1">
+        Basic Data
     </h1>
     <div id="iContent">
 
@@ -61,7 +63,7 @@
 
                     </a>
                 </li>
-                
+
                 <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
                     <a id="tab-button-a3" onclick="showPage5()" style="cursor:pointer;color: rgb(110, 110, 255);">
                         Components
@@ -165,7 +167,7 @@
                     </table>*@
             </div>
 
-            <div  id="newPage">
+            <div id="newPage">
                 <div>
 
                     <div id="iLoading22" style="display: none;">
@@ -186,25 +188,25 @@
                                     <input type="checkbox" id="checkAll" />
                                 </th>
                                 <th></th>
-                                <th style="width: 150px">
+                                <th>
                                     <b>Parameter to measure</b>
                                 </th>
-                                <th style="width: 250px">
+                                <th>
                                     <b>AKZ</b>
                                 </th>
-                               
-                                <th style="width: 120px">
+
+                                <th>
                                     <b>No. of signals </b>
                                 </th>
-                                
-                                <th style="width: 120px">
+
+                                <th>
                                     <b>	 KKS</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th>
                                     <b>	Quantity</b>
                                 </th>
 
-                                <th style="width: 120px">
+                                <th>
                                     <b>Actions</b>
                                 </th>
                             </tr>
@@ -273,88 +275,88 @@
 </script>
 <script>
 
-    function Create() {
-        $("#newPage").load("/Technical/CreateSensor/");
-    }
+      function Create() {
+          $("#newPage").load("/Technical/CreateSensor/");
+      }
 
-    function Edit(id) {
-        $("#newPage").load("/Technical/EditSensor/"+id);
-    }
+      function Edit(id) {
+          $("#newPage").load("/Technical/EditSensor/"+id);
+      }
 
-    
 
-  function showPage1() {
-        $("#Tabs").load("/Technical/GeneralData/");
-    }
 
-    function showPage2() {
-        $("#Tabs").load("/Technical/DesignData/");
-    }
+    function showPage1() {
+          $("#Tabs").load("/Technical/GeneralData/");
+      }
 
-    function showPage3() {
-        $("#Tabs").load("/Technical/Documents/");
-    }
-    
-    function showPage4() {
-        $("#Tabs").load("/Technical/Safety/");
-    }
-    
-    function showPage5() {
-        $("#Tabs").load("/Technical/Components/");
-    }
+      function showPage2() {
+          $("#Tabs").load("/Technical/DesignData/");
+      }
 
-     function showPage6() {
-        $("#Tabs").load("/Technical/ChemicalNorms");
-    }
+      function showPage3() {
+          $("#Tabs").load("/Technical/Documents/");
+      }
 
-    function showPage7() {
-        $("#Tabs").load("/Technical/TechnicalPrograms/");
-    }
+      function showPage4() {
+          $("#Tabs").load("/Technical/Safety/");
+      }
 
-    function showPage8() {
-        $("#Tabs").load("/Technical/Sensors");
-    }
-    
-    function showPage9() {
-        $("#Tabs").load("/Technical/ControlPoints/");
-    }
-    
-    function showPage10() {
-        $("#Tabs").load("/Technical/HForms/");
-    }
+      function showPage5() {
+          $("#Tabs").load("/Technical/Components/");
+      }
 
-    $("#checkAll").click(function () {
-        $(".checkBox").prop('checked',
-            $(this).prop('checked'));
-    });
+       function showPage6() {
+          $("#Tabs").load("/Technical/ChemicalNorms");
+      }
 
-    $("#delete").click(function () {
-        var selectedIDs = new Array();
+      function showPage7() {
+          $("#Tabs").load("/Technical/TechnicalPrograms/");
+      }
 
-        $('input:checkbox.checkBox').each(function () {
-            if ($(this).prop('checked')) {
-                selectedIDs.push($(this).val());
-            }
-        });
+      function showPage8() {
+          $("#Tabs").load("/Technical/Sensors");
+      }
 
-        $.ajax({
-            type: "POST",
-            url: "/Technical/DeleteSensor",
-            data: { "sensorId": selectedIDs },
+      function showPage9() {
+          $("#Tabs").load("/Technical/ControlPoints/");
+      }
 
-            success: function (response) {
-                $("#Tabs").load("/Technical/Sensors/");
-            },
-            failure: function (response) {
-                alert(response.responseText);
-            },
-            error: function (response) {
-                alert(response.responseText);
-            }
+      function showPage10() {
+          $("#Tabs").load("/Technical/HForms/");
+      }
 
-        });
+      $("#checkAll").click(function () {
+          $(".checkBox").prop('checked',
+              $(this).prop('checked'));
+      });
 
-    });
+      $("#delete").click(function () {
+          var selectedIDs = new Array();
+
+          $('input:checkbox.checkBox').each(function () {
+              if ($(this).prop('checked')) {
+                  selectedIDs.push($(this).val());
+              }
+          });
+
+          $.ajax({
+              type: "POST",
+              url: "/Technical/DeleteSensor",
+              data: { "sensorId": selectedIDs },
+
+              success: function (response) {
+                  $("#Tabs").load("/Technical/Sensors/");
+              },
+              failure: function (response) {
+                  alert(response.responseText);
+              },
+              error: function (response) {
+                  alert(response.responseText);
+              }
+
+          });
+
+      });
 
 
 </script>

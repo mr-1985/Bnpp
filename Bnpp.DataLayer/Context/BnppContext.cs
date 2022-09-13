@@ -53,6 +53,7 @@ namespace Bnpp.DataLayer.Context
         public DbSet<ChemicalNorms> ChemicalNorms { get; set; }
         public DbSet<InspectionProgram> InspectionPrograms { get; set; }
         public DbSet<Sensors> Sensors { get; set; }
+        public DbSet<ControlPoints> ControlPoints { get; set; }
         
 
         #endregion
