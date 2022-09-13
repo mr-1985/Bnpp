@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.BasicData.Sensors>
 @{
     ViewData["Title"] = "Sensors";
     Layout = null;
@@ -173,8 +173,8 @@
                     </div>
 
 
-                    <a class="btn-new-equip" onclick="Create()">New</a>
-                    <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
+                    <a class="btn-new-equip" style="cursor: pointer" onclick="Create()">New</a>
+                    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
                     <br />
                     @{
                         int rowCount = 1;
@@ -203,49 +203,45 @@
                                 <th style="width: 120px">
                                     <b>	Quantity</b>
                                 </th>
-                               @* <th style="width: 120px">
-                                    <b>	Length</b>
-                                </th>
-                                <th style="width: 120px">
-                                    <b>	Material Grade</b>
-                                </th>*@
 
-                                	
                                 <th style="width: 120px">
                                     <b>Actions</b>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr role="row">
                                     <td>
-                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
+                                        <input type="checkbox" class="checkBox" value="@item.SensorId" />
                                     </td>
                                     <td>
                                         @rowCount
                                     </td>
                                     <td>
-                                        @item.CreateDate.ToString("yyyy/MM/dd")
+                                        @item.Parametertomeasure
                                     </td>
                                     <td>
-                                        @item.NameOfCondition
+                                        @item.AKZ
                                     </td>
                                     <td>
-                                        @item.AllowableNumber
+                                        @item.Numberofsignals
                                     </td>
                                     <td>
-                                        @item.Occurrances
+                                        @item.KKS
                                     </td>
                                     <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
+                                        @item.Quantity
+                                    </td>
+                                    <td>
+                                        <a class="btn-edit-equip" onclick="Edit(@item.SensorId)">
                                             Edit
                                         </a>
                                     </td>
                                 </tr>
                                 rowCount++;
-                            }*@
+                            }
                         </tbody>
                     </table>
 
@@ -278,11 +274,11 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
+        $("#newPage").load("/Technical/CreateSensor/");
     }
 
     function Edit(id) {
-        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
+        $("#newPage").load("/Technical/EditSensor/"+id);
     }
 
     
@@ -343,11 +339,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+            url: "/Technical/DeleteSensor",
+            data: { "sensorId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
+                $("#Tabs").load("/Technical/Sensors/");
             },
             failure: function (response) {
                 alert(response.responseText);

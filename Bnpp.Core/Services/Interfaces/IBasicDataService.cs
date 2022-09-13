@@ -62,5 +62,15 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteInspectionProgram(int programId);
 
         #endregion
+
+        #region Sensors
+
+        List<Sensors> GetAllSensors();
+        int AddSensors(Sensors sensors);
+        Sensors GetSensorsById(int sensorId);
+        void UpdateSensors(Sensors sensors);
+        void DeleteSensors(int sensorId);
+
+        #endregion
     }
 }

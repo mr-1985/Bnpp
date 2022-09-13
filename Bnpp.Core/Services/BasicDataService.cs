@@ -204,5 +204,37 @@ namespace Bnpp.Core.Services
             _context.Update(inspectionProgram);
             _context.SaveChanges();
         }
+
+        public List<Sensors> GetAllSensors()
+        {
+            return _context.Sensors.Where(s => s.IsDelete == false).ToList();
+        }
+
+        public int AddSensors(Sensors sensors)
+        {
+           sensors.CreateDate=DateTime.Now;
+           _context.Add(sensors);
+           _context.SaveChanges();
+           return sensors.SensorId;
+        }
+
+        public Sensors GetSensorsById(int sensorId)
+        {
+            return _context.Sensors.Find(sensorId);
+        }
+
+        public void UpdateSensors(Sensors sensors)
+        {
+           sensors.CreateDate=DateTime.Now;
+           _context.Update(sensors);
+           _context.SaveChanges();
+        }
+
+        public void DeleteSensors(int sensorId)
+        {
+            var ssensor = GetSensorsById(sensorId);
+            ssensor.IsDelete = true;
+            UpdateSensors(ssensor);
+        }
     }
 }

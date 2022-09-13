@@ -293,12 +293,57 @@ namespace Bnpp.Web.Controllers
         }
         #endregion
 
+        #region Sensors
+        [BindProperty] public Sensors Sensor { get; set; }
+
+
         public IActionResult Sensors()
+        {
+            return View(_dataService.GetAllSensors());
+        }
+
+        public IActionResult CreateSensor()
         {
             return View();
         }
 
-        public IActionResult ControlPoints()
+        [HttpPost]
+
+        public IActionResult CreateSensor(Sensors crtSensors)
+        {
+            //if (!ModelState.IsValid)
+            //    return View();
+
+            _dataService.AddSensors(Sensor);
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditSensor(int id)
+        {
+            return View(_dataService.GetSensorsById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditSensor()
+        {
+            //if (!ModelState.IsValid)
+            //    return View();
+
+            _dataService.UpdateSensors(Sensor);
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteSensor(string[] sensorId)
+        {
+            foreach (string id in sensorId)
+            {
+                _dataService.DeleteSensors(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
+#endregion
+
+public IActionResult ControlPoints()
         {
             return View();
         }
