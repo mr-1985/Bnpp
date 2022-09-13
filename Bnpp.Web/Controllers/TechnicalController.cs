@@ -389,9 +389,60 @@ namespace Bnpp.Web.Controllers
         }
         #endregion
 
+        #region HForms
+
+        [BindProperty] 
+        public HForms Forms { get; set; }
+
         public IActionResult HForms()
+        {
+            return View(_dataService.GetAllHForms());
+        }
+
+
+        public IActionResult CreateHForms()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult CreateHForms(IFormFile filehforms)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _dataService.AddHForms(Forms, filehforms);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult EditHForms(int id)
+        {
+            return View(_dataService.GetHFormsById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditHForms(IFormFile filehforms)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _dataService.UpdateHForms(Forms, filehforms);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult DeleteHForms(string[] hformId)
+        {
+            foreach (string id in hformId)
+            {
+                _dataService.DeleteHForms(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
+        
+        #endregion
     }
 }

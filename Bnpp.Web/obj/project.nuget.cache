@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "oHLguK3vy/4Rto29649/Ofi1TTDAK6wrwgh7fd3zTRVR4Z461ZgRKLC3zMtwvqhvgM94pv5/JMqxf9vsOZbDwQ==",
+  "dgSpecHash": "pUEF8/OdRJHKM63X9vJ8DPV5I+pwB6ECs/ITuNXk5xwvRN1PdaBLCiOLCEaZ4YULpozULb4C6FG+Vqni5W+mLA==",
   "success": true,
   "projectFilePath": "C:\\Users\\payetakht\\source\\repos\\Bnpp\\Bnpp.Web\\Bnpp.Web.csproj",
   "expectedPackageFiles": [
@@ -200,7 +200,7 @@
     "C:\\Users\\payetakht\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\payetakht\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\payetakht\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\payetakht\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.16\\microsoft.netcore.app.host.win-x64.5.0.16.nupkg.sha512"
+    "C:\\Users\\payetakht\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
   ],
   "logs": []
 }

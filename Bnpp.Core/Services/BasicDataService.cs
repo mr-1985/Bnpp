@@ -19,6 +19,9 @@ namespace Bnpp.Core.Services
         {
             _context = context;
         }
+
+        #region GeneralData
+
         public List<GeneralData> GetAllGeneralData()
         {
             return _context.GeneralData.Where(g => g.IsDelete == false).ToList();
@@ -51,6 +54,10 @@ namespace Bnpp.Core.Services
             UpdateGeneralData(general);
         }
 
+        #endregion
+
+        #region DesignData
+
         public List<DesignData> GetAllDesignData()
         {
             return _context.DesignData.Where(g => g.IsDelete == false).ToList();
@@ -82,6 +89,10 @@ namespace Bnpp.Core.Services
             design.IsDelete = true;
             UpdateDesignData(design);
         }
+
+        #endregion
+
+        #region DesignDocument
 
         public List<DesignDocument> GetAllDesignDocument()
         {
@@ -140,6 +151,10 @@ namespace Bnpp.Core.Services
             _context.SaveChanges();
         }
 
+        #endregion
+
+        #region ChemicalNorms
+
         public List<ChemicalNorms> GetAllChemicalNorms()
         {
             return _context.ChemicalNorms.Where(c => c.IsDelete == false).ToList();
@@ -147,10 +162,10 @@ namespace Bnpp.Core.Services
 
         public int AddChemicalNorms(ChemicalNorms chemical)
         {
-           chemical.CreateDate=DateTime.Now;
-           _context.Add(chemical);
-           _context.SaveChanges();
-           return chemical.ChemicalId;
+            chemical.CreateDate=DateTime.Now;
+            _context.Add(chemical);
+            _context.SaveChanges();
+            return chemical.ChemicalId;
         }
 
         public ChemicalNorms GetChemicalNormsById(int chemicalId)
@@ -171,6 +186,10 @@ namespace Bnpp.Core.Services
             chemicals.IsDelete = true;
             UpdateChemicalNorms(chemicals);
         }
+
+        #endregion
+
+        #region InspectionProgram
 
         public List<InspectionProgram> GetAllInspectionProgram()
         {
@@ -205,6 +224,10 @@ namespace Bnpp.Core.Services
             _context.SaveChanges();
         }
 
+        #endregion
+
+        #region Sensors
+
         public List<Sensors> GetAllSensors()
         {
             return _context.Sensors.Where(s => s.IsDelete == false).ToList();
@@ -212,10 +235,10 @@ namespace Bnpp.Core.Services
 
         public int AddSensors(Sensors sensors)
         {
-           sensors.CreateDate=DateTime.Now;
-           _context.Add(sensors);
-           _context.SaveChanges();
-           return sensors.SensorId;
+            sensors.CreateDate=DateTime.Now;
+            _context.Add(sensors);
+            _context.SaveChanges();
+            return sensors.SensorId;
         }
 
         public Sensors GetSensorsById(int sensorId)
@@ -225,9 +248,9 @@ namespace Bnpp.Core.Services
 
         public void UpdateSensors(Sensors sensors)
         {
-           sensors.CreateDate=DateTime.Now;
-           _context.Update(sensors);
-           _context.SaveChanges();
+            sensors.CreateDate=DateTime.Now;
+            _context.Update(sensors);
+            _context.SaveChanges();
         }
 
         public void DeleteSensors(int sensorId)
@@ -236,6 +259,10 @@ namespace Bnpp.Core.Services
             ssensor.IsDelete = true;
             UpdateSensors(ssensor);
         }
+
+        #endregion
+
+        #region ControlPoints
 
         public List<ControlPoints> GetAllControlPoints()
         {
@@ -269,5 +296,79 @@ namespace Bnpp.Core.Services
 
             UpdateControlPoints(controlPoints);
         }
+
+        #endregion
+
+        #region HForms
+
+        public List<HForms> GetAllHForms()
+        {
+            return _context.HForms.Where(f=>f.IsDelete==false).ToList();
+        }
+
+        public int AddHForms(HForms forms, IFormFile imgHForms)
+        {
+            forms.CreateDate = DateTime.Now;
+
+            if (imgHForms != null)
+            {
+                forms.HFormsImage = Guid.NewGuid() + Path.GetExtension(imgHForms.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", forms.HFormsImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgHForms.CopyTo(stream);
+                }
+            }
+
+            _context.Add(forms);
+            _context.SaveChanges();
+            return forms.HFormsId;
+        }
+
+        public HForms GetHFormsById(int formsId)
+        {
+            return _context.HForms.Find(formsId);
+        }
+
+        public void UpdateHForms(HForms forms, IFormFile imgHForms)
+        {
+            forms.CreateDate = DateTime.Now;
+
+            if (imgHForms != null)
+            {
+                if (forms.HFormsImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", forms.HFormsImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+                forms.HFormsImage = Guid.NewGuid() + Path.GetExtension(imgHForms.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", forms.HFormsImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgHForms.CopyTo(stream);
+                }
+            }
+
+            _context.Update(forms);
+            _context.SaveChanges();
+           
+        }
+
+        public void DeleteHForms(int formsId)
+        {
+            var hforms = GetHFormsById(formsId);
+            hforms.IsDelete = true;
+            _context.Update(hforms);
+            _context.SaveChanges();
+        }
+
+        #endregion
     }
 }

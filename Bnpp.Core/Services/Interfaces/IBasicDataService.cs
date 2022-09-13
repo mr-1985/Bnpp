@@ -82,5 +82,15 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteControlPoints(int pointId);
 
         #endregion
+
+        #region H-Forms
+
+        List<HForms> GetAllHForms();
+        int AddHForms(HForms forms, IFormFile imgHForms);
+        HForms GetHFormsById(int formsId);
+        void UpdateHForms(HForms forms, IFormFile imgHForms);
+        void DeleteHForms(int formsId);
+
+        #endregion
     }
 }
