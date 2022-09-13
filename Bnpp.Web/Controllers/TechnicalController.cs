@@ -363,6 +363,30 @@ namespace Bnpp.Web.Controllers
             _dataService.AddControlPoints(ControlPoint);
             return new JsonResult("success");
         }
+
+        public IActionResult EditControlPoints(int id)
+        {
+            return View(_dataService.GetControlPointsById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditControlPoints()
+        {
+            //if (!ModelState.IsValid)
+            //    return View();
+
+            _dataService.UpdateControlPoints(ControlPoint);
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteControlPoints(string[] pointId)
+        {
+            foreach (string id in pointId)
+            {
+                _dataService.DeleteControlPoints(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
         #endregion
 
         public IActionResult HForms()

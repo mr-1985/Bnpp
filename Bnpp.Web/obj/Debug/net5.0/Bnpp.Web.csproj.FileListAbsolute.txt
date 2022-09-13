@@ -620,3 +620,4 @@ C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Techn
 C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Technical\CreateSensor.cshtml.g.cs
 C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Technical\EditSensor.cshtml.g.cs
 C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Technical\CreateControlPoints.cshtml.g.cs
+C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Technical\EditControlPoints.cshtml.g.cs

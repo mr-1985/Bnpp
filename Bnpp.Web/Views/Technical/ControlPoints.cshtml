@@ -173,8 +173,8 @@
                     </div>
 
 
-                    <a class="btn-new-equip" onclick="Create()">New</a>
-                    <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
+                    <a class="btn-new-equip" style="cursor: pointer" onclick="Create()">New</a>
+                    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
                     <br />
                     @{
                         int rowCount = 1;
@@ -186,18 +186,18 @@
                                     <input type="checkbox" id="checkAll" />
                                 </th>
                                 <th></th>
-                                <th style="width: 150px">
+                                <th >
                                     <b>Parameter</b>
                                 </th>
-                                <th style="width: 250px">
+                                <th >
                                     <b>No. Check Points</b>
                                 </th>
                                
-                                <th style="width: 120px">
+                                <th >
                                     <b>Measurement range </b>
                                 </th>
                                 
-                                <th style="width: 120px">
+                                <th >
                                     <b>	 Remarks</b>
                                 </th>
                               @*  <th style="width: 120px">
@@ -217,35 +217,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr role="row">
                                     <td>
-                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
+                                        <input type="checkbox" class="checkBox" value="@item.PointId" />
                                     </td>
                                     <td>
                                         @rowCount
                                     </td>
                                     <td>
-                                        @item.CreateDate.ToString("yyyy/MM/dd")
+                                        @item.Parameter
                                     </td>
                                     <td>
-                                        @item.NameOfCondition
+                                        @item.NumberCheckPoints
                                     </td>
                                     <td>
-                                        @item.AllowableNumber
+                                        @item.MeasurementRange
                                     </td>
                                     <td>
-                                        @item.Occurrances
+                                        @item.Remarks
                                     </td>
                                     <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
+                                        <a class="btn-edit-equip" onclick="Edit(@item.PointId)">
                                             Edit
                                         </a>
                                     </td>
                                 </tr>
                                 rowCount++;
-                            }*@
+                            }
                         </tbody>
                     </table>
 
@@ -278,11 +278,11 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
+        $("#newPage").load("/Technical/CreateControlPoints/");
     }
 
     function Edit(id) {
-        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
+        $("#newPage").load("/Technical/EditControlPoints/"+id);
     }
 
     
@@ -343,11 +343,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+            url: "/Technical/DeleteControlPoints",
+            data: { "pointId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
+                $("#Tabs").load("/Technical/ControlPoints/");
             },
             failure: function (response) {
                 alert(response.responseText);
