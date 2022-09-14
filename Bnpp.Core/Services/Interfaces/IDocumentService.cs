@@ -20,5 +20,15 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteOperationalDocuments(int operationalId);
 
         #endregion
+
+        #region Drawing
+
+        List<Drawing> GetAllDrawing();
+        int AddDrawing(Drawing drawing, IFormFile imgDrawing);
+        Drawing GetDrawingById(int drawingId);
+        void UpdateDrawing(Drawing drawing, IFormFile imgDrawing);
+        void DeleteDrawing(int drawingId);
+
+        #endregion
     }
 }

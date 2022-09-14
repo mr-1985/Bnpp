@@ -75,10 +75,59 @@ namespace Bnpp.Web.Controllers
         }
         #endregion
 
+        #region Drawing
+
+        [BindProperty] public Drawing Drawings { get; set; }
+
         public IActionResult Drawing()
+        {
+            return View(_document.GetAllDrawing());
+        }
+
+        public IActionResult CraeteDrawing()
         {
             return View();
         }
+
+        
+        [HttpPost]
+        public IActionResult CraeteDrawing(IFormFile drawingDocuments)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _document.AddDrawing(Drawings, drawingDocuments);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult EditDrawings(int id)
+        {
+            return View(_document.GetDrawingById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditDrawings(IFormFile drawingDocuments)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _document.UpdateDrawing(Drawings, drawingDocuments);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult DeleteDrawing(string[] drawingsId)
+        {
+            foreach (string id in drawingsId)
+            {
+                _document.DeleteDrawing(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
+        #endregion
 
         public IActionResult Standards()
         {

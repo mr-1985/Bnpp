@@ -89,6 +89,76 @@ namespace Bnpp.Core.Services
             _context.Update(operationalDocument);
             _context.SaveChanges();
         }
+        #endregion
+
+        #region Drawing
+
+        public List<Drawing> GetAllDrawing()
+        {
+            return _context.Drawing.Where(d => d.IsDelete == false).ToList();
+        }
+
+        public int AddDrawing(Drawing drawing, IFormFile imgDrawing)
+        {
+            drawing.CreateDate = DateTime.Now;
+
+            if (imgDrawing != null)
+            {
+                drawing.DrawingImage = Guid.NewGuid() + Path.GetExtension(imgDrawing.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", drawing.DrawingImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgDrawing.CopyTo(stream);
+                }
+            }
+
+            _context.Add(drawing);
+            _context.SaveChanges();
+            return drawing.DrawingId;
+        }
+
+        public Drawing GetDrawingById(int drawingId)
+        {
+            return _context.Drawing.Find(drawingId);
+        }
+
+        public void UpdateDrawing(Drawing drawing, IFormFile imgDrawing)
+        {
+            drawing.CreateDate = DateTime.Now;
+
+            if (imgDrawing != null)
+            {
+                if (drawing.DrawingImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", drawing.DrawingImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+                drawing.DrawingImage = Guid.NewGuid() + Path.GetExtension(imgDrawing.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", drawing.DrawingImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgDrawing.CopyTo(stream);
+                }
+            }
+
+            _context.Update(drawing);
+            _context.SaveChanges();
+        }
+
+        public void DeleteDrawing(int drawingId)
+        {
+            var drawingss = GetDrawingById(drawingId);
+            drawingss.IsDelete = true;
+            _context.Update(drawingss);
+            _context.SaveChanges();
+        }
 
         #endregion
     }

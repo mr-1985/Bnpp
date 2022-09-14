@@ -625,3 +625,5 @@ C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Techn
 C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Technical\EditHForms.cshtml.g.cs
 C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Documents\CreateOperationalDocuments.cshtml.g.cs
 C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Documents\EditOperationalDocuments.cshtml.g.cs
+C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Documents\CraeteDrawing.cshtml.g.cs
+C:\Users\payetakht\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Documents\EditDrawings.cshtml.g.cs

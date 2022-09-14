@@ -63,6 +63,7 @@ namespace Bnpp.DataLayer.Context
         #region Ageing Document
 
         public DbSet<OperationalDocuments> OperationalDocuments { get; set; }
+        public DbSet<Drawing> Drawing { get; set; }
 
         #endregion
     }
