@@ -30,5 +30,15 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteDrawing(int drawingId);
 
         #endregion
+
+        #region Standard
+
+        List<Standard> GetAllStandard();
+        int AddStandard(Standard standard, IFormFile imgStandard);
+        Standard GetimgStandardById(int standardId);
+        void UpdateimgStandard(Standard standard, IFormFile imgStandard);
+        void DeleteimgStandard(int standardId);
+
+        #endregion
     }
 }

@@ -161,5 +161,76 @@ namespace Bnpp.Core.Services
         }
 
         #endregion
+
+        #region Standard
+
+        public List<Standard> GetAllStandard()
+        {
+            return _context.Standard.Where(s=>s.IsDelete==false).ToList();
+        }
+
+        public int AddStandard(Standard standard, IFormFile imgStandard)
+        {
+            standard.CreateDate = DateTime.Now;
+
+            if (imgStandard != null)
+            {
+                standard.StandardImage = Guid.NewGuid() + Path.GetExtension(imgStandard.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", standard.StandardImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgStandard.CopyTo(stream);
+                }
+            }
+
+            _context.Add(standard);
+            _context.SaveChanges();
+            return standard.StandardId;
+        }
+
+        public Standard GetimgStandardById(int standardId)
+        {
+            return _context.Standard.Find(standardId);
+        }
+
+        public void UpdateimgStandard(Standard standard, IFormFile imgStandard)
+        {
+            standard.CreateDate = DateTime.Now;
+
+            if (imgStandard != null)
+            {
+                if (standard.StandardImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", standard.StandardImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+                standard.StandardImage = Guid.NewGuid() + Path.GetExtension(imgStandard.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", standard.StandardImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgStandard.CopyTo(stream);
+                }
+            }
+
+            _context.Update(standard);
+            _context.SaveChanges();
+        }
+
+        public void DeleteimgStandard(int standardId)
+        {
+            var standrd = GetimgStandardById(standardId);
+            standrd.IsDelete=true;
+            _context.Update(standrd);
+            _context.SaveChanges();
+        }
+
+        #endregion
     }
 }

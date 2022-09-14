@@ -129,10 +129,33 @@ namespace Bnpp.Web.Controllers
         }
         #endregion
 
+        #region Standards
+        [BindProperty] 
+        public Standard Standard { get; set; }
+
+
         public IActionResult Standards()
+        {
+            return View(_document.GetAllStandard());
+        }
+
+        public IActionResult CraeteStandards()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult CraeteStandards(IFormFile standardDocuments)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _document.AddStandard(Standard, standardDocuments);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+        #endregion
 
         public IActionResult ManufacturerDocuments()
         {
