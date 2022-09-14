@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.AgeingDocuments.Manufacturer>
 @{
     ViewData["Title"] = "ManufacturerDocuments";
     Layout = null;
@@ -160,8 +160,8 @@
                     </div>
 
 
-                    <a class="btn-new-equip" onclick="Create()">New</a>
-                    <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
+                    <a class="btn-new-equip" style="cursor: pointer" onclick="Create()">New</a>
+                    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
                     <br />
                     @{
                         int rowCount = 1;
@@ -173,26 +173,16 @@
                                     <input type="checkbox" id="checkAll" />
                                 </th>
                                 <th></th>
-                                <th style="width: 150px">
+                                <th >
                                     <b>Code</b>
                                 </th>
-                                <th style="width: 250px">
+                                <th >
                                     <b>File Name</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>Doc. Name</b>
                                 </th>
-                                @*
-                                <th style="width: 120px">
-                                    <b>Prepaired by</b>
-                                </th>
-                                
-                                <th style="width: 120px">
-                                    <b>	Approved</b>
-                                </th>
-                                <th style="width: 120px">
-                                    <b>	Authorized</b>
-                                </th>*@
+                               
                                
                                 <th style="width: 120px">
                                     <b>Actions</b>
@@ -200,35 +190,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr role="row">
                                     <td>
-                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
+                                        <input type="checkbox" class="checkBox" value="@item.ManufacturerId" />
                                     </td>
                                     <td>
                                         @rowCount
                                     </td>
+                                   
                                     <td>
-                                        @item.CreateDate.ToString("yyyy/MM/dd")
+                                        @item.Code
                                     </td>
                                     <td>
-                                        @item.NameOfCondition
+                                        @item.Filename
                                     </td>
                                     <td>
-                                        @item.AllowableNumber
+                                        @item.DocumentName
                                     </td>
                                     <td>
-                                        @item.Occurrances
-                                    </td>
-                                    <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
+                                        <a class="btn-edit-equip" onclick="Edit(@item.ManufacturerId)">
                                             Edit
                                         </a>
                                     </td>
                                 </tr>
                                 rowCount++;
-                            }*@
+                            }
                         </tbody>
                     </table>
 
@@ -261,11 +249,11 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
+        $("#newPage").load("/Documents/CreateManufacturerDocuments/");
     }
 
     function Edit(id) {
-        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
+        $("#newPage").load("/Documents/EditManufacturer/"+id);
     }
 
     
@@ -297,18 +285,7 @@
         $("#Tabs").load("/Documents/TechnicalPrograms/");
     }
 
-    function showPage8() {
-        $("#Tabs").load("/Documents/Sensors");
-    }
     
-    function showPage9() {
-        $("#Tabs").load("/Technical/ControlPoints/");
-    }
-    
-    function showPage10() {
-        $("#Tabs").load("/Technical/HForms/");
-    }
-
 
     $("#checkAll").click(function () {
         $(".checkBox").prop('checked',
@@ -326,11 +303,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+            url: "/Documents/DeleteManufacturers",
+            data: { "manufacturerId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
+                $("#Tabs").load("/Documents/NormalOperations/");
             },
             failure: function (response) {
                 alert(response.responseText);

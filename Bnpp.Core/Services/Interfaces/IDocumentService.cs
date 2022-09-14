@@ -40,5 +40,15 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteimgStandard(int standardId);
 
         #endregion
+
+        #region Manufacturer
+
+        List<Manufacturer> GetAllManufacturer();
+        int AddManufacturer(Manufacturer manufacturer, IFormFile imgManufacturer);
+        Manufacturer GetManufacturerById(int manufacturerId);
+        void UpdateManufacturer(Manufacturer manufacturer, IFormFile imgManufacturer);
+        void DeleteManufacturer(int manufacturerId);
+
+        #endregion
     }
 }

@@ -65,6 +65,7 @@ namespace Bnpp.DataLayer.Context
         public DbSet<OperationalDocuments> OperationalDocuments { get; set; }
         public DbSet<Drawing> Drawing { get; set; }
         public DbSet<Standard> Standard { get; set; }
+        public DbSet<Manufacturer> Manufacturers { get; set; }
 
         #endregion
     }

@@ -231,6 +231,81 @@ namespace Bnpp.Core.Services
             _context.SaveChanges();
         }
 
+
+
+        #endregion
+
+        #region Manufacturer
+
+        public List<Manufacturer> GetAllManufacturer()
+        {
+           return _context.Manufacturers.Where(m=>m.IsDelete==false).ToList();
+        }
+
+        public int AddManufacturer(Manufacturer manufacturer, IFormFile imgManufacturer)
+        {
+            manufacturer.CreateDate = DateTime.Now;
+
+            if (imgManufacturer != null)
+            {
+               
+                manufacturer.ManufacturerImage = Guid.NewGuid() + Path.GetExtension(imgManufacturer.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", manufacturer.ManufacturerImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgManufacturer.CopyTo(stream);
+                }
+            }
+
+            _context.Add(manufacturer);
+            _context.SaveChanges();
+            return manufacturer.ManufacturerId;
+        }
+
+        public Manufacturer GetManufacturerById(int manufacturerId)
+        {
+            return _context.Manufacturers.Find(manufacturerId);
+        }
+
+        public void UpdateManufacturer(Manufacturer manufacturer, IFormFile imgManufacturer)
+        {
+            manufacturer.CreateDate = DateTime.Now;
+
+            if (imgManufacturer != null)
+            {
+                if (manufacturer.ManufacturerImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", manufacturer.ManufacturerImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+                manufacturer.ManufacturerImage = Guid.NewGuid() + Path.GetExtension(imgManufacturer.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", manufacturer.ManufacturerImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgManufacturer.CopyTo(stream);
+                }
+            }
+
+            _context.Update(manufacturer);
+            _context.SaveChanges();
+           
+        }
+
+        public void DeleteManufacturer(int manufacturerId)
+        {
+            var manufactor = GetManufacturerById(manufacturerId);
+            manufactor.IsDelete = true;
+            _context.Update(manufactor);
+            _context.SaveChanges();
+        }
+
         #endregion
     }
 }

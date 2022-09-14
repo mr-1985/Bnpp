@@ -183,10 +183,60 @@ namespace Bnpp.Web.Controllers
         }
         #endregion
 
+        #region  Manufacturer
+
+        [BindProperty] public Manufacturer Manufacturer { get; set; }
+
+
         public IActionResult ManufacturerDocuments()
+        {
+            return View(_document.GetAllManufacturer());
+        }
+
+        public IActionResult CreateManufacturerDocuments()
         {
             return View();
         }
+        
+
+        [HttpPost]
+        public IActionResult CreateManufacturerDocuments(IFormFile ManufacturDocuments)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _document.AddManufacturer(Manufacturer, ManufacturDocuments);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult EditManufacturer(int id)
+        {
+            return View(_document.GetManufacturerById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditManufacturer(IFormFile ManufacturDocuments)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _document.UpdateManufacturer(Manufacturer, ManufacturDocuments);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult DeleteManufacturers(string[] manufacturerId)
+        {
+            foreach (string id in manufacturerId)
+            {
+                _document.DeleteManufacturer(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
+        #endregion
 
         public IActionResult InstallationDocuments()
         {
