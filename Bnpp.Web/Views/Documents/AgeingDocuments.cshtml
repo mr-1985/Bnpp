@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.AgeingDocuments.Ageing>
 
 @{
     ViewData["Title"] = "AgeingDocuments";
@@ -147,7 +147,7 @@
                                 </th>
 
 
-                                <th style="width: 120px">
+                                <th >
                                     <b>Actions</b>
                                 </th>
                             </tr>
@@ -157,7 +157,7 @@
                             {
                                 <tr role="row">
                                     <td>
-                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
+                                        <input type="checkbox" class="checkBox" value="@item.AgeingId" />
                                     </td>
                                     <td>
                                         @rowCount
@@ -172,7 +172,7 @@
                                         @item.DocumentName
                                     </td>
                                     <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
+                                        <a class="btn-edit-equip" onclick="Edit(@item.AgeingId)">
                                             Edit
                                         </a>
                                     </td>
@@ -211,11 +211,11 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/Documents/CreateOperationalDocuments/");
+        $("#newPage").load("/Documents/CreateAgeingDocuments/");
     }
 
     function Edit(id) {
-        $("#newPage").load("/Documents/EditOperationalDocuments/"+id);
+        $("#newPage").load("/Documents/EditAgeingDocuments/"+id);
     }
 
 
@@ -266,11 +266,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+            url: "/Documents/DeleteAgeingDocuments",
+            data: { "ageingId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
+                $("#Tabs").load("/Documents/AgeingDocuments/");
             },
             failure: function (response) {
                 alert(response.responseText);

@@ -456,6 +456,80 @@ namespace Bnpp.Core.Services
         }
 
 
+
+        #endregion
+
+        #region Ageing
+
+        public List<Ageing> GetAllAgeing()
+        {
+            return _context.Ageing.Where(a => a.IsDelete == false).ToList();
+        }
+
+        public int AddAgeing(Ageing ageing, IFormFile imgAgeing)
+        {
+            ageing.CreateDate = DateTime.Now;
+
+            if (imgAgeing != null)
+            {
+
+                ageing.AgeingImage = Guid.NewGuid() + Path.GetExtension(imgAgeing.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", ageing.AgeingImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgAgeing.CopyTo(stream);
+                }
+            }
+
+            _context.Add(ageing);
+            _context.SaveChanges();
+            return ageing.AgeingId;
+        }
+
+        public Ageing GetAgeingById(int ageingId)
+        {
+            return _context.Ageing.Find(ageingId);
+        }
+
+        public void UpdateAgeing(Ageing ageing, IFormFile imgAgeing)
+        {
+            ageing.CreateDate = DateTime.Now;
+
+            if (imgAgeing != null)
+            {
+                if (ageing.AgeingImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", ageing.AgeingImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                ageing.AgeingImage = Guid.NewGuid() + Path.GetExtension(imgAgeing.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", ageing.AgeingImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgAgeing.CopyTo(stream);
+                }
+            }
+
+            _context.Update(ageing);
+            _context.SaveChanges();
+        }
+
+        public void DeleteAgeing(int ageingId)
+        {
+            var aeging = GetAgeingById(ageingId);
+            aeging.IsDelete=true;
+            _context.Update(aeging);
+            _context.SaveChanges();
+        }
+
         #endregion
     }
 }

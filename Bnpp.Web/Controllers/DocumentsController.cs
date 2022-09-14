@@ -346,9 +346,58 @@ namespace Bnpp.Web.Controllers
 
         #endregion
 
+        #region AgeingDocuments
+        [BindProperty]
+        public Ageing Ageing { get; set; }
+
+
         public IActionResult AgeingDocuments()
+        {
+            return View(_document.GetAllAgeing());
+        }
+
+        public IActionResult CreateAgeingDocuments()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult CreateAgeingDocuments(IFormFile ageingDocuments)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _document.AddAgeing(Ageing, ageingDocuments);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult EditAgeingDocuments(int id)
+        {
+            return View(_document.GetAgeingById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditAgeingDocuments(IFormFile ageingDocuments)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _document.UpdateAgeing(Ageing, ageingDocuments);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult DeleteAgeingDocuments(string[] ageingId)
+        {
+            foreach (string id in ageingId)
+            {
+                _document.DeleteAgeing(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
+        #endregion
     }
 }

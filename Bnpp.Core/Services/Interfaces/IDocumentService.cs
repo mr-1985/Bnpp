@@ -70,5 +70,15 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteMaintenanceDocument(int maintenanceId);
 
         #endregion
+
+        #region Ageing
+
+        List<Ageing> GetAllAgeing();
+        int AddAgeing(Ageing ageing, IFormFile imgAgeing);
+        Ageing GetAgeingById(int ageingId);
+        void UpdateAgeing(Ageing ageing, IFormFile imgAgeing);
+        void DeleteAgeing(int ageingId);
+
+        #endregion
     }
 }
