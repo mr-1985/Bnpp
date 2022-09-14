@@ -1,4 +1,5 @@
-﻿using Bnpp.Core.Services.Interfaces;
+﻿using System;
+using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Entities.AgeingDocuments;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -47,6 +48,31 @@ namespace Bnpp.Web.Controllers
             return Json(" Electormotors Successfully Deleted.");
         }
 
+        public IActionResult EditOperationalDocuments(int id)
+        {
+            return View(_document.GetOperationalDocumentsById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditOperationalDocuments(IFormFile fileDocuments)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _document.UpdateOperationalDocuments(Documents, fileDocuments);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult DeleteOperationalDocument(string[] operationalId)
+        {
+            foreach (string id in operationalId)
+            {
+                _document.DeleteOperationalDocuments(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
         #endregion
 
         public IActionResult Drawing()

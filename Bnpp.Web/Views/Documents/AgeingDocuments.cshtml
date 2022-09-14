@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Bnpp.DataLayer.Entities.AgeingDocuments.OperationalDocuments>
+﻿
 
 @{
     ViewData["Title"] = "AgeingDocuments";
@@ -123,7 +123,7 @@
                     </div>
 
 
-                    <a class="btn-new-equip" onclick="Create()">New</a>
+                    <a class="btn-new-equip" style="cursor: pointer" onclick="Create()">New</a>
                     <input type="button" id="delete" class="btn-delete-equip" value="Delete">
                     <br />
                     @{
@@ -215,7 +215,7 @@
     }
 
     function Edit(id) {
-        $("#newPage").load("/Documents/EditNormalOperations/"+id);
+        $("#newPage").load("/Documents/EditOperationalDocuments/"+id);
     }
 
 
