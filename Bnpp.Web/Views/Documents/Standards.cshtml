@@ -253,7 +253,7 @@
     }
 
     function Edit(id) {
-        $("#newPage").load("/Documents/EditNormalOperations/"+id);
+        $("#newPage").load("/Documents/EditStandard/"+id);
     }
 
     
@@ -304,11 +304,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+            url: "/Documents/DeleteStandard",
+            data: { "standardId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
+                $("#Tabs").load("/Documents/Standards/");
             },
             failure: function (response) {
                 alert(response.responseText);

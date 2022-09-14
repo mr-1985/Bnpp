@@ -155,6 +155,32 @@ namespace Bnpp.Web.Controllers
             _document.AddStandard(Standard, standardDocuments);
             return Json(" Electormotors Successfully Deleted.");
         }
+
+        public IActionResult EditStandard(int id)
+        {
+            return View(_document.GetimgStandardById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditStandard(IFormFile standardDocuments)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _document.UpdateimgStandard(Standard, standardDocuments);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult DeleteStandard(string[] standardId)
+        {
+            foreach (string id in standardId)
+            {
+                _document.DeleteimgStandard(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
         #endregion
 
         public IActionResult ManufacturerDocuments()
