@@ -381,6 +381,81 @@ namespace Bnpp.Core.Services
             _context.SaveChanges();
         }
 
+
+        #endregion
+
+        #region MaintenanceDocument
+
+        public List<MaintenanceDocument> GetAllMaintenanceDocument()
+        {
+           return _context.MaintenanceDocument.Where(m=>m.IsDelete==false).ToList();
+        }
+
+        public int AddMaintenanceDocument(MaintenanceDocument maintenance, IFormFile imgMaintenance)
+        {
+            maintenance.CreateDate = DateTime.Now;
+
+            if (imgMaintenance != null)
+            {
+
+                maintenance.MaintenanceImage = Guid.NewGuid() + Path.GetExtension(imgMaintenance.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", maintenance.MaintenanceImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgMaintenance.CopyTo(stream);
+                }
+            }
+
+            _context.Add(maintenance);
+            _context.SaveChanges();
+            return maintenance.MaintenanceId;
+        }
+
+        public MaintenanceDocument GetMaintenanceDocumentById(int maintenanceId)
+        {
+            return _context.MaintenanceDocument.Find(maintenanceId);
+        }
+
+        public void UpdateMaintenanceDocument(MaintenanceDocument maintenance, IFormFile imgMaintenance)
+        {
+            maintenance.CreateDate = DateTime.Now;
+
+            if (imgMaintenance != null)
+            {
+                if (maintenance.MaintenanceImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", maintenance.MaintenanceImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                maintenance.MaintenanceImage = Guid.NewGuid() + Path.GetExtension(imgMaintenance.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", maintenance.MaintenanceImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgMaintenance.CopyTo(stream);
+                }
+            }
+
+            _context.Update(maintenance);
+            _context.SaveChanges();
+        }
+
+        public void DeleteMaintenanceDocument(int maintenanceId)
+        {
+            var maintenece = GetMaintenanceDocumentById(maintenanceId);
+            maintenece.IsDelete = true;
+            _context.Update(maintenece);
+            _context.SaveChanges();
+        }
+
+
         #endregion
     }
 }

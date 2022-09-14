@@ -292,10 +292,59 @@ namespace Bnpp.Web.Controllers
         }
         #endregion
 
+        #region Maintenance Documents
+        [BindProperty] public MaintenanceDocument Maintenance { get; set; }
+
+
         public IActionResult MaintenanceDocuments()
+        {
+            return View(_document.GetAllMaintenanceDocument());
+        }
+
+        public IActionResult CreateMaintenanceDocuments()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult CreateMaintenanceDocuments(IFormFile maintenanceDocuments)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _document.AddMaintenanceDocument(Maintenance, maintenanceDocuments);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult EditMaintenanceDocuments(int id)
+        {
+            return View(_document.GetMaintenanceDocumentById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditMaintenanceDocuments(IFormFile maintenanceDocuments)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _document.UpdateMaintenanceDocument(Maintenance, maintenanceDocuments);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult DeleteMaintenanceDocuments(string[] maintenanceId)
+        {
+            foreach (string id in maintenanceId)
+            {
+                _document.DeleteMaintenanceDocument(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
+
+        #endregion
 
         public IActionResult AgeingDocuments()
         {

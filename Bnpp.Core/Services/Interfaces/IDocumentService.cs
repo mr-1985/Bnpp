@@ -60,5 +60,15 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteInstallation(int installationId);
 
         #endregion
+
+        #region MyRegion
+
+        List<MaintenanceDocument> GetAllMaintenanceDocument();
+        int AddMaintenanceDocument(MaintenanceDocument maintenance, IFormFile imgMaintenance);
+        MaintenanceDocument GetMaintenanceDocumentById(int maintenanceId);
+        void UpdateMaintenanceDocument(MaintenanceDocument maintenance, IFormFile imgMaintenance);
+        void DeleteMaintenanceDocument(int maintenanceId);
+
+        #endregion
     }
 }
