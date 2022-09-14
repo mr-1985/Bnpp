@@ -50,5 +50,15 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteManufacturer(int manufacturerId);
 
         #endregion
+
+        #region Installation
+
+        List<Installation> GetAllInstallation();
+        int AddInstallation(Installation installation, IFormFile imgInstallation);
+        Installation GetInstallationById(int installationId);
+        void UpdateInstallation(Installation installation, IFormFile imgInstallation);
+        void DeleteInstallation(int installationId);
+
+        #endregion
     }
 }

@@ -306,6 +306,81 @@ namespace Bnpp.Core.Services
             _context.SaveChanges();
         }
 
+
+
+        #endregion
+
+        #region Installation
+
+        public List<Installation> GetAllInstallation()
+        {
+            return _context.Installation.Where(i => i.IsDelete == false).ToList();
+        }
+
+        public int AddInstallation(Installation installation, IFormFile imgInstallation)
+        {
+            installation.CreateDate = DateTime.Now;
+
+            if (imgInstallation != null)
+            {
+
+                installation.InstallationImage = Guid.NewGuid() + Path.GetExtension(imgInstallation.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", installation.InstallationImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgInstallation.CopyTo(stream);
+                }
+            }
+
+            _context.Add(installation);
+            _context.SaveChanges();
+            return installation.InstallationId;
+        }
+
+        public Installation GetInstallationById(int installationId)
+        {
+            return _context.Installation.Find(installationId);
+        }
+
+        public void UpdateInstallation(Installation installation, IFormFile imgInstallation)
+        {
+            installation.CreateDate = DateTime.Now;
+
+            if (imgInstallation != null)
+            {
+                if (installation.InstallationImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", installation.InstallationImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                installation.InstallationImage = Guid.NewGuid() + Path.GetExtension(imgInstallation.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", installation.InstallationImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgInstallation.CopyTo(stream);
+                }
+            }
+
+            _context.Update(installation);
+            _context.SaveChanges();
+        }
+
+        public void DeleteInstallation(int installationId)
+        {
+            var install = GetInstallationById(installationId);
+            install.IsDelete = true;
+            _context.Update(install);
+            _context.SaveChanges();
+        }
+
         #endregion
     }
 }

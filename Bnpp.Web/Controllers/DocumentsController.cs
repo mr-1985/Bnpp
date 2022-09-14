@@ -238,10 +238,59 @@ namespace Bnpp.Web.Controllers
         }
         #endregion
 
+        #region InstallationDocuments
+        [BindProperty] public Installation Installation { get; set; }
+
+
         public IActionResult InstallationDocuments()
+        {
+            return View(_document.GetAllInstallation());
+        }
+
+
+        public IActionResult CraeteInstallationDocuments()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult CraeteInstallationDocuments(IFormFile instalationDocuments)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _document.AddInstallation(Installation, instalationDocuments);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult EditInstallationDocuments(int id)
+        {
+            return View(_document.GetInstallationById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditInstallationDocuments(IFormFile instalationDocuments)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _document.UpdateInstallation(Installation, instalationDocuments);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult DeleteInstallationDocuments(string[] instalationId)
+        {
+            foreach (string id in instalationId)
+            {
+                _document.DeleteInstallation(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
+        #endregion
 
         public IActionResult MaintenanceDocuments()
         {

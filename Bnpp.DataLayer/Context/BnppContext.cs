@@ -27,7 +27,7 @@ namespace Bnpp.DataLayer.Context
 
         #endregion
         public DbSet<MechanicalEquipment> MechanicalEquipments { get; set; }
-
+        public DbSet<Strcture> Strctures { get; set; }
         #region Electrical
 
         public DbSet<Cable> Cables { get; set; }
@@ -38,14 +38,23 @@ namespace Bnpp.DataLayer.Context
         public DbSet<Dieselgenerator> Dieselgenerators { get; set; }
 
         #endregion
-        public DbSet<Strcture> Strctures { get; set; }
+        
+        #region Transient
+
         public DbSet<OperationalData> OperationalData { get; set; }
         public DbSet<Occurance> Occurances { get; set; }
         public DbSet<DesignBasis> DesignBasis { get; set; }
+
+        #endregion
+
+        #region  Ageing Management
+
         public DbSet<Methodology> Methodologies { get; set; }
         public DbSet<AgeingDocuments> AgeingDocuments { get; set; }
         public DbSet<ManagementReviews> ManagementReviews { get; set; }
 
+            #endregion
+       
         #region Basic Data
 
         public DbSet<GeneralData> GeneralData { get; set; }
@@ -66,6 +75,7 @@ namespace Bnpp.DataLayer.Context
         public DbSet<Drawing> Drawing { get; set; }
         public DbSet<Standard> Standard { get; set; }
         public DbSet<Manufacturer> Manufacturers { get; set; }
+        public DbSet<Installation> Installation { get; set; }
 
         #endregion
     }
