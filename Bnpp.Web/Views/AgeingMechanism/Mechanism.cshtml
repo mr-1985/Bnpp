@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.AgeingMechanism.Mechanism>
 @{
     ViewData["Title"] = "Mechanism";
      Layout = null;
@@ -130,8 +130,8 @@
                     </div>
 
 
-                    <a class="btn-new-equip" onclick="Create()">New</a>
-                    <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
+                    <a class="btn-new-equip" style="cursor: pointer" onclick="Create()">New</a>
+                    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
                     <br />
                     @{
                         int rowCount = 1;
@@ -143,66 +143,62 @@
                                     <input type="checkbox" id="checkAll" />
                                 </th>
                                 <th></th>
-                                <th style="width: 150px">
+                                <th >
                                     <b>Degradation Mechanism</b>
                                 </th>
-                                <th style="width: 250px">
+                                <th >
                                     <b>Component</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>Region</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>Critical point</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>Consequences</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>Actions</b>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr role="row">
                                     <td>
-                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
+                                        <input type="checkbox" class="checkBox" value="@item.MechanismId" />
                                     </td>
                                     <td>
                                         @rowCount
                                     </td>
                                     <td>
-                                        @item.CreateDate.ToString("yyyy/MM/dd")
+                                        @item.DegradationMechanism
                                     </td>
                                     <td>
-                                        @item.NameOfCondition
+                                        @item.Component
                                     </td>
                                     <td>
-                                        @item.AllowableNumber
+                                        @item.Region
                                     </td>
                                     <td>
-                                        @item.Occurrances
+                                        @item.CriticalPoint
                                     </td>
                                     <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
+                                        @item.Consequences
+                                    </td>
+                                    <td>
+                                        <a class="btn-edit-equip" onclick="Edit(@item.MechanismId)">
                                             Edit
                                         </a>
                                     </td>
                                 </tr>
                                 rowCount++;
-                            }*@
+                            }
                         </tbody>
                     </table>
 
-
-                    <br>
-                    <div style="clear: both;">
-                    </div>
-                    <br>
-                    <br>
-                    <iframe style="display: none" id="if_-2_119" src=""></iframe>
 
                 </div>
             </div>
@@ -225,11 +221,11 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
+        $("#newPage").load("/AgeingMechanism/CreateMechanism/");
     }
 
     function Edit(id) {
-        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
+        $("#newPage").load("/AgeingMechanism/EditMechanism/"+id);
     }
 
     
@@ -240,16 +236,10 @@
 
     function showPage2() {
         $("#Tabs").load("/AgeingMechanism/Documents/");
-        //$("li").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-        //$("li").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-
+       
     }
 
-    function showPage3() {
-        $("#Tabs").load("/ManagementDocuments/ManagementReviews/"),function() {
-            $("li #tab-button3").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-        }
-    }
+    
 
     
 
@@ -269,11 +259,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+            url: "/AgeingMechanism/DleteMechanism",
+            data: { "mechanismId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
+                $("#Tabs").load("/AgeingMechanism/Mechanism/");
             },
             failure: function (response) {
                 alert(response.responseText);

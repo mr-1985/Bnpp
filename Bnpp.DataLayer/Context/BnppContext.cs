@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Bnpp.DataLayer.Entities;
 using Bnpp.DataLayer.Entities.AgeingDocuments;
 using Bnpp.DataLayer.Entities.AgeingManagementDocuments;
+using Bnpp.DataLayer.Entities.AgeingMechanism;
 using Bnpp.DataLayer.Entities.BasicData;
 using Bnpp.DataLayer.Entities.Electrical;
 using Microsoft.EntityFrameworkCore;
@@ -78,6 +79,12 @@ namespace Bnpp.DataLayer.Context
         public DbSet<Installation> Installation { get; set; }
         public DbSet<MaintenanceDocument> MaintenanceDocument { get; set; }
         public DbSet<Ageing> Ageing { get; set; }
+
+        #endregion
+
+        #region Mechanism
+
+        public DbSet<Mechanism> Mechanism { get; set; }
 
         #endregion
     }
