@@ -377,6 +377,38 @@ namespace Bnpp.DataLayer.Migrations
                     b.ToTable("Mechanism");
                 });
 
+            modelBuilder.Entity("Bnpp.DataLayer.Entities.AgeingMechanism.MechanismDocuments", b =>
+                {
+                    b.Property<int>("MechanismDocumentsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DocumentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Filename")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MechanismDocumentsImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MechanismDocumentsId");
+
+                    b.ToTable("MechanismDocuments");
+                });
+
             modelBuilder.Entity("Bnpp.DataLayer.Entities.BasicData.ChemicalNorms", b =>
                 {
                     b.Property<int>("ChemicalId")

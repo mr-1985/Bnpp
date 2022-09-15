@@ -1,6 +1,7 @@
 ﻿using System;
 using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Entities.AgeingMechanism;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bnpp.Web.Controllers
@@ -68,9 +69,59 @@ namespace Bnpp.Web.Controllers
         }
         #endregion
 
+        #region Documents
+
+        [BindProperty]
+        public MechanismDocuments MechanismDocument { get; set; }
+
         public IActionResult Documents()
+        {
+            return View(_mechanismService.GetAllMechanismDocuments());
+        }
+
+        public IActionResult CreateMechanismDocuments()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult CreateMechanismDocuments(IFormFile mechanismDocuments)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _mechanismService.AddMechanismDocuments(MechanismDocument, mechanismDocuments);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult EditMechanismDocuments(int id)
+        {
+            return View(_mechanismService.GetMechanismDocumentsById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditMechanismDocuments(IFormFile mechanismDocuments)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _mechanismService.UpdateMechanismDocuments(MechanismDocument, mechanismDocuments);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        
+        public IActionResult DeleteMechanismDocuments(string[] mechanismDocumentsId)
+        {
+            foreach (string id in mechanismDocumentsId)
+            {
+                _mechanismService.DeleteMechanismDocuments(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
+        #endregion
     }
 }

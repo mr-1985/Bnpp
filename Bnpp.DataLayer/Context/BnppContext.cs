@@ -85,6 +85,7 @@ namespace Bnpp.DataLayer.Context
         #region Mechanism
 
         public DbSet<Mechanism> Mechanism { get; set; }
+        public DbSet<MechanismDocuments> MechanismDocuments { get; set; }
 
         #endregion
     }
