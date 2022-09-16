@@ -29,6 +29,7 @@ namespace Bnpp.DataLayer.Context
         #endregion
         public DbSet<MechanicalEquipment> MechanicalEquipments { get; set; }
         public DbSet<Strcture> Strctures { get; set; }
+        public DbSet<Commissioning> Commissioning { get; set; }
         #region Electrical
 
         public DbSet<Cable> Cables { get; set; }

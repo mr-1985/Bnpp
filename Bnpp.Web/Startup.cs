@@ -71,6 +71,7 @@ namespace Bnpp.Web
             services.AddTransient<IBasicDataService, BasicDataService>();
             services.AddTransient<IDocumentService, DocumentService>();
             services.AddTransient<IMechanismService, MechanismService>();
+            services.AddTransient<ICommissioningService, CommissioningService>();
             #endregion
         }
 
