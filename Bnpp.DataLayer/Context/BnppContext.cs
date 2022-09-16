@@ -67,6 +67,7 @@ namespace Bnpp.DataLayer.Context
         public DbSet<Sensors> Sensors { get; set; }
         public DbSet<ControlPoints> ControlPoints { get; set; }
         public DbSet<HForms> HForms { get; set; }
+        public DbSet<Components> Components { get; set; }
 
 
         #endregion

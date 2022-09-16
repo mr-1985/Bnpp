@@ -179,15 +179,70 @@ namespace Bnpp.Web.Controllers
         }
         #endregion
 
+        #region Safety
+
         public IActionResult Safety()
+        {
+            return View(_dataService.GetAllComponents());
+        }
+
+        #endregion
+
+        #region Components
+
+        [BindProperty]
+        public Components Component { get; set; }
+
+        public IActionResult Components()
+        {
+            return View(_dataService.GetAllComponents());
+        }
+
+
+        public IActionResult CreateComponents()
         {
             return View();
         }
 
-        public IActionResult Components()
+        [HttpPost]
+        public IActionResult CreateComponents(IFormFile fileComponents)
         {
-            return View();
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _dataService.AddComponents(Component, fileComponents);
+            return Json(" Electormotors Successfully Deleted.");
         }
+
+        public IActionResult EditComponents(int id)
+        {
+            return View(_dataService.GetComponentsById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditComponents(IFormFile fileComponents)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _dataService.UpdateComponents(Component, fileComponents);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult DeleteComponents(string[] componentsId)
+        {
+            foreach (string id in componentsId)
+            {
+                _dataService.DeleteComponents(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
+
+        #endregion
 
         #region ChemicalNorms
 

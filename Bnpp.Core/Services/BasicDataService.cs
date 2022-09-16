@@ -370,5 +370,77 @@ namespace Bnpp.Core.Services
         }
 
         #endregion
+
+        #region Components
+
+        public List<Components> GetAllComponents()
+        {
+            return _context.Components.Where(c => c.IsDelete == false).ToList();
+        }
+
+        public int AddComponents(Components components, IFormFile imgComponents)
+        {
+            components.CreateDate = DateTime.Now;
+
+            if (imgComponents != null)
+            {
+                components.ComponentsImage = Guid.NewGuid() + Path.GetExtension(imgComponents.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", components.ComponentsImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgComponents.CopyTo(stream);
+                }
+            }
+
+            _context.Add(components);
+            _context.SaveChanges();
+            return components.ComponentId;
+        }
+
+        public Components GetComponentsById(int componentsId)
+        {
+            return _context.Components.Find(componentsId);
+        }
+
+        public void UpdateComponents(Components components, IFormFile imgComponents)
+        {
+            components.CreateDate = DateTime.Now;
+
+            if (imgComponents != null)
+            {
+                if (components.ComponentsImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", components.ComponentsImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                components.ComponentsImage = Guid.NewGuid() + Path.GetExtension(imgComponents.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", components.ComponentsImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgComponents.CopyTo(stream);
+                }
+            }
+
+            _context.Update(components);
+            _context.SaveChanges();
+        }
+
+        public void DeleteComponents(int componentsId)
+        {
+            var component = GetComponentsById(componentsId);
+            component.IsDelete = true;
+            _context.Update(component);
+            _context.SaveChanges();
+        }
+
+        #endregion
     }
 }

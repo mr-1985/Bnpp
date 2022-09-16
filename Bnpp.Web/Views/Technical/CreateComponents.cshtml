@@ -1,0 +1,231 @@
+﻿@model Bnpp.DataLayer.Entities.BasicData.Components
+@{
+    ViewData["Title"] = "CreateComponents";
+      Layout = null;
+}
+
+<div id="normal">
+    <form id="DesignDocumentForm" asp-action="CreateComponents" method="post" enctype="multipart/form-data">
+
+        <table cellpadding="3" cellspacing="0">
+            <tbody>
+            <tr>
+                <td>
+                    Item Name:
+                </td>
+                <td>
+                    <input asp-for="Item" type="text"  style="direction: ltr; text-align: left;">
+                </td>
+                <td>
+                    <span asp-validation-for="Item"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Designation:
+                </td>
+                <td>
+                    <input asp-for="Designation" type="text"  style="direction: ltr; text-align: left;">
+                </td>
+                <td>
+                    <span asp-validation-for="Designation"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Serial:
+                </td>
+                <td>
+                    <input asp-for="Serial" type="text"  style="direction: ltr; text-align: left;">
+                </td>
+                <td>
+                    <span asp-validation-for="Serial"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Diameter:
+                </td>
+                <td>
+                    <input asp-for="Diameter" type="text"  style="direction: ltr; text-align: left;">
+                </td>
+                <td>
+                    <span asp-validation-for="Diameter"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Thickness:
+                </td>
+                <td>
+                    <input asp-for="Thickness" type="text"  style="direction: ltr; text-align: left;">
+                </td>
+                <td>
+                    <span asp-validation-for="Thickness"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Length:
+                </td>
+                <td>
+                    <input asp-for="Length" type="text"  style="direction: ltr; text-align: left;">
+                </td>
+                <td>
+                    <span asp-validation-for="Length"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Material Grade:
+                </td>
+                <td>
+                    <input asp-for="MaterialGrade" type="text"  style="direction: ltr; text-align: left;">
+                </td>
+                <td>
+                    <span asp-validation-for="MaterialGrade"></span>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    Class of safety:
+                </td>
+                <td>
+                    <input asp-for="ClassofSafety" type="text"  style="direction: ltr; text-align: left;">
+                </td>
+                <td>
+                    <span asp-validation-for="ClassofSafety"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Classification designation:
+                </td>
+                <td>
+                    <input asp-for="ClassificationDesignation" type="text"  style="direction: ltr; text-align: left;">
+                </td>
+                <td>
+                    <span asp-validation-for="ClassificationDesignation"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Group:
+                </td>
+                <td>
+                    <input asp-for="Group" type="text"  style="direction: ltr; text-align: left;">
+                </td>
+                <td>
+                    <span asp-validation-for="Group"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Seismic category:
+                </td>
+                <td>
+                    <input asp-for="SeismicCategory" type="text"  style="direction: ltr; text-align: left;">
+                </td>
+                <td>
+                    <span asp-validation-for="SeismicCategory"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    File Name:
+                </td>
+                
+                <td>
+                    <input asp-for="Filename"  type="text"  value="" style="direction: ltr; text-align: left;">
+                </td>
+                <td>
+                    <span asp-validation-for="Filename"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Select File:
+                </td>
+                <td>
+                    <input type="file" name="imgComponentUp" id="imgComponentUp" style="direction: ltr; text-align: left;">
+                </td>
+            </tr>
+           
+            <tr>
+                <td>
+                    <input type="button" onclick="AjaxdocumentFormSubmit()" value="Save" class="butn-save" style="direction: ltr; text-align: left;">
+                    <input type="button" onclick="showPage4()" value="Cancel" id="Button2" class="butn-cancel" style="direction: ltr; text-align: left;">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="~/js/jquery.validate.min.js"></script>
+<script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+
+<script type="text/javascript">
+       function AjaxdocumentFormSubmit() {
+            //Set the URL.
+            var url = $("#DesignDocumentForm").attr("action");
+            //Add the Field values to FormData object.
+            var formData = new FormData();
+            formData.append("Item", $("#Item").val());
+            formData.append("Designation", $("#Designation").val());
+            formData.append("Serial", $("#Serial").val());
+            formData.append("Diameter", $("#Diameter").val());
+            formData.append("Thickness", $("#Thickness").val());
+            formData.append("Length", $("#Length").val());
+            formData.append("MaterialGrade", $("#MaterialGrade").val());
+            formData.append("ClassofSafety", $("#ClassofSafety").val());
+            formData.append("ClassificationDesignation", $("#ClassificationDesignation").val());
+            formData.append("Group", $("#Group").val());
+            formData.append("SeismicCategory", $("#SeismicCategory").val());
+            formData.append("Filename", $("#Filename").val());
+
+           
+            formData.append("fileComponents", $("#imgComponentUp")[0].files[0]);
+            
+            debugger;
+ 
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: formData,
+                processData: false,
+                contentType: false
+            }).done(function() {
+              $("#Tabs").load("/Technical/Safety/");
+            });
+        }
+
+
+
+          function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgCourse').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgCourseUp").change(function () {
+            readURL(this);
+        });
+
+            $('input[type=file]').change(function () {
+
+        $('#Filename').attr('value', this.files[0].name);
+    });
+</script>
+

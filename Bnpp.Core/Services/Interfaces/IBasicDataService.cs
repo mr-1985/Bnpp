@@ -92,5 +92,15 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteHForms(int formsId);
 
         #endregion
+
+        #region Components
+
+        List<Components> GetAllComponents();
+        int AddComponents(Components components, IFormFile imgComponents);
+        Components GetComponentsById(int componentsId);
+        void UpdateComponents(Components components, IFormFile imgComponents);
+        void DeleteComponents(int componentsId);
+
+        #endregion
     }
 }

@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.BasicData.Components>
 @{
     ViewData["Title"] = "Safety";
    Layout = null;
@@ -174,8 +174,8 @@
                     </div>
 
 
-                    <a class="btn-new-equip" onclick="Create()">New</a>
-                    <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
+                    <a class="btn-new-equip" style="cursor: pointer" onclick="Create()">New</a>
+                    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
                     <br />
                     @{
                         int rowCount = 1;
@@ -187,62 +187,104 @@
                                     <input type="checkbox" id="checkAll" />
                                 </th>
                                 <th></th>
-                                <th style="width: 150px">
-                                    <b>Name</b>
+                                <th>
+                                    <b>Element Name</b>
                                 </th>
-                                <th style="width: 250px">
-                                    <b>AKZ</b>
+                                <th>
+                                    <b>Designation</b>
                                 </th>
-                               
-                                <th style="width: 120px">
-                                    <b>Class of safety </b>
+
+                                <th>
+                                    <b>Serial No.	 </b>
                                 </th>
-                                
-                                <th style="width: 120px">
+
+                                <th>
+                                    <b>	 Diameter</b>
+                                </th>
+                                <th>
+                                    <b>	Thickness</b>
+                                </th>
+                                <th>
+                                    <b>	Length</b>
+                                </th>
+                                <th>
+                                    <b>	Material Grade</b>
+                                </th>
+                               @* <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>*@
+                                 <th>
+                                    <b>Class of safety</b>
+                                    </th>
+                                    <th>
                                     <b>	Classification designation</b>
-                                </th>
-                                <th style="width: 120px">
+                                    </th>
+                                    <th>
                                     <b>	Group</b>
-                                </th>
-                                <th style="width: 120px">
+                                    </th>
+                                    <th>
                                     <b>	Seismic category</b>
-                                </th>
-                                
-                                <th style="width: 120px">
+                                    </th>
+
+                                <th>
                                     <b>Actions</b>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr role="row">
                                     <td>
-                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
+                                        <input type="checkbox" class="checkBox" value="@item.ComponentId" />
                                     </td>
                                     <td>
                                         @rowCount
                                     </td>
                                     <td>
-                                        @item.CreateDate.ToString("yyyy/MM/dd")
+                                        @item.Item
                                     </td>
                                     <td>
-                                        @item.NameOfCondition
+                                        @item.Designation
                                     </td>
                                     <td>
-                                        @item.AllowableNumber
+                                        @item.Serial
                                     </td>
                                     <td>
-                                        @item.Occurrances
+                                        @item.Diameter
                                     </td>
                                     <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
+                                        @item.Thickness
+                                    </td>
+                                    <td>
+                                        @item.Length
+                                    </td>
+                                    <td>
+                                        @item.MaterialGrade
+                                    </td>
+                                     <td>
+                                        @item.ClassofSafety
+                                        </td>
+                                        <td>
+                                        @item.ClassificationDesignation
+                                        </td>
+                                        <td>
+                                        @item.Group
+                                        </td>
+                                        <td>
+                                        @item.SeismicCategory
+                                        </td>
+                                   
+                                    <td>
+                                        <a class="btn-edit-equip" onclick="Edit(@item.ComponentId)">
                                             Edit
                                         </a>
                                     </td>
                                 </tr>
                                 rowCount++;
-                            }*@
+                            }
                         </tbody>
                     </table>
 
@@ -275,11 +317,11 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
+        $("#newPage").load("/Technical/CreateComponents/");
     }
 
     function Edit(id) {
-        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
+        $("#newPage").load("/Technical/EditComponents/"+id);
     }
 
     
@@ -341,11 +383,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+            url: "/Technical/DeleteComponents",
+            data: { "componentsId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
+                $("#Tabs").load("/Technical/Safety/");
             },
             failure: function (response) {
                 alert(response.responseText);

@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.BasicData.Components>
 @{
     ViewData["Title"] = "Components";
     Layout = null;
@@ -20,7 +20,8 @@
                         » <b id="subTitle22a"></b>
                     </td>
                     <td>
-                        » Basic Data<b style="color: #ff0000;" id="subTitle22"> » Components
+                        » Basic Data<b style="color: #ff0000;" id="subTitle22">
+                            » Components
                         </b>
                     </td>
                 </tr>
@@ -31,7 +32,8 @@
         </a>
     </div>
 
-    <h1 id="iH1">Basic Data
+    <h1 id="iH1">
+        Basic Data
     </h1>
     <div id="iContent">
 
@@ -61,7 +63,7 @@
 
                     </a>
                 </li>
-                
+
                 <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
                     <a id="tab-button-a3" onclick="showPage5()" style="cursor:pointer;color: rgb(110, 110, 255);">
                         Components
@@ -165,7 +167,7 @@
                     </table>*@
             </div>
 
-            <div  id="newPage">
+            <div id="newPage">
                 <div>
 
                     <div id="iLoading22" style="display: none;">
@@ -173,79 +175,136 @@
                     </div>
 
 
-                    <a class="btn-new-equip" onclick="Create()">New</a>
-                    <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
+                    @*<a class="btn-new-equip" style="cursor: pointer" onclick="Create()">New</a>
+                        <input type="button" id="delete" class="btn-delete-equip" value="Delete">*@
                     <br />
                     @{
                         int rowCount = 1;
                     }
-                    <table id="myTable" cellpadding="3" cellspacing="0" class="show-table">
+                    <table id="myTable" class="show-table">
                         <thead>
                             <tr role="row">
-                                <th>
-                                    <input type="checkbox" id="checkAll" />
-                                </th>
                                 <th></th>
-                                <th style="width: 150px">
+                                <th>
                                     <b>Element Name</b>
                                 </th>
-                                <th style="width: 250px">
+                                <th>
                                     <b>Designation</b>
                                 </th>
-                               
-                                <th style="width: 120px">
+
+                                <th>
                                     <b>Serial No.	 </b>
                                 </th>
-                                
-                                <th style="width: 120px">
+
+                                <th>
                                     <b>	 Diameter</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th>
                                     <b>	Thickness</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th>
                                     <b>	Length</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th>
                                     <b>	Material Grade</b>
                                 </th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                @* <th>
+                                    <b>Class of safety</b>
+                                    </th>
+                                    <th>
+                                    <th>
+                                    <b>	Classification designation</b>
+                                    </th>
+                                    <th>
+                                    <b>	Group</b>
+                                    </th>
+                                    <th>
+                                    <b>	Seismic category</b>
+                                    </th>*@
 
-                                	
-                                <th style="width: 120px">
+                                @* <th>
                                     <b>Actions</b>
-                                </th>
+                                    </th>*@
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr role="row">
-                                    <td>
-                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
-                                    </td>
                                     <td>
                                         @rowCount
                                     </td>
                                     <td>
-                                        @item.CreateDate.ToString("yyyy/MM/dd")
+                                        @item.Item
                                     </td>
                                     <td>
-                                        @item.NameOfCondition
+                                        @item.Designation
                                     </td>
                                     <td>
-                                        @item.AllowableNumber
+                                        @item.Serial
                                     </td>
                                     <td>
-                                        @item.Occurrances
+                                        @item.Diameter
                                     </td>
                                     <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
-                                            Edit
+                                        @item.Thickness
+                                    </td>
+                                    <td>
+                                        @item.Length
+                                    </td>
+                                    <td>
+                                        @item.MaterialGrade
+                                    </td>
+                                    @* <td>
+                                        @item.ClassofSafety
+                                        </td>
+                                        <td>
+                                        @item.ClassificationDesignation
+                                        </td>
+                                        <td>
+                                        @item.Group
+                                        </td>
+                                        <td>
+                                        @item.SeismicCategory
+                                        </td>*@
+                                    @*<td>
+                                        <a onclick="Edit(@item.ComponentId)">
+                                        Safety class
+                                        </a>
+                                        </td>*@
+                                    <td>
+                                        <a @*onclick="Edit(@item.ComponentId)"*@>
+                                            Mechanical Properties
                                         </a>
                                     </td>
+                                    <td>
+                                        <a @*onclick="Edit(@item.ComponentId)"*@>
+                                            Physical Properties
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a @*onclick="Edit(@item.ComponentId)"*@>
+                                            Chemical Compositions
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a onclick="Edit(@item.ComponentId)">
+                                            Heat Operation
+                                        </a>
+                                    </td>
+                                    @* <td>
+                                        <a class="btn-edit-equip" onclick="Edit(@item.ComponentId)">
+                                        Edit
+                                        </a>
+                                        </td>*@
                                 </tr>
                                 rowCount++;
-                            }*@
+                            }
                         </tbody>
                     </table>
 
@@ -277,89 +336,89 @@
 </script>
 <script>
 
-    function Create() {
-        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
-    }
+      function Create() {
+          $("#newPage").load("/Technical/CreateComponents/");
+      }
 
-    function Edit(id) {
-        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
-    }
-
-    
-
-  function showPage1() {
-        $("#Tabs").load("/Technical/GeneralData/");
-    }
-
-    function showPage2() {
-        $("#Tabs").load("/Technical/DesignData/");
-    }
-
-    function showPage3() {
-        $("#Tabs").load("/Technical/Documents/");
-    }
-    
-    function showPage4() {
-        $("#Tabs").load("/Technical/Safety/");
-    }
-    
-    function showPage5() {
-        $("#Tabs").load("/Technical/Components/");
-    }
-
-     function showPage6() {
-        $("#Tabs").load("/Technical/ChemicalNorms");
-    }
-
-    function showPage7() {
-        $("#Tabs").load("/Technical/TechnicalPrograms/");
-    }
-
-    function showPage8() {
-        $("#Tabs").load("/Technical/Sensors");
-    }
-    
-    function showPage9() {
-        $("#Tabs").load("/Technical/ControlPoints/");
-    }
-    
-    function showPage10() {
-        $("#Tabs").load("/Technical/HForms/");
-    }
+      function Edit(id) {
+          $("#newPage").load("/Technical/EditNormalOperations/"+id);
+      }
 
 
-    $("#checkAll").click(function () {
-        $(".checkBox").prop('checked',
-            $(this).prop('checked'));
-    });
 
-    $("#delete").click(function () {
-        var selectedIDs = new Array();
+    function showPage1() {
+          $("#Tabs").load("/Technical/GeneralData/");
+      }
 
-        $('input:checkbox.checkBox').each(function () {
-            if ($(this).prop('checked')) {
-                selectedIDs.push($(this).val());
-            }
-        });
+      function showPage2() {
+          $("#Tabs").load("/Technical/DesignData/");
+      }
 
-        $.ajax({
-            type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+      function showPage3() {
+          $("#Tabs").load("/Technical/Documents/");
+      }
 
-            success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
-            },
-            failure: function (response) {
-                alert(response.responseText);
-            },
-            error: function (response) {
-                alert(response.responseText);
-            }
+      function showPage4() {
+          $("#Tabs").load("/Technical/Safety/");
+      }
 
-        });
+      function showPage5() {
+          $("#Tabs").load("/Technical/Components/");
+      }
 
-    });
+       function showPage6() {
+          $("#Tabs").load("/Technical/ChemicalNorms");
+      }
+
+      function showPage7() {
+          $("#Tabs").load("/Technical/TechnicalPrograms/");
+      }
+
+      function showPage8() {
+          $("#Tabs").load("/Technical/Sensors");
+      }
+
+      function showPage9() {
+          $("#Tabs").load("/Technical/ControlPoints/");
+      }
+
+      function showPage10() {
+          $("#Tabs").load("/Technical/HForms/");
+      }
+
+
+      $("#checkAll").click(function () {
+          $(".checkBox").prop('checked',
+              $(this).prop('checked'));
+      });
+
+      $("#delete").click(function () {
+          var selectedIDs = new Array();
+
+          $('input:checkbox.checkBox').each(function () {
+              if ($(this).prop('checked')) {
+                  selectedIDs.push($(this).val());
+              }
+          });
+
+          $.ajax({
+              type: "POST",
+              url: "/Transient/DeleteNormalOperations",
+              data: { "operationalId": selectedIDs },
+
+              success: function (response) {
+                  $("#Tabs").load("/Transient/NormalOperations/");
+              },
+              failure: function (response) {
+                  alert(response.responseText);
+              },
+              error: function (response) {
+                  alert(response.responseText);
+              }
+
+          });
+
+      });
 
 
 </script>
