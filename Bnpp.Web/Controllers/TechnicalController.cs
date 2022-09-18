@@ -503,9 +503,32 @@ namespace Bnpp.Web.Controllers
 
         #region Mechanical Properties
 
+        [BindProperty]
+        public MechanicalProperties Mechanical { get; set; }
+
+
         public IActionResult MechanicalProperties(int id)
         {
+            Mechanical = new MechanicalProperties();
+            Mechanical.ComponentId = id;
+
+
             return View(_dataService.GetAllMechanicalProperties(id));
+        }
+
+        public IActionResult CreateMechanicalProperties()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateMechanicalProperties(DesignData design)
+        {
+            //if (!ModelState.IsValid)
+            //    return View();
+
+            _dataService.AddMechanicalProperties(Mechanical);
+            return new JsonResult("success");
         }
         #endregion
     }
