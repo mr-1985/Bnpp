@@ -446,7 +446,7 @@ namespace Bnpp.Web.Controllers
 
         #region HForms
 
-        [BindProperty] 
+        [BindProperty]
         public HForms Forms { get; set; }
 
         public IActionResult HForms()
@@ -497,7 +497,16 @@ namespace Bnpp.Web.Controllers
             }
             return new JsonResult("success");
         }
-        
+
+        #endregion
+
+
+        #region Mechanical Properties
+
+        public IActionResult MechanicalProperties(int id)
+        {
+            return View(_dataService.GetAllMechanicalProperties(id));
+        }
         #endregion
     }
 }

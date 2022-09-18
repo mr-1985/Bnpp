@@ -51,5 +51,8 @@ namespace Bnpp.DataLayer.Entities.BasicData
 
         public DateTime CreateDate { get; set; }
         public bool IsDelete { get; set; }
+
+
+        public List<MechanicalProperties> MechanicalProperties { get; set; }
     }
 }

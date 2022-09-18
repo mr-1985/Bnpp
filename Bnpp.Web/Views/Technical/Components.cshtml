@@ -278,7 +278,7 @@
                                         </a>
                                         </td>*@
                                     <td>
-                                        <a @*onclick="Edit(@item.ComponentId)"*@>
+                                        <a onclick="ShowMechanicalProperties(@item.ComponentId)">
                                             Mechanical Properties
                                         </a>
                                     </td>
@@ -292,11 +292,11 @@
                                             Chemical Compositions
                                         </a>
                                     </td>
-                                    <td>
+                                    @*<td>
                                         <a onclick="Edit(@item.ComponentId)">
-                                            Heat Operation
+                                        Heat Operation
                                         </a>
-                                    </td>
+                                        </td>*@
                                     @* <td>
                                         <a class="btn-edit-equip" onclick="Edit(@item.ComponentId)">
                                         Edit
@@ -343,6 +343,11 @@
       function Edit(id) {
           $("#newPage").load("/Technical/EditNormalOperations/"+id);
       }
+
+
+      function ShowMechanicalProperties(id) {
+             $("#newPage").load("/Technical/MechanicalProperties/"+id);
+        }
 
 
 

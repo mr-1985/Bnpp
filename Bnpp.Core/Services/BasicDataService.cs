@@ -37,7 +37,7 @@ namespace Bnpp.Core.Services
 
         public void UpdateGeneralData(GeneralData data)
         {
-            data.CreateDate=DateTime.Now;
+            data.CreateDate = DateTime.Now;
             _context.Update(data);
             _context.SaveChanges();
         }
@@ -162,7 +162,7 @@ namespace Bnpp.Core.Services
 
         public int AddChemicalNorms(ChemicalNorms chemical)
         {
-            chemical.CreateDate=DateTime.Now;
+            chemical.CreateDate = DateTime.Now;
             _context.Add(chemical);
             _context.SaveChanges();
             return chemical.ChemicalId;
@@ -175,7 +175,7 @@ namespace Bnpp.Core.Services
 
         public void UpdateChemicalNorms(ChemicalNorms chemical)
         {
-            chemical.CreateDate=DateTime.Now;
+            chemical.CreateDate = DateTime.Now;
             _context.Update(chemical);
             _context.SaveChanges();
         }
@@ -193,12 +193,12 @@ namespace Bnpp.Core.Services
 
         public List<InspectionProgram> GetAllInspectionProgram()
         {
-            return _context.InspectionPrograms.Where(p=>p.IsDelete==false).ToList();
+            return _context.InspectionPrograms.Where(p => p.IsDelete == false).ToList();
         }
 
         public int AddInspectionProgram(InspectionProgram program)
         {
-            program.CreateDate=DateTime.Now;
+            program.CreateDate = DateTime.Now;
             _context.Add(program);
             _context.SaveChanges();
             return program.InspectionProgramId;
@@ -211,7 +211,7 @@ namespace Bnpp.Core.Services
 
         public void UpdateInspectionProgram(InspectionProgram program)
         {
-            program.CreateDate=DateTime.Now;
+            program.CreateDate = DateTime.Now;
             _context.Update(program);
             _context.SaveChanges();
         }
@@ -219,7 +219,7 @@ namespace Bnpp.Core.Services
         public void DeleteInspectionProgram(int programId)
         {
             var inspectionProgram = GetInspectionProgramById(programId);
-            inspectionProgram.IsDelete=true;
+            inspectionProgram.IsDelete = true;
             _context.Update(inspectionProgram);
             _context.SaveChanges();
         }
@@ -235,7 +235,7 @@ namespace Bnpp.Core.Services
 
         public int AddSensors(Sensors sensors)
         {
-            sensors.CreateDate=DateTime.Now;
+            sensors.CreateDate = DateTime.Now;
             _context.Add(sensors);
             _context.SaveChanges();
             return sensors.SensorId;
@@ -248,7 +248,7 @@ namespace Bnpp.Core.Services
 
         public void UpdateSensors(Sensors sensors)
         {
-            sensors.CreateDate=DateTime.Now;
+            sensors.CreateDate = DateTime.Now;
             _context.Update(sensors);
             _context.SaveChanges();
         }
@@ -271,7 +271,7 @@ namespace Bnpp.Core.Services
 
         public int AddControlPoints(ControlPoints points)
         {
-            points.CreateDate=DateTime.Now;
+            points.CreateDate = DateTime.Now;
             _context.Add(points);
             _context.SaveChanges();
             return points.PointId;
@@ -284,7 +284,7 @@ namespace Bnpp.Core.Services
 
         public void UpdateControlPoints(ControlPoints points)
         {
-            points.CreateDate=DateTime.Now;
+            points.CreateDate = DateTime.Now;
             _context.Update(points);
             _context.SaveChanges();
         }
@@ -292,7 +292,7 @@ namespace Bnpp.Core.Services
         public void DeleteControlPoints(int pointId)
         {
             var controlPoints = GetControlPointsById(pointId);
-            controlPoints.IsDelete=true;
+            controlPoints.IsDelete = true;
 
             UpdateControlPoints(controlPoints);
         }
@@ -303,7 +303,7 @@ namespace Bnpp.Core.Services
 
         public List<HForms> GetAllHForms()
         {
-            return _context.HForms.Where(f=>f.IsDelete==false).ToList();
+            return _context.HForms.Where(f => f.IsDelete == false).ToList();
         }
 
         public int AddHForms(HForms forms, IFormFile imgHForms)
@@ -358,7 +358,7 @@ namespace Bnpp.Core.Services
 
             _context.Update(forms);
             _context.SaveChanges();
-           
+
         }
 
         public void DeleteHForms(int formsId)
@@ -441,6 +441,36 @@ namespace Bnpp.Core.Services
             _context.SaveChanges();
         }
 
+
+
+        #endregion
+
+        #region 
+        public List<MechanicalProperties> GetAllMechanicalProperties(int componentId)
+        {
+            return _context.MechanicalProperties.Where(p => p.ComponentId == componentId && p.IsDelete == false)
+                .ToList();
+        }
+
+        public int AddMechanicalProperties(MechanicalProperties mechanical)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateMechanicalProperties(MechanicalProperties properties)
+        {
+            throw new NotImplementedException();
+        }
+
+        public GeneralData GetMechanicalPropertiesById(int mechanicalId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteMechanicalProperties(int mechanicalId)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }
