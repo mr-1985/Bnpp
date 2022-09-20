@@ -10332,11 +10332,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mohsen\\Source\\Repos\\Bnpp\\Bnpp.Web\\Bnpp.Web.csproj",
+      "projectUniqueName": "C:\\Users\\mohsen\\source\\repos\\Bnpp\\Bnpp.Web\\Bnpp.Web.csproj",
       "projectName": "Bnpp.Web",
-      "projectPath": "C:\\Users\\mohsen\\Source\\Repos\\Bnpp\\Bnpp.Web\\Bnpp.Web.csproj",
+      "projectPath": "C:\\Users\\mohsen\\source\\repos\\Bnpp\\Bnpp.Web\\Bnpp.Web.csproj",
       "packagesPath": "C:\\Users\\mohsen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mohsen\\Source\\Repos\\Bnpp\\Bnpp.Web\\obj\\",
+      "outputPath": "C:\\Users\\mohsen\\source\\repos\\Bnpp\\Bnpp.Web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mohsen\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10353,11 +10353,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\mohsen\\Source\\Repos\\Bnpp\\Bnpp.Core\\Bnpp.Core.csproj": {
-              "projectPath": "C:\\Users\\mohsen\\Source\\Repos\\Bnpp\\Bnpp.Core\\Bnpp.Core.csproj"
+            "C:\\Users\\mohsen\\source\\repos\\Bnpp\\Bnpp.Core\\Bnpp.Core.csproj": {
+              "projectPath": "C:\\Users\\mohsen\\source\\repos\\Bnpp\\Bnpp.Core\\Bnpp.Core.csproj"
             },
-            "C:\\Users\\mohsen\\Source\\Repos\\Bnpp\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj": {
-              "projectPath": "C:\\Users\\mohsen\\Source\\Repos\\Bnpp\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj"
+            "C:\\Users\\mohsen\\source\\repos\\Bnpp\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj": {
+              "projectPath": "C:\\Users\\mohsen\\source\\repos\\Bnpp\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj"
             }
           }
         }

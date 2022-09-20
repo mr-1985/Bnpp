@@ -509,20 +509,24 @@ namespace Bnpp.Web.Controllers
 
         public IActionResult MechanicalProperties(int id)
         {
-            Mechanical = new MechanicalProperties();
-            Mechanical.ComponentId = id;
+            //Mechanical = new MechanicalProperties();
+            //Mechanical.ComponentId = id;
 
+            ViewData["ComponentId"] = id;
 
             return View(_dataService.GetAllMechanicalProperties(id));
         }
 
-        public IActionResult CreateMechanicalProperties()
+        public IActionResult CreateMechanicalProperties(int id)
         {
+            Mechanical = new MechanicalProperties();
+            Mechanical.ComponentId = id;
+
             return View();
         }
 
         [HttpPost]
-        public IActionResult CreateMechanicalProperties(DesignData design)
+        public IActionResult CreateMechanicalProperties(MechanicalProperties mechanicalProperties)
         {
             //if (!ModelState.IsValid)
             //    return View();

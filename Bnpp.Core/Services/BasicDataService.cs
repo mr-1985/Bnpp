@@ -454,7 +454,10 @@ namespace Bnpp.Core.Services
 
         public int AddMechanicalProperties(MechanicalProperties mechanical)
         {
-            throw new NotImplementedException();
+            mechanical.CreateDate = DateTime.Now;
+            _context.Add(mechanical);
+            _context.SaveChanges();
+            return mechanical.MechanicalPropertiesId;
         }
 
         public void UpdateMechanicalProperties(MechanicalProperties properties)

@@ -14,7 +14,7 @@
         </div>
 
 
-        <a class="btn-new-equip" style="cursor: pointer" onclick="Create()">New</a>
+        <a class="btn-new-equip" style="cursor: pointer" onclick="Create(@ViewData["ComponentId"])">New</a>
         <input type="button" id="delete" class="btn-delete-equip" value="Delete">
         <input type="button" onclick="showPage5()" value="Back" id="Button2" class="butn-cancel" style="direction: ltr; text-align: left;">
         <br />
@@ -132,8 +132,8 @@
 </script>
 <script>
 
-     function Create() {
-         $("#newPage").load("/Technical/CreateMechanicalProperties/");
+     function Create(id) {
+         $("#newPage").load("/Technical/CreateMechanicalProperties/"+id);
      }
 
      function Edit(id) {

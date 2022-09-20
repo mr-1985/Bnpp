@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pXPJVGgXUPHIHKP24UDjFoYyXRAU0BwzTzD9HMvWEUINTVwR7wT+WHQrpKL8LkZwE+ZaxLmQ4jnmClSu1fZRdA==",
+  "dgSpecHash": "8PPpOCQ9HMGT0cytSf/2oek4VZQeO8W3IcI7YqJNKDkAXVU7b4HM961dzjKyh3shYJHsW1IQqjZInwDV7D6ROg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mohsen\\Source\\Repos\\Bnpp\\Bnpp.Core\\Bnpp.Core.csproj",
+  "projectFilePath": "C:\\Users\\mohsen\\source\\repos\\Bnpp\\Bnpp.Core\\Bnpp.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mohsen\\.nuget\\packages\\corecompat.system.drawing.v2\\5.2.0-preview1-r131\\corecompat.system.drawing.v2.5.2.0-preview1-r131.nupkg.sha512",
     "C:\\Users\\mohsen\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
