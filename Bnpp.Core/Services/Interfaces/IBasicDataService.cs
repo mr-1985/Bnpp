@@ -108,7 +108,7 @@ namespace Bnpp.Core.Services.Interfaces
         List<MechanicalProperties> GetAllMechanicalProperties(int componentId);
         int AddMechanicalProperties(MechanicalProperties mechanical);
         void UpdateMechanicalProperties(MechanicalProperties properties);
-        GeneralData GetMechanicalPropertiesById(int mechanicalId);
+        MechanicalProperties GetMechanicalPropertiesById(int mechanicalId);
 
         void DeleteMechanicalProperties(int mechanicalId);
 

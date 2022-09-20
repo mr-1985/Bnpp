@@ -104,7 +104,7 @@
             <tr>
                 <td>
                     <input type="button" onclick="submitdesignNormal()" value="Save" class="butn-save" style="direction: ltr; text-align: left;">
-                    <input type="button" onclick="showPage2()" value="Cancel" id="Button2" class="butn-cancel" style="direction: ltr; text-align: left;">
+                    <input type="button" onclick="showMechanicalPage()" value="Cancel" id="Button2" class="butn-cancel" style="direction: ltr; text-align: left;">
                 </td>
             </tr>
             </tbody>
@@ -131,7 +131,7 @@
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // when we use .serialize() this generates the data in query string format. this needs the default contentType (default content type is: contentType: 'application/x-www-form-urlencoded; charset=UTF-8') so it is optional, you can remove it
             data: data,
             success: function() {
-               $("#Tabs").load("/Technical/DesignData/");
+                $("#newPage").load("/Technical/MechanicalProperties/@Model.ComponentId");
             },
 
             error: function() {
@@ -140,6 +140,10 @@
             }
         });
 
+    }
+
+    function showMechanicalPage() {
+        $("#newPage").load("/Technical/MechanicalProperties/@Model.ComponentId");
     }
 
 </script>

@@ -14,7 +14,7 @@
         </div>
 
 
-        <a class="btn-new-equip" style="cursor: pointer" onclick="Create(5)">New</a>
+        <a class="btn-new-equip" style="cursor: pointer" onclick="Create(@ViewData["ComponentId"])">New</a>
         <input type="button" id="delete" class="btn-delete-equip" value="Delete">
         <input type="button" onclick="showPage5()" value="Back" id="Button2" class="butn-cancel" style="direction: ltr; text-align: left;">
         <br />
@@ -64,7 +64,7 @@
                 {
                     <tr role="row">
                         <td>
-                            <input type="checkbox" class="checkBox" value="@item.ComponentId" />
+                            <input type="checkbox" class="checkBox" value="@item.MechanicalPropertiesId" />
                         </td>
                         <td>
                             @rowCount
@@ -94,7 +94,7 @@
                             @item.Hardness
                         </td>
                         <td>
-                            <a class="btn-edit-equip" onclick="Edit(@item.ComponentId)">
+                            <a class="btn-edit-equip" onclick="Edit(@item.MechanicalPropertiesId)">
                                 Edit
                             </a>
                         </td>
@@ -137,7 +137,7 @@
      }
 
      function Edit(id) {
-         $("#newPage").load("/Technical/EditComponents/"+id);
+        $("#newPage").load("/Technical/EditMechanicalProperties/" + id);
      }
 
 
@@ -199,11 +199,11 @@
 
          $.ajax({
              type: "POST",
-             url: "/Technical/DeleteComponents",
-             data: { "componentsId": selectedIDs },
+            url: "/Technical/DeleteMechanicalProperties",
+             data: { "mechanicalId": selectedIDs },
 
              success: function (response) {
-                 $("#Tabs").load("/Technical/Safety/");
+                $("#newPage").load("/Technical/MechanicalProperties/@ViewData["ComponentId"]");
              },
              failure: function (response) {
                  alert(response.responseText);

@@ -519,10 +519,8 @@ namespace Bnpp.Web.Controllers
 
         public IActionResult CreateMechanicalProperties(int id)
         {
-            Mechanical = new MechanicalProperties();
-            Mechanical.ComponentId = id;
-
-            return View();
+            
+            return View(new MechanicalProperties() { ComponentId=id});
         }
 
         [HttpPost]
@@ -532,6 +530,30 @@ namespace Bnpp.Web.Controllers
             //    return View();
 
             _dataService.AddMechanicalProperties(Mechanical);
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditMechanicalProperties(int id)
+        {
+            return View(_dataService.GetMechanicalPropertiesById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditMechanicalProperties()
+        {
+            //if (!ModelState.IsValid)
+            //    return View();
+
+            _dataService.UpdateMechanicalProperties(Mechanical);
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteMechanicalProperties(string[] mechanicalId)
+        {
+            foreach (string id in mechanicalId)
+            {
+                _dataService.DeleteMechanicalProperties(Convert.ToInt32(id));
+            }
             return new JsonResult("success");
         }
         #endregion

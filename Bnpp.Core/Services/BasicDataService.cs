@@ -462,17 +462,22 @@ namespace Bnpp.Core.Services
 
         public void UpdateMechanicalProperties(MechanicalProperties properties)
         {
-            throw new NotImplementedException();
+            properties.CreateDate = DateTime.Now;
+            _context.Update(properties);
+            _context.SaveChanges();
         }
 
-        public GeneralData GetMechanicalPropertiesById(int mechanicalId)
+        public MechanicalProperties GetMechanicalPropertiesById(int mechanicalId)
         {
-            throw new NotImplementedException();
+            return _context.MechanicalProperties.Find(mechanicalId);
         }
 
         public void DeleteMechanicalProperties(int mechanicalId)
         {
-            throw new NotImplementedException();
+            var mekanik = GetMechanicalPropertiesById(mechanicalId);
+            mekanik.IsDelete = true;
+            _context.Update(mekanik);
+            _context.SaveChanges();
         }
         #endregion
     }
