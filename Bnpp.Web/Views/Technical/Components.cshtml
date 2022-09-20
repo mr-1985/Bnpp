@@ -288,7 +288,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a @*onclick="Edit(@item.ComponentId)"*@>
+                                        <a onclick="ShowChemicalCompositions(@item.ComponentId)">
                                             Chemical Compositions
                                         </a>
                                     </td>
@@ -351,6 +351,10 @@
 
     function ShowPhysicalProperties(id) {
         $("#newPage").load("/Technical/PhysicalProperties/" + id);
+    }
+
+    function ShowChemicalCompositions(id) {
+        $("#newPage").load("/Technical/ChemicalComponent/" + id);
     }
 
     

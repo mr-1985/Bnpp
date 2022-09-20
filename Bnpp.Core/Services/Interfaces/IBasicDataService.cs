@@ -124,5 +124,16 @@ namespace Bnpp.Core.Services.Interfaces
         void DeletePhysicalProperties(int physicalId);
 
         #endregion
+
+        #region Chemical Component
+
+        List<ChemicalComponent> GetAllChemicalComponent(int componentId);
+        int AddChemicalComponent(ChemicalComponent chemical);
+        void UpdateChemicalComponent(ChemicalComponent chemical);
+        ChemicalComponent GetChemicalComponentById(int chemicalId);
+
+        void DeleteChemicalComponent(int chemicalId);
+
+        #endregion
     }
 }

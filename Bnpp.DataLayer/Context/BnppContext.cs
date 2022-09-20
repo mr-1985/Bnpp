@@ -70,6 +70,7 @@ namespace Bnpp.DataLayer.Context
         public DbSet<Components> Components { get; set; }
         public DbSet<MechanicalProperties> MechanicalProperties { get; set; }
         public DbSet<PhysicalProperties> PhysicalProperties { get; set; }
+        public DbSet<ChemicalComponent> ChemicalComponents { get; set; }
 
 
         #endregion

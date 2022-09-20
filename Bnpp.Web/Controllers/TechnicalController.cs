@@ -615,5 +615,62 @@ namespace Bnpp.Web.Controllers
         }
 
         #endregion
+
+        #region Chemical Compositions
+
+        [BindProperty]
+        public ChemicalComponent chemicalComponent { get; set; }
+
+        public IActionResult ChemicalComponent(int id)
+        {
+            //Mechanical = new MechanicalProperties();
+            //Mechanical.ComponentId = id;
+
+            ViewData["ComponentId"] = id;
+
+            return View(_dataService.GetAllChemicalComponent(id));
+        }
+
+        public IActionResult CreateChemicalComponent(int id)
+        {
+
+            return View(new ChemicalComponent() { ComponentId = id });
+        }
+
+        [HttpPost]
+        public IActionResult CreateChemicalComponent(ChemicalComponent chemicals)
+        {
+            //if (!ModelState.IsValid)
+            //    return View();
+
+            _dataService.AddChemicalComponent(chemicalComponent);
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditChemicalComponent(int id)
+        {
+            return View(_dataService.GetChemicalComponentById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditChemicalComponent()
+        {
+            //if (!ModelState.IsValid)
+            //    return View();
+
+            _dataService.UpdateChemicalComponent(chemicalComponent);
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteChemicalComponent(string[] chemicalId)
+        {
+            foreach (string id in chemicalId)
+            {
+                _dataService.DeleteChemicalComponent(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
+
+        #endregion
     }
 }

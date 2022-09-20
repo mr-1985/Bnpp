@@ -517,6 +517,45 @@ namespace Bnpp.Core.Services
             _context.Update(phisik);
             _context.SaveChanges();
         }
+
+
+        #endregion
+
+
+        #region  ChemicalComponent
+        public List<ChemicalComponent> GetAllChemicalComponent(int componentId)
+        {
+            return _context.ChemicalComponents.Where(p => p.ComponentId == componentId && p.IsDelete == false)
+               .ToList();
+        }
+
+        public int AddChemicalComponent(ChemicalComponent chemical)
+        {
+            chemical.CreateDate = DateTime.Now;
+            _context.Add(chemical);
+            _context.SaveChanges();
+            return chemical.ChemicalComponentId;
+        }
+
+        public void UpdateChemicalComponent(ChemicalComponent chemical)
+        {
+            chemical.CreateDate = DateTime.Now;
+            _context.Update(chemical);
+            _context.SaveChanges();
+        }
+
+        public ChemicalComponent GetChemicalComponentById(int chemicalId)
+        {
+            return _context.ChemicalComponents.Find(chemicalId);
+        }
+
+        public void DeleteChemicalComponent(int chemicalId)
+        {
+            var chemikal = GetChemicalComponentById(chemicalId);
+            chemikal.IsDelete = true;
+            _context.Update(chemikal);
+            _context.SaveChanges();
+        }
         #endregion
     }
 }
