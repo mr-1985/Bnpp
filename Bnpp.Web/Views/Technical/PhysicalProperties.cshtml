@@ -1,0 +1,219 @@
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.BasicData.PhysicalProperties>
+
+@{
+    ViewData["Title"] = "PhysicalProperties";
+    Layout = null;
+}
+
+
+<div id="newPage">
+    <div>
+
+        <div id="iLoading22" style="display: none;">
+            <img src="/images/loading.gif">
+        </div>
+
+
+        <a class="btn-new-equip" style="cursor: pointer" onclick="Create(@ViewData["ComponentId"])">New</a>
+        <input type="button" id="delete" class="btn-delete-equip" value="Delete">
+        <input type="button" onclick="showPage5()" value="Back" id="Button2" class="butn-cancel" style="direction: ltr; text-align: left;">
+        <br />
+        @{
+            int rowCount = 1;
+        }
+        <table id="myTable" cellpadding="3" cellspacing="0" class="show-table">
+            <thead>
+                <tr role="row">
+                    <th>
+                        <input type="checkbox" id="checkAll" />
+                    </th>
+                    <th></th>
+                    <th>
+                        <b>Temperature</b>
+                    </th>
+                    <th>
+                        <b>Coefficient of Linear Expension</b>
+                    </th>
+
+                    <th>
+                        <b>Heat Capacity</b>
+                    </th>
+
+                    <th>
+                        <b>Heat Conductivity Factor</b>
+                    </th>
+                    <th>
+                        <b>Normal Radiation Emmissitivity</b>
+                    </th>
+                    <th>
+                        <b>	Poisson's Ratio</b>
+                    </th>
+                    <th>
+                        <b>	Density</b>
+                    </th>
+                
+                    <th>
+                        <b>Actions</b>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr role="row">
+                        <td>
+                            <input type="checkbox" class="checkBox" value="@item.PhysicalPropertiesId" />
+                        </td>
+                        <td>
+                            @rowCount
+                        </td>
+                        <td>
+                            @item.Temperature
+                        </td>
+                        <td>
+                            @item.LinearExpension
+                        </td>
+                        <td>
+                            @item.HeatCapacity
+                        </td>
+                        <td>
+                            @item.ConductivityFactor
+                        </td>
+                        <td>
+                            @item.NormalRadiation
+                        </td>
+                        <td>
+                            @item.PoissonRatio
+                        </td>
+                        <td>
+                            @item.Density
+                        </td>
+                        <td>
+                            <a class="btn-edit-equip" onclick="Edit(@item.PhysicalPropertiesId)">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                    rowCount++;
+                }
+            </tbody>
+        </table>
+
+
+        <br>
+        <div style="clear: both;">
+        </div>
+        <br>
+        <br>
+        <iframe style="display: none" id="if_-2_119" src=""></iframe>
+
+    </div>
+</div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.unobtrusive-ajax.min.js"></script>
+
+
+<script src="/js/datatables.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#myTable").DataTable();
+    });
+</script>
+<script>
+
+    function Create(id) {
+        $("#newPage").load("/Technical/CreatePhysicalProperties/" + id);
+    }
+
+    function Edit(id) {
+        $("#newPage").load("/Technical/EditPhysicalProperties/" + id);
+    }
+
+
+
+    function showPage1() {
+        $("#Tabs").load("/Technical/GeneralData/");
+    }
+
+    function showPage2() {
+        $("#Tabs").load("/Technical/DesignData/");
+    }
+
+    function showPage3() {
+        $("#Tabs").load("/Technical/Documents/");
+    }
+
+    function showPage4() {
+        $("#Tabs").load("/Technical/Safety/");
+    }
+
+    function showPage5() {
+        $("#Tabs").load("/Technical/Components/");
+    }
+
+    function showPage6() {
+        $("#Tabs").load("/Technical/ChemicalNorms");
+    }
+
+    function showPage7() {
+        $("#Tabs").load("/Technical/TechnicalPrograms/");
+    }
+
+    function showPage8() {
+        $("#Tabs").load("/Technical/Sensors");
+    }
+
+    function showPage9() {
+        $("#Tabs").load("/Technical/ControlPoints/");
+    }
+
+    function showPage10() {
+        $("#Tabs").load("/Technical/HForms/");
+    }
+
+
+    $("#checkAll").click(function () {
+        $(".checkBox").prop('checked',
+            $(this).prop('checked'));
+    });
+
+    $("#delete").click(function () {
+        var selectedIDs = new Array();
+
+        $('input:checkbox.checkBox').each(function () {
+            if ($(this).prop('checked')) {
+                selectedIDs.push($(this).val());
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/Technical/DeletePhysicalProperties",
+            data: { "physicalId": selectedIDs },
+
+            success: function (response) {
+                $("#newPage").load("/Technical/PhysicalProperties/@ViewData["ComponentId"]");
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+
+        });
+
+    });
+
+
+</script>
+
+
+
+

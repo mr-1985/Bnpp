@@ -7,36 +7,34 @@ using System.Threading.Tasks;
 
 namespace Bnpp.DataLayer.Entities.BasicData
 {
-    public class MechanicalProperties
+    public class PhysicalProperties
     {
         [Key]
-        public int MechanicalPropertiesId { get; set; }
-
+        public int PhysicalPropertiesId { get; set; }
 
         [Required]
         public string Temperature { get; set; }
 
         [Required]
-        public string YoungModule { get; set; }
+        public string LinearExpension { get; set; }
 
         [Required]
-        public string YieldStrength { get; set; }
+        public string HeatCapacity { get; set; }
 
         [Required]
-        public string UltimateStrength { get; set; }
+        public string ConductivityFactor { get; set; }
 
         [Required]
-        public string SpecificElongation { get; set; }
+        public string NormalRadiation { get; set; }
+
         [Required]
-        public string ReductionArea { get; set; }
+        public string PoissonRatio { get; set; }
+
         [Required]
-        public string ImpactToughness { get; set; }
-        [Required]
-        public string Hardness { get; set; }
+        public string Density { get; set; }
 
         [Required]
         public int ComponentId { get; set; }
-
         public DateTime CreateDate { get; set; }
         public bool IsDelete { get; set; }
     }

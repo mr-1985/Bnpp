@@ -113,5 +113,16 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteMechanicalProperties(int mechanicalId);
 
         #endregion
+
+        #region Physical Properties
+
+        List<PhysicalProperties> GetAllPhysicalProperties(int componentId);
+        int AddPhysicalProperties(PhysicalProperties physical);
+        void UpdatePhysicalProperties(PhysicalProperties physical);
+        PhysicalProperties GetPhysicalPropertiesById(int physicalId);
+
+        void DeletePhysicalProperties(int physicalId);
+
+        #endregion
     }
 }

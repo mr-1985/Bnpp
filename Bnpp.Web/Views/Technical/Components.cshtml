@@ -283,7 +283,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a @*onclick="Edit(@item.ComponentId)"*@>
+                                        <a onclick="ShowPhysicalProperties(@item.ComponentId)">
                                             Physical Properties
                                         </a>
                                     </td>
@@ -349,7 +349,11 @@
         $("#newPage").load("/Technical/MechanicalProperties/" + id);
         }
 
+    function ShowPhysicalProperties(id) {
+        $("#newPage").load("/Technical/PhysicalProperties/" + id);
+    }
 
+    
 
     function showPage1() {
           $("#Tabs").load("/Technical/GeneralData/");

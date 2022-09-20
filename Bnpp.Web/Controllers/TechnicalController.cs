@@ -557,5 +557,63 @@ namespace Bnpp.Web.Controllers
             return new JsonResult("success");
         }
         #endregion
+
+        #region   Physical Properties
+
+        [BindProperty]
+        public PhysicalProperties Physical { get; set; }
+
+
+        public IActionResult PhysicalProperties(int id)
+        {
+            //Mechanical = new MechanicalProperties();
+            //Mechanical.ComponentId = id;
+
+            ViewData["ComponentId"] = id;
+
+            return View(_dataService.GetAllPhysicalProperties(id));
+        }
+
+        public IActionResult CreatePhysicalProperties(int id)
+        {
+
+            return View(new PhysicalProperties() { ComponentId = id });
+        }
+
+        [HttpPost]
+        public IActionResult CreatePhysicalProperties(PhysicalProperties physicalProperties)
+        {
+            //if (!ModelState.IsValid)
+            //    return View();
+
+            _dataService.AddPhysicalProperties(Physical);
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditPhysicalProperties(int id)
+        {
+            return View(_dataService.GetPhysicalPropertiesById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditPhysicalProperties()
+        {
+            //if (!ModelState.IsValid)
+            //    return View();
+
+            _dataService.UpdatePhysicalProperties(Physical);
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeletePhysicalProperties(string[] physicalId)
+        {
+            foreach (string id in physicalId)
+            {
+                _dataService.DeletePhysicalProperties(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
+
+        #endregion
     }
 }

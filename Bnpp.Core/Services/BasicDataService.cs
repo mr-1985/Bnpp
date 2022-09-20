@@ -479,6 +479,44 @@ namespace Bnpp.Core.Services
             _context.Update(mekanik);
             _context.SaveChanges();
         }
+
+
+        #endregion
+
+        #region
+        public List<PhysicalProperties> GetAllPhysicalProperties(int componentId)
+        {
+            return _context.PhysicalProperties.Where(p => p.ComponentId == componentId && p.IsDelete == false)
+               .ToList();
+        }
+
+        public int AddPhysicalProperties(PhysicalProperties physical)
+        {
+            physical.CreateDate = DateTime.Now;
+            _context.Add(physical);
+            _context.SaveChanges();
+            return physical.PhysicalPropertiesId;
+        }
+
+        public void UpdatePhysicalProperties(PhysicalProperties physical)
+        {
+            physical.CreateDate = DateTime.Now;
+            _context.Update(physical);
+            _context.SaveChanges();
+        }
+
+        public PhysicalProperties GetPhysicalPropertiesById(int physicalId)
+        {
+            return _context.PhysicalProperties.Find(physicalId);
+        }
+
+        public void DeletePhysicalProperties(int physicalId)
+        {
+            var phisik = GetPhysicalPropertiesById(physicalId);
+            phisik.IsDelete = true;
+            _context.Update(phisik);
+            _context.SaveChanges();
+        }
         #endregion
     }
 }

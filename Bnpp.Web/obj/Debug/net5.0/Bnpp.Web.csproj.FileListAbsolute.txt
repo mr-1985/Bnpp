@@ -1230,3 +1230,6 @@ C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Bnpp.Web.pdb
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Bnpp.Web.genruntimeconfig.cache
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\ref\Bnpp.Web.dll
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Technical\EditMechanicalProperties.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Technical\PhysicalProperties.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Technical\CreatePhysicalProperties.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Technical\EditPhysicalProperties.cshtml.g.cs

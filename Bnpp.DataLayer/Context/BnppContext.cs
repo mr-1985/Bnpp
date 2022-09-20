@@ -69,6 +69,7 @@ namespace Bnpp.DataLayer.Context
         public DbSet<HForms> HForms { get; set; }
         public DbSet<Components> Components { get; set; }
         public DbSet<MechanicalProperties> MechanicalProperties { get; set; }
+        public DbSet<PhysicalProperties> PhysicalProperties { get; set; }
 
 
         #endregion
