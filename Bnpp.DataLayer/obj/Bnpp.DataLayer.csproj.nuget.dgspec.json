@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mohsen\\source\\repos\\Bnpp\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj": {}
+    "C:\\Users\\mohsen\\source\\New folder\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mohsen\\source\\repos\\Bnpp\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj": {
+    "C:\\Users\\mohsen\\source\\New folder\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mohsen\\source\\repos\\Bnpp\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj",
+        "projectUniqueName": "C:\\Users\\mohsen\\source\\New folder\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj",
         "projectName": "Bnpp.DataLayer",
-        "projectPath": "C:\\Users\\mohsen\\source\\repos\\Bnpp\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj",
+        "projectPath": "C:\\Users\\mohsen\\source\\New folder\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj",
         "packagesPath": "C:\\Users\\mohsen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mohsen\\Source\\Repos\\Bnpp\\Bnpp.DataLayer\\obj\\",
+        "outputPath": "C:\\Users\\mohsen\\source\\New folder\\Bnpp.DataLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mohsen\\AppData\\Roaming\\NuGet\\NuGet.Config",
