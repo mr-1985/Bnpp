@@ -9,6 +9,7 @@ using Bnpp.DataLayer.Entities.AgeingManagementDocuments;
 using Bnpp.DataLayer.Entities.AgeingMechanism;
 using Bnpp.DataLayer.Entities.BasicData;
 using Bnpp.DataLayer.Entities.Electrical;
+using Bnpp.DataLayer.Entities.OperationalDatas;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bnpp.DataLayer.Context
@@ -94,5 +95,7 @@ namespace Bnpp.DataLayer.Context
         public DbSet<MechanismDocuments> MechanismDocuments { get; set; }
 
         #endregion
+
+        public DbSet<Operational> Operationals { get; set; }
     }
 }
