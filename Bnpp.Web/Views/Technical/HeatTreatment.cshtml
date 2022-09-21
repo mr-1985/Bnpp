@@ -125,7 +125,7 @@
     }
 
     function Edit(id) {
-        $("#newPage").load("/Technical/EditMechanicalProperties/" + id);
+        $("#newPage").load("/Technical/EditHeatTreatment/" + id);
     }
 
 
@@ -187,11 +187,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Technical/DeleteMechanicalProperties",
-            data: { "mechanicalId": selectedIDs },
+            url: "/Technical/DeleteHeatTreatment",
+            data: { "heataoperId": selectedIDs },
 
             success: function (response) {
-                $("#newPage").load("/Technical/MechanicalProperties/@ViewData["ComponentId"]");
+                $("#newPage").load("/Technical/HeatTreatment/@ViewData["ComponentId"]");
             },
             failure: function (response) {
                 alert(response.responseText);

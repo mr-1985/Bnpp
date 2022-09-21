@@ -722,6 +722,49 @@ namespace Bnpp.Web.Controllers
             _dataService.AddHeatOperation(HeatOperation, fileHeating);
             return Json(" Electormotors Successfully Deleted.");
         }
+
+        public IActionResult EditHeatTreatment(int id)
+        {
+            return View(_dataService.GetHeatOperationById(id));
+        }
+
+        [HttpPost]
+
+        public IActionResult EditHeatTreatment(IFormFile fileHeating, string StartDates = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            if (StartDates != "")
+            {
+                string[] std = StartDates.Split('/', ' ', ':');
+                HeatOperation.TimesOfHeating = new DateTime(
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    int.Parse(std[2]),
+                    int.Parse(std[3]),
+                    int.Parse(std[4]),
+                    int.Parse(std[5]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _dataService.UpdateHeatOperation(HeatOperation, fileHeating);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+        public IActionResult DeleteHeatTreatment(string[] heataoperId)
+        {
+            foreach (string id in heataoperId)
+            {
+                _dataService.DeleteHeatOperation(Convert.ToInt32(id));
+            }
+            return new JsonResult("success");
+        }
+
         #endregion
     }
 }
