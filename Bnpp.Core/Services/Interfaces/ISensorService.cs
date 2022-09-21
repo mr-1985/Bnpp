@@ -20,5 +20,25 @@ namespace Bnpp.Core.Services.Interfaces
         void UpdateSensor(Operational sensor);
         void DeleteSensor(int sensorId);
         #endregion
+
+        #region Chemical Water
+        List<Operational> GetAllChemicalWater();
+        int AddChemicalWater(Operational water);
+        Operational GetChemicalWaterById(int waterId);
+
+        void UpdateChemicalWater(Operational water);
+        void DeleteChemicalWater(int waterId);
+        #endregion
+
+        #region Environmental
+
+        List<Operational> GetAllEnvironmental();
+        int AddEnvironmental(Operational environmental);
+        Operational GetEnvironmentalById(int environmentalId);
+
+        void UpdateEnvironmental(Operational environmental);
+        void DeleteEnvironmental(int environmentalId);
+
+        #endregion
     }
 }

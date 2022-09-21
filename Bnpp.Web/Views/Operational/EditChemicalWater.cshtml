@@ -1,22 +1,24 @@
 ﻿@model Bnpp.DataLayer.Entities.OperationalDatas.Operational
 @{
-    ViewData["Title"] = "CraeteSensors";
+    ViewData["Title"] = "CraeteChemicalWater";
     Layout = null;
 }
 
 <div id="normal">
-    <form id="normalForm" asp-action="CraeteSensors" method="post">
+    <form id="normalForm" asp-action="EditChemicalWater" method="post">
+        <input type="hidden" asp-for="OperationalId"/>
+        <input type="hidden" asp-for="TypeId"/>
         <table cellpadding="3" cellspacing="0">
             <tbody>
                 <tr>
                     <td>
-                        Sensor Name:
+                        Parameter Name:
                     </td>
                     <td>
-                        <input asp-for="SensorName" type="text" id="iName" style="direction: ltr; text-align: left;">
+                        <input asp-for="ParameterName" type="text" id="iName" style="direction: ltr; text-align: left;">
                     </td>
                     <td>
-                        <span asp-validation-for="SensorName"></span>
+                        <span asp-validation-for="ParameterName"></span>
                     </td>
                 </tr>
                 <tr>
@@ -47,7 +49,7 @@
                         Maximum Value:
                     </td>
                     <td>
-                        <input asp-for="MaximumValue"  type="text" id="iPosition" style="direction: ltr; text-align: left;">
+                        <input asp-for="MaximumValue" type="text" id="iPosition" style="direction: ltr; text-align: left;">
                     </td>
                     <td>
                         <span asp-validation-for="MaximumValue"></span>
@@ -58,7 +60,7 @@
                         Normal Value:
                     </td>
                     <td>
-                        <input asp-for="NormalValue"  type="text" id="iPosition" style="direction: ltr; text-align: left;">
+                        <input asp-for="NormalValue" type="text" id="iPosition" style="direction: ltr; text-align: left;">
                     </td>
                     <td>
                         <span asp-validation-for="NormalValue"></span>
@@ -69,7 +71,7 @@
                         No. Allowable Transient Events:
                     </td>
                     <td>
-                        <input asp-for="TransientEvents"  type="text" id="iPosition" style="direction: ltr; text-align: left;">
+                        <input asp-for="TransientEvents" type="text" id="iPosition" style="direction: ltr; text-align: left;">
                     </td>
                     <td>
                         <span asp-validation-for="TransientEvents"></span>
@@ -86,11 +88,11 @@
                         <span asp-validation-for="Unit"></span>
                     </td>
                 </tr>
-               
+
                 <tr>
                     <td>
                         <input type="button" onclick="submitNormal()" value="Save" class="butn-save" style="direction: ltr; text-align: left;">
-                        <input type="button" onclick="showPage1()" value="Cancel" id="Button2" class="butn-cancel" style="direction: ltr; text-align: left;">
+                        <input type="button" onclick="showPage2()" value="Cancel" id="Button2" class="butn-cancel" style="direction: ltr; text-align: left;">
                     </td>
                 </tr>
             </tbody>
@@ -114,11 +116,11 @@
         //alert(data);
         $.ajax({
             type: 'POST',
-            url: '/Operational/CraeteSensors',
+            url: '/Operational/EditChemicalWater',
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // when we use .serialize() this generates the data in query string format. this needs the default contentType (default content type is: contentType: 'application/x-www-form-urlencoded; charset=UTF-8') so it is optional, you can remove it
             data: data,
             success: function () {
-                $("#Tabs").load("/Operational/Sensors/");
+                $("#Tabs").load("/Operational/ChemicalWater/");
             },
 
             error: function () {

@@ -1241,3 +1241,7 @@ C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Technica
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Technical\EditHeatTreatment.cshtml.g.cs
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Operational\CraeteSensors.cshtml.g.cs
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Operational\EditSensors.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Operational\CraeteChemicalWater.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Operational\EditChemicalWater.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Operational\EditEnvironmental.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Operational\CraeteEnvironmental.cshtml.g.cs
