@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Globalization;
 using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Entities.BasicData;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Bnpp.Web.Controllers
 {
@@ -519,8 +521,8 @@ namespace Bnpp.Web.Controllers
 
         public IActionResult CreateMechanicalProperties(int id)
         {
-            
-            return View(new MechanicalProperties() { ComponentId=id});
+
+            return View(new MechanicalProperties() { ComponentId = id });
         }
 
         [HttpPost]
@@ -671,6 +673,55 @@ namespace Bnpp.Web.Controllers
             return new JsonResult("success");
         }
 
+        #endregion
+
+        #region  Heat Treatment
+
+
+        [BindProperty]
+        public HeatOperation HeatOperation { get; set; }
+
+        public IActionResult HeatTreatment(int id)
+        {
+            //Mechanical = new MechanicalProperties();
+            //Mechanical.ComponentId = id;
+
+            ViewData["ComponentId"] = id;
+
+            return View(_dataService.GetAllHeatOperation(id));
+        }
+
+        public IActionResult CreateHeatTreatment(int id)
+        {
+            return View(new HeatOperation() { ComponentId = id });
+        }
+
+        [HttpPost]
+        public IActionResult CreateHeatTreatment(IFormFile fileHeating, string StartDates = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            if (StartDates != "")
+            {
+                string[] std = StartDates.Split('/', ' ', ':');
+                HeatOperation.TimesOfHeating = new DateTime(
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    int.Parse(std[2]),
+                    int.Parse(std[3]),
+                    int.Parse(std[4]),
+                    int.Parse(std[5]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _dataService.AddHeatOperation(HeatOperation, fileHeating);
+            return Json(" Electormotors Successfully Deleted.");
+        }
         #endregion
     }
 }

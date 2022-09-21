@@ -71,6 +71,7 @@ namespace Bnpp.DataLayer.Context
         public DbSet<MechanicalProperties> MechanicalProperties { get; set; }
         public DbSet<PhysicalProperties> PhysicalProperties { get; set; }
         public DbSet<ChemicalComponent> ChemicalComponents { get; set; }
+        public DbSet<HeatOperation> HeatOperation { get; set; }
 
 
         #endregion

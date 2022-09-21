@@ -292,16 +292,12 @@
                                             Chemical Compositions
                                         </a>
                                     </td>
-                                    @*<td>
-                                        <a onclick="Edit(@item.ComponentId)">
-                                        Heat Operation
+                                    <td>
+                                        <a onclick="ShowHeatOperation(@item.ComponentId)">
+                                            Heat Treatment
                                         </a>
-                                        </td>*@
-                                    @* <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.ComponentId)">
-                                        Edit
-                                        </a>
-                                        </td>*@
+                                    </td>
+                                    
                                 </tr>
                                 rowCount++;
                             }
@@ -357,8 +353,11 @@
         $("#newPage").load("/Technical/ChemicalComponent/" + id);
     }
 
+    function ShowHeatOperation(id) {
+        $("#newPage").load("/Technical/HeatTreatment/" + id);
+    }
     
-
+    
     function showPage1() {
           $("#Tabs").load("/Technical/GeneralData/");
       }

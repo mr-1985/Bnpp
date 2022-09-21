@@ -8,6 +8,7 @@ using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Context;
 using Bnpp.DataLayer.Entities.BasicData;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient.Server;
 
 namespace Bnpp.Core.Services
 {
@@ -556,6 +557,81 @@ namespace Bnpp.Core.Services
             _context.Update(chemikal);
             _context.SaveChanges();
         }
+
+
+        #endregion
+
+        #region Heat Operation
+
+        public List<HeatOperation> GetAllHeatOperation(int componentId)
+        {
+             return _context.HeatOperation.Where(p => p.ComponentId == componentId && p.IsDelete == false)
+               .ToList();
+        }
+
+        public int AddHeatOperation(HeatOperation heat, IFormFile imgHeatOperation)
+        {
+            heat.CreateDate = DateTime.Now;
+
+            if (imgHeatOperation != null)
+            {
+                heat.HeatOperationImage = Guid.NewGuid() + Path.GetExtension(imgHeatOperation.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", heat.HeatOperationImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgHeatOperation.CopyTo(stream);
+                }
+            }
+
+            _context.Add(heat);
+            _context.SaveChanges();
+            return heat.HeatOperationId;
+        }
+
+        public void UpdateHeatOperation(HeatOperation heat, IFormFile imgHeatOperation)
+        {
+            heat.CreateDate = DateTime.Now;
+
+            if (imgHeatOperation != null)
+            {
+                if (heat.HeatOperationImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", heat.HeatOperationImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                heat.HeatOperationImage = Guid.NewGuid() + Path.GetExtension(imgHeatOperation.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", heat.HeatOperationImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgHeatOperation.CopyTo(stream);
+                }
+            }
+
+            _context.Update(heat);
+            _context.SaveChanges();
+        }
+
+        public HeatOperation GetHeatOperationById(int heatId)
+        {
+            return _context.HeatOperation.Find(heatId);
+        }
+
+        public void DeleteHeatOperation(int heatId)
+        {
+            var heating = GetHeatOperationById(heatId);
+            heating.IsDelete = true;
+            _context.Update(heating);
+            _context.SaveChanges();
+        }
+
         #endregion
     }
 }

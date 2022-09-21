@@ -4,14 +4,16 @@ using Bnpp.DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Bnpp.DataLayer.Migrations
 {
     [DbContext(typeof(BnppContext))]
-    partial class BnppContextModelSnapshot : ModelSnapshot
+    [Migration("20220920194142_UpdayeMechanicalproperties")]
+    partial class UpdayeMechanicalproperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -744,56 +746,6 @@ namespace Bnpp.DataLayer.Migrations
                     b.HasKey("HFormsId");
 
                     b.ToTable("HForms");
-                });
-
-            modelBuilder.Entity("Bnpp.DataLayer.Entities.BasicData.HeatOperation", b =>
-                {
-                    b.Property<int>("HeatOperationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ComponentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CoolingMethod")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DocumentNo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Filename")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HeatOperationImage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HeatsOperation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("NoOfHeatOperations")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Temperature")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("TimesOfHeating")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("HeatOperationId");
-
-                    b.ToTable("HeatOperation");
                 });
 
             modelBuilder.Entity("Bnpp.DataLayer.Entities.BasicData.InspectionProgram", b =>

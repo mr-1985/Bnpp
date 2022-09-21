@@ -135,5 +135,17 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteChemicalComponent(int chemicalId);
 
         #endregion
+
+
+        #region Heat Opeartion
+
+        List<HeatOperation> GetAllHeatOperation(int componentId);
+        int AddHeatOperation(HeatOperation heat, IFormFile imgHeatOperation);
+        void UpdateHeatOperation(HeatOperation heat, IFormFile imgHeatOperation);
+        HeatOperation GetHeatOperationById(int heatId);
+
+        void DeleteHeatOperation(int heatId);
+        #endregion
+
     }
 }
