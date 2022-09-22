@@ -20,5 +20,15 @@ namespace Bnpp.Core.Services.Interfaces
         void UpdateDefectList(DefectList defect);
         void DeleteDefectList(int defectId);
         #endregion
+
+        #region  SpareParts
+
+        List<SpareParts> GetAllSpareParts();
+        int AddSpareParts(SpareParts spare);
+        SpareParts GetSparePartsById(int spareId);
+
+        void UpdateSpareParts(SpareParts spare);
+        void DeleteSpareParts(int spareId);
+        #endregion
     }
 }

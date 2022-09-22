@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.Maintenance.SpareParts>
 @{
     ViewData["Title"] = "SpareParts";
     Layout = null;
@@ -153,8 +153,8 @@
                     </div>
 
 
-                    <a class="btn-new-equip" onclick="Create()">New</a>
-                    <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
+                    <a class="btn-new-equip" style="cursor:pointer" onclick="Create()">New</a>
+                    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
                     <br />
                     @{
                         int rowCount = 1;
@@ -191,35 +191,38 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr role="row">
                                     <td>
-                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
+                                        <input type="checkbox" class="checkBox" value="@item.SpareId" />
                                     </td>
                                     <td>
                                         @rowCount
                                     </td>
                                     <td>
-                                        @item.CreateDate.ToString("yyyy/MM/dd")
+                                        @item.PartName
                                     </td>
                                     <td>
-                                        @item.NameOfCondition
+                                        @item.StandardNoofParts
                                     </td>
                                     <td>
-                                        @item.AllowableNumber
+                                        @item.PartUnit
                                     </td>
                                     <td>
-                                        @item.Occurrances
+                                        @item.RealNoofParts
                                     </td>
                                     <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
+                                        @item.Designation
+                                    </td>
+                                    <td>
+                                        <a class="btn-edit-equip" onclick="Edit(@item.SpareId)">
                                             Edit
                                         </a>
                                     </td>
                                 </tr>
                                 rowCount++;
-                            }*@
+                            }
                         </tbody>
                     </table>
 
@@ -252,11 +255,11 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
+        $("#newPage").load("/Maintenance/CreateSpareParts/");
     }
 
     function Edit(id) {
-        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
+        $("#newPage").load("/Maintenance/EditSpareParts/" + id);
     }
 
     
@@ -302,11 +305,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+            url: "/Maintenance/DeleteSpareParts",
+            data: { "sprlistId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
+                $("#Tabs").load("/Maintenance/SpareParts/");
             },
             failure: function (response) {
                 alert(response.responseText);

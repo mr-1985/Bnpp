@@ -31,6 +31,8 @@ namespace Bnpp.Core.Services
             return defect.DefectListId;
         }
 
+       
+
         public void DeleteDefectList(int defectId)
         {
             var dlist=GetDefectListById(defectId);
@@ -39,15 +41,21 @@ namespace Bnpp.Core.Services
             _context.SaveChanges();
         }
 
+       
+
         public List<DefectList> GetAllDefectList()
         {
             return _context.DefectList.Where(d=>d.IsDelete==false).ToList();
         }
 
+       
+
         public DefectList GetDefectListById(int defectId)
         {
             return _context.DefectList.Find(defectId);
         }
+
+        
 
         public void UpdateDefectList(DefectList defect)
         {
@@ -57,6 +65,44 @@ namespace Bnpp.Core.Services
         }
 
 
+
+
+        #endregion
+
+        #region Spare Parts
+
+        public int AddSpareParts(SpareParts spare)
+        {
+            spare.CreateDate = DateTime.Now;
+            _context.Add(spare);
+            _context.SaveChanges();
+            return spare.SpareId;
+        }
+
+        public SpareParts GetSparePartsById(int spareId)
+        {
+            return _context.SpareParts.Find(spareId);
+        }
+
+        public void UpdateSpareParts(SpareParts spare)
+        {
+            spare.CreateDate=DateTime.Now;
+            _context.Update(spare);
+            _context.SaveChanges();
+        }
+
+        public List<SpareParts> GetAllSpareParts()
+        {
+            return _context.SpareParts.Where(s => s.IsDelete == false).ToList();
+        }
+
+        public void DeleteSpareParts(int spareId)
+        {
+            var splist=GetSparePartsById(spareId);
+            splist.IsDelete = true;
+            UpdateSpareParts(splist);
+
+        }
         #endregion
     }
 }

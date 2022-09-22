@@ -125,15 +125,73 @@ namespace Bnpp.Web.Controllers
             return Json(" Diesel Generators Successfully Deleted.");
         }
         #endregion
+
+
         public IActionResult MaintenanceForms()
         {
             return View();
         }
 
+
+        #region  Spare Parts
+
+
+        [BindProperty]
+        public SpareParts Spare { get; set; }
+
+
         public IActionResult SpareParts()
+        {
+            return View(_maintenanceService.GetAllSpareParts());
+        }
+
+        public IActionResult CreateSpareParts()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult CreateSpareParts(SpareParts parts)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _maintenanceService.AddSpareParts(Spare);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditSpareParts(int id)
+        {
+            return View(_maintenanceService.GetSparePartsById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditSpareParts()
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _maintenanceService.UpdateSpareParts(Spare);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteSpareParts(string[] sprlistId)
+        {
+            foreach (string id in sprlistId)
+            {
+                _maintenanceService.DeleteSpareParts(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
 
         public IActionResult Measurements()
         {
