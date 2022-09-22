@@ -73,6 +73,9 @@ namespace Bnpp.Web
             services.AddTransient<IMechanismService, MechanismService>();
             services.AddTransient<ICommissioningService, CommissioningService>();
             services.AddTransient<ISensorService, SensorService>();
+            services.AddTransient<IEventService, EventService>();
+
+            
             #endregion
         }
 

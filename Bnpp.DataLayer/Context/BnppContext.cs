@@ -97,5 +97,6 @@ namespace Bnpp.DataLayer.Context
         #endregion
 
         public DbSet<Operational> Operationals { get; set; }
+        public DbSet<Events> Events { get; set; }
     }
 }

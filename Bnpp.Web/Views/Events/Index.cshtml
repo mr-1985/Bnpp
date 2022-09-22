@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.Events>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout1.cshtml";
@@ -112,8 +112,8 @@
                     </div>
 
 
-                    <a class="btn-new-equip" onclick="Create()">New</a>
-                    <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
+                    <a class="btn-new-equip" style="cursor:pointer" onclick="Create()">New</a>
+                    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
                     <br />
                     @{
                         int rowCount = 1;
@@ -159,35 +159,51 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr role="row">
                                     <td>
-                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
+                                        <input type="checkbox" class="checkBox" value="@item.EventsId" />
                                     </td>
                                     <td>
                                         @rowCount
                                     </td>
+                                   
                                     <td>
-                                        @item.CreateDate.ToString("yyyy/MM/dd")
+                                        @item.EventName
                                     </td>
                                     <td>
-                                        @item.NameOfCondition
+                                        @item.EventLevel
                                     </td>
                                     <td>
-                                        @item.AllowableNumber
+                                        @item.EventDate.ToString("yyyy/MM/dd")
                                     </td>
                                     <td>
-                                        @item.Occurrances
+                                        @item.ReportDate.ToString("yyyy/MM/dd")
                                     </td>
                                     <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
+                                        @item.ReportNo
+                                    </td>
+                                    <td>
+                                        @item.ResponsibleUnit
+                                    </td>
+                                    <td>
+                                        @item.EventLocation
+                                    </td>
+                                    <td>
+                                        @item.OperationalOrganization
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <a class="btn-edit-equip" onclick="Edit(@item.EventsId)">
                                             Edit
                                         </a>
                                     </td>
                                 </tr>
                                 rowCount++;
-                            }*@
+                            }
                         </tbody>
                     </table>
 
@@ -220,7 +236,7 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
+        $("#newPage").load("/Events/CraeteEvents/");
     }
 
     function Edit(id) {

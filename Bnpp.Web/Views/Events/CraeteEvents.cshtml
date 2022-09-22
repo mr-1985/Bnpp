@@ -1,0 +1,258 @@
+﻿@model Bnpp.DataLayer.Entities.Events
+@{
+    ViewData["Title"] = "CraeteEvents";
+   Layout = null;
+}
+
+<div id="normal">
+    <form id="designForm" asp-action="CraeteEvents" method="post">
+        
+        <table cellpadding="3" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td>
+                        Event Name:
+                    </td>
+                    <td>
+                        <input asp-for="EventName" type="text" style="direction: ltr; text-align: left;">
+                    </td>
+                    <td>
+                        <span asp-validation-for="EventName"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Event Level:
+                    </td>
+                    <td>
+                        <input asp-for="EventLevel" type="text" style="direction: ltr; text-align: left;">
+                    </td>
+                    <td>
+                        <span asp-validation-for="EventLevel"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Event Date:
+                    </td>
+                    <td>
+                        <input name="EventDate" id="EventDate" style="direction: ltr; text-align: left;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Report Date:
+                    </td>
+                    <td>
+                        <input name="ReportDate" id="ReportDate" style="direction: ltr; text-align: left;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Report No:
+                    </td>
+                    <td>
+                        <input asp-for="ReportNo" type="text" style="direction: ltr; text-align: left;">
+                    </td>
+                    <td>
+                        <span asp-validation-for="ReportNo"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Responsible Unit:
+                    </td>
+                    <td>
+                        <input asp-for="ResponsibleUnit" type="text" style="direction: ltr; text-align: left;">
+                    </td>
+                    <td>
+                        <span asp-validation-for="ResponsibleUnit"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Event Location:
+                    </td>
+                    <td>
+                        <input asp-for="EventLocation" type="text" style="direction: ltr; text-align: left;">
+                    </td>
+                    <td>
+                        <span asp-validation-for="EventLocation"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Operational Organization:
+                    </td>
+                    <td>
+                        <input asp-for="OperationalOrganization" type="text" style="direction: ltr; text-align: left;">
+                    </td>
+                    <td>
+                        <span asp-validation-for="OperationalOrganization"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Event Reasons:
+                    </td>
+                    <td>
+                        <input asp-for="EventReasons" type="text" style="direction: ltr; text-align: left;">
+                    </td>
+                    <td>
+                        <span asp-validation-for="EventReasons"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Event Consequences:
+                    </td>
+                    <td>
+                        <input asp-for="EventConsequences" type="text" style="direction: ltr; text-align: left;">
+                    </td>
+                    <td>
+                        <span asp-validation-for="EventConsequences"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        File Name:
+                    </td>
+
+                    <td>
+                        <input asp-for="Filename" type="text"  value="" style="direction: ltr; text-align: left;">
+                    </td>
+                    <td>
+                        <span asp-validation-for="Filename"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Select File:
+                    </td>
+                    <td>
+                        <input type="file" name="imgEventUp" id="imgEventUp" style="direction: ltr; text-align: left;">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="button" onclick="AjaxdocumentFormSubmit()" value="Save" class="butn-save" style="direction: ltr; text-align: left;">
+                        <input type="button" onclick="location='/Events'" value="Cancel" id="Button2" class="butn-cancel" style="direction: ltr; text-align: left;">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+
+<link href="/css/kendo.common.min.css" rel="stylesheet" />
+<link href="/css/kendo.default.min.css" rel="stylesheet" />
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/kendo.all.min.js"></script>
+<script src="~/js/jquery.validate.min.js"></script>
+<script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    // create DatePicker from input HTML element
+    //$("#Dates").kendoTimePicker({
+    //    timeFormat: "HH:mm" //24 hours format
+    //});
+
+    $("#EventDate").kendoDateTimePicker(
+        {
+            format: "yyyy/MM/dd hh:mm:ss"
+        });
+    $("#ReportDate").kendoDateTimePicker(
+        {
+            format: "yyyy/MM/dd hh:mm:ss"
+        });
+</script>
+@*<script type="text/javascript">
+    function submitdesignNormal() {
+        var data = $("#designForm").serialize();
+        //console.log(data);
+        //alert(data);
+        $.ajax({
+            type: 'POST',
+            url: '/Technical/CreateHeatTreatment',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // when we use .serialize() this generates the data in query string format. this needs the default contentType (default content type is: contentType: 'application/x-www-form-urlencoded; charset=UTF-8') so it is optional, you can remove it
+            data: data,
+            success: function () {
+                $("#newPage").load("/Technical/HeatTreatment/@Model.ComponentId");
+            },
+
+            error: function () {
+                //alert('Failed to receive the Data');
+                //console.log('Failed ');
+            }
+        });
+
+    }
+
+    
+
+</script>*@
+<script type="text/javascript">
+    function AjaxdocumentFormSubmit() {
+        //Set the URL.
+        var url = $("#designForm").attr("action");
+        //Add the Field values to FormData object.
+        var formData = new FormData();
+        formData.append("EventName", $("#EventName").val());
+        formData.append("EventLevel", $("#EventLevel").val());
+        formData.append("ReportNo", $("#ReportNo").val());
+        formData.append("ResponsibleUnit", $("#ResponsibleUnit").val());
+        formData.append("EventLocation", $("#EventLocation").val());
+        formData.append("Filename", $("#Filename").val());
+        formData.append("EventDate", $("#EventDate").val());
+        formData.append("ReportDate", $("#ReportDate").val());
+        formData.append("OperationalOrganization", $("#OperationalOrganization").val());
+        formData.append("EventReasons", $("#EventReasons").val());
+        formData.append("EventConsequences", $("#EventConsequences").val());
+        
+        
+        formData.append("fileEvents", $("#imgEventUp")[0].files[0]);
+
+        debugger;
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function () {
+            $("#newPage").load("/Events");
+        });
+    }
+
+    function showMechanicalPage() {
+        $("#newPage").load("/Technical/HeatTreatment/");
+    }
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imgCourse').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#imgCourseUp").change(function () {
+        readURL(this);
+    });
+
+    $('input[type=file]').change(function () {
+
+        $('#Filename').attr('value', this.files[0].name);
+    });
+</script>

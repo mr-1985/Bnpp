@@ -101,7 +101,7 @@ namespace Bnpp.Core.Services
         }
         public void DeleteChemicalWater(int waterId)
         {
-            var wter = GetSensorById(waterId);
+            var wter = GetChemicalWaterById(waterId);
             wter.IsDelete = true;
             _context.Update(wter);
             _context.SaveChanges();
@@ -140,7 +140,7 @@ namespace Bnpp.Core.Services
 
         public void DeleteEnvironmental(int environmentalId)
         {
-            var environ = GetSensorById(environmentalId);
+            var environ = GetEnvironmentalById(environmentalId);
             environ.IsDelete = true;
             _context.Update(environ);
             _context.SaveChanges();

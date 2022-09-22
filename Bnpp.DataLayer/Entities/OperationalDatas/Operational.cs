@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -32,7 +33,7 @@ namespace Bnpp.DataLayer.Entities.OperationalDatas
         [Required]
         public string Unit { get; set; }
 
-
+        [ForeignKey("TypeId")]
         public virtual OperationalType OperationalType { get; set; }
 
 
