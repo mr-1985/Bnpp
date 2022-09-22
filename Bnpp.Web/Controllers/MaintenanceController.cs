@@ -193,11 +193,46 @@ namespace Bnpp.Web.Controllers
 
         #endregion
 
+
+        #region  Measurements
+
+        [BindProperty]
+        public Measurements Measureing { get; set; }
+
         public IActionResult Measurements()
+        {
+            return View(_maintenanceService.GetAllMeasurements());
+        }
+
+        public IActionResult CreateMeasurements()
         {
             return View();
         }
 
+
+        [HttpPost]
+        public IActionResult CreateMeasurements(string Dateofmeasurement = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (Dateofmeasurement != "")
+            {
+                string[] std = Dateofmeasurement.Split('/');
+                Measureing.Dateofmeasurement = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _maintenanceService.AddMeasurements(Measureing);
+
+            return new JsonResult("success");
+        }
+
+        #endregion
         public IActionResult DefectsReport()
         {
             return View();

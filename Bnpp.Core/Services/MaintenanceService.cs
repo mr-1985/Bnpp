@@ -3,6 +3,7 @@ using Bnpp.DataLayer.Context;
 using Bnpp.DataLayer.Entities.Maintenance;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -103,6 +104,43 @@ namespace Bnpp.Core.Services
             UpdateSpareParts(splist);
 
         }
+
+
+        #endregion
+        #region Measurements
+
+        public List<Measurements> GetAllMeasurements()
+        {
+            return _context.Measurements.Where(m => m.IsDelete == false).ToList();
+        }
+
+        public int AddMeasurements(Measurements measure)
+        {
+            measure.CreateDate = DateTime.Now;
+            _context.Add(measure);
+            _context.SaveChanges();
+            return measure.MeasurementId;
+        }
+
+        public Measurements GetMeasurementsById(int measureId)
+        {
+            return _context.Measurements.Find(measureId);
+        }
+
+        public void UpdateMeasurements(Measurements measure)
+        {
+            measure.CreateDate= DateTime.Now;
+            _context.Update(measure);
+            _context.SaveChanges();
+        }
+
+        public void DeleteMeasurements(int measureId)
+        {
+            var mesure=GetMeasurementsById(measureId);
+            mesure.IsDelete = true;
+            UpdateMeasurements(mesure);
+        }
+
         #endregion
     }
 }

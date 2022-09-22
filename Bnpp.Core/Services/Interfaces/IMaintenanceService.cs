@@ -30,5 +30,18 @@ namespace Bnpp.Core.Services.Interfaces
         void UpdateSpareParts(SpareParts spare);
         void DeleteSpareParts(int spareId);
         #endregion
+
+        #region Measurement
+
+
+        List<Measurements> GetAllMeasurements();
+        int AddMeasurements(Measurements measure);
+        Measurements GetMeasurementsById(int measureId);
+
+        void UpdateMeasurements(Measurements measure);
+        void DeleteMeasurements(int measureId);
+
+
+        #endregion
     }
 }
