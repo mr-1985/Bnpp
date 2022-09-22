@@ -8,6 +8,23 @@
     <form id="designForm" asp-action="EditEvents" method="post">
         <input type="hidden" asp-for="EventsId"/>
         <input type="hidden" asp-for="EventsImage"/>
+        
+        <input type="hidden" asp-for="BeforeHeatPower"/>
+        <input type="hidden" asp-for="BeforeElectricalPower"/>
+        <input type="hidden" asp-for="BeforeEffectiveWorkingDays"/>
+        <input type="hidden" asp-for="BeforePressureWater"/>
+        <input type="hidden" asp-for="BeforePressureinFirstCircuit"/>
+        <input type="hidden" asp-for="BeforePressureinSecondCircuit"/>
+        <input type="hidden" asp-for="BeforeVaccuminCondensor"/>
+
+
+        <input type="hidden" asp-for="AfterHeatPower"/>
+        <input type="hidden" asp-for="AfterElectricalPower"/>
+        <input type="hidden" asp-for="AfterEffectiveWorkingDays"/>
+        <input type="hidden" asp-for="AfterPressureWater"/>
+        <input type="hidden" asp-for="AfterPressureinFirstCircuit"/>
+        <input type="hidden" asp-for="AfterPressureinSecondCircuit"/>
+        <input type="hidden" asp-for="AfterVaccuminCondensor"/>
 
         <table cellpadding="3" cellspacing="0">
             <tbody>
@@ -159,11 +176,6 @@
 <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
 
 <script>
-    // create DatePicker from input HTML element
-    //$("#Dates").kendoTimePicker({
-    //    timeFormat: "HH:mm" //24 hours format
-    //});
-
     $("#EventDate").kendoDateTimePicker(
         {
             format: "yyyy/MM/dd hh:mm:ss"
@@ -173,31 +185,7 @@
             format: "yyyy/MM/dd hh:mm:ss"
         });
 </script>
-@*<script type="text/javascript">
-    function submitdesignNormal() {
-        var data = $("#designForm").serialize();
-        //console.log(data);
-        //alert(data);
-        $.ajax({
-            type: 'POST',
-            url: '/Technical/CreateHeatTreatment',
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // when we use .serialize() this generates the data in query string format. this needs the default contentType (default content type is: contentType: 'application/x-www-form-urlencoded; charset=UTF-8') so it is optional, you can remove it
-            data: data,
-            success: function () {
-                $("#newPage").load("/Technical/HeatTreatment/@Model.ComponentId");
-            },
 
-            error: function () {
-                //alert('Failed to receive the Data');
-                //console.log('Failed ');
-            }
-        });
-
-    }
-
-
-
-</script>*@
 <script type="text/javascript">
     function AjaxdocumentFormSubmit() {
         //Set the URL.
@@ -217,9 +205,25 @@
         formData.append("EventConsequences", $("#EventConsequences").val());
         formData.append("EventsId", $("#EventsId").val());
         formData.append("EventsImage", $("#EventsImage").val());
+        
+        //Before
+        formData.append("BeforeHeatPower", $("#BeforeHeatPower").val());
+        formData.append("BeforeElectricalPower", $("#BeforeElectricalPower").val());
+        formData.append("BeforeEffectiveWorkingDays", $("#BeforeEffectiveWorkingDays").val());
+        formData.append("BeforePressureWater", $("#BeforePressureWater").val());
+        formData.append("BeforePressureinFirstCircuit", $("#BeforePressureinFirstCircuit").val());
+        formData.append("BeforePressureinSecondCircuit", $("#BeforePressureinSecondCircuit").val());
+        formData.append("BeforeVaccuminCondensor", $("#BeforeVaccuminCondensor").val());
 
-        
-        
+        //After
+        formData.append("AfterHeatPower", $("#AfterHeatPower").val());
+        formData.append("AfterElectricalPower", $("#AfterElectricalPower").val());
+        formData.append("AfterEffectiveWorkingDays", $("#AfterEffectiveWorkingDays").val());
+        formData.append("AfterPressureWater", $("#AfterPressureWater").val());
+        formData.append("AfterPressureinFirstCircuit", $("#AfterPressureinFirstCircuit").val());
+        formData.append("AfterPressureinSecondCircuit", $("#AfterPressureinSecondCircuit").val());
+        formData.append("AfterVaccuminCondensor", $("#AfterVaccuminCondensor").val());
+
         formData.append("fileEvents", $("#imgEventUp")[0].files[0]);
 
         debugger;
