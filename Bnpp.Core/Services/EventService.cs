@@ -40,38 +40,14 @@ namespace Bnpp.Core.Services
             return events.EventsId;
         }
 
-        public void AfterStatusEvents(AfterStatusViewModel afterEvents, int eventsId)
-        {
-            var afterEvnt = GetEventsById(eventsId);
-            afterEvnt.AfterHeatPower = afterEvents.AfterPressureWater;
-            afterEvnt.AfterElectricalPower = afterEvents.AfterElectricalPower;
-            afterEvnt.AfterEffectiveWorkingDays = afterEvents.AfterEffectiveWorkingDays;
-            afterEvnt.AfterPressureWater = afterEvents.AfterPressureWater;
-            afterEvnt.AfterPressureinFirstCircuit = afterEvents.AfterPressureinFirstCircuit;
-            afterEvnt.AfterPressureinSecondCircuit = afterEvents.AfterPressureinSecondCircuit;
-            afterEvnt.AfterVaccuminCondensor = afterEvents.AfterVaccuminCondensor;
-
-            _context.Update(afterEvnt);
-            _context.SaveChanges();
-        }
-
-        public void BeforeStatusEvents(BeforeStatusViewModel beforeEvents, int eventsId)
-        {
-            var beforeEvnt = GetEventsById(eventsId);
-            beforeEvnt.BeforeHeatPower = beforeEvents.BeforeHeatPower;
-            beforeEvnt.BeforeElectricalPower = beforeEvents.BeforeElectricalPower;
-            beforeEvnt.BeforeEffectiveWorkingDays = beforeEvents.BeforeEffectiveWorkingDays;
-            beforeEvnt.BeforePressureWater = beforeEvents.BeforePressureWater;
-            beforeEvnt.BeforePressureinFirstCircuit = beforeEvents.BeforePressureinFirstCircuit;
-            beforeEvnt.BeforePressureinSecondCircuit = beforeEvents.BeforePressureinSecondCircuit;
-            beforeEvnt.BeforeVaccuminCondensor = beforeEvents.BeforeVaccuminCondensor;
-            _context.Update(beforeEvnt);
-            _context.SaveChanges();
-        }
+       
 
         public void DeleteEvents(int eventsId)
         {
-            throw new NotImplementedException();
+            var evnt=GetEventsById(eventsId);
+            evnt.IsDelete = true;
+            _context.Update(evnt);
+            _context.SaveChanges();
         }
 
         public AfterStatusViewModel GetAfterStatusForShow(int eventsId)
@@ -116,7 +92,60 @@ namespace Bnpp.Core.Services
 
         public void UpdateEvents(Events events, IFormFile imgEvents)
         {
-            throw new NotImplementedException();
+            events.CreateDate = DateTime.Now;
+
+            if (imgEvents != null)
+            {
+                if (events.EventsImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", events.EventsImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+                events.EventsImage = Guid.NewGuid() + Path.GetExtension(imgEvents.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", events.EventsImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgEvents.CopyTo(stream);
+                }
+            }
+
+            _context.Update(events);
+            _context.SaveChanges();
+        }
+
+        public void AfterStatusEvents(AfterStatusViewModel afterEvents, int eventsId)
+        {
+            var afterEvnt = GetEventsById(eventsId);
+            afterEvnt.AfterHeatPower = afterEvents.AfterPressureWater;
+            afterEvnt.AfterElectricalPower = afterEvents.AfterElectricalPower;
+            afterEvnt.AfterEffectiveWorkingDays = afterEvents.AfterEffectiveWorkingDays;
+            afterEvnt.AfterPressureWater = afterEvents.AfterPressureWater;
+            afterEvnt.AfterPressureinFirstCircuit = afterEvents.AfterPressureinFirstCircuit;
+            afterEvnt.AfterPressureinSecondCircuit = afterEvents.AfterPressureinSecondCircuit;
+            afterEvnt.AfterVaccuminCondensor = afterEvents.AfterVaccuminCondensor;
+
+            _context.Update(afterEvnt);
+            _context.SaveChanges();
+        }
+
+        public void BeforeStatusEvents(BeforeStatusViewModel beforeEvents, int eventsId)
+        {
+            var beforeEvnt = GetEventsById(eventsId);
+            beforeEvnt.BeforeHeatPower = beforeEvents.BeforeHeatPower;
+            beforeEvnt.BeforeElectricalPower = beforeEvents.BeforeElectricalPower;
+            beforeEvnt.BeforeEffectiveWorkingDays = beforeEvents.BeforeEffectiveWorkingDays;
+            beforeEvnt.BeforePressureWater = beforeEvents.BeforePressureWater;
+            beforeEvnt.BeforePressureinFirstCircuit = beforeEvents.BeforePressureinFirstCircuit;
+            beforeEvnt.BeforePressureinSecondCircuit = beforeEvents.BeforePressureinSecondCircuit;
+            beforeEvnt.BeforeVaccuminCondensor = beforeEvents.BeforeVaccuminCondensor;
+            _context.Update(beforeEvnt);
+            _context.SaveChanges();
         }
     }
 }

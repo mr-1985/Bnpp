@@ -1,12 +1,14 @@
 ﻿@model Bnpp.DataLayer.Entities.Events
 @{
-    ViewData["Title"] = "CraeteEvents";
-   Layout = null;
+    ViewData["Title"] = "EditEvents";
+    Layout = null;
 }
 
 <div id="normal">
-    <form id="designForm" asp-action="CraeteEvents" method="post">
-        
+    <form id="designForm" asp-action="EditEvents" method="post">
+        <input type="hidden" asp-for="EventsId"/>
+        <input type="hidden" asp-for="EventsImage"/>
+
         <table cellpadding="3" cellspacing="0">
             <tbody>
                 <tr>
@@ -121,7 +123,7 @@
                     </td>
 
                     <td>
-                        <input asp-for="Filename" type="text"  value="" style="direction: ltr; text-align: left;">
+                        <input asp-for="Filename" type="text" value="" style="direction: ltr; text-align: left;">
                     </td>
                     <td>
                         <span asp-validation-for="Filename"></span>
@@ -193,7 +195,7 @@
 
     }
 
-    
+
 
 </script>*@
 <script type="text/javascript">
@@ -213,6 +215,9 @@
         formData.append("OperationalOrganization", $("#OperationalOrganization").val());
         formData.append("EventReasons", $("#EventReasons").val());
         formData.append("EventConsequences", $("#EventConsequences").val());
+        formData.append("EventsId", $("#EventsId").val());
+        formData.append("EventsImage", $("#EventsImage").val());
+
         
         
         formData.append("fileEvents", $("#imgEventUp")[0].files[0]);
@@ -230,9 +235,7 @@
         });
     }
 
-    function showMechanicalPage() {
-        $("#newPage").load("/Technical/HeatTreatment/");
-    }
+    
 
     function readURL(input) {
 

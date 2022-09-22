@@ -1248,3 +1248,4 @@ C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Operatio
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Events\CraeteEvents.cshtml.g.cs
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Events\BeforeStatus.cshtml.g.cs
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Events\AfterStatus.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Events\EditEvents.cshtml.g.cs
