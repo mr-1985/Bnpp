@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.Maintenance.DefectList>
 @{
     ViewData["Title"] = "Defections";
      Layout = null;
@@ -153,8 +153,8 @@
                     </div>
 
 
-                    <a class="btn-new-equip" onclick="Create()">New</a>
-                    <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
+                    <a class="btn-new-equip" style="cursor:pointer" onclick="Create()">New</a>
+                    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
                     <br />
                     @{
                         int rowCount = 1;
@@ -166,76 +166,97 @@
                                     <input type="checkbox" id="checkAll" />
                                 </th>
                                 <th></th>
-                                <th style="width: 150px">
+                                <th >
                                     <b>Instruction No. after Correction</b>
                                 </th>
-                                <th style="width: 250px">
+                                <th >
                                     <b>Control Result after Correction</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>Correction Date</b>
                                 </th>
                                 
-                                <th style="width: 120px">
+                                <th >
                                     <b>Correction Method</b>
                                 </th>
                                 
-                                <th style="width: 120px">
+                                <th >
                                     <b>	Control Instruction No.</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>	Control Result</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>	Control Method</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>	Part or Equipment</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>	Detection Date</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>	Journal No.</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>	Name of Defect</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>Actions</b>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr role="row">
                                     <td>
-                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
+                                        <input type="checkbox" class="checkBox" value="@item.DefectListId" />
                                     </td>
                                     <td>
                                         @rowCount
                                     </td>
                                     <td>
-                                        @item.CreateDate.ToString("yyyy/MM/dd")
+                                        @item.InstructionCorrection
                                     </td>
                                     <td>
-                                        @item.NameOfCondition
+                                        @item.ControlCorrection
                                     </td>
                                     <td>
-                                        @item.AllowableNumber
+                                        @item.CorrectionDate.ToString("yyyy/MM/dd")
                                     </td>
                                     <td>
-                                        @item.Occurrances
+                                        @item.CorrectionMethod
                                     </td>
                                     <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
+                                        @item.ControlInstructionNo
+                                    </td>
+                                    <td>
+                                        @item.ControlResult
+                                    </td>
+                                    <td>
+                                        @item.ControlMethod
+                                    </td>
+                                    <td>
+                                        @item.PartorEquipment
+                                    </td>
+                                    <td>
+                                        @item.DetectionDate.ToString("yyyy/MM/dd")
+                                    </td>
+                                    <td>
+                                        @item.JournalNo
+                                    </td>
+                                    <td>
+                                        @item.NameofDefect
+                                    </td>
+                                    <td>
+                                        <a class="btn-edit-equip" onclick="Edit(@item.DefectListId)">
                                             Edit
                                         </a>
                                     </td>
                                 </tr>
                                 rowCount++;
-                            }*@
+                            }
                         </tbody>
                     </table>
 
@@ -268,11 +289,11 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
+        $("#newPage").load("/Maintenance/CreateDefections/");
     }
 
     function Edit(id) {
-        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
+        $("#newPage").load("/Maintenance/EditDefections/" + id);
     }
 
     
@@ -317,11 +338,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+            url: "/Maintenance/DeleteDefections",
+            data: { "defectionId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
+                $("#Tabs").load("/Maintenance/Defections/");
             },
             failure: function (response) {
                 alert(response.responseText);

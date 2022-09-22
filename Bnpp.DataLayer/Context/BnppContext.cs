@@ -9,6 +9,7 @@ using Bnpp.DataLayer.Entities.AgeingManagementDocuments;
 using Bnpp.DataLayer.Entities.AgeingMechanism;
 using Bnpp.DataLayer.Entities.BasicData;
 using Bnpp.DataLayer.Entities.Electrical;
+using Bnpp.DataLayer.Entities.Maintenance;
 using Bnpp.DataLayer.Entities.OperationalDatas;
 using Microsoft.EntityFrameworkCore;
 
@@ -98,5 +99,9 @@ namespace Bnpp.DataLayer.Context
 
         public DbSet<Operational> Operationals { get; set; }
         public DbSet<Events> Events { get; set; }
+
+        #region Maintenance
+        public DbSet<DefectList> DefectList { get; set; }
+        #endregion
     }
 }
