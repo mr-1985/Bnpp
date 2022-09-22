@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using System;
 using Bnpp.DataLayer.Entities;
+using Bnpp.DataLayer.ViewModels;
 
 namespace Bnpp.Web.Controllers
 {
@@ -71,5 +72,38 @@ namespace Bnpp.Web.Controllers
             _eventService.AddEvents(Events, fileEvents);
             return Json(" Electormotors Successfully Deleted.");
         }
+
+
+
+        #region After Before
+
+        public IActionResult BeforeStatus(int id)
+        {
+            
+            ViewData["eventId"] = id;
+            return View(_eventService.GetBeforStatusForShow(id));
+        }
+
+        [HttpPost]
+        public IActionResult BeforeStatus(int id,BeforeStatusViewModel before)
+        {
+            _eventService.BeforeStatusEvents(before, id);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+
+
+        public IActionResult AfterStatus(int id)
+        {
+            ViewData["eventId"] = id;
+            return View(_eventService.GetAfterStatusForShow(id));
+        }
+
+        [HttpPost]
+        public IActionResult AfterStatus(int id, AfterStatusViewModel after)
+        {
+            _eventService.AfterStatusEvents(after, id);
+            return Json(" Electormotors Successfully Deleted.");
+        }
+        #endregion
     }
 }

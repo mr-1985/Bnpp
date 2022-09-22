@@ -1,5 +1,6 @@
 ﻿using Bnpp.DataLayer.Entities;
 using Bnpp.DataLayer.Entities.BasicData;
+using Bnpp.DataLayer.ViewModels;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -17,5 +18,17 @@ namespace Bnpp.Core.Services.Interfaces
         Events GetEventsById(int eventsId);
 
         void DeleteEvents(int eventsId);
+
+        #region Before After
+
+        BeforeStatusViewModel GetBeforStatusForShow(int eventsId);
+        void BeforeStatusEvents(BeforeStatusViewModel beforeEvents, int eventsId);
+
+        AfterStatusViewModel GetAfterStatusForShow(int eventsId);
+        void AfterStatusEvents(AfterStatusViewModel afterEvents, int eventsId);
+
+        #endregion
+
+
     }
 }

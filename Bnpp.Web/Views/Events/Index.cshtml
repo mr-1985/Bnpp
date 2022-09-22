@@ -125,34 +125,35 @@
                                     <input type="checkbox" id="checkAll" />
                                 </th>
                                 <th></th>
-                                <th style="width: 150px">
+                                <th >
                                     <b>Event Name</b>
                                 </th>
-                                <th style="width: 250px">
+                                <th >
                                     <b>Event Level</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>Event Date</b>
                                 </th>
-                                <th style="width: 120px">
+                                @*<th >
                                     <b>Event Time</b>
-                                </th>
-                                <th style="width: 120px">
+                                </th>*@
+                                <th >
                                     <b>Report Date</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>Report No.</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>Responsible Unit</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>Event Location</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>Operational Organization</b>
                                 </th>
-                                
+                                <th></th>
+                                <th></th>
                                 <th style="width: 120px">
                                     <b>Actions</b>
                                 </th>
@@ -176,7 +177,7 @@
                                         @item.EventLevel
                                     </td>
                                     <td>
-                                        @item.EventDate.ToString("yyyy/MM/dd")
+                                        @item.EventDate.ToString("yyyy/MM/dd HH:MM")
                                     </td>
                                     <td>
                                         @item.ReportDate.ToString("yyyy/MM/dd")
@@ -194,7 +195,14 @@
                                         @item.OperationalOrganization
                                     </td>
                                     <td>
-
+                                        <a onclick="ShowStatusbeforeEvent(@item.EventsId)">
+                                            Status before Event
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a onclick="ShowStatusFterEvent(@item.EventsId)">
+                                            Status after Event
+                                        </a>
                                     </td>
                                     <td>
                                         <a class="btn-edit-equip" onclick="Edit(@item.EventsId)">
@@ -244,6 +252,17 @@
     }
 
     
+    function ShowStatusbeforeEvent(id) {
+        $("#newPage").load("/Events/BeforeStatus/" + id);
+    }
+
+
+    function ShowStatusFterEvent(id) {
+        $("#newPage").load("/Events/AfterStatus/" + id);
+    }
+
+    
+
     $("#checkAll").click(function () {
         $(".checkBox").prop('checked',
             $(this).prop('checked'));
