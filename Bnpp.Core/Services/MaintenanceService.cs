@@ -1,9 +1,12 @@
 ﻿using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Context;
+using Bnpp.DataLayer.Entities.BasicData;
 using Bnpp.DataLayer.Entities.Maintenance;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -139,6 +142,82 @@ namespace Bnpp.Core.Services
             var mesure=GetMeasurementsById(measureId);
             mesure.IsDelete = true;
             UpdateMeasurements(mesure);
+        }
+
+
+
+        #endregion
+
+        #region Maintenance Forms
+
+        public List<MaintenanceForm> GetAllMaintenanceForm()
+        {
+            return _context.MaintenanceForms.Where(f=>f.IsDelete== false).ToList(); 
+        }
+
+        public int AddMaintenanceForm(MaintenanceForm forms, IFormFile imgForms)
+        {
+            
+                forms.CreateDate = DateTime.Now;
+
+                if (imgForms != null)
+                {
+                    forms.MaintenanceFormImage = Guid.NewGuid() + Path.GetExtension(imgForms.FileName);
+                    string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", forms.MaintenanceFormImage);
+
+                    using (var stream = new FileStream(imagePath, FileMode.Create))
+                    {
+                        imgForms.CopyTo(stream);
+                    }
+                }
+
+                _context.Add(forms);
+                _context.SaveChanges();
+                return forms.MaintenanceFormId;
+            
+        }
+
+        public MaintenanceForm GetMaintenanceFormById(int formsId)
+        {
+            return _context.MaintenanceForms.Find(formsId);
+        }
+
+        public void UpdateMaintenanceForm(MaintenanceForm forms, IFormFile imgForms)
+        {
+            forms.CreateDate = DateTime.Now;
+
+            if (imgForms != null)
+            {
+                if (forms.MaintenanceFormImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", forms.MaintenanceFormImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                forms.MaintenanceFormImage = Guid.NewGuid() + Path.GetExtension(imgForms.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", forms.MaintenanceFormImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgForms.CopyTo(stream);
+                }
+            }
+
+            _context.Update(forms);
+            _context.SaveChanges();
+        }
+
+        public void DeleteMaintenanceForm(int formsId)
+        {
+            var form = GetMaintenanceFormById(formsId);
+            form.IsDelete = true;
+            _context.Update(form);
+            _context.SaveChanges();
         }
 
         #endregion

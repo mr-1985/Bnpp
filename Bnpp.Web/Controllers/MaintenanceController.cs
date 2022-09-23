@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using System;
 using Bnpp.Core.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 
 namespace Bnpp.Web.Controllers
 {
@@ -126,11 +127,82 @@ namespace Bnpp.Web.Controllers
         }
         #endregion
 
+        #region
+
+        [BindProperty]
+        public MaintenanceForm Form { get; set; }
+
 
         public IActionResult MaintenanceForms()
         {
+            return View(_maintenanceService.GetAllMaintenanceForm());
+        }
+
+        public IActionResult CreateMaintenanceForms()
+        {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult CreateMaintenanceForms(IFormFile fileforms,string DateofMaintenance = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (DateofMaintenance != "")
+            {
+                string[] std = DateofMaintenance.Split('/');
+                Form.DateofMaintenance = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _maintenanceService.AddMaintenanceForm(Form,fileforms);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditMaintenanceForms(int id)
+        {
+            return View(_maintenanceService.GetMaintenanceFormById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditMaintenanceForms(IFormFile fileforms, string DateofMaintenance = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (DateofMaintenance != "")
+            {
+                string[] std = DateofMaintenance.Split('/');
+                Form.DateofMaintenance = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _maintenanceService.UpdateMaintenanceForm(Form, fileforms);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteMaintenanceForms(string[] formId)
+        {
+            foreach (string id in formId)
+            {
+                _maintenanceService.DeleteMaintenanceForm(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
 
 
         #region  Spare Parts

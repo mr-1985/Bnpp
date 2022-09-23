@@ -104,6 +104,7 @@ namespace Bnpp.DataLayer.Context
         public DbSet<DefectList> DefectList { get; set; }
         public DbSet<SpareParts> SpareParts { get; set; }
         public DbSet<Measurements> Measurements { get; set; }
+        public DbSet<MaintenanceForm> MaintenanceForms { get; set; }
         #endregion
     }
 }
