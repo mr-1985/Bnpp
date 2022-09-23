@@ -131,7 +131,7 @@ namespace Bnpp.Core.Services
 
         public void DeleteInspectionInstructions(int instructionsId)
         {
-            var instruct = GetInspectionReportsById(instructionsId);
+            var instruct = GetInspectionInstructionsById(instructionsId);
             instruct.IsDelete = true;
             _context.Update(instruct);
             _context.SaveChanges();
@@ -176,6 +176,82 @@ namespace Bnpp.Core.Services
 
             _context.Update(document);
             _context.SaveChanges();
+        }
+
+
+
+        #endregion
+
+        #region Typical Programs
+
+        public List<TypicalPrograms> GetAlTypicalPrograms()
+        {
+            return _context.TypicalPrograms.Where(t => t.IsDelete == false).ToList();
+        }
+
+        public int AddTypicalPrograms(TypicalPrograms typical)
+        {
+            typical.CreateDate=DateTime.Now;
+            _context.Add(typical);
+            _context.SaveChanges();
+            return typical.TypicalId;
+        }
+
+        public void UpdateTypicalPrograms(TypicalPrograms typical)
+        {
+            typical.CreateDate = DateTime.Now;
+            _context.Update(typical);
+            _context.SaveChanges();
+        }
+
+        public TypicalPrograms GetTypicalProgramsById(int typicalId)
+        {
+            return _context.TypicalPrograms.Find(typicalId);
+        }
+
+        public void DeleteTypicalPrograms(int typicalId)
+        {
+            var tpical = GetTypicalProgramsById(typicalId);
+            tpical.IsDelete = true;
+            UpdateTypicalPrograms(tpical);
+        }
+
+
+
+        #endregion
+
+        #region Working Programs
+
+        public List<WorkingPrograms> GetAlWorkingPrograms()
+        {
+            return _context.WorkingPrograms.Where(w => w.IsDelete == false).ToList();
+        }
+
+        public int AddWorkingPrograms(WorkingPrograms programs)
+        {
+            programs.CreateDate = DateTime.Now;
+            _context.Add(programs);
+            _context.SaveChanges();
+            return programs.WorkingId;
+        }
+
+        public void UpdateWorkingPrograms(WorkingPrograms programs)
+        {
+           programs.CreateDate= DateTime.Now;
+            _context.Update(programs);
+            _context.SaveChanges();
+        }
+
+        public WorkingPrograms GetWorkingProgramsById(int programsId)
+        {
+            return _context.WorkingPrograms.Find(programsId);
+        }
+
+        public void DeleteWorkingPrograms(int programsId)
+        {
+            var progam = GetWorkingProgramsById(programsId);
+            progam.IsDelete = true;
+            UpdateWorkingPrograms(progam);
         }
 
         #endregion

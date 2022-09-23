@@ -30,5 +30,27 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteInspectionInstructions(int instructionsId);
 
         #endregion
+
+        #region TypicalPrograms
+
+        List<TypicalPrograms> GetAlTypicalPrograms();
+        int AddTypicalPrograms(TypicalPrograms typical);
+        void UpdateTypicalPrograms(TypicalPrograms typical);
+        TypicalPrograms GetTypicalProgramsById(int typicalId);
+
+        void DeleteTypicalPrograms(int typicalId);
+
+        #endregion
+
+        #region Working Programs
+
+        List<WorkingPrograms> GetAlWorkingPrograms();
+        int AddWorkingPrograms(WorkingPrograms programs);
+        void UpdateWorkingPrograms(WorkingPrograms programs);
+        WorkingPrograms GetWorkingProgramsById(int programsId);
+
+        void DeleteWorkingPrograms(int programsId);
+
+        #endregion
     }
 }

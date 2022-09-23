@@ -113,6 +113,8 @@ namespace Bnpp.DataLayer.Context
 
         public DbSet<InspectionDocument> InspectionDocuments { get; set; }
         public DbSet<InspectionType> InspectionTypes { get; set; }
+        public DbSet<TypicalPrograms> TypicalPrograms { get; set; }
+        public DbSet<WorkingPrograms> WorkingPrograms { get; set; }
 
         #endregion
     }

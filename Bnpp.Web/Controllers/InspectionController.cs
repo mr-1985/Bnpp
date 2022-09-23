@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Security.Cryptography;
 using Bnpp.Core.Services;
 using Bnpp.Core.Services.Interfaces;
@@ -146,22 +147,125 @@ namespace Bnpp.Web.Controllers
         #endregion
         public IActionResult InspectionPrograms()
         {
-            return View();
+            return View(_inspectionService.GetAlTypicalPrograms());
         }
 
 
-        #region SubMenu
+       
+
+        #region TypicalPrograms
+
+        [BindProperty]
+        public TypicalPrograms Programs { get; set; }
 
         public IActionResult TypicalPrograms()
         {
             return View();
         }
 
-        public IActionResult WorkingPrograms()
+        public IActionResult CreateTypicalPrograms()
         {
             return View();
         }
 
+        [HttpPost]
+        public IActionResult CreateTypicalPrograms(TypicalPrograms typicalPrograms)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            _inspectionService.AddTypicalPrograms(Programs);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditTypicalPrograms(int id)
+        {
+            return View(_inspectionService.GetTypicalProgramsById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditTypicalPrograms()
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _inspectionService.UpdateTypicalPrograms(Programs);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeletTypicalPrograms(string[] typicalsId)
+        {
+            foreach (string id in typicalsId)
+            {
+                _inspectionService.DeleteTypicalPrograms(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
         #endregion
+
+        #region Working Programs
+
+        [BindProperty]
+        public WorkingPrograms Working { get; set; }
+
+
+        public IActionResult WorkingPrograms()
+        {
+            return View(_inspectionService.GetAlWorkingPrograms());
+        }
+
+        public IActionResult CraeteWorkingPrograms()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CraeteWorkingPrograms(WorkingPrograms workingPrograms)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            _inspectionService.AddWorkingPrograms(Working);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditWorkingPrograms(int id)
+        {
+            return View(_inspectionService.GetWorkingProgramsById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditWorkingPrograms()
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            _inspectionService.UpdateWorkingPrograms(Working);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeletWorkingPrograms(string[] workingId)
+        {
+            foreach (string id in workingId)
+            {
+                _inspectionService.DeleteWorkingPrograms(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+        #endregion
+
     }
 }

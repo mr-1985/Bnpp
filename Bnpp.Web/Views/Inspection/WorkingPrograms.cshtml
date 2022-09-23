@@ -1,0 +1,217 @@
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.InspectionData.WorkingPrograms>
+@{
+    ViewData["Title"] = "WorkingPrograms";
+    Layout = null;
+}
+
+<div>
+
+    <div id="iLoading22" style="display: none;">
+        <img src="/images/loading.gif">
+    </div>
+
+
+    <a class="btn-new-equip" style="cursor:pointer" onclick="Create()">New</a>
+    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
+    <br />
+    @{
+        int rowCount = 1;
+    }
+    <table id="myTable" cellpadding="3" cellspacing="0" class="show-table">
+        <thead>
+            <tr role="row">
+                <th>
+                    <input type="checkbox" id="checkAll" />
+                </th>
+                <th></th>
+                <th style="width: 150px">
+                    <b>No. of W.P</b>
+                </th>
+                <th style="width: 150px">
+                    <b>No. of T.P</b>
+                </th>
+                <th style="width: 250px">
+                    <b>equip. Code</b>
+                </th>
+                <th style="width: 120px">
+                    <b>Equip. Name</b>
+                </th>
+                <th style="width: 120px">
+                    <b>Measuring Type</b>
+                </th>
+
+                <th style="width: 120px">
+                    <b>	Material Compositions</b>
+                </th>
+                <th style="width: 120px">
+                    <b>	Weld No.</b>
+                </th>
+                <th style="width: 120px">
+                    <b>	Control Method</b>
+                </th>
+                <th style="width: 120px">
+                    <b>	Control Percent</b>
+                </th>
+                <th style="width: 120px">
+                    <b>	Control Standard</b>
+                </th>
+                <th style="width: 120px">
+                    <b>	QC Standard</b>
+                </th>
+                <th style="width: 120px">
+                    <b>	Control Results</b>
+                </th>
+                <th style="width: 120px">
+                    <b>	Remarks</b>
+                </th>
+
+                <th style="width: 120px">
+                    <b>Actions</b>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr role="row">
+                    <td>
+                        <input type="checkbox" class="checkBox" value="@item.WorkingId" />
+                    </td>
+                    <td>
+                        @rowCount
+                    </td>
+                     <td>
+                        @item.WP
+                    </td>
+                    <td>
+                        @item.TP
+                    </td>
+                    <td>
+                        @item.EquipCode
+                    </td>
+                    <td>
+                        @item.EquipName
+                    </td>
+                    <td>
+                        @item.MeasuringType
+                    </td>
+                    <td>
+                        @item.MaterialCompositions
+                    </td>
+
+                    <td> @item.WeldNo</td>
+                    <td> @item.ControlMethod</td>
+                    <td> @item.ControlPercent</td>
+                    <td> @item.ControlStandard</td>
+                    <td> @item.QCStandard</td>
+                    <td> @item.ControlResults</td>
+                    <td> @item.Remarks</td>
+                    <td>
+
+                        <a class="btn-edit-equip" onclick="Edit(@item.WorkingId)">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+                rowCount++;
+            }
+        </tbody>
+    </table>
+
+
+    <br>
+    <div style="clear: both;">
+    </div>
+    <br>
+    <br>
+    <iframe style="display: none" id="if_-2_119" src=""></iframe>
+
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.unobtrusive-ajax.min.js"></script>
+
+
+<script src="/js/datatables.min.js"></script>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#myTable").DataTable();
+    });
+</script>
+<script>
+
+    function Create() {
+        $("#newPage").load("/Inspection/CraeteWorkingPrograms/");
+    }
+
+    function Edit(id) {
+        $("#newPage").load("/Inspection/EditWorkingPrograms/" + id);
+    }
+
+
+
+    function showPage1() {
+        $("#Tabs").load("/Inspection/InspectionReports/");
+    }
+
+    function showPage2() {
+        $("#Tabs").load("/Inspection/InspectionInstructions/");
+    }
+
+    function showPage3() {
+        $("#Tabs").load("/Inspection/InspectionPrograms/");
+    }
+
+    function showPage4() {
+        $("#Tabs").load("/Inspection/ManagementReviews/");
+    }
+
+    function showsubPage1() {
+        //$("#newPage").load("/Inspection/WorkingPrograms/");
+        $("#Tabs").load("/Inspection/InspectionPrograms/");
+    }
+
+    function showsubPage2() {
+        $("#newPage").load("/Inspection/WorkingPrograms/");
+    }
+    showsubPage1
+
+    $("#checkAll").click(function () {
+        $(".checkBox").prop('checked',
+            $(this).prop('checked'));
+    });
+
+    $("#delete").click(function () {
+        var selectedIDs = new Array();
+
+        $('input:checkbox.checkBox').each(function () {
+            if ($(this).prop('checked')) {
+                selectedIDs.push($(this).val());
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/Inspection/DeletWorkingPrograms",
+            data: { "workingId": selectedIDs },
+
+            success: function (response) {
+                $("#newPage").load("/Inspection/WorkingPrograms/");
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+
+        });
+
+    });
+
+
+</script>

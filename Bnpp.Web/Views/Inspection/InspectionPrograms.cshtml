@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.InspectionData.TypicalPrograms>
+@{
     ViewData["Title"] = "InspectionPrograms";
     Layout = null;
 }
@@ -75,12 +76,12 @@
                     <li id="tab-button1" class="tab-buttons-li" @*style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;"*@ @*style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;"*@>
                         <a id="tab-button-a1"
                            onclick="showsubPage1()" style="cursor:pointer;color: rgb(0, 113, 158);">
-                            Inspection Reports
+                            Typical Programs
                         </a>
                     </li>
                     <li id="tab-button2" @*class="tab-buttons-li"*@ style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
                         <a id="tab-buttona2" onclick="showsubPage2()" style="cursor:pointer;color: rgb(110, 110, 255);">
-                            Inspection Instructions
+                            Working Programs
                         </a>
                     </li>
                 </ul>
@@ -121,8 +122,8 @@
                         </div>
 
 
-                        <a class="btn-new-equip" onclick="Create()">New</a>
-                        <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
+                        <a class="btn-new-equip" style="cursor:pointer" onclick="Create()">New</a>
+                        <input type="button" id="delete" class="btn-delete-equip" value="Delete">
                         <br />
                         @{
                             int rowCount = 1;
@@ -135,24 +136,33 @@
                                 </th>
                                 <th></th>
                                 <th style="width: 150px">
-                                    <b>Type</b>
+                                        <b>No. of T.P</b>
                                 </th>
                                 <th style="width: 250px">
-                                    <b>Date</b>
+                                        <b>equip. Code</b>
                                 </th>
                                 <th style="width: 120px">
-                                    <b>Frequency</b>
+                                        <b>Equip. Name</b>
                                 </th>
                                 <th style="width: 120px">
-                                    <b>Prepaired by</b>
+                                        <b>Test Method</b>
                                 </th>
 
                                 <th style="width: 120px">
-                                    <b>	Approved</b>
+                                        <b>	Test Standard</b>
                                 </th>
                                 <th style="width: 120px">
-                                    <b>	Authorized</b>
+                                        <b>	Control Percent</b>
                                 </th>
+                                    <th style="width: 120px">
+                                        <b>	Period</b>
+                                    </th>
+                                    <th style="width: 120px">
+                                        <b>	Weld Type</b>
+                                </th>
+                                    <th style="width: 120px">
+                                        <b>	Remarks</b>
+                                    </th>
 
                                 <th style="width: 120px">
                                     <b>Actions</b>
@@ -160,35 +170,44 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @*@foreach (var item in Model)
+                            @foreach (var item in Model)
                                 {
                                 <tr role="row">
                                 <td>
-                                <input type="checkbox" class="checkBox" value="@item.OperationalId" />
+                                <input type="checkbox" class="checkBox" value="@item.TypicalId" />
                                 </td>
                                 <td>
                                 @rowCount
                                 </td>
                                 <td>
-                                @item.CreateDate.ToString("yyyy/MM/dd")
+                                @item.TP
                                 </td>
                                 <td>
-                                @item.NameOfCondition
+                                @item.EquipCode
                                 </td>
                                 <td>
-                                @item.AllowableNumber
+                                @item.EquipName
                                 </td>
                                 <td>
-                                @item.Occurrances
+                                @item.TestMethod
                                 </td>
+                                 <td>
+                                @item.TestStandard
+                                </td>
+
+                                        <td> @item.ControlPercent</td>
+                                        <td> @item.Period</td>
+                                        <td> @item.WeldType</td>
+                                        <td> @item.Remarks</td>
                                 <td>
-                                <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
+                                        
+                                <a class="btn-edit-equip" onclick="Edit(@item.TypicalId)">
                                 Edit
                                 </a>
                                 </td>
                                 </tr>
                                 rowCount++;
-                                }*@
+                                }
                             </tbody>
                         </table>
 
@@ -222,11 +241,11 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
+        $("#newPage").load("/Inspection/CreateTypicalPrograms/");
     }
 
     function Edit(id) {
-        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
+        $("#newPage").load("/Inspection/EditTypicalPrograms/" + id);
     }
 
 
@@ -246,13 +265,17 @@
     function showPage4() {
         $("#Tabs").load("/Inspection/ManagementReviews/");
     }
-    
-    
-    
-     function showsubPage1() {
-        $("#Tabs").load("/Inspection/TypicalPrograms/");
+
+
+    function showsubPage1() {
+        //$("#newPage").load("/Inspection/WorkingPrograms/");
+        $("#Tabs").load("/Inspection/InspectionPrograms/");
     }
-    showsubPage1
+    
+     function showsubPage2() {
+        $("#newPage").load("/Inspection/WorkingPrograms/");
+    }
+   
 
     $("#checkAll").click(function () {
         $(".checkBox").prop('checked',
@@ -270,11 +293,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+            url: "/Inspection/DeletTypicalPrograms",
+            data: { "typicalsId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
+                $("#Tabs").load("/Inspection/InspectionPrograms/");
             },
             failure: function (response) {
                 alert(response.responseText);
