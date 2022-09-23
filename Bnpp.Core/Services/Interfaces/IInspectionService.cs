@@ -52,5 +52,16 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteWorkingPrograms(int programsId);
 
         #endregion
+
+        #region Visual Control
+
+        List<TestResults> GetAllVisualControl();
+        int AddVisualControl(TestResults visual);
+        void UpdateVisualControl(TestResults visual);
+        TestResults GetVisualControlById(int visualId);
+
+        void DeleteVisualControl(int visualId);
+
+        #endregion
     }
 }

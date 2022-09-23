@@ -150,11 +150,47 @@ namespace Bnpp.Web.Controllers
             return View(_inspectionService.GetAlTypicalPrograms());
         }
 
+
+        #region Visual Control
+        [BindProperty]
+        public TestResults Results { get; set; }
+
         public IActionResult InspectionResults()
         {
             return View();
         }
 
+        public IActionResult CraeteVisualControl()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CraeteVisualControl(string TestDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (TestDate != "")
+            {
+                string[] std = TestDate.Split('/');
+                Results.TestingDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+           
+
+
+            _inspectionService.AddVisualControl(Results);
+
+            return new JsonResult("success");
+        }
+
+        #endregion
 
         #region TypicalPrograms
 

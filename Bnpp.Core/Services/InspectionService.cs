@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -252,6 +253,46 @@ namespace Bnpp.Core.Services
             var progam = GetWorkingProgramsById(programsId);
             progam.IsDelete = true;
             UpdateWorkingPrograms(progam);
+        }
+
+
+
+        #endregion
+
+        #region Visual Control
+
+        public List<TestResults> GetAllVisualControl()
+        {
+            return _context.TestResults.Where(o => o.TypeId == 1 && o.IsDelete == false).ToList();
+        }
+
+        public int AddVisualControl(TestResults visual)
+        {
+            visual.CreateDate=DateTime.Now;
+            visual.TypeId = 1;
+            _context.Add(visual);
+            _context.SaveChanges();
+            return visual.TestResultsId;
+        }
+
+        public void UpdateVisualControl(TestResults visual)
+        {
+            visual.CreateDate = DateTime.Now;
+            visual.TypeId = 1;
+            _context.Update(visual);
+            _context.SaveChanges();
+        }
+
+        public TestResults GetVisualControlById(int visualId)
+        {
+            return _context.TestResults.SingleOrDefault(s => s.TestResultsId == visualId && s.TypeId == 1);
+        }
+
+        public void DeleteVisualControl(int visualId)
+        {
+            var visal=GetVisualControlById(visualId);
+            visal.IsDelete = true;
+            UpdateVisualControl(visal);
         }
 
         #endregion

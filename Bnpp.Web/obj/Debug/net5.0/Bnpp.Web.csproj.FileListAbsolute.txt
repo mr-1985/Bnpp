@@ -1269,3 +1269,4 @@ C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Inspecti
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Inspection\CraeteWorkingPrograms.cshtml.g.cs
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Inspection\EditWorkingPrograms.cshtml.g.cs
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Inspection\InspectionResults.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Inspection\CraeteVisualControl.cshtml.g.cs
