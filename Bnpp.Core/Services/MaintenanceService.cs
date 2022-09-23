@@ -3,6 +3,7 @@ using Bnpp.DataLayer.Context;
 using Bnpp.DataLayer.Entities.BasicData;
 using Bnpp.DataLayer.Entities.Maintenance;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient.Server;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -217,6 +218,82 @@ namespace Bnpp.Core.Services
             var form = GetMaintenanceFormById(formsId);
             form.IsDelete = true;
             _context.Update(form);
+            _context.SaveChanges();
+        }
+
+
+
+
+
+        #endregion
+
+        #region
+
+        public List<DefectionReports> GetAllDefectionReports()
+        {
+            return _context.DefectionReports.Where(d => d.IsDelete == false).ToList();
+        }
+
+        public int AddDefectionReports(DefectionReports reports, IFormFile imgReports)
+        {
+            reports.CreateDate = DateTime.Now;
+
+            if (imgReports != null)
+            {
+                reports.DefectionReportsImage = Guid.NewGuid() + Path.GetExtension(imgReports.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", reports.DefectionReportsImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgReports.CopyTo(stream);
+                }
+            }
+
+            _context.Add(reports);
+            _context.SaveChanges();
+            return reports.DefectionReportsId;
+        }
+
+        public DefectionReports GetDefectionReportsById(int reportsId)
+        {
+            return _context.DefectionReports.Find(reportsId);
+        }
+
+        public void UpdateDefectionReports(DefectionReports reports, IFormFile imgReports)
+        {
+            reports.CreateDate = DateTime.Now;
+
+            if (imgReports != null)
+            {
+                if (reports.DefectionReportsImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", reports.DefectionReportsImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                reports.DefectionReportsImage = Guid.NewGuid() + Path.GetExtension(imgReports.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", reports.DefectionReportsImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgReports.CopyTo(stream);
+                }
+            }
+
+            _context.Update(reports);
+            _context.SaveChanges();
+        }
+
+        public void DeleteDefectionReports(int reportsId)
+        {
+            var rports=GetDefectionReportsById(reportsId);
+            rports.IsDelete = true;
+            _context.Update(rports);
             _context.SaveChanges();
         }
 

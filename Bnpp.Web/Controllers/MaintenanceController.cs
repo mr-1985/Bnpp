@@ -342,9 +342,67 @@ namespace Bnpp.Web.Controllers
         }
 
         #endregion
+
+
+        #region  Defects Report
+
+        [BindProperty]
+        public DefectionReports Reports { get; set; }
+
+
         public IActionResult DefectsReport()
+        {
+            return View(_maintenanceService.GetAllDefectionReports());
+        }
+
+        public IActionResult CreateDefectsReport()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult CreateDefectsReport(IFormFile filereports)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            
+
+            _maintenanceService.AddDefectionReports(Reports, filereports);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditDefectsReport(int id)
+        {
+            return View(_maintenanceService.GetDefectionReportsById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditDefectsReport(IFormFile filereports)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _maintenanceService.UpdateDefectionReports(Reports, filereports);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteDefectsReport(string[] reportsId)
+        {
+            foreach (string id in reportsId)
+            {
+                _maintenanceService.DeleteDefectionReports(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
     }
 }

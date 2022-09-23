@@ -1257,3 +1257,5 @@ C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Maintena
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Maintenance\EditMeasurements.cshtml.g.cs
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Maintenance\CreateMaintenanceForms.cshtml.g.cs
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Maintenance\EditMaintenanceForms.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Maintenance\CreateDefectsReport.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Maintenance\EditDefectsReport.cshtml.g.cs

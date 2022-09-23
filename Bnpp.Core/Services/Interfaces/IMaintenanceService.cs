@@ -55,5 +55,15 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteMaintenanceForm(int formsId);
 
         #endregion
+
+        #region Defection Reports
+
+        List<DefectionReports> GetAllDefectionReports();
+        int AddDefectionReports(DefectionReports reports, IFormFile imgReports);
+        DefectionReports GetDefectionReportsById(int reportsId);
+        void UpdateDefectionReports(DefectionReports reports, IFormFile imgReports);
+        void DeleteDefectionReports(int reportsId);
+
+        #endregion
     }
 }
