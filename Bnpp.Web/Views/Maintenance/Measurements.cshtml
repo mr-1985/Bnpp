@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.Maintenance.Measurements>
 @{
     ViewData["Title"] = "Measurements";
    Layout = null;
@@ -166,56 +166,56 @@
                                     <input type="checkbox" id="checkAll" />
                                 </th>
                                 <th></th>
-                                <th style="width: 150px">
+                                <th >
                                     <b>Date of measurement</b>
                                 </th>
-                                <th style="width: 250px">
+                                <th >
                                     <b>Type of measurement</b>
                                 </th>
-                                <th style="width: 120px">
+                                <th >
                                     <b>Result measurement</b>
                                 </th>
                                 
-                                <th style="width: 120px">
+                                <th >
                                     <b>  Description</b>
                                 </th>
                                 
                                  
-                                <th style="width: 120px">
+                                <th >
                                     <b>Actions</b>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr role="row">
                                     <td>
-                                        <input type="checkbox" class="checkBox" value="@item.OperationalId" />
+                                        <input type="checkbox" class="checkBox" value="@item.MeasurementId" />
                                     </td>
                                     <td>
                                         @rowCount
                                     </td>
                                     <td>
-                                        @item.CreateDate.ToString("yyyy/MM/dd")
+                                        @item.Dateofmeasurement.ToString("yyyy/MM/dd")
                                     </td>
                                     <td>
-                                        @item.NameOfCondition
+                                        @item.Typeofmeasurement
                                     </td>
                                     <td>
-                                        @item.AllowableNumber
+                                        @item.Resultmeasurement
                                     </td>
                                     <td>
-                                        @item.Occurrances
+                                        @item.Description
                                     </td>
                                     <td>
-                                        <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
+                                        <a class="btn-edit-equip" onclick="Edit(@item.MeasurementId)">
                                             Edit
                                         </a>
                                     </td>
                                 </tr>
                                 rowCount++;
-                            }*@
+                            }
                         </tbody>
                     </table>
 
@@ -252,7 +252,7 @@
     }
 
     function Edit(id) {
-        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
+        $("#newPage").load("/Maintenance/EditMeasurements/" + id);
     }
 
     
@@ -297,11 +297,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+            url: "/Maintenance/DeleteMeasurements",
+            data: { "measureId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
+                $("#Tabs").load("/Maintenance/Measurements/");
             },
             failure: function (response) {
                 alert(response.responseText);

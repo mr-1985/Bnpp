@@ -232,6 +232,43 @@ namespace Bnpp.Web.Controllers
             return new JsonResult("success");
         }
 
+        public IActionResult EditMeasurements(int id)
+        {
+            return View(_maintenanceService.GetMeasurementsById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditMeasurements(string Dateofmeasurement = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (Dateofmeasurement != "")
+            {
+                string[] std = Dateofmeasurement.Split('/');
+                Measureing.Dateofmeasurement = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _maintenanceService.UpdateMeasurements(Measureing);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteMeasurements(string[] measureId)
+        {
+            foreach (string id in measureId)
+            {
+                _maintenanceService.DeleteMeasurements(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
         #endregion
         public IActionResult DefectsReport()
         {
