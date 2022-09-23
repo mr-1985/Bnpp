@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.InspectionData.InspectionDocument>
+@{
     ViewData["Title"] = "InspectionReports";
     Layout = null;
 }
@@ -140,8 +141,8 @@
                     </div>
 
 
-                    <a class="btn-new-equip" onclick="Create()">New</a>
-                    <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
+                    <a class="btn-new-equip" style="cursor:pointer" onclick="Create()">New</a>
+                    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
                     <br />
                     @{
                         int rowCount = 1;
@@ -154,23 +155,16 @@
                                 </th>
                                 <th></th>
                                 <th style="width: 150px">
-                                    <b>Type</b>
+                                    <b>
+                                        Code
+                                    </b>
                                 </th>
                                 <th style="width: 250px">
-                                    <b>Date</b>
-                                </th>
-                                <th style="width: 120px">
-                                    <b>Frequency</b>
-                                </th>
-                                <th style="width: 120px">
-                                    <b>Prepaired by</b>
+                                    <b>File Name</b>
                                 </th>
 
                                 <th style="width: 120px">
-                                    <b>	Approved</b>
-                                </th>
-                                <th style="width: 120px">
-                                    <b>	Authorized</b>
+                                    <b>Doc. Name</b>
                                 </th>
 
                                 <th style="width: 120px">
@@ -179,35 +173,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model)
-                                {
+                            @foreach (var item in Model)
+                            {
                                 <tr role="row">
-                                <td>
-                                <input type="checkbox" class="checkBox" value="@item.OperationalId" />
-                                </td>
-                                <td>
-                                @rowCount
-                                </td>
-                                <td>
-                                @item.CreateDate.ToString("yyyy/MM/dd")
-                                </td>
-                                <td>
-                                @item.NameOfCondition
-                                </td>
-                                <td>
-                                @item.AllowableNumber
-                                </td>
-                                <td>
-                                @item.Occurrances
-                                </td>
-                                <td>
-                                <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">
-                                Edit
-                                </a>
-                                </td>
+                                    <td>
+                                        <input type="checkbox" class="checkBox" value="@item.InspectionId" />
+                                    </td>
+                                    <td>
+                                        @rowCount
+                                    </td>
+
+                                    <td>
+                                        @item.Code
+                                    </td>
+                                    <td>
+                                        @item.Filename
+                                    </td>
+                                    <td>
+                                        @item.DocumentName
+                                    </td>
+                                    <td>
+                                        <a class="btn-edit-equip" onclick="Edit(@item.InspectionId)">
+                                            Edit
+                                        </a>
+                                    </td>
                                 </tr>
                                 rowCount++;
-                                }*@
+                            }
                         </tbody>
                     </table>
 
@@ -240,11 +232,11 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
+        $("#newPage").load("/Inspection/CretaeInspectionReports/");
     }
 
     function Edit(id) {
-        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
+        $("#newPage").load("/Inspection/EditInspectionReports/" + id);
     }
 
 
@@ -281,11 +273,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Transient/DeleteNormalOperations",
-            data: { "operationalId": selectedIDs },
+            url: "/Inspection/DeleteInspectionReports",
+            data: { "rportId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Transient/NormalOperations/");
+                $("#Tabs").load("/Inspection/InspectionReports/");
             },
             failure: function (response) {
                 alert(response.responseText);

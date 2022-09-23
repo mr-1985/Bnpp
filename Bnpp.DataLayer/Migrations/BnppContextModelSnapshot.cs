@@ -1481,6 +1481,68 @@ namespace Bnpp.DataLayer.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("Bnpp.DataLayer.Entities.InspectionData.InspectionDocument", b =>
+                {
+                    b.Property<int>("InspectionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DocumentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Filename")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FormName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FormNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("InspectionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("InspectionImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("InspectionId");
+
+                    b.HasIndex("TypeId");
+
+                    b.ToTable("InspectionDocuments");
+                });
+
+            modelBuilder.Entity("Bnpp.DataLayer.Entities.InspectionData.InspectionType", b =>
+                {
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TypeTitle")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("TypeId");
+
+                    b.ToTable("InspectionTypes");
+                });
+
             modelBuilder.Entity("Bnpp.DataLayer.Entities.Maintenance.DefectList", b =>
                 {
                     b.Property<int>("DefectListId")
@@ -2070,6 +2132,17 @@ namespace Bnpp.DataLayer.Migrations
                         .HasForeignKey("ComponentsComponentId");
                 });
 
+            modelBuilder.Entity("Bnpp.DataLayer.Entities.InspectionData.InspectionDocument", b =>
+                {
+                    b.HasOne("Bnpp.DataLayer.Entities.InspectionData.InspectionType", "InspectionType")
+                        .WithMany("InspectionDocuments")
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InspectionType");
+                });
+
             modelBuilder.Entity("Bnpp.DataLayer.Entities.OperationalDatas.Operational", b =>
                 {
                     b.HasOne("Bnpp.DataLayer.Entities.OperationalDatas.OperationalType", "OperationalType")
@@ -2129,6 +2202,11 @@ namespace Bnpp.DataLayer.Migrations
             modelBuilder.Entity("Bnpp.DataLayer.Entities.BasicData.Components", b =>
                 {
                     b.Navigation("MechanicalProperties");
+                });
+
+            modelBuilder.Entity("Bnpp.DataLayer.Entities.InspectionData.InspectionType", b =>
+                {
+                    b.Navigation("InspectionDocuments");
                 });
 
             modelBuilder.Entity("Bnpp.DataLayer.Entities.OperationalDatas.OperationalType", b =>
