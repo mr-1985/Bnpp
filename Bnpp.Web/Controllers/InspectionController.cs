@@ -150,8 +150,11 @@ namespace Bnpp.Web.Controllers
             return View(_inspectionService.GetAlTypicalPrograms());
         }
 
+        public IActionResult InspectionResults()
+        {
+            return View();
+        }
 
-       
 
         #region TypicalPrograms
 

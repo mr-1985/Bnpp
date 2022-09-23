@@ -115,6 +115,8 @@ namespace Bnpp.DataLayer.Context
         public DbSet<InspectionType> InspectionTypes { get; set; }
         public DbSet<TypicalPrograms> TypicalPrograms { get; set; }
         public DbSet<WorkingPrograms> WorkingPrograms { get; set; }
+        public DbSet<TestResults> TestResults { get; set; }
+        public DbSet<TestResultsType> TestResultsType { get; set; }
 
         #endregion
     }
