@@ -63,5 +63,57 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteVisualControl(int visualId);
 
         #endregion
+
+        #region  Leakage Test
+
+
+        List<TestResults> GetAllLeakageTest();
+        int AddLeakageTest(TestResults leakage);
+        void UpdateLeakageTest(TestResults leakage);
+        TestResults GetLeakageTestById(int leakageId);
+
+        void DeleteLeakageTest(int leakageId);
+
+        #endregion
+
+        #region Liquid Penetrated Test
+
+        List<TestResults> GetAllLiquidPenetrated();
+        int AddLiquidPenetrated(TestResults penetrated);
+        void UpdateLiquidPenetrated(TestResults penetrated);
+        TestResults GetLiquidPenetratedById(int penetratedId);
+        void DeleteLiquidPenetrated(int penetratedId);
+
+        #endregion
+
+        #region Magnetic Powder test
+
+        List<TestResults> GetAllMagneticPowder();
+        int AddMagneticPowder(TestResults powder);
+        void UpdateMagneticPowder(TestResults powder);
+        TestResults GetMagneticPowderById(int powderId);
+        void DeleteMagneticPowder(int powderId);
+
+        #endregion
+
+        #region Radiographics Test
+
+        List<TestResults> GetAllRadiographics();
+        int AddRadiographics(TestResults radiographics);
+        void UpdateRadiographics(TestResults radiographics);
+        TestResults GetRadiographicsById(int radiographicsId);
+        void DeleteRadiographics(int radiographicsId);
+
+        #endregion
+
+        #region Ultrasonic Tests
+
+        List<TestResults> GetAllUltrasonic();
+        int AddUltrasonic(TestResults ultrasonic);
+        void UpdateUltrasonic(TestResults ultrasonic);
+        TestResults GetUltrasonicById(int ultrasonicId);
+        void DeleteUltrasonic(int ultrasonicId);
+
+        #endregion
     }
 }

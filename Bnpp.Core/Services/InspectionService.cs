@@ -295,6 +295,207 @@ namespace Bnpp.Core.Services
             UpdateVisualControl(visal);
         }
 
+
+
+        #endregion
+
+
+        #region  Leakage Test
+
+        public List<TestResults> GetAllLeakageTest()
+        {
+            return _context.TestResults.Where(o => o.TypeId == 2 && o.IsDelete == false).ToList();
+        }
+
+        public int AddLeakageTest(TestResults leakage)
+        {
+            leakage.CreateDate = DateTime.Now;
+            leakage.TypeId = 2;
+            _context.Add(leakage);
+            _context.SaveChanges();
+            return leakage.TestResultsId;
+        }
+
+        public void UpdateLeakageTest(TestResults leakage)
+        {
+            leakage.CreateDate = DateTime.Now;
+            leakage.TypeId = 2;
+            _context.Update(leakage);
+            _context.SaveChanges();
+        }
+
+        public TestResults GetLeakageTestById(int leakageId)
+        {
+            return _context.TestResults.SingleOrDefault(s => s.TestResultsId == leakageId && s.TypeId == 2);
+        }
+
+        public void DeleteLeakageTest(int leakageId)
+        {
+            var lakage = GetLeakageTestById(leakageId);
+            lakage.IsDelete = true;
+            UpdateLeakageTest(lakage);
+        }
+
+
+
+        #endregion
+
+
+        #region Liquid Penetrated Test
+
+        public List<TestResults> GetAllLiquidPenetrated()
+        {
+            return _context.TestResults.Where(o => o.TypeId == 3 && o.IsDelete == false).ToList();
+        }
+
+        public int AddLiquidPenetrated(TestResults penetrated)
+        {
+            penetrated.CreateDate = DateTime.Now;
+            penetrated.TypeId = 3;
+            _context.Add(penetrated);
+            _context.SaveChanges();
+            return penetrated.TestResultsId;
+        }
+
+        public void UpdateLiquidPenetrated(TestResults penetrated)
+        {
+            penetrated.CreateDate = DateTime.Now;
+            penetrated.TypeId = 3;
+            _context.Update(penetrated);
+            _context.SaveChanges();
+        }
+
+        public TestResults GetLiquidPenetratedById(int penetratedId)
+        {
+            return _context.TestResults.SingleOrDefault(s => s.TestResultsId == penetratedId && s.TypeId == 3);
+        }
+
+        public void DeleteLiquidPenetrated(int penetratedId)
+        {
+            var penetrate = GetLiquidPenetratedById(penetratedId);
+            penetrate.IsDelete = true;
+            UpdateLiquidPenetrated(penetrate);
+        }
+
+
+
+        #endregion
+
+        #region Magnetic Powder test
+
+        public List<TestResults> GetAllMagneticPowder()
+        {
+            return _context.TestResults.Where(o => o.TypeId == 4 && o.IsDelete == false).ToList();
+        }
+
+        public int AddMagneticPowder(TestResults powder)
+        {
+            powder.CreateDate = DateTime.Now;
+            powder.TypeId = 4;
+            _context.Add(powder);
+            _context.SaveChanges();
+            return powder.TestResultsId;
+        }
+
+        public void UpdateMagneticPowder(TestResults powder)
+        {
+            powder.CreateDate = DateTime.Now;
+            powder.TypeId = 4;
+            _context.Update(powder);
+            _context.SaveChanges();
+        }
+
+        public TestResults GetMagneticPowderById(int powderId)
+        {
+            return _context.TestResults.SingleOrDefault(s => s.TestResultsId == powderId && s.TypeId == 4);
+        }
+
+        public void DeleteMagneticPowder(int powderId)
+        {
+            var pwder=GetMagneticPowderById(powderId);
+            pwder.IsDelete = true;
+            UpdateMagneticPowder(pwder);
+        }
+
+        #endregion
+
+
+        #region Radiographics Test
+
+        public List<TestResults> GetAllRadiographics()
+        {
+            return _context.TestResults.Where(o => o.TypeId == 5 && o.IsDelete == false).ToList();
+        }
+
+        public int AddRadiographics(TestResults radiographics)
+        {
+            radiographics.CreateDate = DateTime.Now;
+            radiographics.TypeId = 5;
+            _context.Add(radiographics);
+            _context.SaveChanges();
+            return radiographics.TestResultsId;
+        }
+
+        public void UpdateRadiographics(TestResults radiographics)
+        {
+            radiographics.CreateDate = DateTime.Now;
+            radiographics.TypeId = 5;
+            _context.Update(radiographics);
+            _context.SaveChanges();
+        }
+
+        public TestResults GetRadiographicsById(int radiographicsId)
+        {
+            return _context.TestResults.SingleOrDefault(s => s.TestResultsId == radiographicsId && s.TypeId == 5);
+        }
+
+        public void DeleteRadiographics(int radiographicsId)
+        {
+            var radio=GetRadiographicsById(radiographicsId);
+            radio.IsDelete = true;
+            UpdateRadiographics(radio);
+        }
+
+
+        #endregion
+
+        #region Ultrasonic Tests
+
+        public List<TestResults> GetAllUltrasonic()
+        {
+            return _context.TestResults.Where(o => o.TypeId == 6 && o.IsDelete == false).ToList();
+        }
+
+        public int AddUltrasonic(TestResults ultrasonic)
+        {
+            ultrasonic.CreateDate = DateTime.Now;
+            ultrasonic.TypeId = 6;
+            _context.Add(ultrasonic);
+            _context.SaveChanges();
+            return ultrasonic.TestResultsId;
+        }
+
+        public void UpdateUltrasonic(TestResults ultrasonic)
+        {
+            ultrasonic.CreateDate = DateTime.Now;
+            ultrasonic.TypeId = 6;
+            _context.Update(ultrasonic);
+            _context.SaveChanges();
+        }
+
+        public TestResults GetUltrasonicById(int ultrasonicId)
+        {
+            return _context.TestResults.SingleOrDefault(s => s.TestResultsId == ultrasonicId && s.TypeId == 6);
+        }
+
+        public void DeleteUltrasonic(int ultrasonicId)
+        {
+            var ultra=GetUltrasonicById(ultrasonicId);
+            ultra.IsDelete = true;
+            UpdateUltrasonic(ultra);
+        }
+
+
         #endregion
     }
 }

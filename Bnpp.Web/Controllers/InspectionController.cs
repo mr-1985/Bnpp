@@ -145,6 +145,8 @@ namespace Bnpp.Web.Controllers
             return Json(" Diesel Generators Successfully Deleted.");
         }
         #endregion
+
+
         public IActionResult InspectionPrograms()
         {
             return View(_inspectionService.GetAlTypicalPrograms());
@@ -220,6 +222,376 @@ namespace Bnpp.Web.Controllers
             foreach (string id in visualId)
             {
                 _inspectionService.DeleteVisualControl(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
+
+        #region  Leakage Test
+
+        public IActionResult LeakageTest()
+        {
+            return View(_inspectionService.GetAllLeakageTest());
+        }
+
+        public IActionResult CreateLeakageTest()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateLeakageTest(string TestDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (TestDate != "")
+            {
+                string[] std = TestDate.Split('/');
+                Results.TestingDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.AddLeakageTest(Results);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditLeakageTest(int id)
+        {
+            return View(_inspectionService.GetLeakageTestById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditLeakageTest(string TestDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (TestDate != "")
+            {
+                string[] std = TestDate.Split('/');
+                Results.TestingDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.UpdateLeakageTest(Results);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteLeakageTest(string[] leakageId)
+        {
+            foreach (string id in leakageId)
+            {
+                _inspectionService.DeleteLeakageTest(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
+
+
+
+        #region Liquid Penetrated Test
+
+        public IActionResult LiquidPenetrated()
+        {
+            return View(_inspectionService.GetAllLiquidPenetrated());
+        }
+
+
+        public IActionResult CreateLiquidPenetrated()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateLiquidPenetrated(string TestDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (TestDate != "")
+            {
+                string[] std = TestDate.Split('/');
+                Results.TestingDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.AddLiquidPenetrated(Results);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditLiquidPenetrated(int id)
+        {
+            return View(_inspectionService.GetLiquidPenetratedById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditLiquidPenetrated(string TestDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (TestDate != "")
+            {
+                string[] std = TestDate.Split('/');
+                Results.TestingDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.UpdateLiquidPenetrated(Results);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteLiquidPenetrated(string[] liquidId)
+        {
+            foreach (string id in liquidId)
+            {
+                _inspectionService.DeleteLiquidPenetrated(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
+
+        #region Magnetic Powder test
+
+        public IActionResult MagneticPowder()
+        {
+            return View(_inspectionService.GetAllMagneticPowder());
+        }
+
+        public IActionResult CreateMagneticPowder()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateMagneticPowder(string TestDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (TestDate != "")
+            {
+                string[] std = TestDate.Split('/');
+                Results.TestingDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.AddMagneticPowder(Results);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditMagneticPowder(int id)
+        {
+            return View(_inspectionService.GetMagneticPowderById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditMagneticPowder(string TestDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (TestDate != "")
+            {
+                string[] std = TestDate.Split('/');
+                Results.TestingDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.UpdateMagneticPowder(Results);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteMagneticPowder(string[] magneticId)
+        {
+            foreach (string id in magneticId)
+            {
+                _inspectionService.DeleteMagneticPowder(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
+
+
+        #region Radiographics Test
+
+
+        public IActionResult RadiographicsTest()
+        {
+            return View(_inspectionService.GetAllRadiographics());
+        }
+
+        public IActionResult CreateRadiographicsTest()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateRadiographicsTest(string TestDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (TestDate != "")
+            {
+                string[] std = TestDate.Split('/');
+                Results.TestingDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.AddRadiographics(Results);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditRadiographicsTest(int id)
+        {
+            return View(_inspectionService.GetRadiographicsById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditRadiographicsTest(string TestDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (TestDate != "")
+            {
+                string[] std = TestDate.Split('/');
+                Results.TestingDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.UpdateRadiographics(Results);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteRadiographics(string[] radiograId)
+        {
+            foreach (string id in radiograId)
+            {
+                _inspectionService.DeleteRadiographics(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
+
+        #region Ultrasonic Tests
+
+        public IActionResult UltrasonicTests()
+        {
+            return View(_inspectionService.GetAllUltrasonic());
+        }
+
+        public IActionResult CreateUltrasonicTests()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateUltrasonicTests(string TestDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (TestDate != "")
+            {
+                string[] std = TestDate.Split('/');
+                Results.TestingDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.AddUltrasonic(Results);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditUltrasonicTests(int id)
+        {
+            return View(_inspectionService.GetUltrasonicById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditUltrasonicTests(string TestDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (TestDate != "")
+            {
+                string[] std = TestDate.Split('/');
+                Results.TestingDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.UpdateUltrasonic(Results);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteUltrasonicTests(string[] sonicId)
+        {
+            foreach (string id in sonicId)
+            {
+                _inspectionService.DeleteUltrasonic(Convert.ToInt32(id));
             }
 
             return Json(" Diesel Generators Successfully Deleted.");
