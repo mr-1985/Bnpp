@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.InspectionData.TestResults>
 @{
     ViewData["Title"] = "InspectionResults";
     Layout = null;
@@ -232,44 +232,44 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               @* @foreach (var item in Model)
+                                @foreach (var item in Model)
                                 {
                                     <tr role="row">
                                         <td>
-                                            <input type="checkbox" class="checkBox" value="@item.TypicalId" />
+                                            <input type="checkbox" class="checkBox" value="@item.TestResultsId" />
                                         </td>
                                         <td>
                                             @rowCount
                                         </td>
                                         <td>
-                                            @item.TP
+                                            @item.NO
                                         </td>
                                         <td>
-                                            @item.EquipCode
+                                            @item.TestingDate.ToString("yy/MM/dd")
                                         </td>
                                         <td>
-                                            @item.EquipName
+                                            @item.WeldNo
                                         </td>
                                         <td>
-                                            @item.TestMethod
+                                            @item.WeldSize
                                         </td>
                                         <td>
-                                            @item.TestStandard
+                                            @item.TestScope
                                         </td>
 
-                                        <td> @item.ControlPercent</td>
-                                        <td> @item.Period</td>
-                                        <td> @item.WeldType</td>
-                                        <td> @item.Remarks</td>
+                                        <td> @item.FoundDefectDescription</td>
+                                        <td> @item.QualityAssessment</td>
+                                        <td> @item.NooflogBook</td>
+                                        <td> @item.Notes</td>
                                         <td>
 
-                                            <a class="btn-edit-equip" onclick="Edit(@item.TypicalId)">
+                                            <a class="btn-edit-equip" onclick="Edit(@item.TestResultsId)">
                                                 Edit
                                             </a>
                                         </td>
                                     </tr>
                                     rowCount++;
-                                }*@
+                                }
                             </tbody>
                         </table>
 
@@ -307,7 +307,7 @@
     }
 
     function Edit(id) {
-        $("#newPage").load("/Inspection/EditTypicalPrograms/" + id);
+        $("#newPage").load("/Inspection/EditVisualControl/" + id);
     }
 
 
@@ -331,7 +331,7 @@
 
     function showsubPage1() {
         //$("#newPage").load("/Inspection/WorkingPrograms/");
-        $("#Tabs").load("/Inspection/InspectionPrograms/");
+        $("#Tabs").load("/Inspection/InspectionResults/");
     }
 
     function showsubPage2() {
@@ -355,11 +355,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Inspection/DeletTypicalPrograms",
-            data: { "typicalsId": selectedIDs },
+            url: "/Inspection/DeleteVisualControl",
+            data: { "visualId": selectedIDs },
 
             success: function (response) {
-                $("#Tabs").load("/Inspection/InspectionPrograms/");
+                $("#Tabs").load("/Inspection/InspectionResults/");
             },
             failure: function (response) {
                 alert(response.responseText);

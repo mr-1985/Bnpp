@@ -157,7 +157,7 @@ namespace Bnpp.Web.Controllers
 
         public IActionResult InspectionResults()
         {
-            return View();
+            return View(_inspectionService.GetAllVisualControl());
         }
 
         public IActionResult CraeteVisualControl()
@@ -182,12 +182,47 @@ namespace Bnpp.Web.Controllers
                 );
             }
 
-           
-
-
             _inspectionService.AddVisualControl(Results);
 
             return new JsonResult("success");
+        }
+
+        public IActionResult EditVisualControl(int id)
+        {
+            return View(_inspectionService.GetVisualControlById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditVisualControl(string TestDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (TestDate != "")
+            {
+                string[] std = TestDate.Split('/');
+                Results.TestingDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.UpdateVisualControl(Results);
+
+            return new JsonResult("success");
+        }
+
+
+        public IActionResult DeleteVisualControl(string[] visualId)
+        {
+            foreach (string id in visualId)
+            {
+                _inspectionService.DeleteVisualControl(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
         }
 
         #endregion
@@ -304,6 +339,8 @@ namespace Bnpp.Web.Controllers
 
             return Json(" Diesel Generators Successfully Deleted.");
         }
+
+        
         #endregion
 
     }
