@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Bnpp.DataLayer.Entities.InspectionData.TestResults>
 @{
-    ViewData["Title"] = "LeakageTest";
+    ViewData["Title"] = "MetalThickness";
     Layout = null;
 }
 
@@ -10,7 +10,7 @@
         <img src="/images/loading.gif">
     </div>
 
-    <h1>Leakage Test of Weld</h1>
+    <h1>Metal thickness ultrasonic measurement</h1>
 
     <a class="btn-new-equip" style="cursor:pointer" onclick="Create()">New</a>
     <input type="button" id="delete" class="btn-delete-equip" value="Delete">
@@ -31,25 +31,27 @@
                 <th style="width: 250px">
                     <b>Date</b>
                 </th>
+                <th style="width: 120px">
+                    <b>Unit description</b>
+                </th>
                 <th style="width: 250px">
-                    <b>Code</b>
+                    <b>Point No</b>
                 </th>
-                <th style="width: 120px">
-                    <b>No Weld Joints</b>
-                </th>
-                <th style="width: 120px">
-                    <b>Dimension of Weld</b>
+
+                <th style="width: 250px">
+                    <b>Minimum allowed thickness</b>
                 </th>
 
                 <th style="width: 120px">
-                    <b>	Scope of Testing</b>
+                    <b>	Measured Thickness</b>
                 </th>
-                <th style="width: 120px">
-                    <b>	Defect description</b>
-                </th>
+               
+
                 <th style="width: 120px">
                     <b>	Quality assessment</b>
                 </th>
+
+
                 <th style="width: 120px">
                     <b>	No. of log book</b>
                 </th>
@@ -79,20 +81,21 @@
                         @item.TestingDate.ToString("yy/MM/dd")
                     </td>
                     <td>
-                        @item.Code
+                        @item.UnitDescription
                     </td>
                     <td>
-                        @item.WeldNo
+                        @item.PointNo
                     </td>
                     <td>
-                        @item.DimensionofWeld
-                    </td>
-                    <td>
-                        @item.TestScope
+                        @item.MinimumAllowedThickness
                     </td>
 
-                    <td> @item.FoundDefectDescription</td>
+                    <td>
+                        @item.MeasuredThickness
+                    </td>
+
                     <td> @item.QualityAssessment</td>
+
                     <td> @item.NooflogBook</td>
                     <td> @item.Notes</td>
                     <td>
@@ -134,11 +137,11 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/Inspection/CreateLeakageTest/");
+        $("#newPage").load("/Inspection/CreateMetalThickness/");
     }
 
     function Edit(id) {
-        $("#newPage").load("/Inspection/EditLeakageTest/" + id);
+        $("#newPage").load("/Inspection/EditMetalThickness/" + id);
     }
 
 
@@ -158,6 +161,7 @@
     function showPage4() {
         $("#Tabs").load("/Inspection/InspectionResults/");
     }
+
     //SUB MENU
 
     function showsubPage1() {
@@ -189,7 +193,7 @@
         $("#newPage").load("/Inspection/MetalThickness/");
     }
 
-
+    
 
     $("#checkAll").click(function () {
         $(".checkBox").prop('checked',
@@ -207,11 +211,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/Inspection/DeleteLeakageTest",
-            data: { "leakageId": selectedIDs },
+            url: "/Inspection/DeleteMetalThickness",
+            data: { "thicknessId": selectedIDs },
 
             success: function (response) {
-                $("#newPage").load("/Inspection/LeakageTest/");
+                $("#newPage").load("/Inspection/MetalThickness/");
             },
             failure: function (response) {
                 alert(response.responseText);

@@ -599,6 +599,81 @@ namespace Bnpp.Web.Controllers
 
         #endregion
 
+        #region Metal thickness ultrasonic measurement
+
+
+        public IActionResult MetalThickness()
+        {
+            return View(_inspectionService.GetAllMetalThickness());
+        }
+
+        public IActionResult CreateMetalThickness()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateMetalThickness(string TestDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (TestDate != "")
+            {
+                string[] std = TestDate.Split('/');
+                Results.TestingDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.AddMetalThickness(Results);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditMetalThickness(int id)
+        {
+            return View(_inspectionService.GetMetalThicknessById(id));
+        }
+
+
+        [HttpPost]
+        public IActionResult EditMetalThickness(string TestDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (TestDate != "")
+            {
+                string[] std = TestDate.Split('/');
+                Results.TestingDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.UpdateMetalThickness(Results);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteMetalThickness(string[] thicknessId)
+        {
+            foreach (string id in thicknessId)
+            {
+                _inspectionService.DeleteMetalThickness(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
+
         #region TypicalPrograms
 
         [BindProperty]

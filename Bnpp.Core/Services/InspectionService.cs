@@ -496,6 +496,48 @@ namespace Bnpp.Core.Services
         }
 
 
+
+        #endregion
+
+        #region Metal thickness ultrasonic measurement
+
+
+        public List<TestResults> GetAllMetalThickness()
+        {
+            return _context.TestResults.Where(o => o.TypeId == 7 && o.IsDelete == false).ToList();
+        }
+
+        public int AddMetalThickness(TestResults metal)
+        {
+            metal.CreateDate = DateTime.Now;
+            metal.TypeId = 7;
+            _context.Add(metal);
+            _context.SaveChanges();
+            return metal.TestResultsId;
+        }
+
+        public void UpdateMetalThickness(TestResults metal)
+        {
+            metal.CreateDate = DateTime.Now;
+            metal.TypeId = 7;
+            _context.Update(metal);
+            _context.SaveChanges();
+        }
+
+        public TestResults GetMetalThicknessById(int metalId)
+        {
+            return _context.TestResults.SingleOrDefault(s => s.TestResultsId == metalId && s.TypeId == 7);
+        }
+
+        public void DeleteMetalThickness(int metalId)
+        {
+            var metalic=GetMetalThicknessById(metalId);
+            metalic.IsDelete = true;
+            UpdateMetalThickness(metalic);
+        }
+
+
+
         #endregion
     }
 }

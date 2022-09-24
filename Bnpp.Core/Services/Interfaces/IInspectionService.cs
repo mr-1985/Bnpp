@@ -115,5 +115,15 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteUltrasonic(int ultrasonicId);
 
         #endregion
+
+        #region Metal thickness ultrasonic measurement
+
+        List<TestResults> GetAllMetalThickness();
+        int AddMetalThickness(TestResults metal);
+        void UpdateMetalThickness(TestResults metal);
+        TestResults GetMetalThicknessById(int metalId);
+        void DeleteMetalThickness(int metalId);
+
+        #endregion
     }
 }
