@@ -183,6 +183,9 @@ namespace Bnpp.Core.Services
 
         #endregion
 
+
+      
+
         #region Typical Programs
 
         public List<TypicalPrograms> GetAlTypicalPrograms()
@@ -537,6 +540,322 @@ namespace Bnpp.Core.Services
         }
 
 
+
+
+
+        #endregion
+
+
+
+        #region Visual Inspection Form
+
+
+        public List<InspectionDocument> GetAllVisualInspectionForm()
+        {
+            return _context.InspectionDocuments.Where(o => o.TypeId == 3 && o.IsDelete == false).ToList();
+        }
+
+        public int AddVisualInspectionForm(InspectionDocument document, IFormFile imgVisual)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 3;
+
+            if (imgVisual != null)
+            {
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgVisual.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgVisual.CopyTo(stream);
+                }
+            }
+
+            _context.Add(document);
+            _context.SaveChanges();
+            return document.InspectionId;
+        }
+
+        public InspectionDocument GetVisualInspectionFormById(int visualId)
+        {
+            return _context.InspectionDocuments.SingleOrDefault(s => s.InspectionId == visualId && s.TypeId == 3);
+        }
+
+        public void UpdateVisualInspectionForm(InspectionDocument document, IFormFile imgVisual)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 3;
+
+            if (imgVisual != null)
+            {
+                if (document.InspectionImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgVisual.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgVisual.CopyTo(stream);
+                }
+            }
+
+            _context.Update(document);
+            _context.SaveChanges();
+        }
+
+        public void DeleteVisualInspectionForm(int visualId)
+        {
+            var visul = GetVisualInspectionFormById(visualId);
+            visul.IsDelete = true;
+            _context.Update(visul);
+            _context.SaveChanges();
+        }
+
+
+
+        #endregion
+
+
+
+        #region Leakage Test Form
+
+        public List<InspectionDocument> GetAllLeakageForm()
+        {
+            return _context.InspectionDocuments.Where(o => o.TypeId == 4 && o.IsDelete == false).ToList();
+        }
+
+        public int AddLeakageForm(InspectionDocument document, IFormFile imgLeakage)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 4;
+
+            if (imgLeakage != null)
+            {
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgLeakage.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgLeakage.CopyTo(stream);
+                }
+            }
+
+            _context.Add(document);
+            _context.SaveChanges();
+            return document.InspectionId;
+        }
+
+        public InspectionDocument GetLeakageFormById(int leakageId)
+        {
+            return _context.InspectionDocuments.SingleOrDefault(s => s.InspectionId == leakageId && s.TypeId == 4);
+        }
+
+        public void UpdateLeakageForm(InspectionDocument document, IFormFile imgLeakage)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 4;
+
+            if (imgLeakage != null)
+            {
+                if (document.InspectionImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgLeakage.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgLeakage.CopyTo(stream);
+                }
+            }
+
+            _context.Update(document);
+            _context.SaveChanges();
+        }
+
+        public void DeleteLeakageForm(int leakageId)
+        {
+            var leakag = GetLeakageFormById(leakageId);
+            leakag.IsDelete = true;
+            _context.Update(leakag);
+            _context.SaveChanges();
+        }
+
+
+
+        #endregion
+
+        #region Liquid Penetration Test Form
+
+        public List<InspectionDocument> GetAllPenetrationForm()
+        {
+            return _context.InspectionDocuments.Where(o => o.TypeId == 5 && o.IsDelete == false).ToList();
+        }
+
+        public int AddPenetrationForm(InspectionDocument document, IFormFile imgLiquid)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 5;
+
+            if (imgLiquid != null)
+            {
+                
+
+
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgLiquid.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgLiquid.CopyTo(stream);
+                }
+            }
+
+            _context.Add(document);
+            _context.SaveChanges();
+            return document.InspectionId;
+        }
+
+        public InspectionDocument GetPenetrationFormById(int liquidId)
+        {
+            return _context.InspectionDocuments.SingleOrDefault(s => s.InspectionId == liquidId && s.TypeId == 5);
+        }
+
+        public void UpdatePenetrationForm(InspectionDocument document, IFormFile imgLiquid)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 5;
+
+            if (imgLiquid != null)
+            {
+                if (document.InspectionImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgLiquid.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgLiquid.CopyTo(stream);
+                }
+            }
+
+            _context.Update(document);
+            _context.SaveChanges();
+        }
+
+        public void DeletePenetrationForm(int liquidId)
+        {
+            var penet = GetPenetrationFormById(liquidId);
+            penet.IsDelete = true;
+            _context.Update(penet);
+            _context.SaveChanges();
+        }
+
+
+
+        #endregion
+
+        #region Magnetic Powder Test Form
+
+        public List<InspectionDocument> GetAllMagneticForm()
+        {
+            return _context.InspectionDocuments.Where(o => o.TypeId == 6 && o.IsDelete == false).ToList();
+        }
+
+        public int AddMagneticForm(InspectionDocument document, IFormFile imgMagnetic)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 6;
+
+            if (imgMagnetic != null)
+            {
+
+
+
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgMagnetic.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgMagnetic.CopyTo(stream);
+                }
+            }
+
+            _context.Add(document);
+            _context.SaveChanges();
+            return document.InspectionId;
+        }
+
+        public InspectionDocument GetMagneticFormById(int magneticId)
+        {
+            return _context.InspectionDocuments.SingleOrDefault(s => s.InspectionId == magneticId && s.TypeId == 6);
+        }
+
+        public void UpdateMagneticForm(InspectionDocument document, IFormFile imgMagnetic)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 6;
+
+            if (imgMagnetic != null)
+            {
+
+                if (document.InspectionImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgMagnetic.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgMagnetic.CopyTo(stream);
+                }
+            }
+
+            _context.Update(document);
+            _context.SaveChanges();
+        }
+
+        public void DeleteMagneticForm(int magneticId)
+        {
+            var magnet = GetMagneticFormById(magneticId);
+            magnet.IsDelete = true;
+            _context.Update(magnet);
+            _context.SaveChanges();
+        }
 
         #endregion
     }

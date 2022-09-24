@@ -1,0 +1,211 @@
+﻿@model IEnumerable<Bnpp.DataLayer.Entities.InspectionData.InspectionDocument>
+@{
+    ViewData["Title"] = "VisualForm";
+    Layout = null;
+}
+
+<div>
+
+    <div id="iLoading22" style="display: none;">
+        <img src="/images/loading.gif">
+    </div>
+
+    <h1>Visual Inspection Form</h1>
+
+    <a class="btn-new-equip" style="cursor:pointer" onclick="Create()">New</a>
+    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
+    <br />
+    @{
+        int rowCount = 1;
+    }
+    <table id="myTable" cellpadding="3" cellspacing="0" class="show-table">
+        <thead>
+            <tr role="row">
+                <th>
+                    <input type="checkbox" id="checkAll" />
+                </th>
+                <th></th>
+                <th style="width: 150px">
+                    <b>Form No</b>
+                </th>
+                <th style="width: 250px">
+                    <b>	Form Name</b>
+                </th>
+                <th style="width: 250px">
+                    <b>File Name</b>
+                </th>
+                <th style="width: 120px">
+                    <b>Date</b>
+                </th>
+                <th style="width: 120px">
+                    <b>		Remarks</b>
+                </th>
+                
+
+                <th style="width: 120px">
+                    <b>Actions</b>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr role="row">
+                    <td>
+                        <input type="checkbox" class="checkBox" value="@item.InspectionId" />
+                    </td>
+                    <td>
+                        @rowCount
+                    </td>
+
+                    <td>
+                        @item.FormName
+                    </td>
+                    <td>
+                        @item.FormNo
+                    </td>
+                    <td>
+                        @item.Filename
+                    </td>
+                    <td>
+                        @item.InspectionDate.ToString("yyyy/MM/dd")
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        <a class="btn-edit-equip" onclick="Edit(@item.InspectionId)">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+                rowCount++;
+            }
+        </tbody>
+    </table>
+
+
+    <br>
+    <div style="clear: both;">
+    </div>
+    <br>
+    <br>
+    <iframe style="display: none" id="if_-2_119" src=""></iframe>
+
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.unobtrusive-ajax.min.js"></script>
+
+
+<script src="/js/datatables.min.js"></script>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#myTable").DataTable();
+    });
+</script>
+<script>
+
+    function Create() {
+        $("#newPage").load("/Inspection/CreateVisualForm/");
+    }
+
+    function Edit(id) {
+        $("#newPage").load("/Inspection/EditVisualForm/" + id);
+    }
+
+
+
+    function showPage1() {
+        $("#Tabs").load("/Inspection/InspectionReports/");
+    }
+
+    function showPage2() {
+        $("#Tabs").load("/Inspection/InspectionInstructions/");
+    }
+
+    function showPage3() {
+        $("#Tabs").load("/Inspection/InspectionPrograms/");
+    }
+
+    function showPage4() {
+        $("#Tabs").load("/Inspection/InspectionResults/");
+    }
+    //SUB MENU
+
+    function showsubPage1() {
+        //$("#newPage").load("/Inspection/WorkingPrograms/");
+        $("#Tabs").load("/Inspection/InspectionResults/");
+    }
+
+    function showsubPage2() {
+        $("#newPage").load("/Inspection/LeakageTest/");
+    }
+
+    function showsubPage3() {
+        $("#newPage").load("/Inspection/LiquidPenetrated/");
+    }
+
+    function showsubPage4() {
+        $("#newPage").load("/Inspection/MagneticPowder/");
+    }
+
+    function showsubPage5() {
+        $("#newPage").load("/Inspection/RadiographicsTest/");
+    }
+
+    function showsubPage6() {
+        $("#newPage").load("/Inspection/UltrasonicTests/");
+    }
+
+    function showsubPage7() {
+        $("#newPage").load("/Inspection/MetalThickness/");
+    }
+
+    function showsubPage8() {
+        $("#newPage").load("/Inspection/VisualForm/");
+    }
+
+    function showsubPage9() {
+        $("#newPage").load("/Inspection/LeakageForm/");
+    }
+
+    $("#checkAll").click(function () {
+        $(".checkBox").prop('checked',
+            $(this).prop('checked'));
+    });
+
+    $("#delete").click(function () {
+        var selectedIDs = new Array();
+
+        $('input:checkbox.checkBox').each(function () {
+            if ($(this).prop('checked')) {
+                selectedIDs.push($(this).val());
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/Inspection/DeleteVisualForm",
+            data: { "visualformId": selectedIDs },
+
+            success: function (response) {
+                $("#newPage").load("/Inspection/VisualForm/");
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+
+        });
+
+    });
+
+
+</script>

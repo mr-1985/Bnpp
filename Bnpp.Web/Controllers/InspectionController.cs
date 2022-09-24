@@ -7,6 +7,7 @@ using Bnpp.DataLayer.Entities.InspectionData;
 using Bnpp.DataLayer.Entities.Maintenance;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Bnpp.Web.Controllers
 {
@@ -83,6 +84,307 @@ namespace Bnpp.Web.Controllers
             foreach (string id in rportId)
             {
                 _inspectionService.DeleteInspectionReports(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
+
+
+        #region Visual Inspection Form
+
+
+        public IActionResult VisualForm()
+        {
+            return View(_inspectionService.GetAllVisualInspectionForm());
+        }
+
+
+        public IActionResult CreateVisualForm()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateVisualForm(IFormFile fileVisual, string VisualDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (VisualDate != "")
+            {
+                string[] std = VisualDate.Split('/');
+                Document.InspectionDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.AddVisualInspectionForm(Document, fileVisual);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditVisualForm(int id)
+        {
+            return View(_inspectionService.GetVisualInspectionFormById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditVisualForm(IFormFile fileVisual, string VisualDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (VisualDate != "")
+            {
+                string[] std = VisualDate.Split('/');
+                Document.InspectionDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.UpdateVisualInspectionForm(Document, fileVisual);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteVisualForm(string[] visualformId)
+        {
+            foreach (string id in visualformId)
+            {
+                _inspectionService.DeleteVisualInspectionForm(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+
+        #endregion
+
+
+        #region Leakage Test Form
+
+        public IActionResult LeakageForm()
+        {
+            return View(_inspectionService.GetAllLeakageForm());
+        }
+
+        public IActionResult CreateLeakageForm()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateLeakageForm(IFormFile fileLeakage, string VisualDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (VisualDate != "")
+            {
+                string[] std = VisualDate.Split('/');
+                Document.InspectionDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.AddLeakageForm(Document, fileLeakage);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditLeakageForm(int id)
+        {
+            return View(_inspectionService.GetLeakageFormById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditLeakageForm(IFormFile fileLeakage, string VisualDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (VisualDate != "")
+            {
+                string[] std = VisualDate.Split('/');
+                Document.InspectionDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.UpdateLeakageForm(Document, fileLeakage);
+
+            return new JsonResult("success");
+        }
+
+
+        public IActionResult DeleteLeakageForm(string[] lekageId)
+        {
+            foreach (string id in lekageId)
+            {
+                _inspectionService.DeleteLeakageForm(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+        #endregion
+
+
+        #region Liquid Penetration Test Form
+
+        public IActionResult PenetrationForm()
+        {
+            return View(_inspectionService.GetAllPenetrationForm());
+        }
+
+        
+
+        public IActionResult CreatePenetrationForm()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreatePenetrationForm(IFormFile fileLiquid, string VisualDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (VisualDate != "")
+            {
+                string[] std = VisualDate.Split('/');
+                Document.InspectionDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.AddPenetrationForm(Document, fileLiquid);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditPenetrationForm(int id)
+        {
+            return View(_inspectionService.GetPenetrationFormById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditPenetrationForm(IFormFile fileLiquid, string VisualDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (VisualDate != "")
+            {
+                string[] std = VisualDate.Split('/');
+                Document.InspectionDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.UpdatePenetrationForm(Document, fileLiquid);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeletePenetrationForm(string[] liquidId)
+        {
+            foreach (string id in liquidId)
+            {
+                _inspectionService.DeletePenetrationForm(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
+
+        #region Magnetic Powder Test Form
+
+        public IActionResult MagneticForm()
+        {
+            return View(_inspectionService.GetAllMagneticForm());
+        }
+
+        public IActionResult CreateMagneticForm()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateMagneticForm(IFormFile fileMagnetic, string VisualDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (VisualDate != "")
+            {
+                string[] std = VisualDate.Split('/');
+                Document.InspectionDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.AddMagneticForm(Document, fileMagnetic);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditMagneticForm(int id)
+        {
+            return View(_inspectionService.GetMagneticFormById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditMagneticForm(IFormFile fileMagnetic, string VisualDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (VisualDate != "")
+            {
+                string[] std = VisualDate.Split('/');
+                Document.InspectionDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.UpdateMagneticForm(Document, fileMagnetic);
+
+            return new JsonResult("success");
+        }
+
+
+        public IActionResult DeleteMagneticForm(string[] magnetId)
+        {
+            foreach (string id in magnetId)
+            {
+                _inspectionService.DeleteMagneticForm(Convert.ToInt32(id));
             }
 
             return Json(" Diesel Generators Successfully Deleted.");

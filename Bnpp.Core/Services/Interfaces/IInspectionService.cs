@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Bnpp.Core.Services.Interfaces
 {
@@ -20,6 +21,52 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteInspectionReports(int reportId);
 
         #endregion
+
+
+
+        #region Visual Inspection Form
+
+
+        List<InspectionDocument> GetAllVisualInspectionForm();
+        int AddVisualInspectionForm(InspectionDocument document, IFormFile imgVisual);
+        InspectionDocument GetVisualInspectionFormById(int visualId);
+        void UpdateVisualInspectionForm(InspectionDocument document, IFormFile imgVisual);
+        void DeleteVisualInspectionForm(int visualId);
+
+
+
+        #endregion
+
+        #region Leakage Test Form
+
+        List<InspectionDocument> GetAllLeakageForm();
+        int AddLeakageForm(InspectionDocument document, IFormFile imgLeakage);
+        InspectionDocument GetLeakageFormById(int leakageId);
+        void UpdateLeakageForm(InspectionDocument document, IFormFile imgLeakage);
+        void DeleteLeakageForm(int leakageId);
+
+        #endregion
+
+        #region Liquid Penetration Test Form
+
+        List<InspectionDocument> GetAllPenetrationForm();
+        int AddPenetrationForm(InspectionDocument document, IFormFile imgLiquid);
+        InspectionDocument GetPenetrationFormById(int liquidId);
+        void UpdatePenetrationForm(InspectionDocument document, IFormFile imgLiquid);
+        void DeletePenetrationForm(int liquidId);
+
+        #endregion
+
+        #region Magnetic Powder Test Form
+
+        List<InspectionDocument> GetAllMagneticForm();
+        int AddMagneticForm(InspectionDocument document, IFormFile imgMagnetic);
+        InspectionDocument GetMagneticFormById(int magneticId);
+        void UpdateMagneticForm(InspectionDocument document, IFormFile imgMagnetic);
+        void DeleteMagneticForm(int magneticId);
+
+        #endregion
+
 
         #region Inspection Instructions
 
@@ -52,6 +99,11 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteWorkingPrograms(int programsId);
 
         #endregion
+
+      
+
+
+
 
         #region Visual Control
 
