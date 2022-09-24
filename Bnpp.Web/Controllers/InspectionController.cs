@@ -392,6 +392,230 @@ namespace Bnpp.Web.Controllers
 
         #endregion
 
+        #region Radiographics Test Form
+
+        public IActionResult RadiographicsForm()
+        {
+            return View(_inspectionService.GetAllRadiographicsForm());
+        }
+
+        public IActionResult CreateRadiographicsForm()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateRadiographicsForm(IFormFile fileRadiograph, string VisualDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (VisualDate != "")
+            {
+                string[] std = VisualDate.Split('/');
+                Document.InspectionDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.AddRadiographicsForm(Document, fileRadiograph);
+
+            return new JsonResult("success");
+        }
+
+        
+
+        public IActionResult EditRadiographicsForm(int id)
+        {
+            return View(_inspectionService.GetRadiographicsFormById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditRadiographicsForm(IFormFile fileRadiograph, string VisualDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (VisualDate != "")
+            {
+                string[] std = VisualDate.Split('/');
+                Document.InspectionDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.UpdateRadiographicsForm(Document, fileRadiograph);
+
+            return new JsonResult("success");
+        }
+
+        
+        public IActionResult DeleteRadiographicsForm(string[] rdioId)
+        {
+            foreach (string id in rdioId)
+            {
+                _inspectionService.DeleteRadiographicsForm(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
+
+        #region Ultrasonic Test Form
+
+        public IActionResult UltrasonicForm()
+        {
+            return View(_inspectionService.GetAllUltrasonicForm());
+        }
+
+        public IActionResult CraeteUltrasonicForm()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CraeteUltrasonicForm(IFormFile fileSonic, string VisualDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (VisualDate != "")
+            {
+                string[] std = VisualDate.Split('/');
+                Document.InspectionDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.AddUltrasonicForm(Document, fileSonic);
+
+            return new JsonResult("success");
+        }
+        
+        public IActionResult EditUltrasonicForm(int id)
+        {
+            return View(_inspectionService.GetUltrasonicFormById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditUltrasonicForm(IFormFile fileSonic, string VisualDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (VisualDate != "")
+            {
+                string[] std = VisualDate.Split('/');
+                Document.InspectionDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.UpdateUltrasonicForm(Document, fileSonic);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteUltrasonicForm(string[] sonicId)
+        {
+            foreach (string id in sonicId)
+            {
+                _inspectionService.DeleteUltrasonicForm(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
+
+        #region Metal thickness ultrasonic Test Form
+
+        public IActionResult MetalForm()
+        {
+            return View(_inspectionService.GetAllMetalForm());
+        }
+
+        public IActionResult CreateMetalForm()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateMetalForm(IFormFile fileMetal, string VisualDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (VisualDate != "")
+            {
+                string[] std = VisualDate.Split('/');
+                Document.InspectionDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.AddMetalForm(Document, fileMetal);
+
+            return new JsonResult("success");
+        }
+
+        
+
+        public IActionResult EditMetalForm(int id)
+        {
+            return View(_inspectionService.GetMetalFormById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditMetalForm(IFormFile fileMetal, string VisualDate = "")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            if (VisualDate != "")
+            {
+                string[] std = VisualDate.Split('/');
+                Document.InspectionDate = new DateTime(int.Parse(std[2]),
+                    int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    new GregorianCalendar()
+                );
+            }
+
+            _inspectionService.UpdateMetalForm(Document, fileMetal);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteMetalForm(string[] mtalId)
+        {
+            foreach (string id in mtalId)
+            {
+                _inspectionService.DeleteMetalForm(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+        #endregion
+
+
         #region Inspection Instructions
 
         public IActionResult InspectionInstructions()
@@ -604,8 +828,6 @@ namespace Bnpp.Web.Controllers
 
         #endregion
 
-
-
         #region Liquid Penetrated Test
 
         public IActionResult LiquidPenetrated()
@@ -752,7 +974,6 @@ namespace Bnpp.Web.Controllers
         }
 
         #endregion
-
 
         #region Radiographics Test
 

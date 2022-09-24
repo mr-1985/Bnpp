@@ -24,8 +24,6 @@ namespace Bnpp.Core.Services
         }
 
        
-
-
         #region Inspection Document
         public int AddInspectionReports(InspectionDocument document, IFormFile imgReports)
         {
@@ -183,9 +181,6 @@ namespace Bnpp.Core.Services
 
         #endregion
 
-
-      
-
         #region Typical Programs
 
         public List<TypicalPrograms> GetAlTypicalPrograms()
@@ -302,7 +297,6 @@ namespace Bnpp.Core.Services
 
         #endregion
 
-
         #region  Leakage Test
 
         public List<TestResults> GetAllLeakageTest()
@@ -342,7 +336,6 @@ namespace Bnpp.Core.Services
 
 
         #endregion
-
 
         #region Liquid Penetrated Test
 
@@ -421,7 +414,6 @@ namespace Bnpp.Core.Services
         }
 
         #endregion
-
 
         #region Radiographics Test
 
@@ -545,8 +537,6 @@ namespace Bnpp.Core.Services
 
         #endregion
 
-
-
         #region Visual Inspection Form
 
 
@@ -623,8 +613,6 @@ namespace Bnpp.Core.Services
 
 
         #endregion
-
-
 
         #region Leakage Test Form
 
@@ -856,6 +844,244 @@ namespace Bnpp.Core.Services
             _context.Update(magnet);
             _context.SaveChanges();
         }
+
+
+
+        #endregion
+
+        #region Radiographics Test Form
+
+        public List<InspectionDocument> GetAllRadiographicsForm()
+        {
+            return _context.InspectionDocuments.Where(o => o.TypeId == 7 && o.IsDelete == false).ToList();
+        }
+
+        public int AddRadiographicsForm(InspectionDocument document, IFormFile imgRadiographics)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 7;
+
+            if (imgRadiographics != null)
+            {
+
+
+
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgRadiographics.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgRadiographics.CopyTo(stream);
+                }
+            }
+
+            _context.Add(document);
+            _context.SaveChanges();
+            return document.InspectionId;
+        }
+
+        public InspectionDocument GetRadiographicsFormById(int radiographicsId)
+        {
+            return _context.InspectionDocuments.SingleOrDefault(s => s.InspectionId == radiographicsId && s.TypeId == 7);
+        }
+
+        public void UpdateRadiographicsForm(InspectionDocument document, IFormFile imgRadiographics)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 7;
+
+            if (imgRadiographics != null)
+            {
+                if (document.InspectionImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgRadiographics.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgRadiographics.CopyTo(stream);
+                }
+            }
+
+            _context.Update(document);
+            _context.SaveChanges();
+        }
+
+        public void DeleteRadiographicsForm(int radiographicsId)
+        {
+            var graphic=GetRadiographicsFormById(radiographicsId);
+            graphic.IsDelete = true;
+            _context.Update(graphic);
+            _context.SaveChanges();
+        }
+
+
+
+        #endregion
+
+        #region Ultrasonic Test Form
+
+        public List<InspectionDocument> GetAllUltrasonicForm()
+        {
+            return _context.InspectionDocuments.Where(o => o.TypeId == 8 && o.IsDelete == false).ToList();
+        }
+
+        public int AddUltrasonicForm(InspectionDocument document, IFormFile imgUltrasonic)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 8;
+
+            if (imgUltrasonic != null)
+            {
+
+
+
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgUltrasonic.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgUltrasonic.CopyTo(stream);
+                }
+            }
+
+            _context.Add(document);
+            _context.SaveChanges();
+            return document.InspectionId;
+        }
+
+        public InspectionDocument GetUltrasonicFormById(int ultrasonicId)
+        {
+            return _context.InspectionDocuments.SingleOrDefault(s => s.InspectionId == ultrasonicId && s.TypeId == 8);
+        }
+
+        public void UpdateUltrasonicForm(InspectionDocument document, IFormFile imgUltrasonic)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 8;
+
+            if (imgUltrasonic != null)
+            {
+                if (document.InspectionImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgUltrasonic.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgUltrasonic.CopyTo(stream);
+                }
+            }
+
+            _context.Update(document);
+            _context.SaveChanges();
+        }
+
+        public void DeleteUltrasonicForm(int ultrasonicId)
+        {
+            var sonic=GetUltrasonicFormById(ultrasonicId);
+            sonic.IsDelete = true;
+            _context.Update(sonic);
+            _context.SaveChanges();
+        }
+
+
+        #endregion
+
+        #region Metal thickness ultrasonic Test Form
+
+        public List<InspectionDocument> GetAllMetalForm()
+        {
+            return _context.InspectionDocuments.Where(o => o.TypeId == 9 && o.IsDelete == false).ToList();
+        }
+
+        public int AddMetalForm(InspectionDocument document, IFormFile imgMetal)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 9;
+
+            if (imgMetal != null)
+            {
+
+
+
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgMetal.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgMetal.CopyTo(stream);
+                }
+            }
+
+            _context.Add(document);
+            _context.SaveChanges();
+            return document.InspectionId;
+        }
+
+        public InspectionDocument GetMetalFormById(int metalId)
+        {
+            return _context.InspectionDocuments.SingleOrDefault(s => s.InspectionId == metalId && s.TypeId == 9);
+        }
+
+        public void UpdateMetalForm(InspectionDocument document, IFormFile imgMetal)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 9;
+
+            if (imgMetal != null)
+            {
+                if (document.InspectionImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgMetal.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgMetal.CopyTo(stream);
+                }
+            }
+
+            _context.Update(document);
+            _context.SaveChanges();
+        }
+
+        public void DeleteMetalForm(int metalId)
+        {
+            var mtal=GetMetalFormById(metalId);
+            mtal.IsDelete=true;
+            _context.Update(mtal);
+            _context.SaveChanges();
+        }
+
+
 
         #endregion
     }

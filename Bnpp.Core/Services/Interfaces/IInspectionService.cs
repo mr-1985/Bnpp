@@ -22,8 +22,6 @@ namespace Bnpp.Core.Services.Interfaces
 
         #endregion
 
-
-
         #region Visual Inspection Form
 
 
@@ -68,6 +66,37 @@ namespace Bnpp.Core.Services.Interfaces
         #endregion
 
 
+        #region Radiographics Test Form
+
+        List<InspectionDocument> GetAllRadiographicsForm();
+        int AddRadiographicsForm(InspectionDocument document, IFormFile imgRadiographics);
+        InspectionDocument GetRadiographicsFormById(int radiographicsId);
+        void UpdateRadiographicsForm(InspectionDocument document, IFormFile imgRadiographics);
+        void DeleteRadiographicsForm(int radiographicsId);
+
+        #endregion
+
+        #region Ultrasonic Test Form
+
+        List<InspectionDocument> GetAllUltrasonicForm();
+        int AddUltrasonicForm(InspectionDocument document, IFormFile imgUltrasonic);
+        InspectionDocument GetUltrasonicFormById(int ultrasonicId);
+        void UpdateUltrasonicForm(InspectionDocument document, IFormFile imgUltrasonic);
+        void DeleteUltrasonicForm(int ultrasonicId);
+
+
+        #endregion
+
+        #region Metal thickness ultrasonic Test Form
+
+        List<InspectionDocument> GetAllMetalForm();
+        int AddMetalForm(InspectionDocument document, IFormFile imgMetal);
+        InspectionDocument GetMetalFormById(int metalId);
+        void UpdateMetalForm(InspectionDocument document, IFormFile imgMetal);
+        void DeleteMetalForm(int metalId);
+
+        #endregion
+
         #region Inspection Instructions
 
         List<InspectionDocument> GetAllInspectionInstructions();
@@ -99,11 +128,6 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteWorkingPrograms(int programsId);
 
         #endregion
-
-      
-
-
-
 
         #region Visual Control
 
