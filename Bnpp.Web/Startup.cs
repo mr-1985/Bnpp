@@ -76,6 +76,7 @@ namespace Bnpp.Web
             services.AddTransient<IEventService, EventService>();
             services.AddTransient<IMaintenanceService,MaintenanceService>();
             services.AddTransient<IInspectionService,InspectionService>();
+            services.AddTransient<IChangeService,ChangeService>();
 
             
             #endregion

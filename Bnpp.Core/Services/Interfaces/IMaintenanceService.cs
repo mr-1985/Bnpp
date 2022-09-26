@@ -65,5 +65,16 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteDefectionReports(int reportsId);
 
         #endregion
+
+        #region Maintenance Programs
+
+        List<MaintenancePrograms> GetAllMaintenancePrograms();
+        int AddMaintenancePrograms(MaintenancePrograms programs);
+        MaintenancePrograms GetMaintenanceProgramsById(int programsId);
+
+        void UpdateMaintenancePrograms(MaintenancePrograms programs);
+        void DeleteMaintenancePrograms(int programsId);
+
+        #endregion
     }
 }

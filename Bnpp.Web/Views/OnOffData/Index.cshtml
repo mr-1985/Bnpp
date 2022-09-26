@@ -111,8 +111,8 @@
                     </div>
 
 
-                    <a class="btn-new-equip" onclick="Create()">New</a>
-                    <input type="button" @*id="delete"*@ class="btn-delete-equip" value="Delete">
+                    <a class="btn-new-equip" style="cursor:pointer" onclick="Create()">New</a>
+                    <input type="button" id="delete" class="btn-delete-equip" value="Delete">
                     <br />
                     @{
                         int rowCount = 1;
@@ -127,9 +127,7 @@
                                 <th style="width: 150px">
                                     <b>Date of change state</b>
                                 </th>
-                                <th style="width: 250px">
-                                    <b>Time of change state</b>
-                                </th>
+                                
                                 <th style="width: 120px">
                                     <b>Start up</b>
                                 </th>
@@ -209,11 +207,11 @@
 <script>
 
     function Create() {
-        $("#newPage").load("/ManagementDocuments/CreateNormalOperations/");
+        $("#newPage").load("/OnOffData/CreateOnOffData/");
     }
 
     function Edit(id) {
-        $("#newPage").load("/ManagementDocuments/EditNormalOperations/"+id);
+        $("#newPage").load("/OnOffData/EditNormalOperations/" + id);
     }
 
 

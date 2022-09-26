@@ -11,6 +11,7 @@ using Bnpp.DataLayer.Entities.BasicData;
 using Bnpp.DataLayer.Entities.Electrical;
 using Bnpp.DataLayer.Entities.InspectionData;
 using Bnpp.DataLayer.Entities.Maintenance;
+using Bnpp.DataLayer.Entities.ONOFF;
 using Bnpp.DataLayer.Entities.OperationalDatas;
 using Microsoft.EntityFrameworkCore;
 
@@ -107,6 +108,7 @@ namespace Bnpp.DataLayer.Context
         public DbSet<Measurements> Measurements { get; set; }
         public DbSet<MaintenanceForm> MaintenanceForms { get; set; }
         public DbSet<DefectionReports> DefectionReports { get; set; }
+        public DbSet<MaintenancePrograms> MaintenancePrograms { get; set; }
         #endregion
 
         #region Inspectionresult
@@ -117,6 +119,14 @@ namespace Bnpp.DataLayer.Context
         public DbSet<WorkingPrograms> WorkingPrograms { get; set; }
         public DbSet<TestResults> TestResults { get; set; }
         public DbSet<TestResultsType> TestResultsType { get; set; }
+
+        #endregion
+
+        #region OnOff
+
+        public DbSet<ChangeState> ChangeState { get; set; }
+        public DbSet<States> State { get; set; }
+        public DbSet<ChangingInState> ChangingInState { get; set; }
 
         #endregion
     }

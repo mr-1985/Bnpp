@@ -23,10 +23,7 @@ namespace Bnpp.Web.Controllers
             return View();
         }
 
-        public IActionResult MaintenancePrograms()
-        {
-            return View();
-        }
+       
 
 
         #region List of Defections
@@ -265,6 +262,64 @@ namespace Bnpp.Web.Controllers
 
         #endregion
 
+
+        #region Maintenance Programs
+
+        [BindProperty]
+        public MaintenancePrograms Programs { get; set; }
+
+        public IActionResult MaintenancePrograms()
+        {
+            return View(_maintenanceService.GetAllMaintenancePrograms());
+        }
+
+        public IActionResult CreateMaintenancePrograms()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateMaintenancePrograms(MaintenancePrograms parts)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _maintenanceService.AddMaintenancePrograms(Programs);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditMaintenancePrograms(int id)
+        {
+            return View(_maintenanceService.GetMaintenanceProgramsById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditMaintenancePrograms()
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            _maintenanceService.UpdateMaintenancePrograms(Programs);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteMaintenancePrograms(string[] programId)
+        {
+            foreach (string id in programId)
+            {
+                _maintenanceService.DeleteMaintenancePrograms(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
 
         #region  Measurements
 

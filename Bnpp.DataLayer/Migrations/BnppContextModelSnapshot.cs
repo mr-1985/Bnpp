@@ -1905,6 +1905,40 @@ namespace Bnpp.DataLayer.Migrations
                     b.ToTable("MaintenanceForms");
                 });
 
+            modelBuilder.Entity("Bnpp.DataLayer.Entities.Maintenance.MaintenancePrograms", b =>
+                {
+                    b.Property<int>("ProgramsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IR")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MaintenanceType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OVH")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RR")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProgramsId");
+
+                    b.ToTable("MaintenancePrograms");
+                });
+
             modelBuilder.Entity("Bnpp.DataLayer.Entities.Maintenance.Measurements", b =>
                 {
                     b.Property<int>("MeasurementId")
@@ -2028,6 +2062,63 @@ namespace Bnpp.DataLayer.Migrations
                     b.HasKey("MechanicalId");
 
                     b.ToTable("MechanicalEquipments");
+                });
+
+            modelBuilder.Entity("Bnpp.DataLayer.Entities.ONOFF.ChangeState", b =>
+                {
+                    b.Property<int>("ChangeStateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("ChangeStateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ChangeStateId");
+
+                    b.ToTable("ChangeState");
+                });
+
+            modelBuilder.Entity("Bnpp.DataLayer.Entities.ONOFF.StateOfChangeState", b =>
+                {
+                    b.Property<int>("SGu_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("eeeeee")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SGu_Id");
+
+                    b.ToTable("StateOfChangeState");
+                });
+
+            modelBuilder.Entity("Bnpp.DataLayer.Entities.ONOFF.States", b =>
+                {
+                    b.Property<int>("StateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("StateTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StateId");
+
+                    b.ToTable("State");
                 });
 
             modelBuilder.Entity("Bnpp.DataLayer.Entities.Occurance", b =>

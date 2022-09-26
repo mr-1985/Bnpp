@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Bnpp.Core.Services
 {
-    public class MaintenanceService:IMaintenanceService
+    public class MaintenanceService : IMaintenanceService
     {
         private BnppContext _context;
 
@@ -30,41 +30,41 @@ namespace Bnpp.Core.Services
 
         public int AddDefectList(DefectList defect)
         {
-            defect.CreateDate=DateTime.Now;
+            defect.CreateDate = DateTime.Now;
             _context.Add(defect);
             _context.SaveChanges();
             return defect.DefectListId;
         }
 
-       
+
 
         public void DeleteDefectList(int defectId)
         {
-            var dlist=GetDefectListById(defectId);
+            var dlist = GetDefectListById(defectId);
             dlist.IsDelete = true;
             _context.Update(dlist);
             _context.SaveChanges();
         }
 
-       
+
 
         public List<DefectList> GetAllDefectList()
         {
-            return _context.DefectList.Where(d=>d.IsDelete==false).ToList();
+            return _context.DefectList.Where(d => d.IsDelete == false).ToList();
         }
 
-       
+
 
         public DefectList GetDefectListById(int defectId)
         {
             return _context.DefectList.Find(defectId);
         }
 
-        
+
 
         public void UpdateDefectList(DefectList defect)
         {
-            defect.CreateDate= DateTime.Now;
+            defect.CreateDate = DateTime.Now;
             _context.Update(defect);
             _context.SaveChanges();
         }
@@ -91,7 +91,7 @@ namespace Bnpp.Core.Services
 
         public void UpdateSpareParts(SpareParts spare)
         {
-            spare.CreateDate=DateTime.Now;
+            spare.CreateDate = DateTime.Now;
             _context.Update(spare);
             _context.SaveChanges();
         }
@@ -103,7 +103,7 @@ namespace Bnpp.Core.Services
 
         public void DeleteSpareParts(int spareId)
         {
-            var splist=GetSparePartsById(spareId);
+            var splist = GetSparePartsById(spareId);
             splist.IsDelete = true;
             UpdateSpareParts(splist);
 
@@ -133,14 +133,14 @@ namespace Bnpp.Core.Services
 
         public void UpdateMeasurements(Measurements measure)
         {
-            measure.CreateDate= DateTime.Now;
+            measure.CreateDate = DateTime.Now;
             _context.Update(measure);
             _context.SaveChanges();
         }
 
         public void DeleteMeasurements(int measureId)
         {
-            var mesure=GetMeasurementsById(measureId);
+            var mesure = GetMeasurementsById(measureId);
             mesure.IsDelete = true;
             UpdateMeasurements(mesure);
         }
@@ -153,29 +153,29 @@ namespace Bnpp.Core.Services
 
         public List<MaintenanceForm> GetAllMaintenanceForm()
         {
-            return _context.MaintenanceForms.Where(f=>f.IsDelete== false).ToList(); 
+            return _context.MaintenanceForms.Where(f => f.IsDelete == false).ToList();
         }
 
         public int AddMaintenanceForm(MaintenanceForm forms, IFormFile imgForms)
         {
-            
-                forms.CreateDate = DateTime.Now;
 
-                if (imgForms != null)
+            forms.CreateDate = DateTime.Now;
+
+            if (imgForms != null)
+            {
+                forms.MaintenanceFormImage = Guid.NewGuid() + Path.GetExtension(imgForms.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", forms.MaintenanceFormImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
-                    forms.MaintenanceFormImage = Guid.NewGuid() + Path.GetExtension(imgForms.FileName);
-                    string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", forms.MaintenanceFormImage);
-
-                    using (var stream = new FileStream(imagePath, FileMode.Create))
-                    {
-                        imgForms.CopyTo(stream);
-                    }
+                    imgForms.CopyTo(stream);
                 }
+            }
 
-                _context.Add(forms);
-                _context.SaveChanges();
-                return forms.MaintenanceFormId;
-            
+            _context.Add(forms);
+            _context.SaveChanges();
+            return forms.MaintenanceFormId;
+
         }
 
         public MaintenanceForm GetMaintenanceFormById(int formsId)
@@ -291,10 +291,48 @@ namespace Bnpp.Core.Services
 
         public void DeleteDefectionReports(int reportsId)
         {
-            var rports=GetDefectionReportsById(reportsId);
+            var rports = GetDefectionReportsById(reportsId);
             rports.IsDelete = true;
             _context.Update(rports);
             _context.SaveChanges();
+        }
+
+
+
+        #endregion
+
+        #region Maintenance Programs
+
+        public List<MaintenancePrograms> GetAllMaintenancePrograms()
+        {
+            return _context.MaintenancePrograms.Where(m => m.IsDelete == false).ToList();
+        }
+
+        public int AddMaintenancePrograms(MaintenancePrograms programs)
+        {
+            programs.CreateDate = DateTime.Now;
+            _context.Add(programs);
+            _context.SaveChanges();
+            return programs.ProgramsId;
+        }
+
+        public MaintenancePrograms GetMaintenanceProgramsById(int programsId)
+        {
+            return _context.MaintenancePrograms.Find(programsId);
+        }
+
+        public void UpdateMaintenancePrograms(MaintenancePrograms programs)
+        {
+            programs.CreateDate= DateTime.Now;
+            _context.Update(programs);
+            _context.SaveChanges(true);
+        }
+
+        public void DeleteMaintenancePrograms(int programsId)
+        {
+            var pogram=GetMaintenanceProgramsById(programsId);
+            pogram.IsDelete = true;
+            UpdateMaintenancePrograms(pogram);
         }
 
         #endregion
