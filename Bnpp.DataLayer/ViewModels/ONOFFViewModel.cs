@@ -4,23 +4,19 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
-namespace Bnpp.DataLayer.Entities.ONOFF
+namespace Bnpp.DataLayer.ViewModels
 {
-    public class ChangeState
-    {
-        [Key]
+	public class ONOFFViewModel
+	{
         public int ChangeStateId { get; set; }
-
-
-
         public string Description { get; set; }
 
         public DateTime ChangeStateDate { get; set; }
 
-        public bool IsDelete { get; set; }
+        public List<int> ChangingInStates { get; set; }
         public DateTime CreateDate { get; set; }
 
-        public List<ChangingInState> ChangingInState { get; set; }
     }
 }

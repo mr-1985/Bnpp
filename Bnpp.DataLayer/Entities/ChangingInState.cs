@@ -22,9 +22,9 @@ namespace Bnpp.DataLayer.Entities
 
 
         [ForeignKey("StateId")]
-        public List<States> States { get; set; }
+        public States States { get; set; }
 
         [ForeignKey("ChangeStateId")]
-        public List<ChangeState> ChangeState { get; set; }
+        public ChangeState ChangeState { get; set; }
     }
 }

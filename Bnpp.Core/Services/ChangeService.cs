@@ -1,7 +1,10 @@
 ﻿using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Context;
 using Bnpp.DataLayer.Entities;
+using Bnpp.DataLayer.Entities.AgeingDocuments;
 using Bnpp.DataLayer.Entities.ONOFF;
+using Bnpp.DataLayer.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +25,7 @@ namespace Bnpp.Core.Services
 
         public int AddChangeState(ChangeState change)
         {
-            change.CreateDate=DateTime.Now;
+            change.CreateDate = DateTime.Now;
             _context.Add(change);
             _context.SaveChanges();
             return change.ChangeStateId;
@@ -30,47 +33,84 @@ namespace Bnpp.Core.Services
 
         public void DeleteChangeState(int changeId)
         {
-            throw new NotImplementedException();
+            var changing=_context.ChangeState.Find(changeId);
+            changing.IsDelete = true;
+            _context.Update(changing);
+            _context.SaveChanges();
         }
 
-        public List<ChangeState> GetAllGeneralData()
+        public List<ONOFFViewModel> GetAllChangeState()
         {
-            return _context.ChangeState.Where(c=>c.IsDelete==false).ToList();
+
+
+            return _context.ChangeState.Where(c => c.IsDelete == false).
+                Include(c => c.ChangingInState).ThenInclude(s => s.States)
+                .Select(c => new ONOFFViewModel()
+                {
+                    ChangeStateId=c.ChangeStateId,
+                    CreateDate = c.CreateDate,
+                    ChangeStateDate = c.ChangeStateDate,
+                    Description = c.Description,
+                    ChangingInStates = c.ChangingInState.Select(s => s.StateId).ToList()
+                }).ToList();
         }
 
-        
 
-        public ChangeState GetChangeStateById(int changeId)
+
+        public ONOFFViewModel GetChangeStateById(int changeId)
         {
-            throw new NotImplementedException();
+
+            return _context.ChangeState.Where(u => u.ChangeStateId == changeId).Include(u => u.ChangingInState)
+                .Select(u => new ONOFFViewModel()
+                {
+                    ChangeStateId=u.ChangeStateId,
+                    CreateDate = u.CreateDate,
+                    ChangeStateDate = u.ChangeStateDate,
+                    Description = u.Description,
+                    ChangingInStates = u.ChangingInState.Select(s => s.StateId).ToList()
+                }).Single();
         }
 
         public void UpdateChangeState(ChangeState change)
         {
-            throw new NotImplementedException();
+            change.CreateDate=DateTime.Now;
+            _context.Update(change);
+            _context.SaveChanges();
         }
 
 
         public List<States> GetAllStates()
         {
-           return _context.State.Where(c=>c.IsDelete==false).ToList();
+            return _context.State.Where(c => c.IsDelete == false).ToList();
         }
 
-        //public void AddStateToStaeChanges(int chngestateId, List<int> states)
-        //{
-        //    foreach (var p in states)
-        //    {
-               
-        //        _context.StateOfChangeState.Add(new StateOfChangeState()
-        //        {
-        //            StateId = p,
-        //            ChangeStateId = chngestateId
-        //        });
-        //    }
+        public void AddStateToStaeChanges(int chngestateId, List<int> states)
+        {
+            foreach (var p in states)
+            {
 
-            
+                _context.ChangingInState.Add(new ChangingInState()
+                {
+                    StateId = p,
+                    ChangeStateId = chngestateId
+                });
+            }
 
-        //    _context.SaveChanges();
-        //}
+
+
+            _context.SaveChanges();
+        }
+
+        public void EDitStateToStaeChanges(int chngestateId, List<int> states)
+        {
+           
+
+            //-------Delete All Roles User ---------//
+            _context.ChangingInState.Where(r => r.ChangeStateId == chngestateId).ToList().ForEach(r => _context.ChangingInState.Remove(r));
+
+            //-----Add New Roles To User ------------//
+
+            AddStateToStaeChanges(chngestateId, states);
+        }
     }
 }

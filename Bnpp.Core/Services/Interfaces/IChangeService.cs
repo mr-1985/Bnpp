@@ -1,5 +1,6 @@
 ﻿using Bnpp.DataLayer.Entities.BasicData;
 using Bnpp.DataLayer.Entities.ONOFF;
+using Bnpp.DataLayer.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,10 @@ namespace Bnpp.Core.Services.Interfaces
     public interface IChangeService
     {
 
-        List<ChangeState> GetAllGeneralData();
+        List<ONOFFViewModel> GetAllChangeState();
         int AddChangeState(ChangeState change);
         void UpdateChangeState(ChangeState change);
-        ChangeState GetChangeStateById(int changeId);
+        ONOFFViewModel GetChangeStateById(int changeId);
 
         void DeleteChangeState(int changeId);
 
@@ -22,6 +23,7 @@ namespace Bnpp.Core.Services.Interfaces
 
 
         List<States> GetAllStates();
-        //void AddStateToStaeChanges(int chngestateId, List<int> states);
+        void AddStateToStaeChanges(int chngestateId, List<int> states);
+        void EDitStateToStaeChanges(int chngestateId, List<int> states);
     }
 }

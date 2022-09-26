@@ -16,7 +16,7 @@ namespace Bnpp.DataLayer.Entities.ONOFF
 
 
         public string StateTitle { get; set; }
-        public ChangingInState ChangingInState { get; set; }
+        public List<ChangingInState> ChangingInState { get; set; }
 
         public bool IsDelete { get; set; }
     }

@@ -1,13 +1,14 @@
-﻿@model Bnpp.DataLayer.Entities.ONOFF.ChangeState
+﻿@model Bnpp.DataLayer.ViewModels.ONOFFViewModel
 @using Bnpp.DataLayer.Entities.ONOFF
 @{
 	ViewData["Title"] = "CreateOnOffData";
 	Layout = null;
-	List<States> permissions = ViewData["States"] as List<States>;
+	List<States> statess = ViewData["States"] as List<States>;
 }
 
 <div id="normal">
-	<form id="designForm" asp-action="CreateOnOffData" method="post">
+	<form id="designForm" asp-action="EditOnOffData" method="post">
+		<input type="hidden" asp-for="ChangeStateId" />
 
 		<table cellpadding="3" cellspacing="0">
 			<tbody>
@@ -22,12 +23,16 @@
 					</td>
 				</tr>
 
-				@foreach (var stte in permissions)
-				{
-					<li>
-						<input type="checkbox" name="SelectedStates" value="@stte.StateId" /> @stte.StateTitle
-					</li>
-				}
+				<tr>
+					@foreach (var p in statess)
+					{
+
+						<label>
+							<input type="checkbox" name="SelectedRoles" value="@p.StateId" @((Model.ChangingInStates.Any(r => r == p.StateId) ? "checked" : ""))>@p.StateTitle
+						</label>
+
+					}
+				</tr>
 
 				<tr>
 					<td>
