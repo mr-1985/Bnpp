@@ -101,7 +101,7 @@ namespace Bnpp.Core.Services
             _context.SaveChanges();
         }
 
-        public void EDitStateToStaeChanges(int chngestateId, List<int> states)
+        public void EDitStateToStaeChanges(int chngestateId, List<int> statess)
         {
            
 
@@ -110,7 +110,7 @@ namespace Bnpp.Core.Services
 
             //-----Add New Roles To User ------------//
 
-            AddStateToStaeChanges(chngestateId, states);
+            AddStateToStaeChanges(chngestateId, statess);
         }
     }
 }

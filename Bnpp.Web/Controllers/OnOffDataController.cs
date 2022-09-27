@@ -71,7 +71,7 @@ namespace Bnpp.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditOnOffData(int ChangeStateId, List<int> SelectedStates, string Dateofchangestate = "")
+        public IActionResult EditOnOffData( List<int> SelectedStates, string Dateofchangestate = "")
         {
             //if (!ModelState.IsValid)
             //{
@@ -95,7 +95,7 @@ namespace Bnpp.Web.Controllers
 
              _changeService.UpdateChangeState(Change);
 
-            _changeService.EDitStateToStaeChanges(ChangeStateId, SelectedStates);
+            _changeService.EDitStateToStaeChanges(Change.ChangeStateId, SelectedStates);
 
 
 

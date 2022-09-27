@@ -24,6 +24,6 @@ namespace Bnpp.Core.Services.Interfaces
 
         List<States> GetAllStates();
         void AddStateToStaeChanges(int chngestateId, List<int> states);
-        void EDitStateToStaeChanges(int chngestateId, List<int> states);
+        void EDitStateToStaeChanges(int chngestateId, List<int> statess);
     }
 }

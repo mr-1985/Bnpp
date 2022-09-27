@@ -28,7 +28,7 @@
 					{
 
 						<label>
-							<input type="checkbox" name="SelectedRoles" value="@p.StateId" @((Model.ChangingInStates.Any(r => r == p.StateId) ? "checked" : ""))>@p.StateTitle
+							<input type="checkbox" name="SelectedStates" value="@p.StateId" @((Model.ChangingInStates.Any(r => r == p.StateId) ? "checked" : ""))>@p.StateTitle
 						</label>
 
 					}

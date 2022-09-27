@@ -240,7 +240,7 @@
 			data: { "operationalId": selectedIDs },
 
 			success: function (response) {
-				$("#Tabs").load("/OnOffData//");
+				 window.location.href = "/OnOffData/";
 			},
 			failure: function (response) {
 				alert(response.responseText);
