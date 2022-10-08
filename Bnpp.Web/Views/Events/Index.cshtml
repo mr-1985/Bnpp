@@ -277,22 +277,28 @@
             }
         });
 
-        $.ajax({
-            type: "POST",
-            url: "/Events/DeleteEvents",
-            data: { "eventId": selectedIDs },
 
-            success: function (response) {
-                window.location.href = "/Events/";
-            },
-            failure: function (response) {
-                alert(response.responseText);
-            },
-            error: function (response) {
-                alert(response.responseText);
-            }
+        var result = confirm("are you sure you want to delete?");
+        if (result) {
+            $.ajax({
+                type: "POST",
+                url: "/Events/DeleteEvents",
+                data: { "eventId": selectedIDs },
 
-        });
+                success: function (response) {
+                    window.location.href = "/Events/";
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+
+            });
+        }
+
+        
 
     });
 

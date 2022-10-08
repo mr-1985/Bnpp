@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Data;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Entities.BasicData;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Bnpp.Web.Controllers
@@ -133,6 +138,43 @@ namespace Bnpp.Web.Controllers
         public IActionResult Documents()
         {
             return View(_dataService.GetAllDesignDocument());
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Export()
+        {
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                DataTable dt = this.GetAllDesignDocument().Tables[0];
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Grid.xlsx");
+                }
+            }
+        }
+
+        private DataSet GetAllDesignDocument()
+        {
+            DataSet ds = new DataSet();
+            string constr = @"Data Source=87.236.215.209;Initial Catalog=bnppDBNew;Integrated Security=False;Persist Security Info=False;User ID=bnppuser;Password=1234@qweR1234@qweR";
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "SELECT * FROM DesignDocuments";
+                using (SqlCommand cmd = new SqlCommand(query))
+                {
+                    cmd.Connection = con;
+                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                    {
+                        sda.Fill(ds);
+                    }
+                }
+            }
+
+            return ds;
         }
 
         public IActionResult CreateDesignDocument()

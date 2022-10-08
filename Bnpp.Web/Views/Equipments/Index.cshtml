@@ -119,6 +119,9 @@
             }
         });
 
+
+            var result = confirm("are you sure you want to delete?");
+            if (result) {
         $.ajax({
             type: "POST",
             url: "/Equipments/DeleteEquipment",
@@ -137,6 +140,7 @@
             }
 
         });
+        }
 
     });
 </script>

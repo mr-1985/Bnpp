@@ -188,34 +188,46 @@
                                 </th>
                                 <th></th>
                                 <th>
-                                    <b>Element Name</b>
+                                    <b>Name and designation of systems, equipment, pipelines and components</b>
                                 </th>
                                 <th>
-                                    <b>Designation</b>
+                                    <b>
+                                        <b>Safety Class</b>
+                                        <br>according to PNAE G-01-011-97
+                                    </b>
                                 </th>
 
                                 <th>
-                                    <b>Serial No.	 </b>
+                                    <b>
+                                        Classification Designation
+                                        according to PNAE G-01-011-97
+                                    </b>
                                 </th>
 
                                 <th>
-                                    <b>	 Diameter</b>
+                                    <b>
+                                        Group
+                                        according to PNAE G-07-008-89
+                                    </b>
                                 </th>
                                 <th>
-                                    <b>	Thickness</b>
+                                    <b>
+                                        Seismic category
+                                        according to PNAE G-5-006-87
+                                    </b>
                                 </th>
-                                <th>
+                               @* <th>
                                     <b>	Length</b>
                                 </th>
                                 <th>
                                     <b>	Material Grade</b>
-                                </th>
+                                </th>*@
                                @* <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>*@
-                                 <th>
+                                @* <th>
                                     <b>Class of safety</b>
                                     </th>
                                     <th>
@@ -226,7 +238,7 @@
                                     </th>
                                     <th>
                                     <b>	Seismic category</b>
-                                    </th>
+                                    </th>*@
 
                                 <th>
                                     <b>Actions</b>
@@ -246,7 +258,7 @@
                                     <td>
                                         @item.Item
                                     </td>
-                                    <td>
+                                   @* <td>
                                         @item.Designation
                                     </td>
                                     <td>
@@ -263,10 +275,10 @@
                                     </td>
                                     <td>
                                         @item.MaterialGrade
-                                    </td>
+                                    </td>*@
                                      <td>
                                         @item.ClassofSafety
-                                        </td>
+                                     </td>
                                         <td>
                                         @item.ClassificationDesignation
                                         </td>
@@ -381,6 +393,9 @@
             }
         });
 
+
+        var result = confirm("are you sure you want to delete?");
+        if (result) {
         $.ajax({
             type: "POST",
             url: "/Technical/DeleteComponents",
@@ -397,6 +412,7 @@
             }
 
         });
+        }
 
     });
 
