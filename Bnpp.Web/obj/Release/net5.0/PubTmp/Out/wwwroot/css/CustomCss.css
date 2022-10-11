@@ -65,3 +65,9 @@
 .checkBox {
     border: none;
 }
+
+li.active {
+    background-color: rgb(208, 208, 208);
+    border-color: rgb(128, 128, 128);
+    font-weight: bold;
+}

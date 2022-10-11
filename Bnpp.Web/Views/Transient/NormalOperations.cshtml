@@ -66,25 +66,17 @@
                 <table cellpadding="3" cellspacing="0">
                     <tbody>
                         <tr>
-                            @*<td>
-                                Search:
-                                </td>
-                                <td>
-                                <input name="iSearch" type="text" id="iSearch" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td>
-                                <input type="submit" name="Button11" value="Search" id="Button11" class="butn-search" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td>
-                                <input type="submit" name="Button1" value="Export Excel" id="Button1" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td style="width: 60px;">
-                                &nbsp;
-                                </td>*@
-                            <td>
+                           @* <td>
                                 <input type="file" name="uploadedFile" id="uploadedFile" style="direction: ltr; text-align: left;">
                                 <input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">
+                            </td>*@
+
+                            <td>
+                                <form method="post" asp-controller="Transient" asp-action="ExportNormalOperations">
+                                    <input type="submit" value="Export" />
+                                </form>
                             </td>
+
                             <td style="width: 200px;">
                                 <span id="message">
                                 </span>

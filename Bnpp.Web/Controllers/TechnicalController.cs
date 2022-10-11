@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Bnpp.Core.Services.Interfaces;
+using Bnpp.Core.Convertors;
 using Bnpp.DataLayer.Entities.BasicData;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using static Microsoft.AspNetCore.Razor.Language.TagHelperMetadata;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Bnpp.Web.Controllers
@@ -37,6 +41,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult GeneralData()
         {
             return View(_dataService.GetAllGeneralData());
+        }
+
+        [HttpPost]
+        public IActionResult ExportGeneralData()
+        {
+            var generalData = _dataService.GetAllGeneralData().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(generalData.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "GeneralData.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateGeneralData()
@@ -91,6 +111,22 @@ namespace Bnpp.Web.Controllers
             return View(_dataService.GetAllDesignData());
         }
 
+        [HttpPost]
+        public IActionResult ExportDesignData()
+        {
+            var designData = _dataService.GetAllDesignData().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(designData.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DesignData.xlsx");
+                }
+            }
+            //return View();
+        }
+
         public IActionResult CreateDesignData()
         {
             return View();
@@ -142,39 +178,58 @@ namespace Bnpp.Web.Controllers
 
 
 
+        //[HttpPost]
+        //public IActionResult Export()
+        //{
+        //    using (XLWorkbook wb = new XLWorkbook())
+        //    {
+        //        DataTable dt = this.GetAllDesignDocument().Tables[0];
+        //        wb.Worksheets.Add(dt);
+        //        using (MemoryStream stream = new MemoryStream())
+        //        {
+        //            wb.SaveAs(stream);
+        //            return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Grid.xlsx");
+        //        }
+        //    }
+        //}
+
+        //private DataSet GetAllDesignDocument()
+        //{
+        //    DataSet ds = new DataSet();
+        //    string constr = @"Data Source=87.236.215.209;Initial Catalog=bnppDBNew;Integrated Security=False;Persist Security Info=False;User ID=bnppuser;Password=1234@qweR1234@qweR";
+        //    using (SqlConnection con = new SqlConnection(constr))
+        //    {
+        //        string query = "SELECT * FROM DesignDocuments";
+        //        using (SqlCommand cmd = new SqlCommand(query))
+        //        {
+        //            cmd.Connection = con;
+        //            using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+        //            {
+        //                sda.Fill(ds);
+        //            }
+        //        }
+        //    }
+
+        //    return ds;
+        //}
+
+
+       
+
         [HttpPost]
-        public IActionResult Export()
+        public IActionResult ExportDocument()
         {
+            var designsdoc = _dataService.GetAllDesignDocument().ToList();
             using (XLWorkbook wb = new XLWorkbook())
             {
-                DataTable dt = this.GetAllDesignDocument().Tables[0];
-                wb.Worksheets.Add(dt);
+                wb.Worksheets.Add(Commons.ToDataTable(designsdoc.ToList()));
                 using (MemoryStream stream = new MemoryStream())
                 {
                     wb.SaveAs(stream);
-                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Grid.xlsx");
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Documents.xlsx");
                 }
             }
-        }
-
-        private DataSet GetAllDesignDocument()
-        {
-            DataSet ds = new DataSet();
-            string constr = @"Data Source=87.236.215.209;Initial Catalog=bnppDBNew;Integrated Security=False;Persist Security Info=False;User ID=bnppuser;Password=1234@qweR1234@qweR";
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                string query = "SELECT * FROM DesignDocuments";
-                using (SqlCommand cmd = new SqlCommand(query))
-                {
-                    cmd.Connection = con;
-                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
-                    {
-                        sda.Fill(ds);
-                    }
-                }
-            }
-
-            return ds;
+            //return View();
         }
 
         public IActionResult CreateDesignDocument()
@@ -228,6 +283,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult Safety()
         {
             return View(_dataService.GetAllComponents());
+        }
+
+        [HttpPost]
+        public IActionResult ExportSafety()
+        {
+            var safety = _dataService.GetAllComponents().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(safety.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Safety class & Seismic.xlsx");
+                }
+            }
+            //return View();
         }
 
         #endregion
@@ -298,6 +369,22 @@ namespace Bnpp.Web.Controllers
             return View(_dataService.GetAllChemicalNorms());
         }
 
+        [HttpPost]
+        public IActionResult ExportChemicalNorms()
+        {
+            var chemicalNorms = _dataService.GetAllChemicalNorms().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(chemicalNorms.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ChemicalNorms.xlsx");
+                }
+            }
+            //return View();
+        }
+
 
         public IActionResult CreateChemicalNorms()
         {
@@ -351,6 +438,22 @@ namespace Bnpp.Web.Controllers
             return View(_dataService.GetAllInspectionProgram());
         }
 
+        [HttpPost]
+        public IActionResult ExportTechnicalPrograms()
+        {
+            var technicalPrograms = _dataService.GetAllInspectionProgram().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(technicalPrograms.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "TechnicalPrograms.xlsx");
+                }
+            }
+            //return View();
+        }
+
         public IActionResult CreateTechnicalInspectionProgram()
         {
             return View();
@@ -401,6 +504,22 @@ namespace Bnpp.Web.Controllers
             return View(_dataService.GetAllSensors());
         }
 
+        [HttpPost]
+        public IActionResult ExportSensors()
+        {
+            var sensors = _dataService.GetAllSensors().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(sensors.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Sensors.xlsx");
+                }
+            }
+            //return View();
+        }
+
         public IActionResult CreateSensor()
         {
             return View();
@@ -447,6 +566,23 @@ namespace Bnpp.Web.Controllers
         public IActionResult ControlPoints()
         {
             return View(_dataService.GetAllControlPoints());
+        }
+
+
+        [HttpPost]
+        public IActionResult ExportControlPoints()
+        {
+            var controlPoints = _dataService.GetAllControlPoints().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(controlPoints.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ControlPoints.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateControlPoints()
@@ -498,6 +634,22 @@ namespace Bnpp.Web.Controllers
             return View(_dataService.GetAllHForms());
         }
 
+
+        [HttpPost]
+        public IActionResult ExportHForms()
+        {
+            var hForms = _dataService.GetAllHForms().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(hForms.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "HForms.xlsx");
+                }
+            }
+            //return View();
+        }
 
         public IActionResult CreateHForms()
         {

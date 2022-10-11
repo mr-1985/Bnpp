@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Globalization;
+using Bnpp.Core.Convertors;
+using System.IO;
 using Bnpp.Core.Services.Interfaces;
 using Bnpp.Core.ViewModels;
 using Bnpp.DataLayer.Entities;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace Bnpp.Web.Controllers
 {
@@ -31,7 +35,24 @@ namespace Bnpp.Web.Controllers
             return View(_operational.GetAllNormalOperations());
         }
 
-       
+
+        [HttpPost]
+        public IActionResult ExportNormalOperations()
+        {
+            var normalOperations = _operational.GetAllNormalOperations().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(normalOperations.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "NormalOperations.xlsx");
+                }
+            }
+            return View();
+        }
+
+
         [BindProperty]
         public OperationalData NormalOperation { get; set; }
         public IActionResult CreateNormalOperations()
@@ -111,6 +132,22 @@ namespace Bnpp.Web.Controllers
             return View(_operational.GetAllOccurances());
         }
 
+        [HttpPost]
+        public IActionResult ExportOperationalOccurence()
+        {
+            var operationalOccurence = _operational.GetAllOccurances().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(operationalOccurence.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "OperationalOccurence.xlsx");
+                }
+            }
+            return View();
+        }
+
         [BindProperty]
         public Occurance Occurance { get; set; }
 
@@ -184,6 +221,21 @@ namespace Bnpp.Web.Controllers
             return View(_operational.GetAllBasisAccident());
         }
 
+        [HttpPost]
+        public IActionResult ExportDesignBasisAccidents()
+        {
+            var designBasisAccidents = _operational.GetAllBasisAccident().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(designBasisAccidents.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DesignBasisAccidents.xlsx");
+                }
+            }
+            return View();
+        }
 
         public IActionResult CreateDesignBasisAccidents()
         {

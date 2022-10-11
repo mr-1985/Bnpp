@@ -107,28 +107,14 @@
                 <table cellpadding="3" cellspacing="0">
                     <tbody>
                         <tr>
-                            @*<td>
-                                Search:
-                                </td>
-                                <td>
-                                <input name="iSearch" type="text" id="iSearch" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td>
-                                <input type="submit" name="Button11" value="Search" id="Button11" class="butn-search" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td>
-                                <input type="submit" name="Button1" value="Export Excel" id="Button1" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td style="width: 60px;">
-                                &nbsp;
-                                </td>*@
+                           
                            @* <td>
                                 <input type="file" name="uploadedFile" id="uploadedFile" style="direction: ltr; text-align: left;">
                                 <input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">
                             </td>*@
 
                            <td>
-                                <form method="post" asp-controller="Technical" asp-action="Export">
+                                <form method="post" asp-controller="Technical" asp-action="ExportDocument">
                                     <input type="submit" value="Export" />
                                 </form>
                            </td>
@@ -145,32 +131,7 @@
                         </tr>
                     </tbody>
                 </table>
-                @* <table cellpadding="3" cellspacing="0">
-                    <tbody>
-                    <tr>
-                    <td>Sort:</td>
-                    <td>
-                    <select name="iSort" onchange="javascript:setTimeout('__doPostBack(\'iSort\',\'\')', 0)" id="iSort">
-                    <option selected="selected" value="Asc">Asc</option>
-                    <option value="Desc">Desc</option>
-
-                    </select>
-                    </td>
-                    <td>Records to Show:</td>
-                    <td>
-                    <select name="iShowNum" onchange="javascript:setTimeout('__doPostBack(\'iShowNum\',\'\')', 0)" id="iShowNum">
-                    <option value="10">10</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <option value="500">500</option>
-                    <option selected="selected" value="1000">
-                    1000
-                    </option>
-                    </select>
-                    </td>
-                    </tr>
-                    </tbody>
-                    </table>*@
+               
             </div>
 
             <div  id="newPage">

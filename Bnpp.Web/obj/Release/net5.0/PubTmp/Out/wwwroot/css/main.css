@@ -84,9 +84,12 @@ a:hover
     text-decoration:underline;
 }
 
-.icon-table td
-{
-    text-align:center;
+.icon-table td {
+    /*text-align:center;*/
+
+    padding: 5px;
+    text-align: left;
+    border-bottom: solid 1px #cccccc;
 }
 
 .icon-table img
@@ -381,7 +384,7 @@ a.breadcumb2-link:hover
     background-repeat:no-repeat !important;
     padding-left:20px !important;
     background-position:4px 6px !important;
-    background-image:url(/images/cancel.png) !important;        
+    background-image:url(/images/no.png) !important;        
 }
 
 .butn-save
@@ -653,4 +656,8 @@ input.new_input2
 .cright
 {
     text-align:right;
+}
+
+.tab-buttons-li {
+
 }

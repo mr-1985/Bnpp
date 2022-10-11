@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Globalization;
+using Bnpp.Core.Convertors;
+using System.IO;
 using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Entities.AgeingManagementDocuments;
+using Bnpp.DataLayer.Entities.OperationalDatas;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace Bnpp.Web.Controllers
 {
@@ -31,6 +36,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult Methodology()
         {
             return View(_management.GetAllMethodolgies());
+        }
+
+        [HttpPost]
+        public IActionResult ExportMethodology()
+        {
+            var methodology = _management.GetAllMethodolgies().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(methodology.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Methodology.xlsx");
+                }
+            }
+            return View();
         }
 
         public IActionResult CreateMethodology()
@@ -81,7 +102,7 @@ namespace Bnpp.Web.Controllers
 
 
 
-        #region MyRegion
+        #region Documents
 
         [BindProperty]
         public AgeingDocuments Documents { get; set; }
@@ -91,10 +112,27 @@ namespace Bnpp.Web.Controllers
             return View(_management.GetAllAgeingDocuments());
         }
 
+        [HttpPost]
+        public IActionResult ExportDocuments()
+        {
+            var documents = _management.GetAllAgeingDocuments().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(documents.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Documents.xlsx");
+                }
+            }
+            return View();
+        }
+
         public IActionResult CreateAgeingDocuments()
         {
             return View();
         }
+
 
         [HttpPost]
         public IActionResult CreateAgeingDocuments(IFormFile filedocument)
@@ -148,6 +186,21 @@ namespace Bnpp.Web.Controllers
             return View(_management.GetAllManagementReviews());
         }
 
+        [HttpPost]
+        public IActionResult ExportManagementReviews()
+        {
+            var managementReviews = _management.GetAllManagementReviews().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(managementReviews.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ManagementReviews.xlsx");
+                }
+            }
+            return View();
+        }
 
         public IActionResult CreateManagementReviews()
         {

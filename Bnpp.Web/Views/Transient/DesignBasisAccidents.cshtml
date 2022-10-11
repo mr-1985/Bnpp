@@ -66,10 +66,18 @@
                     <tbody>
                         <tr>
                            
-                            <td>
+                           @* <td>
                                 <input type="file" name="uploadedFile" id="uploadedFile" style="direction: ltr; text-align: left;">
                                 <input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">
+                            </td>*@
+
+
+                            <td>
+                                <form method="post" asp-controller="Transient" asp-action="ExportDesignBasisAccidents">
+                                    <input type="submit" value="Export" />
+                                </form>
                             </td>
+
                             <td style="width: 200px;">
                                 <span id="message">
                                 </span>
