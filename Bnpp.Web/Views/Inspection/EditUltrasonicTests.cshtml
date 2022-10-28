@@ -166,6 +166,9 @@
         var data = $("#normalForm").serialize();
         //console.log(data);
         //alert(data);
+
+        var result = confirm("Are You Sure ?");
+        if (result) {
         $.ajax({
             type: 'POST',
             url: '/Inspection/EditUltrasonicTests',
@@ -173,7 +176,7 @@
             data: data,
             success: function () {
 
-                $("#newPage").load("/Inspection/UltrasonicTests/");
+                    $("#submenu").load("/Inspection/UltrasonicTests/");
             },
 
             error: function () {
@@ -181,6 +184,7 @@
                 //console.log('Failed ');
             }
         });
+        }
 
     }
 

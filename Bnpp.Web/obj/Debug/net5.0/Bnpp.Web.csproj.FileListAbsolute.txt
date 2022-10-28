@@ -1318,3 +1318,6 @@ C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\ClosedXML.dll
 C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\DocumentFormat.OpenXml.dll
 C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\ExcelNumberFormat.dll
 C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\System.IO.Packaging.dll
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Maintenance\CreateProgramDocuments.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Maintenance\EditProgramDocuments.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Backup\Index.cshtml.g.cs

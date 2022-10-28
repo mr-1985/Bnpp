@@ -1,8 +1,12 @@
 ﻿using System;
+using Bnpp.Core.Convertors;
+using System.IO;
 using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Entities.AgeingMechanism;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace Bnpp.Web.Controllers
 {
@@ -27,6 +31,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult Mechanism()
         {
             return View(_mechanismService.GetAllMechanism());
+        }
+
+        [HttpPost]
+        public IActionResult ExportMechanism()
+        {
+            var mechanism = _mechanismService.GetAllMechanism().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(mechanism.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "AgeingMechanism.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateMechanism()
@@ -77,6 +97,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult Documents()
         {
             return View(_mechanismService.GetAllMechanismDocuments());
+        }
+
+        [HttpPost]
+        public IActionResult ExportDocuments()
+        {
+            var documents = _mechanismService.GetAllMechanismDocuments().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(documents.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "MechanismDocuments.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateMechanismDocuments()

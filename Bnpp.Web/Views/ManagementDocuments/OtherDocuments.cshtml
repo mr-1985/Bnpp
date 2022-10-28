@@ -33,16 +33,16 @@
     <h1 id="iH1"></h1>
     <div id="iContent">
 
-        <div class="tab-buttons">
+        <div class="tab-buttons" >
             <ul>
-                <li id="tab-button1" class="tab-buttons-li" @*style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;"*@ @*style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;"*@>
+                <li id="tab-button1" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;" @*style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;"*@>
                     <a id="tab-button-a1"
                        onclick="showPage1()" style="cursor:pointer;color: rgb(0, 113, 158);">
                         Methodology (TLAA)
                     </a>
                 </li>
-                <li id="tab-button2" @*class="tab-buttons-li"*@ style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
-                    <a id="tab-buttona2" onclick="showPage2()" style="cursor:pointer;color: rgb(110, 110, 255);">
+                <li id="tab-button2" @*class="tab-buttons-li"*@ style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;" @*style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;"*@>
+                    <a id="tab-button2" onclick="showPage2()" style="cursor:pointer;color: rgb(110, 110, 255);">
                         Other Documents
                     </a>
 
@@ -59,21 +59,23 @@
 
         <div id="tab1" class="tab-item" style="display: block;">
 
-            <h1 id="iH1">Documents</h1>
+            <h1 id="iH1">
+                Other Documents
+            </h1>
 
             <div class="bevel-box">
                 <table cellpadding="3" cellspacing="0">
                     <tbody>
                         <tr>
                            
-                           @* <td>
+                            <td>
                                 <input type="file" name="uploadedFile" id="uploadedFile" style="direction: ltr; text-align: left;">
-                                <input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">
-                            </td>*@
+                                @*<input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">*@
+                            </td>
 
                             <td>
                                 <form method="post" asp-controller="ManagementDocuments" asp-action="ExportDocuments">
-                                    <input type="submit" value="Export" />
+                                    <input type="submit" value="Export Excel" />
                                 </form>
                             </td>
 
@@ -229,9 +231,7 @@
     }
 
     function showPage2() {
-        $("#Tabs").load("/ManagementDocuments/OtherDocuments/");
-       
-
+        $("#Tabs").load("/ManagementDocuments/OtherDocuments/");          
     }
 
     function showPage3() {
@@ -277,7 +277,9 @@
 
     });
 
-
+    //$('#tab-button2').click(function () {
+    //    $('#tab-button2').css({ 'background-color': 'rgb(208, 208, 208)', 'border-color': 'rgb(128, 128, 128)', 'font-weight': 'bold' });
+    //});
 </script>
 
 

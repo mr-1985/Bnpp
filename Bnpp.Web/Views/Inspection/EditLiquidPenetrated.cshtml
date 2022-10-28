@@ -136,6 +136,9 @@
         var data = $("#normalForm").serialize();
         //console.log(data);
         //alert(data);
+
+        var result = confirm("Are You Sure ?");
+        if (result) {
         $.ajax({
             type: 'POST',
             url: '/Inspection/EditLiquidPenetrated',
@@ -143,7 +146,7 @@
             data: data,
             success: function () {
 
-                $("#newPage").load("/Inspection/LiquidPenetrated/");
+                    $("#submenu").load("/Inspection/LiquidPenetrated/");
                 //$("#Tabs").load("/Inspection/LiquidPenetrated/");
             },
 
@@ -152,6 +155,7 @@
                 //console.log('Failed ');
             }
         });
+        }
 
     }
 

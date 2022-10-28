@@ -1,7 +1,12 @@
 ﻿using System;
+using Bnpp.Core.Convertors;
+using Bnpp.Core.Services;
+using System.IO;
 using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Entities;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace Bnpp.Web.Controllers
 {
@@ -21,6 +26,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult Index()
         {
             return View(_commissioning.GetAllCommissioning());
+        }
+
+        [HttpPost]
+        public IActionResult ExportInstallation()
+        {
+            var installation = _commissioning.GetAllCommissioning().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(installation.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Installation&Commissioning.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateCommissioning()

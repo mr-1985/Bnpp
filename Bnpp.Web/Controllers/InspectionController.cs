@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
+using Bnpp.Core.Convertors;
 using Bnpp.Core.Services;
 using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Entities.InspectionData;
 using Bnpp.DataLayer.Entities.Maintenance;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static System.Net.Mime.MediaTypeNames;
@@ -39,6 +43,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult InspectionReports()
         {
             return View(_inspectionService.GetAllInspectionReports());
+        }
+
+        [HttpPost]
+        public IActionResult ExportInspectionReports()
+        {
+            var inspectionReports = _inspectionService.GetAllInspectionReports().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(inspectionReports.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "InspectionReports.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CretaeInspectionReports()
@@ -98,6 +118,23 @@ namespace Bnpp.Web.Controllers
         public IActionResult VisualForm()
         {
             return View(_inspectionService.GetAllVisualInspectionForm());
+        }
+
+
+        [HttpPost]
+        public IActionResult ExportVisualForm()
+        {
+            var visualForm = _inspectionService.GetAllVisualInspectionForm().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(visualForm.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Visual Inspection Form.xlsx");
+                }
+            }
+            //return View();
         }
 
 
@@ -176,6 +213,22 @@ namespace Bnpp.Web.Controllers
             return View(_inspectionService.GetAllLeakageForm());
         }
 
+        [HttpPost]
+        public IActionResult ExportLeakageForm()
+        {
+            var leakageForm = _inspectionService.GetAllLeakageForm().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(leakageForm.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Leakage Test Form.xlsx");
+                }
+            }
+            //return View();
+        }
+
         public IActionResult CreateLeakageForm()
         {
             return View();
@@ -250,7 +303,22 @@ namespace Bnpp.Web.Controllers
             return View(_inspectionService.GetAllPenetrationForm());
         }
 
-        
+
+        [HttpPost]
+        public IActionResult ExportPenetrationForm()
+        {
+            var penetrationForm = _inspectionService.GetAllPenetrationForm().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(penetrationForm.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Liquid Penetration Test Form.xlsx");
+                }
+            }
+            //return View();
+        }
 
         public IActionResult CreatePenetrationForm()
         {
@@ -325,6 +393,22 @@ namespace Bnpp.Web.Controllers
             return View(_inspectionService.GetAllMagneticForm());
         }
 
+        [HttpPost]
+        public IActionResult ExportMagneticForm()
+        {
+            var magneticForm = _inspectionService.GetAllMagneticForm().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(magneticForm.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Magnetic Powder Test Form.xlsx");
+                }
+            }
+            //return View();
+        }
+
         public IActionResult CreateMagneticForm()
         {
             return View();
@@ -397,6 +481,23 @@ namespace Bnpp.Web.Controllers
         public IActionResult RadiographicsForm()
         {
             return View(_inspectionService.GetAllRadiographicsForm());
+        }
+
+
+        [HttpPost]
+        public IActionResult ExportRadiographicsForm()
+        {
+            var radiographicsForm = _inspectionService.GetAllRadiographicsForm().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(radiographicsForm.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Radiographics Test Form.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateRadiographicsForm()
@@ -475,6 +576,22 @@ namespace Bnpp.Web.Controllers
             return View(_inspectionService.GetAllUltrasonicForm());
         }
 
+        [HttpPost]
+        public IActionResult ExportUltrasonicForm()
+        {
+            var ultrasonicForm = _inspectionService.GetAllUltrasonicForm().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(ultrasonicForm.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Ultrasonic Test Form.xlsx");
+                }
+            }
+            //return View();
+        }
+
         public IActionResult CraeteUltrasonicForm()
         {
             return View();
@@ -546,6 +663,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult MetalForm()
         {
             return View(_inspectionService.GetAllMetalForm());
+        }
+
+        [HttpPost]
+        public IActionResult ExportMetalForm()
+        {
+            var metalForm = _inspectionService.GetAllMetalForm().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(metalForm.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Metal thickness ultrasonic Test Form.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateMetalForm()
@@ -623,6 +756,22 @@ namespace Bnpp.Web.Controllers
             return View(_inspectionService.GetAllInspectionInstructions());
         }
 
+        [HttpPost]
+        public IActionResult ExportInspectionInstructions()
+        {
+            var inspectionInstructions = _inspectionService.GetAllInspectionInstructions().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(inspectionInstructions.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "InspectionInstructions.xlsx");
+                }
+            }
+            //return View();
+        }
+
         public IActionResult CretaeInspectionInstructions()
         {
             return View();
@@ -678,6 +827,21 @@ namespace Bnpp.Web.Controllers
             return View(_inspectionService.GetAlTypicalPrograms());
         }
 
+        [HttpPost]
+        public IActionResult ExportInspectionPrograms()
+        {
+            var inspectionPrograms = _inspectionService.GetAlTypicalPrograms().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(inspectionPrograms.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Typical Programs.xlsx");
+                }
+            }
+            //return View();
+        }
 
         #region Visual Control
         [BindProperty]
@@ -686,6 +850,23 @@ namespace Bnpp.Web.Controllers
         public IActionResult InspectionResults()
         {
             return View(_inspectionService.GetAllVisualControl());
+        }
+
+
+        [HttpPost]
+        public IActionResult ExportVisualControl()
+        {
+            var visualControl = _inspectionService.GetAllVisualControl().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(visualControl.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Visual Control.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CraeteVisualControl()
@@ -762,6 +943,22 @@ namespace Bnpp.Web.Controllers
             return View(_inspectionService.GetAllLeakageTest());
         }
 
+        [HttpPost]
+        public IActionResult ExportLeakageTest()
+        {
+            var leakageTest = _inspectionService.GetAllLeakageTest().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(leakageTest.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Leakage Test of Weld.xlsx");
+                }
+            }
+            //return View();
+        }
+
         public IActionResult CreateLeakageTest()
         {
             return View();
@@ -835,7 +1032,21 @@ namespace Bnpp.Web.Controllers
             return View(_inspectionService.GetAllLiquidPenetrated());
         }
 
-
+        [HttpPost]
+        public IActionResult ExportLiquidPenetrated()
+        {
+            var liquidPenetrated = _inspectionService.GetAllLiquidPenetrated().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(liquidPenetrated.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Liquid Penetrated Test.xlsx");
+                }
+            }
+            //return View();
+        }
         public IActionResult CreateLiquidPenetrated()
         {
             return View();
@@ -907,6 +1118,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult MagneticPowder()
         {
             return View(_inspectionService.GetAllMagneticPowder());
+        }
+
+        [HttpPost]
+        public IActionResult ExportMagneticPowder()
+        {
+            var magneticPowder = _inspectionService.GetAllMagneticPowder().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(magneticPowder.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Magnetic Powder test.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateMagneticPowder()
@@ -983,6 +1210,24 @@ namespace Bnpp.Web.Controllers
             return View(_inspectionService.GetAllRadiographics());
         }
 
+
+
+        [HttpPost]
+        public IActionResult ExportRadiographicsTest()
+        {
+            var radiographicsTest = _inspectionService.GetAllRadiographics().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(radiographicsTest.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "radiographics Test.xlsx");
+                }
+            }
+            //return View();
+        }
+
         public IActionResult CreateRadiographicsTest()
         {
             return View();
@@ -1054,6 +1299,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult UltrasonicTests()
         {
             return View(_inspectionService.GetAllUltrasonic());
+        }
+
+        [HttpPost]
+        public IActionResult ExportUltrasonicTests()
+        {
+            var ultrasonicTests = _inspectionService.GetAllUltrasonic().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(ultrasonicTests.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Ultrasonic Tests.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateUltrasonicTests()
@@ -1128,6 +1389,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult MetalThickness()
         {
             return View(_inspectionService.GetAllMetalThickness());
+        }
+
+        [HttpPost]
+        public IActionResult ExportMetalThickness()
+        {
+            var metalThickness = _inspectionService.GetAllMetalThickness().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(metalThickness.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Metal thickness ultrasonic measurement.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateMetalThickness()
@@ -1264,6 +1541,23 @@ namespace Bnpp.Web.Controllers
         public IActionResult WorkingPrograms()
         {
             return View(_inspectionService.GetAlWorkingPrograms());
+        }
+
+
+        [HttpPost]
+        public IActionResult ExportWorkingPrograms()
+        {
+            var workingPrograms = _inspectionService.GetAlWorkingPrograms().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(workingPrograms.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Working Programs.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CraeteWorkingPrograms()

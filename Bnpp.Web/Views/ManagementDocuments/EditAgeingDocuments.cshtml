@@ -81,8 +81,9 @@
             
 
             formData.append("filedocument", $("#imgDocumentUp")[0].files[0]);
-            
- 
+
+        var result = confirm("Are You Sure ?");
+        if (result) {
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -92,6 +93,7 @@
             }).done(function() {
                $("#Tabs").load("/ManagementDocuments/OtherDocuments/");
             });
+        }
         }
 
 

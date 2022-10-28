@@ -104,6 +104,9 @@
         var data = $("#occurenceForm").serialize();
         //console.log(data);
         //alert(data);
+
+        var result = confirm("Are You Sure ?");
+        if (result) {
         $.ajax({
             type: 'POST',
             url: '/ManagementDocuments/EditManagementReviews',
@@ -118,6 +121,7 @@
                 //console.log('Failed ');
             }
         });
+        }
 
     }
 

@@ -6,6 +6,10 @@ using System.Globalization;
 using System;
 using Bnpp.DataLayer.Entities;
 using Bnpp.DataLayer.ViewModels;
+using Bnpp.Core.Convertors;
+using ClosedXML.Excel;
+using System.IO;
+using System.Linq;
 
 namespace Bnpp.Web.Controllers
 {
@@ -25,6 +29,23 @@ namespace Bnpp.Web.Controllers
         public IActionResult Index()
         {
             return View(_eventService.GetAllEvents());
+        }
+
+
+        [HttpPost]
+        public IActionResult ExportEvents()
+        {
+            var events = _eventService.GetAllEvents().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(events.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Events.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CraeteEvents()

@@ -136,6 +136,9 @@
         var data = $("#normalForm").serialize();
         //console.log(data);
         //alert(data);
+
+        var result = confirm("Are You Sure ?");
+        if (result) {
         $.ajax({
             type: 'POST',
             url: '/Inspection/EditMagneticPowder',
@@ -143,7 +146,7 @@
             data: data,
             success: function () {
 
-                $("#newPage").load("/Inspection/MagneticPowder/");
+                    $("#submenu").load("/Inspection/MagneticPowder/");
             },
 
             error: function () {
@@ -151,6 +154,7 @@
                 //console.log('Failed ');
             }
         });
+        }
 
     }
 

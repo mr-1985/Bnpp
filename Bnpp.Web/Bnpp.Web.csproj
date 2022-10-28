@@ -23,6 +23,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\DocumentImage\" />
     <Folder Include="wwwroot\AgeingDocuments\" />
+    <Folder Include="wwwroot\BackupDatabase\" />
   </ItemGroup>
 
 </Project>

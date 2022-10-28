@@ -1,7 +1,12 @@
-﻿using Bnpp.Core.Services.Interfaces;
+﻿using Bnpp.Core.Convertors;
+using Bnpp.Core.Services;
+using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Entities.OperationalDatas;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.IO;
+using System.Linq;
 
 namespace Bnpp.Web.Controllers
 {
@@ -21,7 +26,7 @@ namespace Bnpp.Web.Controllers
             return View();
         }
 
-        #region
+        #region Sensors
 
         [BindProperty]
         public Operational Operational { get; set; }
@@ -29,6 +34,23 @@ namespace Bnpp.Web.Controllers
         public IActionResult Sensors()
         {
             return View(_sensor.GetAllSensors());
+        }
+
+
+        [HttpPost]
+        public IActionResult ExportSensors()
+        {
+            var sensors = _sensor.GetAllSensors().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(sensors.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "OperationalSensors.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CraeteSensors()
@@ -79,6 +101,22 @@ namespace Bnpp.Web.Controllers
             return View(_sensor.GetAllChemicalWater());
         }
 
+        [HttpPost]
+        public IActionResult ExportChemicalWater()
+        {
+            var chemicalWater = _sensor.GetAllChemicalWater().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(chemicalWater.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ChemicalWater.xlsx");
+                }
+            }
+            //return View();
+        }
+
         public IActionResult CraeteChemicalWater()
         {
             return View();
@@ -119,11 +157,27 @@ namespace Bnpp.Web.Controllers
         }
         #endregion
 
-        #region
+        #region Environmental
 
         public IActionResult Environmental()
         {
             return View(_sensor.GetAllEnvironmental());
+        }
+
+        [HttpPost]
+        public IActionResult ExportEnvironmental()
+        {
+            var environmental = _sensor.GetAllEnvironmental().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(environmental.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "EnvironmentalData.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CraeteEnvironmental()

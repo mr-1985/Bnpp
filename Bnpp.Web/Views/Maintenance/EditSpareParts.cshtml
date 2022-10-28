@@ -96,6 +96,9 @@
         var data = $("#normalForm").serialize();
         //console.log(data);
         //alert(data);
+
+        var result = confirm("Are You Sure ?");
+        if (result) {
         $.ajax({
             type: 'POST',
             url: '/Maintenance/EditSpareParts',
@@ -110,6 +113,7 @@
                 //console.log('Failed ');
             }
         });
+        }
 
     }
 

@@ -4,27 +4,24 @@
     Layout = null;
 }
 
+
+
 <div id="normal">
-    <form id="normalForm" asp-action="CreateSpareParts" method="post">
+    <form id="normalForm" asp-action="CreateMaintenancePrograms" method="post">
         <table cellpadding="3" cellspacing="0">
             <tbody>
-                <tr>
-                    <td>
-                        Maintenance Type:
-                    </td>
-                    <td>
-                        <textarea asp-for="MaintenanceType" type="text" id="iName" style="direction: ltr; text-align: left;"></textarea>
-                    </td>
-                    <td>
-                        <span asp-validation-for="MaintenanceType"></span>
-                    </td>
+                 <tr>
+
+                    Type of Repair:
+                <select class="form-control" style="direction: ltr; text-align: left;" asp-for="MaintenanceType" asp-items="@(ViewData["Types"] as SelectList)"></select>
                 </tr>
                 <tr>
                     <td>
                         R.R:
                     </td>
                     <td>
-                        <textarea asp-for="RR" type="text" id="iAZK" required="" style="direction: ltr; text-align: left;"></textarea>
+                        <textarea asp-for="RR" type="text" id="textRR" class="textRR" required="" style="direction: ltr; text-align: left;width: 400px;
+    height: 100px;"></textarea>
                     </td>
                     <td>
                         <span asp-validation-for="RR"></span>
@@ -35,7 +32,8 @@
                         I.R:
                     </td>
                     <td>
-                        <textarea asp-for="IR" type="text" id="iPosition" style="direction: ltr; text-align: left;"></textarea>
+                        <textarea asp-for="IR" type="text" id="textRR" onclick="focus(this)"  style="direction: ltr; text-align: left;width: 400px;
+    height: 100px;"></textarea>
                     </td>
                     <td>
                         <span asp-validation-for="IR"></span>
@@ -46,7 +44,8 @@
                         OVH:
                     </td>
                     <td>
-                        <textarea asp-for="OVH" type="text" id="iPosition" style="direction: ltr; text-align: left;"></textarea>
+                        <textarea asp-for="OVH" type="text" id="textRR" style="direction: ltr; text-align: left;width: 400px;
+    height: 100px;"></textarea>
                     </td>
                     <td>
                         <span asp-validation-for="OVH"></span>
@@ -62,9 +61,96 @@
                 </tr>
             </tbody>
         </table>
+        <table cellpadding="3" cellspacing="0">
+            <tbody id="Repairs">
+        <tr >
+        <td>
+            <input value="external examination" type="checkbox"  style="direction: ltr; text-align: left;"> external examination
+        </td>
+        <td>
+                        <input value="repair of motor" type="checkbox"  style="direction: ltr; text-align: left;"> repair of motor
+        </td>
+    </tr>
+    <tr>
+        <td>
+                        <input type="checkbox" value="repair of component equipment" style="direction: ltr; text-align: left;"> repair of component equipment
+        </td>
+        <td>
+                        <input type="checkbox" value="change of oil and lubricant" style="direction: ltr; text-align: left;"> change of oil and lubricant
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input value="re-sealing of flanges" type="checkbox"  style="direction: ltr; text-align: left;"> re-sealing of flanges
+        </td>
+        <td>
+                        <input value="replacement of lower bearing" type="checkbox" style="direction: ltr; text-align: left;"> replacement of lower bearing
+        </td>
+    </tr>
+    <tr>
+        <td>
+                        <input value="re-filling of oil" type="checkbox" style="direction: ltr; text-align: left;"> re-filling of oil
+        </td>
+        <td>
+                        <input value="repair of sealing unit" type="checkbox" style="direction: ltr; text-align: left;"> repair of sealing unit
+        </td>
+    </tr>
+    <tr>
+        <td>
+                        <input value="check of alignment" type="checkbox" style="direction: ltr; text-align: left;"> check of alignment
+        </td>
+        <td>
+                        <input value="repair of RAB" type="checkbox" style="direction: ltr; text-align: left;"> repair of RAB
+        </td>
+    </tr>
+    <tr>
+        <td>
+                        <input value="check of base metal" type="checkbox" style="direction: ltr; text-align: left;"> check of base metal
+        </td>
+        <td>
+                        <input value="tightening of studs of the main joint" type="checkbox" style="direction: ltr; text-align: left;"> tightening of studs of the main joint
+        </td>
+    </tr>
+    <tr>
+        <td>
+                        <input value="replacement of units" type="checkbox" style="direction: ltr; text-align: left;"> replacement of units
+        </td>
+        <td>
+                        <input value="check of the hydraulic part" type="checkbox" style="direction: ltr; text-align: left;"> check of the hydraulic part
+        </td>
+    </tr>
+
+</tbody></table>
     </form>
 </div>
 
+@*<div class="alloptions">
+    <textarea class="fulloptions" type="text" value=""></textarea><br>
+    <label>Test1
+        <input type="checkbox" class="cb" name="option1" value="Test1"/>Test1<br>
+    </label>
+    <label>Test2
+        <input type="checkbox" class="cb" name="option1" value="Test2"/>Test2<br>
+    </label>
+    <label>Test3
+        <input type="checkbox" class="cb" name="option1" value="Test3"/>Test3
+    </label>
+</div>
+<br>
+
+<div class="alloptions">
+    <textarea class="fulloptions" type="text" value=""></textarea><br>
+    <label>Test1
+        <input type="checkbox" class="cb" name="option1" value="Test1"/>Test1<br>
+    </label>
+    <label>Test2
+        <input type="checkbox" class="cb" name="option1" value="Test2"/>Test2<br>
+    </label>
+    <label>Test3
+        <input type="checkbox" class="cb" name="option1" value="Test3"/>Test3
+    </label>
+</div>
+*@
 <link href="/css/kendo.common.min.css" rel="stylesheet" />
 <link href="/css/kendo.default.min.css" rel="stylesheet" />
 
@@ -102,4 +188,23 @@
 
     }
 
+    $("#Repairs :checkbox").change(function () {
+
+        debugger;
+        var text = $("#Repairs :checked").map(function () {
+            return this.value;
+        }).get().join(" ");
+        $("#textRR").val(text);
+    });
+
+    //$(function () {
+    //    $(".alloptions  input[type='checkbox']").on('change', function () {
+    //        var parentDiv = $(this).closest('div.alloptions');
+    //        parentDiv.find('textarea.fulloptions').val(parentDiv.find('input[type="checkbox"]').filter(':checked').map(function (item) {
+    //            return this.value;
+    //        }).get().join(', ')
+    //        );
+    //    });
+    //});
+   
 </script>

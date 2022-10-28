@@ -81,6 +81,8 @@
         //console.log(data);
        
         //alert(data);
+        var result = confirm("Are You Sure ?");
+        if (result) {
         $.ajax({
             type: 'POST',
             url: '/Transient/EditNormalOperations',
@@ -95,6 +97,7 @@
                 //console.log('Failed ');
             }
         });
+        }
 
     }
 

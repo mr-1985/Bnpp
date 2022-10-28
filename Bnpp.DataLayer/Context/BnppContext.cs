@@ -34,6 +34,7 @@ namespace Bnpp.DataLayer.Context
         public DbSet<MechanicalEquipment> MechanicalEquipments { get; set; }
         public DbSet<Strcture> Strctures { get; set; }
         public DbSet<Commissioning> Commissioning { get; set; }
+        public DbSet<Backup> Backups { get; set; }
         #region Electrical
 
         public DbSet<Cable> Cables { get; set; }
@@ -109,6 +110,7 @@ namespace Bnpp.DataLayer.Context
         public DbSet<MaintenanceForm> MaintenanceForms { get; set; }
         public DbSet<DefectionReports> DefectionReports { get; set; }
         public DbSet<MaintenancePrograms> MaintenancePrograms { get; set; }
+        public DbSet<ProgramsDocument> ProgramsDocuments { get; set; }
         #endregion
 
         #region Inspectionresult

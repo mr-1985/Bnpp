@@ -84,7 +84,10 @@
             formData.append("mechanismDocuments", $("#imgMechanismUp")[0].files[0]);
             
             debugger;
- 
+
+
+        var result = confirm("Are You Sure ?");
+        if (result) {
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -94,6 +97,7 @@
             }).done(function() {
               $("#Tabs").load("/AgeingMechanism/Documents/");
             });
+        }
         }
 
 

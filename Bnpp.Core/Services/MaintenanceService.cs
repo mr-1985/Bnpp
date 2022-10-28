@@ -227,7 +227,7 @@ namespace Bnpp.Core.Services
 
         #endregion
 
-        #region
+        #region DefectionReports
 
         public List<DefectionReports> GetAllDefectionReports()
         {
@@ -297,7 +297,78 @@ namespace Bnpp.Core.Services
             _context.SaveChanges();
         }
 
+        #endregion
 
+
+        #region Program document
+
+        public List<ProgramsDocument> GetAllProgramsDocument()
+        {
+            return _context.ProgramsDocuments.Where(d => d.IsDelete == false).ToList();
+        }
+
+        public int AddProgramsDocument(ProgramsDocument document, IFormFile imgDocument)
+        {
+            document.CreateDate = DateTime.Now;
+
+            if (imgDocument != null)
+            {
+                if (document.ProgramsDocumentImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.ProgramsDocumentImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+                document.ProgramsDocumentImage = Guid.NewGuid() + Path.GetExtension(imgDocument.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.ProgramsDocumentImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgDocument.CopyTo(stream);
+                }
+            }
+
+            _context.Add(document);
+            _context.SaveChanges();
+            return document.ProgramsDocumentId;
+        }
+
+        public ProgramsDocument GetProgramsDocumentById(int documentId)
+        {
+            return _context.ProgramsDocuments.Find(documentId);
+        }
+
+        public void UpdateProgramsDocument(ProgramsDocument document, IFormFile imgDocument)
+        {
+            document.CreateDate = DateTime.Now;
+
+            if (imgDocument != null)
+            {
+                document.ProgramsDocumentImage = Guid.NewGuid() + Path.GetExtension(imgDocument.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.ProgramsDocumentImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgDocument.CopyTo(stream);
+                }
+            }
+
+            _context.Update(document);
+            _context.SaveChanges();
+            
+        }
+
+        public void DeleteProgramsDocument(int documentId)
+        {
+            var pdocument=GetProgramsDocumentById(documentId);
+            pdocument.IsDelete = true;
+            _context.Update(pdocument);
+            _context.SaveChanges();
+        }
 
         #endregion
 
@@ -335,6 +406,7 @@ namespace Bnpp.Core.Services
             UpdateMaintenancePrograms(pogram);
         }
 
+       
         #endregion
     }
 }

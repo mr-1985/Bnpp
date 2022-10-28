@@ -84,6 +84,9 @@
             formData.append("filehforms", $("#imgHformsUp")[0].files[0]);
             
             debugger;
+
+        var result = confirm("Are You Sure ?");
+        if (result) {
  
             $.ajax({
                 type: 'POST',
@@ -94,6 +97,7 @@
             }).done(function() {
               $("#Tabs").load("/Technical/HForms/");
             });
+        }
         }
 
 

@@ -186,6 +186,9 @@
         var data = $("#normalForm").serialize();
         //console.log(data);
         //alert(data);
+
+        var result = confirm("Are You Sure ?");
+        if (result) {
         $.ajax({
             type: 'POST',
             url: '/Inspection/EditRadiographicsTest',
@@ -193,7 +196,7 @@
             data: data,
             success: function () {
 
-                $("#newPage").load("/Inspection/RadiographicsTest/");
+                    $("#submenu").load("/Inspection/RadiographicsTest/");
             },
 
             error: function () {
@@ -201,6 +204,7 @@
                 //console.log('Failed ');
             }
         });
+        }
 
     }
 

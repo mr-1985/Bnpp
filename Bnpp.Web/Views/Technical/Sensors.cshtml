@@ -80,7 +80,7 @@
                         Technical Programs
                     </a>
                 </li>
-                <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
+                <li id="tab-button3" class="tab-buttons-li" style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;">
                     <a id="tab-button-a3" onclick="showPage8()" style="cursor:pointer;color: rgb(110, 110, 255);">
                         Sensors
                     </a>
@@ -109,14 +109,14 @@
                     <tbody>
                         <tr>
                            
-                           @* <td>
+                            <td>
                                 <input type="file" name="uploadedFile" id="uploadedFile" style="direction: ltr; text-align: left;">
-                                <input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">
-                            </td>*@
+                                @*<input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">*@
+                            </td>
 
                             <td>
                                 <form method="post" asp-controller="Technical" asp-action="ExportSensors">
-                                    <input type="submit" value="Export" />
+                                    <input type="submit" value="Export Excel" />
                                 </form>
                             </td>
 

@@ -114,6 +114,8 @@
 
         debugger;
 
+        var result = confirm("Are You Sure ?");
+        if (result) {
         $.ajax({
             type: 'POST',
             url: url,
@@ -121,8 +123,9 @@
             processData: false,
             contentType: false
         }).done(function () {
-            $("#newPage").load("/Inspection/LeakageForm/");
+                $("#submenu").load("/Inspection/LeakageForm/");
         });
+        }
     }
 
 

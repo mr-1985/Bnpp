@@ -6,6 +6,16 @@ using System.Globalization;
 using System;
 using Bnpp.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Bnpp.Core.Convertors;
+using Bnpp.Core.Services;
+using ClosedXML.Excel;
+using System.IO;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using static System.Net.WebRequestMethods;
 
 namespace Bnpp.Web.Controllers
 {
@@ -23,9 +33,7 @@ namespace Bnpp.Web.Controllers
             return View();
         }
 
-       
-
-
+      
         #region List of Defections
 
         [BindProperty]
@@ -35,6 +43,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult Defections()
         {
             return View(_maintenanceService.GetAllDefectList());
+        }
+
+        [HttpPost]
+        public IActionResult ExportDefections()
+        {
+            var defections = _maintenanceService.GetAllDefectList().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(defections.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ListofDefections.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateDefections()
@@ -124,7 +148,7 @@ namespace Bnpp.Web.Controllers
         }
         #endregion
 
-        #region
+        #region MaintenanceForms
 
         [BindProperty]
         public MaintenanceForm Form { get; set; }
@@ -133,6 +157,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult MaintenanceForms()
         {
             return View(_maintenanceService.GetAllMaintenanceForm());
+        }
+
+        [HttpPost]
+        public IActionResult ExportMaintenanceForms()
+        {
+            var maintenanceForms = _maintenanceService.GetAllMaintenanceForm().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(maintenanceForms.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "MaintenanceForms.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateMaintenanceForms()
@@ -201,7 +241,6 @@ namespace Bnpp.Web.Controllers
 
         #endregion
 
-
         #region  Spare Parts
 
 
@@ -212,6 +251,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult SpareParts()
         {
             return View(_maintenanceService.GetAllSpareParts());
+        }
+
+        [HttpPost]
+        public IActionResult ExportSpareParts()
+        {
+            var spareParts = _maintenanceService.GetAllSpareParts().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(spareParts.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "SparePartsList.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateSpareParts()
@@ -262,7 +317,6 @@ namespace Bnpp.Web.Controllers
 
         #endregion
 
-
         #region Maintenance Programs
 
         [BindProperty]
@@ -270,11 +324,46 @@ namespace Bnpp.Web.Controllers
 
         public IActionResult MaintenancePrograms()
         {
+            ViewData["Documents"] = _maintenanceService.GetAllProgramsDocument();
             return View(_maintenanceService.GetAllMaintenancePrograms());
+        }
+
+        [HttpPost]
+        public IActionResult ExportMaintenancePrograms()
+        {
+            var maintenancePrograms = _maintenanceService.GetAllMaintenancePrograms().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(maintenancePrograms.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "MaintenancePrograms.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateMaintenancePrograms()
         {
+            
+            List<SelectListItem> list = new List<SelectListItem>()
+            {
+                new SelectListItem { Value = "Oil system", Text = "Oil system"},
+                new SelectListItem { Value = "Component cooling circuit system", Text = "Component cooling circuit system" },
+                new SelectListItem { Value = "Sealing unit cooling system", Text = "Sealing unit cooling system" },
+                new SelectListItem { Value = "RAB cooling system", Text = "RAB cooling system" },
+                new SelectListItem { Value = "Isolated circuit system", Text = "Isolated circuit system" },
+                new SelectListItem { Value = "Torsion", Text = "Torsion" },
+                new SelectListItem { Value = "VACDSM system", Text = "VACDSM system" },
+                new SelectListItem { Value = "Removable part", Text = "Removable part" },
+                new SelectListItem { Value = "Support structures", Text = "Support structures" },
+                new SelectListItem { Value = "Spherical casing", Text = "Spherical casing" }
+            };
+           
+
+            ViewData["Types"] = new SelectList(list, "Value", "Text");
+
             return View();
         }
 
@@ -293,6 +382,23 @@ namespace Bnpp.Web.Controllers
 
         public IActionResult EditMaintenancePrograms(int id)
         {
+            List<SelectListItem> list = new List<SelectListItem>()
+            {
+                new SelectListItem { Value = "Oil system", Text = "Oil system"},
+                new SelectListItem { Value = "Component cooling circuit system", Text = "Component cooling circuit system" },
+                new SelectListItem { Value = "Sealing unit cooling system", Text = "Sealing unit cooling system" },
+                new SelectListItem { Value = "RAB cooling system", Text = "RAB cooling system" },
+                new SelectListItem { Value = "Isolated circuit system", Text = "Isolated circuit system" },
+                new SelectListItem { Value = "Torsion", Text = "Torsion" },
+                new SelectListItem { Value = "VACDSM system", Text = "VACDSM system" },
+                new SelectListItem { Value = "Removable part", Text = "Removable part" },
+                new SelectListItem { Value = "Support structures", Text = "Support structures" },
+                new SelectListItem { Value = "Spherical casing", Text = "Spherical casing" }
+            };
+
+
+            ViewData["Types"] = new SelectList(list, "Value", "Text");
+
             return View(_maintenanceService.GetMaintenanceProgramsById(id));
         }
 
@@ -319,6 +425,59 @@ namespace Bnpp.Web.Controllers
             return Json(" Diesel Generators Successfully Deleted.");
         }
 
+        #region Program Documents
+        [BindProperty]
+        public ProgramsDocument programsDocument { get; set; }
+
+        public IActionResult CreateProgramDocuments()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateProgramDocuments(IFormFile programsdoc)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _maintenanceService.AddProgramsDocument(programsDocument, programsdoc);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditProgramDocuments(int id)
+        {
+            return View(_maintenanceService.GetProgramsDocumentById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditProgramDocuments(IFormFile programsdoc)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _maintenanceService.UpdateProgramsDocument(programsDocument, programsdoc);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteProgramDocuments(string[] documentId)
+        {
+            foreach (string id in documentId)
+            {
+                _maintenanceService.DeleteProgramsDocument(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
         #endregion
 
         #region  Measurements
@@ -329,6 +488,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult Measurements()
         {
             return View(_maintenanceService.GetAllMeasurements());
+        }
+
+        [HttpPost]
+        public IActionResult ExportMeasurements()
+        {
+            var measurements = _maintenanceService.GetAllMeasurements().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(measurements.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ResultofMeasurementsbefore&afterMaintenance.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateMeasurements()
@@ -398,7 +573,6 @@ namespace Bnpp.Web.Controllers
 
         #endregion
 
-
         #region  Defects Report
 
         [BindProperty]
@@ -408,6 +582,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult DefectsReport()
         {
             return View(_maintenanceService.GetAllDefectionReports());
+        }
+
+        [HttpPost]
+        public IActionResult ExportDefectsReport()
+        {
+            var defectsReport = _maintenanceService.GetAllDefectionReports().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(defectsReport.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DefectionReports.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateDefectsReport()

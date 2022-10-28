@@ -45,7 +45,7 @@
                         Sensors Data
                     </a>
                 </li>
-                <li id="tab-button2" @*class="tab-buttons-li"*@ style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
+                <li id="tab-button2" @*class="tab-buttons-li"*@ style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;">
                     <a id="tab-buttona2" onclick="showPage2()" style="cursor:pointer;color: rgb(110, 110, 255);">
                         Water Chemical Data
                     </a>
@@ -70,25 +70,19 @@
                 <table cellpadding="3" cellspacing="0">
                     <tbody>
                         <tr>
-                            @*<td>
-                                Search:
-                                </td>
-                                <td>
-                                <input name="iSearch" type="text" id="iSearch" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td>
-                                <input type="submit" name="Button11" value="Search" id="Button11" class="butn-search" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td>
-                                <input type="submit" name="Button1" value="Export Excel" id="Button1" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td style="width: 60px;">
-                                &nbsp;
-                                </td>*@
+                            
                             <td>
                                 <input type="file" name="uploadedFile" id="uploadedFile" style="direction: ltr; text-align: left;">
-                                <input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">
+                                @*<input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">*@
                             </td>
+
+
+                            <td>
+                                <form method="post" asp-controller="Operational" asp-action="ExportChemicalWater">
+                                    <input type="submit" value="Export Excel" />
+                                </form>
+                            </td>
+
                             <td style="width: 200px;">
                                 <span id="message">
                                 </span>

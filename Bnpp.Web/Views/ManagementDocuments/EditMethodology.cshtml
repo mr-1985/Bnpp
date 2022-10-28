@@ -83,8 +83,9 @@
             
             //formData.append("file name", $("#fileName").val());
             formData.append("filemetholody", $("#imgMetholodyUp")[0].files[0]);
-            
- 
+
+        var result = confirm("Are You Sure ?");
+        if (result) {
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -94,6 +95,7 @@
             }).done(function() {
                $("#Tabs").load("/ManagementDocuments/Methodology/");
             });
+            }
         }
 
 

@@ -175,6 +175,8 @@
 
         debugger;
 
+        var result = confirm("Are You Sure ?");
+        if (result) {
         $.ajax({
             type: 'POST',
             url: url,
@@ -184,6 +186,7 @@
         }).done(function () {
             $("#newPage").load("/Technical/HeatTreatment/@Model.ComponentId");
         });
+        }
     }
 
     function showMechanicalPage() {

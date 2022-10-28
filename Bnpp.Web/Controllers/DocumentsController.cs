@@ -1,8 +1,12 @@
 ﻿using System;
+using Bnpp.Core.Convertors;
+using System.IO;
 using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Entities.AgeingDocuments;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace Bnpp.Web.Controllers
 {
@@ -29,6 +33,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult OperationalDocuments()
         {
             return View(_document.GetAllOperationalDocuments());
+        }
+
+        [HttpPost]
+        public IActionResult ExportOperationalDocuments()
+        {
+            var operationalDocuments = _document.GetAllOperationalDocuments().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(operationalDocuments.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "OperationalDocuments.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateOperationalDocuments()
@@ -82,6 +102,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult Drawing()
         {
             return View(_document.GetAllDrawing());
+        }
+
+        [HttpPost]
+        public IActionResult ExportDrawing()
+        {
+            var drawing = _document.GetAllDrawing().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(drawing.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Drawing.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CraeteDrawing()
@@ -139,6 +175,22 @@ namespace Bnpp.Web.Controllers
             return View(_document.GetAllStandard());
         }
 
+        [HttpPost]
+        public IActionResult ExportStandards()
+        {
+            var standards = _document.GetAllStandard().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(standards.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Standards.xlsx");
+                }
+            }
+            //return View();
+        }
+
         public IActionResult CraeteStandards()
         {
             return View();
@@ -191,6 +243,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult ManufacturerDocuments()
         {
             return View(_document.GetAllManufacturer());
+        }
+
+        [HttpPost]
+        public IActionResult ExportManufacturerDocuments()
+        {
+            var manufacturerDocuments = _document.GetAllManufacturer().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(manufacturerDocuments.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ManufacturerDocuments.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateManufacturerDocuments()
@@ -247,6 +315,21 @@ namespace Bnpp.Web.Controllers
             return View(_document.GetAllInstallation());
         }
 
+        [HttpPost]
+        public IActionResult ExportInstallationDocuments()
+        {
+            var installationDocuments = _document.GetAllInstallation().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(installationDocuments.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "InstallationDocuments.xlsx");
+                }
+            }
+            //return View();
+        }
 
         public IActionResult CraeteInstallationDocuments()
         {
@@ -299,6 +382,22 @@ namespace Bnpp.Web.Controllers
         public IActionResult MaintenanceDocuments()
         {
             return View(_document.GetAllMaintenanceDocument());
+        }
+
+        [HttpPost]
+        public IActionResult ExportMaintenanceDocuments()
+        {
+            var maintenanceDocuments = _document.GetAllMaintenanceDocument().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(maintenanceDocuments.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "MaintenanceDocuments.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateMaintenanceDocuments()
@@ -354,6 +453,23 @@ namespace Bnpp.Web.Controllers
         public IActionResult AgeingDocuments()
         {
             return View(_document.GetAllAgeing());
+        }
+
+
+        [HttpPost]
+        public IActionResult ExportAgeingDocuments()
+        {
+            var ageingDocuments = _document.GetAllAgeing().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(ageingDocuments.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "AgeingDocuments.xlsx");
+                }
+            }
+            //return View();
         }
 
         public IActionResult CreateAgeingDocuments()

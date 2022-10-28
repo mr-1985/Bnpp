@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Bnpp.DataLayer.Entities.Maintenance.MaintenancePrograms>
+﻿@using Bnpp.DataLayer.Entities.Maintenance
+@model IEnumerable<Bnpp.DataLayer.Entities.Maintenance.MaintenancePrograms>
 @{
     ViewData["Title"] = "MaintenancePrograms";
      Layout = null;
@@ -38,7 +39,7 @@
 
         <div class="tab-buttons">
             <ul>
-                <li id="tab-button1" class="tab-buttons-li" @*style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;"*@ @*style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;"*@>
+                <li id="tab-button1" class="tab-buttons-li" @*style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;"*@ style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;">
                     <a id="tab-button-a1"
                        onclick="showPage1()" style="cursor:pointer;color: rgb(0, 113, 158);">
                         Maintenance Programs
@@ -86,25 +87,18 @@
                 <table cellpadding="3" cellspacing="0">
                     <tbody>
                         <tr>
-                            @*<td>
-                                Search:
-                                </td>
-                                <td>
-                                <input name="iSearch" type="text" id="iSearch" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td>
-                                <input type="submit" name="Button11" value="Search" id="Button11" class="butn-search" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td>
-                                <input type="submit" name="Button1" value="Export Excel" id="Button1" style="direction: ltr; text-align: left;">
-                                </td>
-                                <td style="width: 60px;">
-                                &nbsp;
-                                </td>*@
+                           
                             <td>
                                 <input type="file" name="uploadedFile" id="uploadedFile" style="direction: ltr; text-align: left;">
-                                <input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">
+                                @*<input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">*@
                             </td>
+
+                            <td>
+                                <form method="post" asp-controller="Maintenance" asp-action="ExportMaintenancePrograms">
+                                    <input type="submit" value="Export Excel" />
+                                </form>
+                            </td>
+
                             <td style="width: 200px;">
                                 <span id="message">
                                 </span>
@@ -224,7 +218,102 @@
                     </div>
                     <br>
                     <br>
-                    <iframe style="display: none" id="if_-2_119" src=""></iframe>
+                    <hr />
+                    @{
+                        List<ProgramsDocument> maintenanceForms = ViewData["Documents"] as List<ProgramsDocument>;
+                    }
+                    <div id="tab1" class="tab-item" style="display: block;">
+
+                        <h1 id="iH1">Documents</h1>
+
+                       
+
+                        
+                            <div>
+
+                                <div id="iLoading22" style="display: none;">
+                                    <img src="/images/loading.gif">
+                                </div>
+
+
+                            <a class="btn-new-equip" style="cursor: pointer" onclick="CreateProgramDocument()">New</a>
+                                <input type="button" id="deleteProgram" class="btn-delete-equip" value="Delete">
+                                <br />
+                                @{
+                                    int rowCount1 = 1;
+                                }
+                                <table id="myTableDocument" cellpadding="3" cellspacing="0" class="show-table">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>
+                                                <input type="checkbox" id="checkAllPrograms" />
+                                            </th>
+                                            <th></th>
+                                            <th style="width: 150px">
+                                                <b>Code</b>
+                                            </th>
+                                            <th style="width: 250px">
+                                                <b>File Name</b>
+                                            </th>
+
+                                            <th style="width: 120px">
+                                                <b>Doc. Name </b>
+                                            </th>
+
+                                            @*<th style="width: 120px">
+                                            <b>	Description</b>
+                                            </th>*@
+                                            @*<th style="width: 120px">
+                                            <b>	Authorized</b>
+                                            </th>*@
+
+                                            <th style="width: 120px">
+                                                <b>Actions</b>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in maintenanceForms)
+                                        {
+                                            <tr role="row">
+                                                <td>
+                                                    <input type="checkbox" class="checkBoxProgram" value="@item.ProgramsDocumentId" />
+                                                </td>
+                                                <td>
+                                                    @rowCount
+                                                </td>
+
+                                                <td>
+                                                    @item.Code
+                                                </td>
+                                                <td>
+                                                    @item.Filename
+                                                </td>
+                                                <td>
+                                                    @item.DocumentName
+                                                </td>
+                                                <td>
+                                                    <a class="btn-edit-equip" onclick="EditProgramDocument(@item.ProgramsDocumentId)">
+                                                        Edit
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            rowCount1++;
+                                        }
+                                    </tbody>
+                                </table>
+
+
+                                <br>
+                                <div style="clear: both;">
+                                </div>
+                                <br>
+                                <br>
+                                <iframe style="display: none" id="if_-2_119" src=""></iframe>
+
+                            </div>
+                        
+                    </div>
 
                 </div>
             </div>
@@ -243,6 +332,11 @@
     $(document).ready(function () {
         $("#myTable").DataTable();
     });
+    
+
+    $(document).ready(function () {
+        $("#myTableDocument").DataTable();
+    });
 </script>
 <script>
 
@@ -255,6 +349,10 @@
     }
 
     
+    function EditProgramDocument(id) {
+        $("#newPage").load("/Maintenance/EditProgramDocuments/" + id);
+    }
+
      function showPage1() {
         $("#Tabs").load("/Maintenance/MaintenancePrograms/");
     }
@@ -316,6 +414,48 @@
 
     });
 
+    
+    
+
+    $("#checkAllPrograms").click(function () {
+        $(".checkBoxProgram").prop('checked',
+            $(this).prop('checked'));
+    });
+
+    $("#deleteProgram").click(function () {
+        var selectedIDs = new Array();
+
+        $('input:checkbox.checkBoxProgram').each(function () {
+            if ($(this).prop('checked')) {
+                selectedIDs.push($(this).val());
+            }
+        });
+
+        var result = confirm("are you sure you want to delete?");
+        if (result) {
+            $.ajax({
+                type: "POST",
+                url: "/Maintenance/DeleteProgramDocuments",
+                data: { "documentId": selectedIDs },
+
+                success: function (response) {
+                    $("#Tabs").load("/Maintenance/MaintenancePrograms/");
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+
+            });
+        }
+
+    });
+
+    function CreateProgramDocument() {
+        $("#newPage").load("/Maintenance/CreateProgramDocuments/");
+    }
 
 </script>
 

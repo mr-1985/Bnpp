@@ -409,6 +409,28 @@ namespace Bnpp.DataLayer.Migrations
                     b.ToTable("MechanismDocuments");
                 });
 
+            modelBuilder.Entity("Bnpp.DataLayer.Entities.Backup", b =>
+                {
+                    b.Property<int>("BackupId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("BackupId");
+
+                    b.ToTable("Backups");
+                });
+
             modelBuilder.Entity("Bnpp.DataLayer.Entities.BasicData.ChemicalComponent", b =>
                 {
                     b.Property<int>("ChemicalComponentId")
@@ -1992,6 +2014,38 @@ namespace Bnpp.DataLayer.Migrations
                     b.HasKey("MeasurementId");
 
                     b.ToTable("Measurements");
+                });
+
+            modelBuilder.Entity("Bnpp.DataLayer.Entities.Maintenance.ProgramsDocument", b =>
+                {
+                    b.Property<int>("ProgramsDocumentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DocumentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Filename")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ProgramsDocumentImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProgramsDocumentId");
+
+                    b.ToTable("ProgramsDocuments");
                 });
 
             modelBuilder.Entity("Bnpp.DataLayer.Entities.Maintenance.SpareParts", b =>

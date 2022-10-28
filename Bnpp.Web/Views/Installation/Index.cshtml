@@ -48,8 +48,15 @@
                            
                             <td>
                                 <input type="file" name="uploadedFile" id="uploadedFile" style="direction: ltr; text-align: left;">
-                                <input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">
+                              @*  <input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">*@
                             </td>
+
+                            <td>
+                                <form method="post" asp-controller="Installation" asp-action="ExportInstallation">
+                                    <input type="submit" value="Export Excel" />
+                                </form>
+                            </td>
+
                             <td style="width: 200px;">
                                 <span id="message">
                                 </span>

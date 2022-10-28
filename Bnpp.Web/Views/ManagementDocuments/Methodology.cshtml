@@ -35,7 +35,7 @@
 
         <div class="tab-buttons">
             <ul>
-                <li id="tab-button1" class="tab-buttons-li" @*style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;"*@ @*style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;"*@>
+                <li id="tab-button1" class="tab-buttons-li"  style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;">
                     <a id="tab-button-a1"
                        onclick="showPage1()" style="cursor:pointer;color: rgb(0, 113, 158);">
                         Methodology (TLAA)
@@ -59,21 +59,21 @@
 
         <div id="tab1" class="tab-item" style="display: block;">
 
-            <h1 id="iH1">Documents</h1>
+            <h1 id="iH1">Methodology (TLAA)</h1>
 
             <div class="bevel-box">
                 <table cellpadding="3" cellspacing="0">
                     <tbody>
                         <tr>
                            
-                           @* <td>
+                            <td>
                                 <input type="file" name="uploadedFile" id="uploadedFile" style="direction: ltr; text-align: left;">
-                                <input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">
-                            </td>*@
+                               @* <input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">*@
+                            </td>
 
                             <td>
                                 <form method="post" asp-controller="ManagementDocuments" asp-action="ExportMethodology">
-                                    <input type="submit" value="Export" />
+                                    <input type="submit" value="Export Excel" />
                                 </form>
                             </td>
 
@@ -227,8 +227,7 @@
 
     function showPage2() {
         $("#Tabs").load("/ManagementDocuments/OtherDocuments/");
-        //$("li").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
-        //$("li").css({"background-color": "yellow", "padding": "25px", "width": "200px"});
+        
 
     }
 
@@ -275,6 +274,10 @@
 
     });
 
+
+    //$('#tab-button1').click(function () {
+    //    $('#tab-button1').css({ 'background-color': 'rgb(208, 208, 208)', 'border-color': 'rgb(128, 128, 128)', 'font-weight': 'bold' });
+    //});
 
 </script>
 

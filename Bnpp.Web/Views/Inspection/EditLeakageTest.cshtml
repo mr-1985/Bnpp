@@ -147,6 +147,9 @@
         var data = $("#normalForm").serialize();
         //console.log(data);
         //alert(data);
+
+        var result = confirm("Are You Sure ?");
+        if (result) {
         $.ajax({
             type: 'POST',
             url: '/Inspection/EditLeakageTest',
@@ -154,7 +157,7 @@
             data: data,
             success: function () {
 
-                $("#newPage").load("/Inspection/LeakageTest/");
+                    $("#submenu").load("/Inspection/LeakageTest/");
             },
 
             error: function () {
@@ -162,6 +165,7 @@
                 //console.log('Failed ');
             }
         });
+        }
 
     }
 

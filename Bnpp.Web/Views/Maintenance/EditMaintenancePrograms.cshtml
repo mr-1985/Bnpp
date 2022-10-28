@@ -9,7 +9,7 @@
         <input type="hidden" asp-for="ProgramsId" />
         <table cellpadding="3" cellspacing="0">
             <tbody>
-                <tr>
+               @* <tr>
                     <td>
                         Maintenance Type:
                     </td>
@@ -19,6 +19,11 @@
                     <td>
                         <span asp-validation-for="MaintenanceType"></span>
                     </td>
+                </tr>*@
+                <tr>
+
+                    Type of Repair:
+                    <select class="form-control" style="direction: ltr; text-align: left;" asp-for="MaintenanceType" asp-items="@(ViewData["Types"] as SelectList)"></select>
                 </tr>
                 <tr>
                     <td>
@@ -86,6 +91,9 @@
         var data = $("#normalForm").serialize();
         //console.log(data);
         //alert(data);
+
+        var result = confirm("Are You Sure ?");
+        if (result) {
         $.ajax({
             type: 'POST',
             url: '/Maintenance/EditMaintenancePrograms',
@@ -100,6 +108,7 @@
                 //console.log('Failed ');
             }
         });
+        }
 
     }
 

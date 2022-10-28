@@ -66,6 +66,15 @@ namespace Bnpp.Core.Services.Interfaces
 
         #endregion
 
+        #region  Programs document
+
+        List<ProgramsDocument> GetAllProgramsDocument();
+        int AddProgramsDocument(ProgramsDocument document, IFormFile imgDocument);
+        ProgramsDocument GetProgramsDocumentById(int documentId);
+        void UpdateProgramsDocument(ProgramsDocument document, IFormFile imgDocument);
+        void DeleteProgramsDocument(int documentId);
+
+        #endregion
         #region Maintenance Programs
 
         List<MaintenancePrograms> GetAllMaintenancePrograms();
