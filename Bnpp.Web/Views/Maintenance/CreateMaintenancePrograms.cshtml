@@ -8,149 +8,104 @@
 
 <div id="normal">
     <form id="normalForm" asp-action="CreateMaintenancePrograms" method="post">
+        <h1>Type of Repairs</h1>
         <table cellpadding="3" cellspacing="0">
-            <tbody>
-                 <tr>
+            <tr>
+                <td>Type of Repair: </td>
+                <td>
+                    <select class="form-control" style="direction: ltr; text-align: left;" asp-for="MaintenanceType" asp-items="@(ViewData["Types"] as SelectList)"></select>
+                </td>
+            </tr>
 
-                    Type of Repair:
-                <select class="form-control" style="direction: ltr; text-align: left;" asp-for="MaintenanceType" asp-items="@(ViewData["Types"] as SelectList)"></select>
-                </tr>
-                <tr>
-                    <td>
-                        R.R:
-                    </td>
-                    <td>
-                        <textarea asp-for="RR" type="text" id="textRR" class="textRR" required="" style="direction: ltr; text-align: left;width: 400px;
-    height: 100px;"></textarea>
-                    </td>
-                    <td>
-                        <span asp-validation-for="RR"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        I.R:
-                    </td>
-                    <td>
-                        <textarea asp-for="IR" type="text" id="textRR" onclick="focus(this)"  style="direction: ltr; text-align: left;width: 400px;
-    height: 100px;"></textarea>
-                    </td>
-                    <td>
-                        <span asp-validation-for="IR"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        OVH:
-                    </td>
-                    <td>
-                        <textarea asp-for="OVH" type="text" id="textRR" style="direction: ltr; text-align: left;width: 400px;
-    height: 100px;"></textarea>
-                    </td>
-                    <td>
-                        <span asp-validation-for="OVH"></span>
-                    </td>
-                </tr>
-                
+          
 
-                <tr>
-                    <td>
-                        <input type="button" onclick="submitNormal()" value="Save" class="butn-save" style="direction: ltr; text-align: left;">
-                        <input type="button" onclick="showPage1()" value="Cancel" id="Button2" class="butn-cancel" style="direction: ltr; text-align: left;">
-                    </td>
-                </tr>
-            </tbody>
+            <tr>
+                <td>R.R: </td>
+                <td><textarea asp-for="RR" id="iRR" style='width:400px;height:100px' onclick='focused(this);'></textarea></td>
+            </tr>
+            <tr>
+                <td>I.R: </td>
+                <td><textarea asp-for="IR" id="iIR" style='width:400px;height:100px' onclick='focused(this);'></textarea></td>
+            </tr>
+            <tr>
+                <td>OVH: </td>
+                <td><textarea asp-for="OVH" id="iOVH" style='width:400px;height:100px' onclick='focused(this);'></textarea></td>
+            </tr>
+
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="button" onclick="submitNormal()" value="Save" class="butn-save" style="direction: ltr; text-align: left;">
+                    <input type="button" onclick="showPage1()" value="Cancel" id="Button2" class="butn-cancel" style="direction: ltr; text-align: left;">
+                </td>
+            </tr>
+            
         </table>
-        <table cellpadding="3" cellspacing="0">
-            <tbody id="Repairs">
-        <tr >
-        <td>
-            <input value="external examination" type="checkbox"  style="direction: ltr; text-align: left;"> external examination
-        </td>
-        <td>
-                        <input value="repair of motor" type="checkbox"  style="direction: ltr; text-align: left;"> repair of motor
-        </td>
-    </tr>
-    <tr>
-        <td>
-                        <input type="checkbox" value="repair of component equipment" style="direction: ltr; text-align: left;"> repair of component equipment
-        </td>
-        <td>
-                        <input type="checkbox" value="change of oil and lubricant" style="direction: ltr; text-align: left;"> change of oil and lubricant
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <input value="re-sealing of flanges" type="checkbox"  style="direction: ltr; text-align: left;"> re-sealing of flanges
-        </td>
-        <td>
-                        <input value="replacement of lower bearing" type="checkbox" style="direction: ltr; text-align: left;"> replacement of lower bearing
-        </td>
-    </tr>
-    <tr>
-        <td>
-                        <input value="re-filling of oil" type="checkbox" style="direction: ltr; text-align: left;"> re-filling of oil
-        </td>
-        <td>
-                        <input value="repair of sealing unit" type="checkbox" style="direction: ltr; text-align: left;"> repair of sealing unit
-        </td>
-    </tr>
-    <tr>
-        <td>
-                        <input value="check of alignment" type="checkbox" style="direction: ltr; text-align: left;"> check of alignment
-        </td>
-        <td>
-                        <input value="repair of RAB" type="checkbox" style="direction: ltr; text-align: left;"> repair of RAB
-        </td>
-    </tr>
-    <tr>
-        <td>
-                        <input value="check of base metal" type="checkbox" style="direction: ltr; text-align: left;"> check of base metal
-        </td>
-        <td>
-                        <input value="tightening of studs of the main joint" type="checkbox" style="direction: ltr; text-align: left;"> tightening of studs of the main joint
-        </td>
-    </tr>
-    <tr>
-        <td>
-                        <input value="replacement of units" type="checkbox" style="direction: ltr; text-align: left;"> replacement of units
-        </td>
-        <td>
-                        <input value="check of the hydraulic part" type="checkbox" style="direction: ltr; text-align: left;"> check of the hydraulic part
-        </td>
-    </tr>
 
-</tbody></table>
+        <table cellpadding="3" cellspacing="0">
+            <tr>
+                <td>
+                    <input runat="server" type="checkbox" id="i1" onchange='itemsChanged();' /> external examination
+                </td>
+                <td>
+                    <input runat="server" type="checkbox" id="i8" onchange='itemsChanged();' /> repair of motor
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input runat="server" type="checkbox" id="i2" onchange='itemsChanged();' /> repair of component equipment
+                </td>
+                <td>
+                    <input runat="server" type="checkbox" id="i9" onchange='itemsChanged();' /> change of oil and lubricant
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input runat="server" type="checkbox" id="i3" onchange='itemsChanged();' /> re-sealing of flanges
+                </td>
+                <td>
+                    <input runat="server" type="checkbox" id="i10" onchange='itemsChanged();' /> replacement of lower bearing
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input runat="server" type="checkbox" id="i4" onchange='itemsChanged();' /> re-filling of oil
+                </td>
+                <td>
+                    <input runat="server" type="checkbox" id="i11" onchange='itemsChanged();' /> repair of sealing unit
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input runat="server" type="checkbox" id="i5" onchange='itemsChanged();' /> check of alignment
+                </td>
+                <td>
+                    <input runat="server" type="checkbox" id="i12" onchange='itemsChanged();' /> repair of RAB
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input runat="server" type="checkbox" id="i6" onchange='itemsChanged();' /> check of base metal
+                </td>
+                <td>
+                    <input runat="server" type="checkbox" id="i13" onchange='itemsChanged();' /> tightening of studs of the main joint
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input runat="server" type="checkbox" id="i7" onchange='itemsChanged();' /> replacement of units
+                </td>
+                <td>
+                    <input runat="server" type="checkbox" id="i14" onchange='itemsChanged();' /> check of the hydraulic part
+                </td>
+            </tr>
+
+        </table>
+
     </form>
 </div>
 
-@*<div class="alloptions">
-    <textarea class="fulloptions" type="text" value=""></textarea><br>
-    <label>Test1
-        <input type="checkbox" class="cb" name="option1" value="Test1"/>Test1<br>
-    </label>
-    <label>Test2
-        <input type="checkbox" class="cb" name="option1" value="Test2"/>Test2<br>
-    </label>
-    <label>Test3
-        <input type="checkbox" class="cb" name="option1" value="Test3"/>Test3
-    </label>
-</div>
-<br>
 
-<div class="alloptions">
-    <textarea class="fulloptions" type="text" value=""></textarea><br>
-    <label>Test1
-        <input type="checkbox" class="cb" name="option1" value="Test1"/>Test1<br>
-    </label>
-    <label>Test2
-        <input type="checkbox" class="cb" name="option1" value="Test2"/>Test2<br>
-    </label>
-    <label>Test3
-        <input type="checkbox" class="cb" name="option1" value="Test3"/>Test3
-    </label>
-</div>
-*@
 <link href="/css/kendo.common.min.css" rel="stylesheet" />
 <link href="/css/kendo.default.min.css" rel="stylesheet" />
 
@@ -169,8 +124,9 @@
 <script type="text/javascript">
     function submitNormal() {
         var data = $("#normalForm").serialize();
-        //console.log(data);
-        //alert(data);
+        ////console.log(data);
+        ////alert(data);
+        debugger;
         $.ajax({
             type: 'POST',
             url: '/Maintenance/CreateMaintenancePrograms',
@@ -188,23 +144,76 @@
 
     }
 
-    $("#Repairs :checkbox").change(function () {
 
-        debugger;
-        var text = $("#Repairs :checked").map(function () {
-            return this.value;
-        }).get().join(" ");
-        $("#textRR").val(text);
-    });
 
-    //$(function () {
-    //    $(".alloptions  input[type='checkbox']").on('change', function () {
-    //        var parentDiv = $(this).closest('div.alloptions');
-    //        parentDiv.find('textarea.fulloptions').val(parentDiv.find('input[type="checkbox"]').filter(':checked').map(function (item) {
-    //            return this.value;
-    //        }).get().join(', ')
-    //        );
-    //    });
-    //});
-   
+    var itemFocused = null;
+    function focused(item) {
+        var val = item.value;
+        itemFocused = item;
+
+        document.getElementById('i1').checked = false;
+        document.getElementById('i2').checked = false;
+        document.getElementById('i3').checked = false;
+        document.getElementById('i4').checked = false;
+        document.getElementById('i5').checked = false;
+        document.getElementById('i6').checked = false;
+        document.getElementById('i7').checked = false;
+        document.getElementById('i8').checked = false;
+        document.getElementById('i9').checked = false;
+        document.getElementById('i10').checked = false;
+        document.getElementById('i11').checked = false;
+        document.getElementById('i12').checked = false;
+        document.getElementById('i13').checked = false;
+        document.getElementById('i14').checked = false;
+
+        var sp = val.split('\n');
+        for (var i = 0; i < sp.length; i++) {
+            sp[i] = sp[i].trim();
+            if (sp[i] == 'external examination') document.getElementById('i1').checked = true;
+            if (sp[i] == 'repair of component equipment') document.getElementById('i2').checked = true;
+            if (sp[i] == 're-sealing of flanges') document.getElementById('i3').checked = true;
+            if (sp[i] == 're-filling of oil') document.getElementById('i4').checked = true;
+            if (sp[i] == 'check of alignment') document.getElementById('i5').checked = true;
+            if (sp[i] == 'check of base metal') document.getElementById('i6').checked = true;
+            if (sp[i] == 'replacement of units') document.getElementById('i7').checked = true;
+            if (sp[i] == 'repair of motor') document.getElementById('i8').checked = true;
+            if (sp[i] == 'change of oil and lubricant') document.getElementById('i9').checked = true;
+            if (sp[i] == 'replacement of lower bearing') document.getElementById('i10').checked = true;
+            if (sp[i] == 'repair of sealing unit') document.getElementById('i11').checked = true;
+            if (sp[i] == 'repair of RAB') document.getElementById('i12').checked = true;
+            if (sp[i] == 'tightening of studs of the main joint') document.getElementById('i13').checked = true;
+            if (sp[i] == 'check of the hydraulic part') document.getElementById('i14').checked = true;
+        }
+    }
+
+    function addItem(s) {
+        var val = itemFocused.value;
+        if (val != "") val += "\n";
+        val += s;
+        itemFocused.value = val;
+    }
+
+    function itemsChanged() {
+        if (itemFocused == null) return;
+        itemFocused.value = "";
+        if (document.getElementById('i1').checked) addItem("external examination");
+        if (document.getElementById('i2').checked) addItem("repair of component equipment");
+        if (document.getElementById('i3').checked) addItem("re-sealing of flanges");
+        if (document.getElementById('i4').checked) addItem("re-filling of oil");
+        if (document.getElementById('i5').checked) addItem("check of alignment");
+        if (document.getElementById('i6').checked) addItem("check of base metal");
+        if (document.getElementById('i7').checked) addItem("replacement of units");
+        if (document.getElementById('i8').checked) addItem("repair of motor");
+        if (document.getElementById('i9').checked) addItem("change of oil and lubricant");
+        if (document.getElementById('i10').checked) addItem("replacement of lower bearing");
+        if (document.getElementById('i11').checked) addItem("repair of sealing unit");
+        if (document.getElementById('i12').checked) addItem("repair of RAB");
+        if (document.getElementById('i13').checked) addItem("tightening of studs of the main joint");
+        if (document.getElementById('i14').checked) addItem("check of the hydraulic part");
+    }
+
+    function init() {
+        itemFocused = document.getElementById('iRR');
+    }
+
 </script>
