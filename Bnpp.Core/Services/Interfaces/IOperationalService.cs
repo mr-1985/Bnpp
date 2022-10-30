@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Bnpp.Core.ViewModels;
 using Bnpp.DataLayer.Entities;
+using Bnpp.DataLayer.Entities.InspectionData;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch.Operations;
 
 namespace Bnpp.Core.Services.Interfaces
 {
@@ -38,6 +41,37 @@ namespace Bnpp.Core.Services.Interfaces
         int AddBasisAccident(DesignBasis designBasis);
         void UpdateBasisAccident(DesignBasis designBasis);
         void DeleteBasisAccident(int basisId);
+
+        #endregion
+
+        #region Normal Operation Document
+
+        List<InspectionDocument> GetAllNormalOperationDocument();
+        int AddNormalOperationDocument(InspectionDocument document, IFormFile imgnormal);
+        InspectionDocument GetNormalOperationDocumentById(int normalId);
+        void UpdateNormalOperationDocument(InspectionDocument document, IFormFile imgnormal);
+        void DeleteNormalOperationDocument(int normalId);
+
+        #endregion
+
+        #region Occurance Document
+
+        List<InspectionDocument> GetAllOccuranceDocument();
+        int AddOccuranceDocument(InspectionDocument document, IFormFile imgOccurance);
+        InspectionDocument GetOccuranceDocumentById(int occuranceId);
+        void UpdateOccuranceDocument(InspectionDocument document, IFormFile imgOccurance);
+        void DeleteOccuranceDocument(int occuranceId);
+
+
+        #endregion
+
+        #region  Basis accidents Document
+
+        List<InspectionDocument> GetAllBasisDocument();
+        int AddBasisDocument(InspectionDocument document, IFormFile imgBasis);
+        InspectionDocument GetBasisDocumentById(int basisId);
+        void UpdateBasisDocument(InspectionDocument document, IFormFile imgBasis);
+        void DeleteBasisDocument(int basisId);
 
         #endregion
     }

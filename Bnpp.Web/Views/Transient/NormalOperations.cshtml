@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Bnpp.Core.ViewModels.NormalOperationListViewModel>
+﻿@using Bnpp.DataLayer.Entities.InspectionData
+@model IEnumerable<Bnpp.Core.ViewModels.NormalOperationListViewModel>
 
 @{
     ViewData["Title"] = "NormalOperations";
@@ -36,7 +37,7 @@
 
         <div class="tab-buttons">
             <ul>
-                <li id="tab-button1" class="tab-buttons-li" @*style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;"*@ @*style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;"*@>
+                <li id="tab-button1" class="tab-buttons-li" @*style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;"*@ style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;">
                     <a id="tab-button-a1"
                        onclick="showPage1()" style="cursor:pointer;color: rgb(0, 113, 158);">
                         Normal Operations
@@ -166,7 +167,7 @@
                                         @rowCount
                                     </td>
                                     <td>
-                                        @item.CreateDate.ToString("yyyy/MM/dd")
+                                        @item.NormalDate.ToString("yyyy/MM/dd")
                                     </td>
                                     <td>
                                         @item.NameOfCondition
@@ -194,7 +195,102 @@
                     </div>
                     <br>
                     <br>
-                    <iframe style="display: none" id="if_-2_119" src=""></iframe>
+                    <hr />
+                    @{
+                        List<InspectionDocument> NormalDocuments = ViewData["NormalDocuments"] as List<InspectionDocument>;
+                    }
+                    <div id="tab1" class="tab-item" style="display: block;">
+
+                        <h1 id="iH1">Documents</h1>
+
+                       
+
+                        
+                            <div>
+
+                                <div id="iLoading22" style="display: none;">
+                                    <img src="/images/loading.gif">
+                                </div>
+
+
+                            <a class="btn-new-equip" style="cursor: pointer" onclick="CreateNormalDocument()">New</a>
+                                <input type="button" id="deleteProgram" class="btn-delete-equip" value="Delete">
+                                <br />
+                                @{
+                                    int rowCount1 = 1;
+                                }
+                                <table id="myTableDocument" cellpadding="3" cellspacing="0" class="show-table">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>
+                                                <input type="checkbox" id="checkAllPrograms" />
+                                            </th>
+                                            <th></th>
+                                            <th style="width: 150px">
+                                                <b>Code</b>
+                                            </th>
+                                            <th style="width: 250px">
+                                                <b>File Name</b>
+                                            </th>
+
+                                            <th style="width: 120px">
+                                                <b>Doc. Name </b>
+                                            </th>
+
+                                            @*<th style="width: 120px">
+                                            <b>	Description</b>
+                                            </th>*@
+                                            @*<th style="width: 120px">
+                                            <b>	Authorized</b>
+                                            </th>*@
+
+                                            <th style="width: 120px">
+                                                <b>Actions</b>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                     @foreach (var item in NormalDocuments)
+                                        {
+                                            <tr role="row">
+                                                <td>
+                                                    <input type="checkbox" class="checkBoxProgram" value="@item.InspectionId" />
+                                                </td>
+                                                <td>
+                                                    @rowCount
+                                                </td>
+
+                                                <td>
+                                                    @item.Code
+                                                </td>
+                                                <td>
+                                                    @item.Filename
+                                                </td>
+                                                <td>
+                                                    @item.DocumentName
+                                                </td>
+                                                <td>
+                                                <a class="btn-edit-equip" onclick="EditNormalDocument(@item.InspectionId)">
+                                                        Edit
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            rowCount1++;
+                                        }
+                                    </tbody>
+                                </table>
+
+
+                                <br>
+                                <div style="clear: both;">
+                                </div>
+                                <br>
+                                <br>
+                                <iframe style="display: none" id="if_-2_119" src=""></iframe>
+
+                            </div>
+                        
+                    </div>
 
                 </div>
             </div>
@@ -212,6 +308,10 @@
 <script>
     $(document).ready(function () {
         $("#myTable").DataTable();
+    });
+
+    $(document).ready(function () {
+        $("#myTableDocument").DataTable();
     });
 </script>
 <script>
@@ -282,7 +382,49 @@
 
     });
 
+    $("#checkAllPrograms").click(function () {
+        $(".checkBoxProgram").prop('checked',
+            $(this).prop('checked'));
+    });
 
+    $("#deleteProgram").click(function () {
+        var selectedIDs = new Array();
+
+        $('input:checkbox.checkBoxProgram').each(function () {
+            if ($(this).prop('checked')) {
+                selectedIDs.push($(this).val());
+            }
+        });
+
+        var result = confirm("are you sure you want to delete?");
+        if (result) {
+            $.ajax({
+                type: "POST",
+                url: "/Transient/DeleteNormalOperationsDocuments",
+                data: { "normalDocId": selectedIDs },
+
+                success: function (response) {
+                    $("#Tabs").load("/Transient/NormalOperations/");
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+
+            });
+        }
+
+    });
+
+    function CreateNormalDocument() {
+        $("#newPage").load("/Transient/CreateNormalOperationsDocument/");
+    }
+
+    function EditNormalDocument(id) {
+        $("#newPage").load("/Transient/EditNormalOperationsDocument/" + id);
+    }
 </script>
 
 

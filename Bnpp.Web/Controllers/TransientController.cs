@@ -8,6 +8,10 @@ using Bnpp.DataLayer.Entities;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using Bnpp.DataLayer.Entities.InspectionData;
+using Bnpp.Core.Services;
+using Bnpp.DataLayer.Entities.Maintenance;
+using Microsoft.AspNetCore.Http;
 
 namespace Bnpp.Web.Controllers
 {
@@ -32,6 +36,7 @@ namespace Bnpp.Web.Controllers
 
         public IActionResult NormalOperations()
         {
+            ViewData["NormalDocuments"] = _operational.GetAllNormalOperationDocument();
             return View(_operational.GetAllNormalOperations());
         }
 
@@ -57,6 +62,8 @@ namespace Bnpp.Web.Controllers
         public OperationalData NormalOperation { get; set; }
         public IActionResult CreateNormalOperations()
         {
+            
+
             return View();
         }
 
@@ -71,7 +78,7 @@ namespace Bnpp.Web.Controllers
             if (StartDates != "")
             {
                 string[] std = StartDates.Split('/');
-                NormalOperation.CreateDate = new DateTime(int.Parse(std[2]),
+                NormalOperation.NormalDate = new DateTime(int.Parse(std[2]),
                     int.Parse(std[0]),
                     int.Parse(std[1]),
                     new GregorianCalendar()
@@ -100,7 +107,7 @@ namespace Bnpp.Web.Controllers
             if (StartDates != "")
             {
                 string[] std = StartDates.Split('/');
-                NormalOperation.CreateDate = new DateTime(int.Parse(std[2]),
+                NormalOperation.NormalDate = new DateTime(int.Parse(std[2]),
                     int.Parse(std[0]),
                     int.Parse(std[1]),
                     new GregorianCalendar()
@@ -129,6 +136,7 @@ namespace Bnpp.Web.Controllers
 
         public IActionResult OperationalOccurence()
         {
+            ViewData["OccurenceDocuments"] = _operational.GetAllOccuranceDocument();
             return View(_operational.GetAllOccurances());
         }
 
@@ -162,7 +170,7 @@ namespace Bnpp.Web.Controllers
             if (StartDates != "")
             {
                 string[] std = StartDates.Split('/');
-                Occurance.CreateDate = new DateTime(int.Parse(std[2]),
+                Occurance.OccuranceDate = new DateTime(int.Parse(std[2]),
                     int.Parse(std[0]),
                     int.Parse(std[1]),
                     new GregorianCalendar()
@@ -190,7 +198,7 @@ namespace Bnpp.Web.Controllers
             if (StartDates != "")
             {
                 string[] std = StartDates.Split('/');
-                Occurance.CreateDate = new DateTime(int.Parse(std[2]),
+                Occurance.OccuranceDate = new DateTime(int.Parse(std[2]),
                     int.Parse(std[0]),
                     int.Parse(std[1]),
                     new GregorianCalendar()
@@ -218,6 +226,8 @@ namespace Bnpp.Web.Controllers
         public DesignBasis Basis { get; set; }
         public IActionResult DesignBasisAccidents()
         {
+
+            ViewData["BasisDocuments"] = _operational.GetAllBasisDocument();
             return View(_operational.GetAllBasisAccident());
         }
 
@@ -248,7 +258,7 @@ namespace Bnpp.Web.Controllers
             if (StartDates != "")
             {
                 string[] std = StartDates.Split('/');
-                Basis.CreateDate = new DateTime(int.Parse(std[2]),
+                Basis.DesignBasisDate = new DateTime(int.Parse(std[2]),
                     int.Parse(std[0]),
                     int.Parse(std[1]),
                     new GregorianCalendar()
@@ -262,6 +272,7 @@ namespace Bnpp.Web.Controllers
 
         public IActionResult EditDesignBasisAccidents(int id)
         {
+
             return View(_operational.GetBasisAccidentById(id));
         }
 
@@ -276,7 +287,7 @@ namespace Bnpp.Web.Controllers
             if (StartDates != "")
             {
                 string[] std = StartDates.Split('/');
-                Basis.CreateDate = new DateTime(int.Parse(std[2]),
+                Basis.DesignBasisDate = new DateTime(int.Parse(std[2]),
                     int.Parse(std[0]),
                     int.Parse(std[1]),
                     new GregorianCalendar()
@@ -298,7 +309,168 @@ namespace Bnpp.Web.Controllers
         }
 
 
-        
+
+
+
+        [BindProperty]
+        public InspectionDocument Document { get; set; }
+        #endregion
+
+        #region NormalOperations Document
+
+        public IActionResult CreateNormalOperationsDocument()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateNormalOperationsDocument(IFormFile normalDocs)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _operational.AddNormalOperationDocument(Document, normalDocs);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditNormalOperationsDocument(int id)
+        {
+            return View(_operational.GetNormalOperationDocumentById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditNormalOperationsDocument(IFormFile normalDocs)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _operational.UpdateNormalOperationDocument(Document, normalDocs);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteNormalOperationsDocuments(string[] normalDocId)
+        {
+            foreach (string id in normalDocId)
+            {
+                _operational.DeleteNormalOperationDocument(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
+
+        #region Occurences Document
+
+        public IActionResult CreateOccurenceDocument()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateOccurenceDocument(IFormFile occurenceDocs)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _operational.AddOccuranceDocument(Document, occurenceDocs);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditOccurenceDocument(int id)
+        {
+            return View(_operational.GetOccuranceDocumentById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditOccurenceDocument(IFormFile occurenceDocs)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _operational.UpdateOccuranceDocument(Document, occurenceDocs);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeleteOccurenceDocuments(string[] occurenceId)
+        {
+            foreach (string id in occurenceId)
+            {
+                _operational.DeleteOccuranceDocument(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
+
+        #region DesignBasisAccidents Document
+
+        public IActionResult CreateBasisDocument()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateBasisDocument(IFormFile basisDocs)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _operational.AddBasisDocument(Document, basisDocs);
+
+            return new JsonResult("success");
+        }
+
+
+        public IActionResult EditBasisDocument(int id)
+        {
+            return View(_operational.GetBasisDocumentById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditBasisDocument(IFormFile basisDocs)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _operational.UpdateBasisDocument(Document, basisDocs);
+
+            return new JsonResult("success");
+        }
+
+
+        public IActionResult DeleteBasisAccidentDocument(string[] basisId)
+        {
+            foreach (string id in basisId)
+            {
+                _operational.DeleteBasisDocument(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
 
         #endregion
 

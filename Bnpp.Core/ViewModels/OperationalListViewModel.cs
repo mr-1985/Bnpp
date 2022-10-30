@@ -23,6 +23,7 @@ namespace Bnpp.Core.ViewModels
         [Required(ErrorMessage = "please insert  {0}")]
         public string Occurrances { get; set; }
         public DateTime CreateDate { get; set; }
+        public DateTime NormalDate { get; set; }
     }
 
     public class OccuranceListViewModel
@@ -41,6 +42,7 @@ namespace Bnpp.Core.ViewModels
         [Required(ErrorMessage = "please insert  {0}")]
         public string Occurrances { get; set; }
         public DateTime CreateDate { get; set; }
+        public DateTime OccurranceDate { get; set; }
     }
 
     public class DesignBasisListViewModel
@@ -59,5 +61,6 @@ namespace Bnpp.Core.ViewModels
         [Required(ErrorMessage = "please insert  {0}")]
         public string Occurrances { get; set; }
         public DateTime CreateDate { get; set; }
+        public DateTime BasisDate { get; set; }
     }
 }
