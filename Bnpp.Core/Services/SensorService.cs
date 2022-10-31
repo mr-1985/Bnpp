@@ -1,9 +1,12 @@
 ﻿using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Context;
 using Bnpp.DataLayer.Entities.BasicData;
+using Bnpp.DataLayer.Entities.InspectionData;
 using Bnpp.DataLayer.Entities.OperationalDatas;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -146,8 +149,82 @@ namespace Bnpp.Core.Services
             _context.SaveChanges();
         }
 
+
+
         #endregion
 
+        #region Sensor Document
 
+        public List<InspectionDocument> GetAllSensorDocument()
+        {
+            return _context.InspectionDocuments.Where(o => o.TypeId == 13 && o.IsDelete == false).ToList();
+        }
+
+        public int AddSensorDocument(InspectionDocument document, IFormFile imgSensor)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 13;
+
+            if (imgSensor != null)
+            {
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgSensor.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgSensor.CopyTo(stream);
+                }
+            }
+
+            _context.Add(document);
+            _context.SaveChanges();
+            return document.InspectionId;
+        }
+
+        public InspectionDocument GetSensorDocumentById(int sensorId)
+        {
+            return _context.InspectionDocuments.SingleOrDefault(s => s.InspectionId == sensorId && s.TypeId == 13);
+        }
+
+        public void UpdateSensorDocument(InspectionDocument document, IFormFile imgSensor)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 13;
+
+            if (imgSensor != null)
+            {
+                if (document.InspectionImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgSensor.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgSensor.CopyTo(stream);
+                }
+            }
+
+            _context.Update(document);
+            _context.SaveChanges();
+        }
+
+        public void DeleteSensorDocument(int sensorId)
+        {
+            var sensordoc = GetSensorDocumentById(sensorId);
+            sensordoc.IsDelete = true;
+            _context.Update(sensordoc);
+            _context.SaveChanges();
+        }
+
+        #endregion
     }
 }

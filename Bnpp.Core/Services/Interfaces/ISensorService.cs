@@ -1,7 +1,9 @@
 ﻿using Bnpp.Core.ViewModels;
 using Bnpp.DataLayer.Context;
 using Bnpp.DataLayer.Entities;
+using Bnpp.DataLayer.Entities.InspectionData;
 using Bnpp.DataLayer.Entities.OperationalDatas;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +40,16 @@ namespace Bnpp.Core.Services.Interfaces
 
         void UpdateEnvironmental(Operational environmental);
         void DeleteEnvironmental(int environmentalId);
+
+        #endregion
+
+        #region Sensor Document
+
+        List<InspectionDocument> GetAllSensorDocument();
+        int AddSensorDocument(InspectionDocument document, IFormFile imgSensor);
+        InspectionDocument GetSensorDocumentById(int sensorId);
+        void UpdateSensorDocument(InspectionDocument document, IFormFile imgSensor);
+        void DeleteSensorDocument(int sensorId);
 
         #endregion
     }

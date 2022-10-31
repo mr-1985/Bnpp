@@ -210,12 +210,9 @@
                     </table>
 
 
+                    
                     <br>
-                    <div style="clear: both;">
-                    </div>
-                    <br>
-                    <br>
-                    <iframe style="display: none" id="if_-2_119" src=""></iframe>
+                    <input type="button" value="Sensor Positions" onclick="SensorDocument()" class="butn-sensor-position" style="direction: ltr; text-align: left;">
 
                 </div>
             </div>
@@ -296,6 +293,13 @@
 
     });
 
+
+    
+    function SensorDocument() {
+        $("#newPage").load("/Operational/SensorDocument/");
+    }
+
+   
 
 </script>
 

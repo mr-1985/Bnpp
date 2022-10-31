@@ -1,8 +1,10 @@
 ﻿using Bnpp.Core.Convertors;
 using Bnpp.Core.Services;
 using Bnpp.Core.Services.Interfaces;
+using Bnpp.DataLayer.Entities.InspectionData;
 using Bnpp.DataLayer.Entities.OperationalDatas;
 using ClosedXML.Excel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
@@ -216,6 +218,57 @@ namespace Bnpp.Web.Controllers
             {
                 _sensor.DeleteEnvironmental(Convert.ToInt32(id));
             }
+            return new JsonResult("success");
+        }
+
+        #endregion
+
+
+        [BindProperty]
+        public InspectionDocument Document { get; set; }
+
+        #region Sensor Document
+
+        public IActionResult SensorDocument()
+        {
+            return View(_sensor.GetAllSensorDocument());
+        }
+
+        public IActionResult CreateSensorDocument()
+        { 
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateSensorDocument(IFormFile sensorDocs)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _sensor.AddSensorDocument(Document, sensorDocs);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditSensorDocument(int id)
+        {
+            return View(_sensor.GetSensorDocumentById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditSensorDocument(IFormFile sensorDocs)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _sensor.UpdateSensorDocument(Document, sensorDocs);
+
             return new JsonResult("success");
         }
 
