@@ -67,5 +67,15 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteChemicalWaterDocument(int waterId);
 
         #endregion
+
+        #region Environmental Sensor
+
+        List<InspectionDocument> GetAllEnvironmentalSensor();
+        int AddEnvironmentalSensor(InspectionDocument document, IFormFile imgEnvironmental);
+        InspectionDocument GetEnvironmentalSensorById(int environmentalId);
+        void UpdateEnvironmentalSensor(InspectionDocument document, IFormFile imgEnvironmental);
+        void DeleteEnvironmentalSensor(int environmentalId);
+
+        #endregion
     }
 }

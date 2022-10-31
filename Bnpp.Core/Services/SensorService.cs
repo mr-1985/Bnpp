@@ -301,6 +301,83 @@ namespace Bnpp.Core.Services
             _context.SaveChanges();
         }
 
+
+
+        #endregion
+
+
+        #region Environmental Sensor
+
+        public List<InspectionDocument> GetAllEnvironmentalSensor()
+        {
+            return _context.InspectionDocuments.Where(o => o.TypeId == 15 && o.IsDelete == false).ToList();
+        }
+
+        public int AddEnvironmentalSensor(InspectionDocument document, IFormFile imgEnvironmental)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 15;
+
+            if (imgEnvironmental != null)
+            {
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgEnvironmental.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgEnvironmental.CopyTo(stream);
+                }
+            }
+
+            _context.Add(document);
+            _context.SaveChanges();
+            return document.InspectionId;
+        }
+
+        public InspectionDocument GetEnvironmentalSensorById(int environmentalId)
+        {
+            return _context.InspectionDocuments.SingleOrDefault(s => s.InspectionId == environmentalId && s.TypeId == 15);
+        }
+
+        public void UpdateEnvironmentalSensor(InspectionDocument document, IFormFile imgEnvironmental)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 15;
+
+            if (imgEnvironmental != null)
+            {
+                if (document.InspectionImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgEnvironmental.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgEnvironmental.CopyTo(stream);
+                }
+            }
+
+            _context.Update(document);
+            _context.SaveChanges();
+        }
+
+        public void DeleteEnvironmentalSensor(int environmentalId)
+        {
+            var environsensor = GetEnvironmentalSensorById(environmentalId);
+            environsensor.IsDelete = true;
+            _context.Update(environsensor);
+            _context.SaveChanges();
+        }
+
         #endregion
     }
 }

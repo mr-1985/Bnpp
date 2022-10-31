@@ -209,12 +209,10 @@
                     </table>
 
 
+
                     <br>
-                    <div style="clear: both;">
-                    </div>
-                    <br>
-                    <br>
-                    <iframe style="display: none" id="if_-2_119" src=""></iframe>
+                    <input type="button" value="Sensor Positions" onclick="EnvironmentalSensorDocument()" class="butn-sensor-position" style="direction: ltr; text-align: left;">
+
 
                 </div>
             </div>
@@ -294,7 +292,9 @@
 
     });
 
-
+    function EnvironmentalSensorDocument() {
+        $("#newPage").load("/Operational/EnvironmentalSensor/");
+    }
 </script>
 
 

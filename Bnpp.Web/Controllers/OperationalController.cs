@@ -235,7 +235,7 @@ namespace Bnpp.Web.Controllers
         }
 
         public IActionResult CreateSensorDocument()
-        { 
+        {
             return View();
         }
 
@@ -329,8 +329,8 @@ namespace Bnpp.Web.Controllers
             return new JsonResult("success");
         }
 
-        
-             public IActionResult DeleteWaterSensorDocument(string[] watersensorId)
+
+        public IActionResult DeleteWaterSensorDocument(string[] watersensorId)
         {
             foreach (string id in watersensorId)
             {
@@ -339,6 +339,67 @@ namespace Bnpp.Web.Controllers
 
             return Json(" Diesel Generators Successfully Deleted.");
         }
+
+        #endregion
+
+        #region Environmental Sensor
+
+        public IActionResult EnvironmentalSensor()
+        {
+            return View(_sensor.GetAllEnvironmentalSensor());
+        }
+
+
+        public IActionResult CreateEnvironmentalSensor()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateEnvironmentalSensor(IFormFile environmentalDocs)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _sensor.AddEnvironmentalSensor(Document, environmentalDocs);
+
+            return new JsonResult("success");
+        }
+
+
+        public IActionResult EditEnvironmentalSensor(int id)
+        {
+            return View(_sensor.GetEnvironmentalSensorById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditEnvironmentalSensor(IFormFile environmentalDocs)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _sensor.UpdateEnvironmentalSensor(Document, environmentalDocs);
+
+            return new JsonResult("success");
+        }
+
+
+        public IActionResult DeleteEnvironmentalSensor(string[] environsensorId)
+        {
+            foreach (string id in environsensorId)
+            {
+                _sensor.DeleteEnvironmentalSensor(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
         #endregion
     }
 }
