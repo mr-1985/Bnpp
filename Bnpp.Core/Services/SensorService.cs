@@ -225,6 +225,82 @@ namespace Bnpp.Core.Services
             _context.SaveChanges();
         }
 
+
+
+        #endregion
+
+        #region Chemical Water Document
+
+        public List<InspectionDocument> GetAllChemicalWaterDocument()
+        {
+            return _context.InspectionDocuments.Where(o => o.TypeId == 14 && o.IsDelete == false).ToList();
+        }
+
+        public int AddChemicalWaterDocument(InspectionDocument document, IFormFile imgWater)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 14;
+
+            if (imgWater != null)
+            {
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgWater.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgWater.CopyTo(stream);
+                }
+            }
+
+            _context.Add(document);
+            _context.SaveChanges();
+            return document.InspectionId;
+        }
+
+        public InspectionDocument GetChemicalWaterDocumentById(int waterId)
+        {
+            return _context.InspectionDocuments.SingleOrDefault(s => s.InspectionId == waterId && s.TypeId == 14);
+        }
+
+        public void UpdateChemicalWaterDocument(InspectionDocument document, IFormFile imgWater)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 14;
+
+            if (imgWater != null)
+            {
+                if (document.InspectionImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgWater.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgWater.CopyTo(stream);
+                }
+            }
+
+            _context.Update(document);
+            _context.SaveChanges();
+        }
+
+        public void DeleteChemicalWaterDocument(int waterId)
+        {
+            var sensorwaterdoc = GetChemicalWaterDocumentById(waterId);
+            sensorwaterdoc.IsDelete = true;
+            _context.Update(sensorwaterdoc);
+            _context.SaveChanges();
+        }
+
         #endregion
     }
 }

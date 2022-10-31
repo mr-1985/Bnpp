@@ -14,22 +14,27 @@ namespace Bnpp.Core.Services.Interfaces
 {
     public interface ISensorService
     {
+
         #region Sensor
+
         List<Operational> GetAllSensors();
         int AddSensor(Operational sensor);
         Operational GetSensorById(int sensorId);
 
         void UpdateSensor(Operational sensor);
         void DeleteSensor(int sensorId);
+
         #endregion
 
         #region Chemical Water
+
         List<Operational> GetAllChemicalWater();
         int AddChemicalWater(Operational water);
         Operational GetChemicalWaterById(int waterId);
 
         void UpdateChemicalWater(Operational water);
         void DeleteChemicalWater(int waterId);
+
         #endregion
 
         #region Environmental
@@ -50,6 +55,16 @@ namespace Bnpp.Core.Services.Interfaces
         InspectionDocument GetSensorDocumentById(int sensorId);
         void UpdateSensorDocument(InspectionDocument document, IFormFile imgSensor);
         void DeleteSensorDocument(int sensorId);
+
+        #endregion
+
+        #region Chemical Water Document
+
+        List<InspectionDocument> GetAllChemicalWaterDocument();
+        int AddChemicalWaterDocument(InspectionDocument document, IFormFile imgWater);
+        InspectionDocument GetChemicalWaterDocumentById(int waterId);
+        void UpdateChemicalWaterDocument(InspectionDocument document, IFormFile imgWater);
+        void DeleteChemicalWaterDocument(int waterId);
 
         #endregion
     }

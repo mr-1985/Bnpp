@@ -95,6 +95,19 @@
     </div>
 
 </div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.unobtrusive-ajax.min.js"></script>
+
+
+<script src="/js/datatables.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#myTableDocument").DataTable();
+    });
+</script>
 <script>
     function CreateSensorDocuments() {
         $("#newPage").load("/Operational/CreateSensorDocument/");
@@ -103,5 +116,41 @@
     function EditSensorDocuments(id) {
         $("#newPage").load("/Operational/EditSensorDocument/" + id);
     }
+
+    $("#checkAllPrograms").click(function () {
+        $(".checkBoxProgram").prop('checked',
+            $(this).prop('checked'));
+    });
+
+    $("#deleteProgram").click(function () {
+        var selectedIDs = new Array();
+
+        $('input:checkbox.checkBoxProgram').each(function () {
+            if ($(this).prop('checked')) {
+                selectedIDs.push($(this).val());
+            }
+        });
+
+        var result = confirm("are you sure you want to delete?");
+        if (result) {
+            $.ajax({
+                type: "POST",
+                url: "/Operational/DeleteSensorDocument",
+                data: { "sensorId": selectedIDs },
+
+                success: function (response) {
+                    $("#newPage").load("/Operational/SensorDocument/");
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+
+            });
+        }
+
+    });
 </script>
                          

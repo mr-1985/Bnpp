@@ -272,6 +272,73 @@ namespace Bnpp.Web.Controllers
             return new JsonResult("success");
         }
 
+        public IActionResult DeleteSensorDocument(string[] sensorId)
+        {
+            foreach (string id in sensorId)
+            {
+                _sensor.DeleteSensorDocument(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
+
+        #region Water Sensor Document
+
+        public IActionResult WaterSensorDocument()
+        {
+            return View(_sensor.GetAllChemicalWaterDocument());
+        }
+
+        public IActionResult CreateWaterSensorDocument()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateWaterSensorDocument(IFormFile waterDocs)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _sensor.AddChemicalWaterDocument(Document, waterDocs);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditWaterSensorDocument(int id)
+        {
+            return View(_sensor.GetChemicalWaterDocumentById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditWaterSensorDocument(IFormFile waterDocs)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _sensor.UpdateChemicalWaterDocument(Document, waterDocs);
+
+            return new JsonResult("success");
+        }
+
+        
+             public IActionResult DeleteWaterSensorDocument(string[] watersensorId)
+        {
+            foreach (string id in watersensorId)
+            {
+                _sensor.DeleteChemicalWaterDocument(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
         #endregion
     }
 }
