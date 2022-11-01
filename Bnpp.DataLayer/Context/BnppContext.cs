@@ -35,6 +35,7 @@ namespace Bnpp.DataLayer.Context
         public DbSet<Strcture> Strctures { get; set; }
         public DbSet<Commissioning> Commissioning { get; set; }
         public DbSet<Backup> Backups { get; set; }
+        public DbSet<DamageabilityReport> DamageabilityReports { get; set; }
         #region Electrical
 
         public DbSet<Cable> Cables { get; set; }

@@ -1123,6 +1123,52 @@ namespace Bnpp.DataLayer.Migrations
                     b.ToTable("Commissioning");
                 });
 
+            modelBuilder.Entity("Bnpp.DataLayer.Entities.DamageabilityReport", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Actionperiodofequipment")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Damageabilitypercoiledcycles")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Damageabilityperuncoiledcycles")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Lifetimeofequipmentindesign")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("LifetimeofequipmentperRALDS")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Locationofthecheckpoint")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Totaldamageabilityofequipment")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("DamageabilityReports");
+                });
+
             modelBuilder.Entity("Bnpp.DataLayer.Entities.DesignBasis", b =>
                 {
                     b.Property<int>("BasislId")
