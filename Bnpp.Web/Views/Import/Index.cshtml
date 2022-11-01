@@ -60,6 +60,9 @@
                     <input type="checkbox" id="checkAll" />
                 </th>
                 <th></th>
+                <th>
+                    <b>Location of the checkpoint</b>
+                </th>
                 <th >
                     <b>Action period of equipment (years)</b>
                 </th>
@@ -86,6 +89,7 @@
                         Total damageability of equipment
                     </b>
                 </th>
+
                @* <th style="width: 120px">
                     <b>Actions</b>
                 </th>*@
@@ -100,6 +104,9 @@
                     </td>
                     <td>
                         @rowCount
+                    </td>
+                    <td>
+                        @item.Locationofthecheckpoint
                     </td>
                     <td>
                         @item.Actionperiodofequipment
@@ -119,7 +126,7 @@
                     <td>
                         @item.Totaldamageabilityofequipment
                     </td>
-                   @* <td>
+                    @* <td>
                         <a class="btn-edit-equip" href="/Structure/EditStructure/@item.ID">
                             Edit
                         </a>

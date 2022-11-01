@@ -85,6 +85,7 @@ namespace Bnpp.Web.Controllers
                     report.LifetimeofequipmentperRALDS = LifetimeofequipmentperRALDS;
                     report.Lifetimeofequipmentindesign = Lifetimeofequipmentindesign;
                     report.Actionperiodofequipment = Actionperiodofequipment;
+                    report.Locationofthecheckpoint=location;
 
 
                     _reportService.AddNewDamageabilityReport(report);
