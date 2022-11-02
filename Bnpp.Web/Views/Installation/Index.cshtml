@@ -56,6 +56,19 @@
                                     <input type="submit" value="Export Excel" />
                                 </form>
                             </td>
+                            <td>
+                                <form method="post" asp-controller="Installation" asp-action="ImportExcel" enctype="multipart/form-data">
+
+                                    <input type="file" name="postedFile" />
+                                    <input type="submit" value="Import Excel" />
+
+                                </form>
+                            </td>
+
+                         @*   <form asp-controller="Home" asp-action="Index" method="post" enctype="multipart/form-data">
+                                <input type="file" name="postedFile" />
+                                <input type="submit" value="Import" />
+                            </form>*@
 
                             <td style="width: 200px;">
                                 <span id="message">

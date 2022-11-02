@@ -3,16 +3,26 @@ using Bnpp.Core.Services.Interfaces;
 using Bnpp.Core.ViewModels;
 using Bnpp.DataLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+
+using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient;
+using System.Data.OleDb;
+using System.IO;
+
+
 
 namespace Bnpp.Web.Controllers
 {
     public class StructureController : Controller
     {
         private IStructureService _structure;
+       
 
         public StructureController(IStructureService structure)
         {
             _structure = structure;
+           
         }
 
         [Route("Structure")]
@@ -73,6 +83,8 @@ namespace Bnpp.Web.Controllers
 
             return Json("Structures Successfully Deleted.");
         }
+
+        
 
 
     }
