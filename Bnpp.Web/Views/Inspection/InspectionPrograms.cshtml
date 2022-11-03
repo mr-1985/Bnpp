@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Bnpp.DataLayer.Entities.InspectionData.TypicalPrograms>
+﻿@using Bnpp.DataLayer.Entities.InspectionData
+@model IEnumerable<Bnpp.DataLayer.Entities.InspectionData.TypicalPrograms>
 @{
 	ViewData["Title"] = "InspectionPrograms";
 	Layout = null;
@@ -66,173 +67,268 @@
 			<div style="clear:both;"></div>
 		</div>
 		<div id="submenu">
-		<div id="tab1" class="tab-item" style="display: block;">
+			<div id="tab1" class="tab-item" style="display: block;">
 
-			<h1 id="iH1">Inspection Programs</h1>
-
-
-			<div class="tab-buttons">
-				<ul>
-					<li id="tab-button1" class="tab-buttons-li" @*style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;"*@ style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;">
-						<a id="tab-button-a1"
-						   onclick="showsubPage1()" style="cursor:pointer;color: rgb(0, 113, 158);">
-							Typical Programs
-						</a>
-					</li>
-					<li id="tab-button2" @*class="tab-buttons-li"*@ style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
-						<a id="tab-buttona2" onclick="showsubPage2()" style="cursor:pointer;color: rgb(110, 110, 255);">
-							Working Programs
-						</a>
-					</li>
-				</ul>
-
-				<div style="clear:both;"></div>
-			</div>
+				<h1 id="iH1">Inspection Programs</h1>
 
 
+				<div class="tab-buttons">
+					<ul>
+						<li id="tab-button1" class="tab-buttons-li" @*style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;"*@ style="background-color: rgb(208, 208, 208); border-color: rgb(128, 128, 128); font-weight: bold;">
+							<a id="tab-button-a1"
+							   onclick="showsubPage1()" style="cursor:pointer;color: rgb(0, 113, 158);">
+								Typical Programs
+							</a>
+						</li>
+						<li id="tab-button2" @*class="tab-buttons-li"*@ style="background-color: rgb(240, 240, 240); border-color: rgb(192, 192, 192); font-weight: normal;">
+							<a id="tab-buttona2" onclick="showsubPage2()" style="cursor:pointer;color: rgb(110, 110, 255);">
+								Working Programs
+							</a>
+						</li>
+					</ul>
 
-
-			<div id="newPage">
-				<div class="bevel-box">
-					<table cellpadding="3" cellspacing="0">
-						<tbody>
-							<tr>
-
-								<td>
-									<input type="file" name="uploadedFile" id="uploadedFile" style="direction: ltr; text-align: left;">
-									@* <input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">*@
-								</td>
-
-
-								<td>
-									<form method="post" asp-controller="Inspection" asp-action="ExportInspectionPrograms">
-										<input type="submit" value="Export Excel" />
-									</form>
-								</td>
-
-								<td style="width: 200px;">
-									<span id="message">
-									</span>
-								</td>
-								<td>
-									<a href="#" target="_blank">
-										<img src="/images/print_printer.png" title="Print">
-									</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-
+					<div style="clear:both;"></div>
 				</div>
-				<div>
 
-					<div id="iLoading22" style="display: none;">
-						<img src="/images/loading.gif">
-					</div>
 
-					<h1>Typical Programs</h1>
 
-					<a class="btn-new-equip" style="cursor:pointer" onclick="Create()">New</a>
-					<input type="button" id="delete" class="btn-delete-equip" value="Delete">
-					<br />
-					@{
-						int rowCount = 1;
-					}
-					<table id="myTable" cellpadding="3" cellspacing="0" class="show-table">
-						<thead>
-							<tr role="row">
-								<th>
-									<input type="checkbox" id="checkAll" />
-								</th>
-								<th></th>
-								<th style="width: 150px">
-									<b>No. of T.P</b>
-								</th>
-								<th style="width: 250px">
-									<b>equip. Code</b>
-								</th>
-								<th style="width: 120px">
-									<b>Equip. Name</b>
-								</th>
-								<th style="width: 120px">
-									<b>Test Method</b>
-								</th>
 
-								<th style="width: 120px">
-									<b>	Test Standard</b>
-								</th>
-								<th style="width: 120px">
-									<b>	Control Percent</b>
-								</th>
-								<th style="width: 120px">
-									<b>	Period</b>
-								</th>
-								<th style="width: 120px">
-									<b>	Weld Type</b>
-								</th>
-								<th style="width: 120px">
-									<b>	Remarks</b>
-								</th>
+				<div id="newPage">
+					<div class="bevel-box">
+						<table cellpadding="3" cellspacing="0">
+							<tbody>
+								<tr>
 
-								<th style="width: 120px">
-									<b>Actions</b>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach (var item in Model)
-							{
-								<tr role="row">
 									<td>
-										<input type="checkbox" class="checkBox" value="@item.TypicalId" />
-									</td>
-									<td>
-										@rowCount
-									</td>
-									<td>
-										@item.TP
-									</td>
-									<td>
-										@item.EquipCode
-									</td>
-									<td>
-										@item.EquipName
-									</td>
-									<td>
-										@item.TestMethod
-									</td>
-									<td>
-										@item.TestStandard
+										<input type="file" name="uploadedFile" id="uploadedFile" style="direction: ltr; text-align: left;">
+										@* <input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">*@
 									</td>
 
-									<td> @item.ControlPercent</td>
-									<td> @item.Period</td>
-									<td> @item.WeldType</td>
-									<td> @item.Remarks</td>
-									<td>
 
-										<a class="btn-edit-equip" onclick="Edit(@item.TypicalId)">
-											Edit
+									<td>
+										<form method="post" asp-controller="Inspection" asp-action="ExportInspectionPrograms">
+											<input type="submit" value="Export Excel" />
+										</form>
+									</td>
+
+									<td style="width: 200px;">
+										<span id="message">
+										</span>
+									</td>
+									<td>
+										<a href="#" target="_blank">
+											<img src="/images/print_printer.png" title="Print">
 										</a>
 									</td>
 								</tr>
-								rowCount++;
-							}
-						</tbody>
-					</table>
+							</tbody>
+						</table>
 
-
-					<br>
-					<div style="clear: both;">
 					</div>
-					<br>
-					<br>
-					<iframe style="display: none" id="if_-2_119" src=""></iframe>
+					<div>
 
+						<div id="iLoading22" style="display: none;">
+							<img src="/images/loading.gif">
+						</div>
+
+						<h1>Typical Programs</h1>
+
+						<a class="btn-new-equip" style="cursor:pointer" onclick="Create()">New</a>
+						<input type="button" id="delete" class="btn-delete-equip" value="Delete">
+						<br />
+						@{
+							int rowCount = 1;
+						}
+						<table id="myTable" cellpadding="3" cellspacing="0" class="show-table">
+							<thead>
+								<tr role="row">
+									<th>
+										<input type="checkbox" id="checkAll" />
+									</th>
+									<th></th>
+									<th style="width: 150px">
+										<b>No. of T.P</b>
+									</th>
+									<th style="width: 250px">
+										<b>equip. Code</b>
+									</th>
+									<th style="width: 120px">
+										<b>Equip. Name</b>
+									</th>
+									<th style="width: 120px">
+										<b>Test Method</b>
+									</th>
+
+									<th style="width: 120px">
+										<b>	Test Standard</b>
+									</th>
+									<th style="width: 120px">
+										<b>	Control Percent</b>
+									</th>
+									<th style="width: 120px">
+										<b>	Period</b>
+									</th>
+									<th style="width: 120px">
+										<b>	Weld Type</b>
+									</th>
+									<th style="width: 120px">
+										<b>	Remarks</b>
+									</th>
+
+									<th style="width: 120px">
+										<b>Actions</b>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var item in Model)
+								{
+									<tr role="row">
+										<td>
+											<input type="checkbox" class="checkBox" value="@item.TypicalId" />
+										</td>
+										<td>
+											@rowCount
+										</td>
+										<td>
+											@item.TP
+										</td>
+										<td>
+											@item.EquipCode
+										</td>
+										<td>
+											@item.EquipName
+										</td>
+										<td>
+											@item.TestMethod
+										</td>
+										<td>
+											@item.TestStandard
+										</td>
+
+										<td> @item.ControlPercent</td>
+										<td> @item.Period</td>
+										<td> @item.WeldType</td>
+										<td> @item.Remarks</td>
+										<td>
+
+											<a class="btn-edit-equip" onclick="Edit(@item.TypicalId)">
+												Edit
+											</a>
+										</td>
+									</tr>
+									rowCount++;
+								}
+							</tbody>
+						</table>
+
+
+						<br>
+						<div style="clear: both;">
+						</div>
+						<br>
+						<br>
+						<hr />
+						@{
+							List<InspectionDocument> TypicalyDocuments = ViewData["TypicalDocuments"] as List<InspectionDocument>;
+						}
+						<div id="tab1" class="tab-item" style="display: block;">
+
+							<h1 id="iH1">Documents</h1>
+
+
+
+
+							<div>
+
+								<div id="iLoading22" style="display: none;">
+									<img src="/images/loading.gif">
+								</div>
+
+
+								<a class="btn-new-equip" style="cursor: pointer" onclick="CreateTypicalyDocument()">New</a>
+								<input type="button" id="deleteProgram" class="btn-delete-equip" value="Delete">
+								<br />
+								@{
+									int rowCount1 = 1;
+								}
+								<table id="myTableDocument" cellpadding="3" cellspacing="0" class="show-table">
+									<thead>
+										<tr role="row">
+											<th>
+												<input type="checkbox" id="checkAllPrograms" />
+											</th>
+											<th></th>
+											<th style="width: 150px">
+												<b>Code</b>
+											</th>
+											<th style="width: 250px">
+												<b>File Name</b>
+											</th>
+
+											<th style="width: 120px">
+												<b>Doc. Name </b>
+											</th>
+
+											@*<th style="width: 120px">
+											<b>	Description</b>
+											</th>*@
+											@*<th style="width: 120px">
+											<b>	Authorized</b>
+											</th>*@
+
+											<th style="width: 120px">
+												<b>Actions</b>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach (var item in TypicalyDocuments)
+										{
+											<tr role="row">
+												<td>
+													<input type="checkbox" class="checkBoxProgram" value="@item.InspectionId" />
+												</td>
+												<td>
+													@rowCount
+												</td>
+
+												<td>
+													@item.Code
+												</td>
+												<td>
+													@item.Filename
+												</td>
+												<td>
+													@item.DocumentName
+												</td>
+												<td>
+													<a class="btn-edit-equip" onclick="EditTypicalyDocument(@item.InspectionId)">
+														Edit
+													</a>
+												</td>
+											</tr>
+											rowCount1++;
+										}
+									</tbody>
+								</table>
+
+
+								<br>
+								<div style="clear: both;">
+								</div>
+								<br>
+								<br>
+								<iframe style="display: none" id="if_-2_119" src=""></iframe>
+
+							</div>
+
+						</div>
+
+					</div>
 				</div>
-			</div>
 
-		</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -325,5 +421,48 @@
 
 	});
 
+	 function CreateTypicalyDocument() {
+		$("#newPage").load("/Inspection/CreateTypicalDocument/");
+    }
+
+	function EditTypicalyDocument(id) {
+		$("#newPage").load("/Inspection/EditTypicalDocument/" + id);
+    }
+
+	 $("#checkAllPrograms").click(function () {
+        $(".checkBoxProgram").prop('checked',
+            $(this).prop('checked'));
+    });
+
+    $("#deleteProgram").click(function () {
+        var selectedIDs = new Array();
+
+        $('input:checkbox.checkBoxProgram').each(function () {
+            if ($(this).prop('checked')) {
+                selectedIDs.push($(this).val());
+            }
+        });
+
+        var result = confirm("are you sure you want to delete?");
+        if (result) {
+            $.ajax({
+                type: "POST",
+				url: "/Inspection/DeletTypicalDocument",
+				data: { "typicalsId": selectedIDs },
+
+                success: function (response) {
+					$("#Tabs").load("/Inspection/InspectionPrograms/");
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+
+            });
+        }
+
+    });
 
 </script>

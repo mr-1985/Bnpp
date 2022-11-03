@@ -1081,7 +1081,79 @@ namespace Bnpp.Core.Services
             _context.SaveChanges();
         }
 
+        #endregion
 
+        #region Typical Programs Document
+
+        public List<InspectionDocument> GetAllTypicalDocument()
+        {
+            return _context.InspectionDocuments.Where(o => o.TypeId == 16 && o.IsDelete == false).ToList();
+        }
+
+        public int AddTypicalDocument(InspectionDocument document, IFormFile imgTypical)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 16;
+
+            if (imgTypical != null)
+            {
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgTypical.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgTypical.CopyTo(stream);
+                }
+            }
+
+            _context.Add(document);
+            _context.SaveChanges();
+            return document.InspectionId;
+        }
+
+        public InspectionDocument GetTypicalDocumentById(int typicalId)
+        {
+            return _context.InspectionDocuments.SingleOrDefault(s => s.InspectionId == typicalId && s.TypeId == 16);
+        }
+
+        public void UpdateTypicalDocument(InspectionDocument document, IFormFile imgTypical)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 16;
+
+            if (imgTypical != null)
+            {
+                if (document.InspectionImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgTypical.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgTypical.CopyTo(stream);
+                }
+            }
+
+            _context.Update(document);
+            _context.SaveChanges();
+        }
+
+        public void DeleteTypicalDocument(int typicalId)
+        {
+            var typicaldoc = GetTypicalDocumentById(typicalId);
+            typicaldoc.IsDelete = true;
+            _context.Update(typicaldoc);
+            _context.SaveChanges();
+        }
 
         #endregion
     }

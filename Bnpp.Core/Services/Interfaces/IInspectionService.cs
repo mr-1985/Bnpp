@@ -201,5 +201,15 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteMetalThickness(int metalId);
 
         #endregion
+
+        #region Typical Programs Document
+
+        List<InspectionDocument> GetAllTypicalDocument();
+        int AddTypicalDocument(InspectionDocument document, IFormFile imgTypical);
+        InspectionDocument GetTypicalDocumentById(int typicalId);
+        void UpdateTypicalDocument(InspectionDocument document, IFormFile imgTypical);
+        void DeleteTypicalDocument(int typicalId);
+
+        #endregion
     }
 }

@@ -8,6 +8,7 @@ using Bnpp.Core.Services;
 using Bnpp.Core.Services.Interfaces;
 using Bnpp.DataLayer.Entities.InspectionData;
 using Bnpp.DataLayer.Entities.Maintenance;
+using Bnpp.DataLayer.Entities.OperationalDatas;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -824,6 +825,7 @@ namespace Bnpp.Web.Controllers
 
         public IActionResult InspectionPrograms()
         {
+            ViewData["TypicalDocuments"] = _inspectionService.GetAllTypicalDocument();
             return View(_inspectionService.GetAlTypicalPrograms());
         }
 
@@ -1604,7 +1606,59 @@ namespace Bnpp.Web.Controllers
             return Json(" Diesel Generators Successfully Deleted.");
         }
 
-        
+
+        #endregion
+
+        #region Typical Document
+
+        public IActionResult CreateTypicalDocument()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateTypicalDocument(IFormFile typicalyDocs)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _inspectionService.AddTypicalDocument(Document, typicalyDocs);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditTypicalDocument(int id)
+        {
+            return View(_inspectionService.GetTypicalDocumentById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditTypicalDocument(IFormFile typicalyDocs)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _inspectionService.UpdateTypicalDocument(Document, typicalyDocs);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeletTypicalDocument(string[] typicalsId)
+        {
+            foreach (string id in typicalsId)
+            {
+                _inspectionService.DeleteTypicalDocument(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
         #endregion
 
     }
