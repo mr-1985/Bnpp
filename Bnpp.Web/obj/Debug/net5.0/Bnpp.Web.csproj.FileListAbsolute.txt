@@ -1344,3 +1344,5 @@ C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\runtimes\win\lib\net
 C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.0\System.Diagnostics.PerformanceCounter.dll
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Inspection\CreateTypicalDocument.cshtml.g.cs
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Inspection\EditTypicalDocument.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Inspection\CreateWorkingDocument.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Inspection\EditWorkingDocument.cshtml.g.cs

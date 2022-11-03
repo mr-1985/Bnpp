@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Bnpp.DataLayer.Entities.InspectionData.WorkingPrograms>
+﻿@using Bnpp.DataLayer.Entities.InspectionData
+@model IEnumerable<Bnpp.DataLayer.Entities.InspectionData.WorkingPrograms>
 @{
     ViewData["Title"] = "WorkingPrograms";
     Layout = null;
@@ -173,12 +174,107 @@
     </table>
 
 
-    <br>
-    <div style="clear: both;">
-    </div>
-    <br>
-    <br>
-    <iframe style="display: none" id="if_-2_119" src=""></iframe>
+   <br>
+						<div style="clear: both;">
+						</div>
+						<br>
+						<br>
+						<hr />
+						@{
+                List<InspectionDocument> WorkinggDocuments = ViewData["WorkingDocuments"] as List<InspectionDocument>;
+						}
+						<div id="tab1" class="tab-item" style="display: block;">
+
+							<h1 id="iH1">Documents</h1>
+
+
+
+
+							<div>
+
+								<div id="iLoading22" style="display: none;">
+									<img src="/images/loading.gif">
+								</div>
+
+
+                    <a class="btn-new-equip" style="cursor: pointer" onclick="CreateWorkingyDocument()">New</a>
+								<input type="button" id="deleteProgram" class="btn-delete-equip" value="Delete">
+								<br />
+								@{
+									int rowCount1 = 1;
+								}
+								<table id="myTableDocument" cellpadding="3" cellspacing="0" class="show-table">
+									<thead>
+										<tr role="row">
+											<th>
+												<input type="checkbox" id="checkAllPrograms" />
+											</th>
+											<th></th>
+											<th style="width: 150px">
+												<b>Code</b>
+											</th>
+											<th style="width: 250px">
+												<b>File Name</b>
+											</th>
+
+											<th style="width: 120px">
+												<b>Doc. Name </b>
+											</th>
+
+											@*<th style="width: 120px">
+											<b>	Description</b>
+											</th>*@
+											@*<th style="width: 120px">
+											<b>	Authorized</b>
+											</th>*@
+
+											<th style="width: 120px">
+												<b>Actions</b>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+                            @foreach (var item in WorkinggDocuments)
+										{
+											<tr role="row">
+												<td>
+													<input type="checkbox" class="checkBoxProgram" value="@item.InspectionId" />
+												</td>
+												<td>
+													@rowCount
+												</td>
+
+												<td>
+													@item.Code
+												</td>
+												<td>
+													@item.Filename
+												</td>
+												<td>
+													@item.DocumentName
+												</td>
+												<td>
+                                        <a class="btn-edit-equip" onclick="EditWorkingyDocument(@item.InspectionId)">
+														Edit
+													</a>
+												</td>
+											</tr>
+											rowCount1++;
+										}
+									</tbody>
+								</table>
+
+
+								<br>
+								<div style="clear: both;">
+								</div>
+								<br>
+								<br>
+								<iframe style="display: none" id="if_-2_119" src=""></iframe>
+
+							</div>
+
+						</div>
 
 </div>
 </div>
@@ -234,7 +330,7 @@
     function showsubPage2() {
         $("#submenu").load("/Inspection/WorkingPrograms/");
     }
-    showsubPage1
+    
 
     $("#checkAll").click(function () {
         $(".checkBox").prop('checked',
@@ -269,6 +365,50 @@
             }
 
         });
+        }
+
+    });
+
+    function CreateWorkingyDocument() {
+        $("#newPage").load("/Inspection/CreateWorkingDocument/");
+    }
+
+    function EditWorkingyDocument(id) {
+        $("#newPage").load("/Inspection/EditWorkingDocument/" + id);
+    }
+
+    $("#checkAllPrograms").click(function () {
+        $(".checkBoxProgram").prop('checked',
+            $(this).prop('checked'));
+    });
+
+    $("#deleteProgram").click(function () {
+        var selectedIDs = new Array();
+
+        $('input:checkbox.checkBoxProgram').each(function () {
+            if ($(this).prop('checked')) {
+                selectedIDs.push($(this).val());
+            }
+        });
+
+        var result = confirm("are you sure you want to delete?");
+        if (result) {
+            $.ajax({
+                type: "POST",
+                url: "/Inspection/DeletWorkingDocument",
+                data: { "workingsId": selectedIDs },
+
+                success: function (response) {
+                    $("#submenu").load("/Inspection/WorkingPrograms/");
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+
+            });
         }
 
     });

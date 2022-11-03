@@ -1542,6 +1542,7 @@ namespace Bnpp.Web.Controllers
 
         public IActionResult WorkingPrograms()
         {
+            ViewData["WorkingDocuments"] = _inspectionService.GetAllWorkingDocument();
             return View(_inspectionService.GetAlWorkingPrograms());
         }
 
@@ -1654,6 +1655,58 @@ namespace Bnpp.Web.Controllers
             foreach (string id in typicalsId)
             {
                 _inspectionService.DeleteTypicalDocument(Convert.ToInt32(id));
+            }
+
+            return Json(" Diesel Generators Successfully Deleted.");
+        }
+
+        #endregion
+
+        #region Working Programs Document
+
+        public IActionResult CreateWorkingDocument()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateWorkingDocument(IFormFile workingyDocs)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _inspectionService.AddWorkingDocument(Document, workingyDocs);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult EditWorkingDocument(int id)
+        {
+            return View(_inspectionService.GetWorkingDocumentById(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditWorkingDocument(IFormFile workingyDocs)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+
+            _inspectionService.UpdateWorkingDocument(Document, workingyDocs);
+
+            return new JsonResult("success");
+        }
+
+        public IActionResult DeletWorkingDocument(string[] workingsId)
+        {
+            foreach (string id in workingsId)
+            {
+                _inspectionService.DeleteWorkingDocument(Convert.ToInt32(id));
             }
 
             return Json(" Diesel Generators Successfully Deleted.");

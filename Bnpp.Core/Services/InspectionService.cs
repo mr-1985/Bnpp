@@ -1155,6 +1155,84 @@ namespace Bnpp.Core.Services
             _context.SaveChanges();
         }
 
+
+
+        #endregion
+
+
+
+        #region Working Programs Document
+
+        public List<InspectionDocument> GetAllWorkingDocument()
+        {
+            return _context.InspectionDocuments.Where(o => o.TypeId == 17 && o.IsDelete == false).ToList();
+        }
+
+        public int AddWorkingDocument(InspectionDocument document, IFormFile imgWorking)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 17;
+
+            if (imgWorking != null)
+            {
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgWorking.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgWorking.CopyTo(stream);
+                }
+            }
+
+            _context.Add(document);
+            _context.SaveChanges();
+            return document.InspectionId;
+        }
+
+        public InspectionDocument GetWorkingDocumentById(int workingId)
+        {
+            return _context.InspectionDocuments.SingleOrDefault(s => s.InspectionId == workingId && s.TypeId == 17);
+        }
+
+        public void UpdateWorkingDocument(InspectionDocument document, IFormFile imgWorking)
+        {
+            document.CreateDate = DateTime.Now;
+            document.TypeId = 17;
+
+            if (imgWorking != null)
+            {
+                if (document.InspectionImage != null)
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                }
+
+
+                document.InspectionImage = Guid.NewGuid() + Path.GetExtension(imgWorking.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/DocumentImage", document.InspectionImage);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgWorking.CopyTo(stream);
+                }
+            }
+
+            _context.Update(document);
+            _context.SaveChanges();
+        }
+
+        public void DeleteWorkingDocument(int workingId)
+        {
+            var workindoc = GetWorkingDocumentById(workingId);
+            workindoc.IsDelete = true;
+            _context.Update(workindoc);
+            _context.SaveChanges();
+        }
+
         #endregion
     }
 }

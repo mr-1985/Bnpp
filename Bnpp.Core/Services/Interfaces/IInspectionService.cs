@@ -211,5 +211,15 @@ namespace Bnpp.Core.Services.Interfaces
         void DeleteTypicalDocument(int typicalId);
 
         #endregion
+
+        #region Working Programs Document
+
+        List<InspectionDocument> GetAllWorkingDocument();
+        int AddWorkingDocument(InspectionDocument document, IFormFile imgWorking);
+        InspectionDocument GetWorkingDocumentById(int workingId);
+        void UpdateWorkingDocument(InspectionDocument document, IFormFile imgWorking);
+        void DeleteWorkingDocument(int workingId);
+
+        #endregion
     }
 }
