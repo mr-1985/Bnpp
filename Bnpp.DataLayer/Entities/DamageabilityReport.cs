@@ -33,8 +33,18 @@ namespace Bnpp.DataLayer.Entities
         [MaxLength(200)]
         public string Locationofthecheckpoint { get; set; }
 
-       
+        [MaxLength(200)]
+        public string AllowableCUF { get; set; }
 
+        [MaxLength(200)]
+        public string AllowableLifeTime { get; set; }
+
+        [MaxLength(200)]
+        public string ChangingRatio { get; set; }
+
+
+
+        public DateTime ReportDate { get; set; }
         public DateTime CreateDate { get; set; }
         public bool IsDelete { get; set; }
     }

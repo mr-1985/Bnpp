@@ -434,6 +434,7 @@ a.breadcumb2-link:hover
 .show-table tr:hover
 {
     background-color:#e8e8e8 !important;
+    
     cursor:pointer;
 }
 

@@ -19,12 +19,12 @@ namespace Bnpp.Web.Controllers
     public class InstallationController : Controller
     {
         private ICommissioningService _commissioning;
-        private IHostingEnvironment Environment;
+        private IWebHostEnvironment _env;
         private IConfiguration Configuration;
-        public InstallationController(ICommissioningService commissioning, IHostingEnvironment _environment, IConfiguration _configuration)
+        public InstallationController(ICommissioningService commissioning, IWebHostEnvironment env, IConfiguration _configuration)
         {
             _commissioning = commissioning;
-            Environment = _environment;
+            _env = env;
             Configuration = _configuration;
         }
 
@@ -87,7 +87,7 @@ namespace Bnpp.Web.Controllers
             if (postedFile != null)
             {
                 //Create a Folder.
-                string path = Path.Combine(this.Environment.WebRootPath, "Uploads");
+                string path = Path.Combine(this._env.WebRootPath, "Uploads");
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);

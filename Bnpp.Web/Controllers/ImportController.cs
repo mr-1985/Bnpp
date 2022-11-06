@@ -3,7 +3,13 @@ using Bnpp.DataLayer.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using System.Globalization;
+using Bnpp.Core.Convertors;
 using System.IO;
+using System;
+using Bnpp.Core.Services;
+using System.Linq;
+using ClosedXML.Excel;
 
 namespace Bnpp.Web.Controllers
 {
@@ -16,7 +22,7 @@ namespace Bnpp.Web.Controllers
             _reportService = reportService;
         }
 
-        [Route("RALDS")]
+        [Route("SACOR-446")]
         public IActionResult Index()
         {
             return View(_reportService.GetAllReports());
@@ -28,7 +34,7 @@ namespace Bnpp.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateDamageabilityReport(IFormFile fileReport)
+        public IActionResult CreateDamageabilityReport(IFormFile fileReport,string reportDate = "",string allowablecuf="",string allowablelifetime="",string Changingratio="")
         {
 
             var location = "";
@@ -86,7 +92,19 @@ namespace Bnpp.Web.Controllers
                     report.Lifetimeofequipmentindesign = Lifetimeofequipmentindesign;
                     report.Actionperiodofequipment = Actionperiodofequipment;
                     report.Locationofthecheckpoint=location;
+                    report.AllowableCUF = allowablecuf;
+                    report.AllowableLifeTime = allowablelifetime;
+                    report.ChangingRatio = Changingratio;
 
+                    if (reportDate != "")
+                    {
+                        string[] std = reportDate.Split('/');
+                        report.ReportDate = new DateTime(int.Parse(std[2]),
+                            int.Parse(std[0]),
+                            int.Parse(std[1]),
+                            new GregorianCalendar()
+                        );
+                    }
 
                     _reportService.AddNewDamageabilityReport(report);
                 }
@@ -95,6 +113,24 @@ namespace Bnpp.Web.Controllers
 
                 //return View();
             return RedirectToAction("Index");
+        }
+
+        
+
+        [HttpPost]
+        public IActionResult ExportSACOR()
+        {
+            var sacorreport = _reportService.GetAllReports().ToList();
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(sacorreport.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "SACOR Report.xlsx");
+                }
+            }
+            //return View();
         }
     }
 }
