@@ -69,7 +69,7 @@ C:\Users\mohsen\source\New folder\Bnpp.DataLayer\obj\Debug\net5.0\Bnpp.DataLayer
 C:\Users\mohsen\source\New folder\Bnpp.DataLayer\obj\Debug\net5.0\Bnpp.DataLayer.AssemblyInfo.cs
 C:\Users\mohsen\source\New folder\Bnpp.DataLayer\obj\Debug\net5.0\Bnpp.DataLayer.csproj.CoreCompileInputs.cache
 C:\Users\mohsen\source\New folder\Bnpp.DataLayer\obj\Debug\net5.0\Bnpp.DataLayer.dll
-C:\Users\mohsen\source\New folder\Bnpp.DataLayer\obj\Debug\net5.0\refint\Bnpp.DataLayer.dll
 C:\Users\mohsen\source\New folder\Bnpp.DataLayer\obj\Debug\net5.0\Bnpp.DataLayer.pdb
 C:\Users\mohsen\source\New folder\Bnpp.DataLayer\obj\Debug\net5.0\Bnpp.DataLayer.genruntimeconfig.cache
 C:\Users\mohsen\source\New folder\Bnpp.DataLayer\obj\Debug\net5.0\ref\Bnpp.DataLayer.dll
+C:\Users\mohsen\source\New folder\Bnpp.DataLayer\bin\Debug\net5.0\ref\Bnpp.DataLayer.dll

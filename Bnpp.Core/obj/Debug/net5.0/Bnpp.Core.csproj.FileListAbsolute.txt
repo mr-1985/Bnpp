@@ -84,7 +84,7 @@ C:\Users\mohsen\source\New folder\Bnpp.Core\obj\Debug\net5.0\Bnpp.Core.AssemblyI
 C:\Users\mohsen\source\New folder\Bnpp.Core\obj\Debug\net5.0\Bnpp.Core.csproj.CoreCompileInputs.cache
 C:\Users\mohsen\source\New folder\Bnpp.Core\obj\Debug\net5.0\Bnpp.Core.csproj.CopyComplete
 C:\Users\mohsen\source\New folder\Bnpp.Core\obj\Debug\net5.0\Bnpp.Core.dll
-C:\Users\mohsen\source\New folder\Bnpp.Core\obj\Debug\net5.0\refint\Bnpp.Core.dll
 C:\Users\mohsen\source\New folder\Bnpp.Core\obj\Debug\net5.0\Bnpp.Core.pdb
 C:\Users\mohsen\source\New folder\Bnpp.Core\obj\Debug\net5.0\Bnpp.Core.genruntimeconfig.cache
 C:\Users\mohsen\source\New folder\Bnpp.Core\obj\Debug\net5.0\ref\Bnpp.Core.dll
+C:\Users\mohsen\source\New folder\Bnpp.Core\bin\Debug\net5.0\ref\Bnpp.Core.dll
