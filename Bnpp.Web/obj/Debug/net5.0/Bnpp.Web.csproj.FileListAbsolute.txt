@@ -1364,3 +1364,5 @@ C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\ref\Bnpp.Web.dll
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Reports\Index.cshtml.g.cs
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Reports\MechanicalReport.cshtml.g.cs
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Reports\ElectricalReport.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Reports\ICEquipments.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Reports\StructuresReport.cshtml.g.cs

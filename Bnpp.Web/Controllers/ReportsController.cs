@@ -23,7 +23,7 @@ namespace Bnpp.Web.Controllers
             return View();
         }
 
-        [Microsoft.AspNetCore.Mvc.Route("EquipmentsReport")]
+        [Microsoft.AspNetCore.Mvc.Route("I & C Equipments")]
         public IActionResult ICEquipments()
         {
             return View();

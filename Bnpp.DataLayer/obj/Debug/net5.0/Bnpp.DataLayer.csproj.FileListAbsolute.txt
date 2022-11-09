@@ -63,7 +63,6 @@ C:\Users\mohsen\source\New folder\Bnpp.DataLayer\bin\Debug\net5.0\Bnpp.DataLayer
 C:\Users\mohsen\source\New folder\Bnpp.DataLayer\bin\Debug\net5.0\Bnpp.DataLayer.runtimeconfig.dev.json
 C:\Users\mohsen\source\New folder\Bnpp.DataLayer\bin\Debug\net5.0\Bnpp.DataLayer.dll
 C:\Users\mohsen\source\New folder\Bnpp.DataLayer\bin\Debug\net5.0\Bnpp.DataLayer.pdb
-C:\Users\mohsen\source\New folder\Bnpp.DataLayer\obj\Debug\net5.0\Bnpp.DataLayer.csproj.AssemblyReference.cache
 C:\Users\mohsen\source\New folder\Bnpp.DataLayer\obj\Debug\net5.0\Bnpp.DataLayer.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\mohsen\source\New folder\Bnpp.DataLayer\obj\Debug\net5.0\Bnpp.DataLayer.AssemblyInfoInputs.cache
 C:\Users\mohsen\source\New folder\Bnpp.DataLayer\obj\Debug\net5.0\Bnpp.DataLayer.AssemblyInfo.cs
