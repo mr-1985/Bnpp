@@ -30,7 +30,7 @@ namespace Bnpp.Core.Services
                     AllowableNumber = e.AllowableNumber,
                     NameOfCondition = e.NameofConditions,
                     Occurrances = e.Occurrance,
-                    NormalDate = e.NormalDate,
+                    Date=e.Dates,
                     CreateDate = e.CreateDate
                 }).ToList();
         }
@@ -50,6 +50,7 @@ namespace Bnpp.Core.Services
 
         public void UpdateNormalOperational(OperationalData normalOperational)
         {
+            normalOperational.CreateDate = DateTime.Now;
             _context.OperationalData.Update(normalOperational);
             _context.SaveChanges();
         }

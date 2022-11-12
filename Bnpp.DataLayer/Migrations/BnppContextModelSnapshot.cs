@@ -2293,15 +2293,16 @@ namespace Bnpp.DataLayer.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Dates")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<string>("NameofConditions")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime>("NormalDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Occurrance")
                         .HasMaxLength(200)

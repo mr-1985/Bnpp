@@ -75,15 +75,16 @@ namespace Bnpp.Web.Controllers
             //{
             //    return View();
             //}
-            if (StartDates != "")
-            {
-                string[] std = StartDates.Split('/');
-                NormalOperation.NormalDate = new DateTime(int.Parse(std[2]),
-                    int.Parse(std[0]),
-                    int.Parse(std[1]),
-                    new GregorianCalendar()
-                );
-            }
+
+            //if (StartDates != "")
+            //{
+            //    string[] std = StartDates.Split('/');
+            //    NormalOperation.NormalDate = new DateTime(int.Parse(std[2]),
+            //        int.Parse(std[0]),
+            //        int.Parse(std[1]),
+            //        new GregorianCalendar()
+            //    );
+            //}
 
 
             _operational.AddNormalOperation(NormalOperation);
@@ -104,15 +105,15 @@ namespace Bnpp.Web.Controllers
             //    return View(NormalOperation);
             //}
 
-            if (StartDates != "")
-            {
-                string[] std = StartDates.Split('/');
-                NormalOperation.NormalDate = new DateTime(int.Parse(std[2]),
-                    int.Parse(std[0]),
-                    int.Parse(std[1]),
-                    new GregorianCalendar()
-                );
-            }
+            //if (StartDates != "")
+            //{
+            //    string[] std = StartDates.Split('/');
+            //    NormalOperation.NormalDate = new DateTime(int.Parse(std[2]),
+            //        int.Parse(std[0]),
+            //        int.Parse(std[1]),
+            //        new GregorianCalendar()
+            //    );
+            //}
 
 
             _operational.UpdateNormalOperational(NormalOperation);

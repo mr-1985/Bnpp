@@ -23,7 +23,7 @@ namespace Bnpp.Core.ViewModels
         [Required(ErrorMessage = "please insert  {0}")]
         public string Occurrances { get; set; }
         public DateTime CreateDate { get; set; }
-        public DateTime NormalDate { get; set; }
+        public string Date { get; set; }
     }
 
     public class OccuranceListViewModel
