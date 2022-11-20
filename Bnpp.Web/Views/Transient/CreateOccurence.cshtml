@@ -32,14 +32,7 @@
                 </td>
             </tr>
 
-            <tr>
-                <td>
-                    Dates:
-                </td>
-                <td>
-                    <input name="StartDates" id="Dates" style="direction: ltr; text-align: left;">
-                </td>
-            </tr>
+           
             <tr>
                 <td>
                     Occurrances:
@@ -51,6 +44,15 @@
                     <span asp-validation-for="Occurrances"></span>
                 </td>
             </tr>
+             <tr>
+                    <td>
+                        <input asp-for="Dates" type="text" id="txtdate" placeholder="Dates" style="width: auto; direction: ltr; text-align: left;">
+                        <input name="StartDates" id="Dates" @*type="date"*@>
+                    </td>
+                    <td>
+                        <input id="adding" value="" style="background-image: url(&quot;/images/new-folder2.png&quot;); background-repeat: no-repeat; background-position: 4px 4px; cursor: pointer; width: 30px; height: 30px; background-color: rgb(240, 240, 240); direction: ltr; text-align: left;" title="Add date" onclick="addDateToInput();" type="button">
+                    </td>
+                </tr>
             <tr>
                 <td>
                     <input type="button" onclick="submitNormal()" value="Save" class="butn-save" style="direction: ltr; text-align: left;">
@@ -95,5 +97,23 @@
         });
 
     }
+
+     function addDateToInput() {
+
+         //debugger;
+
+     var date = $('#Dates').val();
+     var input=$('#txtdate').val();
+
+     if(input ==""){
+         $('#txtdate').val(date)
+     }
+
+     else {
+         $('#txtdate').val(input + ", " + date);
+     }
+     //alert($('#txtdate').val());
+         $('#Dates').val("");
+     }
 
 </script>

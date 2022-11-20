@@ -1,5 +1,5 @@
 ﻿@using Bnpp.DataLayer.Entities.InspectionData
-@model IEnumerable<Bnpp.Core.ViewModels.NormalOperationListViewModel>
+@model IEnumerable<Bnpp.DataLayer.Entities.OperationalData>
 
 @{
     ViewData["Title"] = "NormalOperations";
@@ -78,6 +78,15 @@
                                 </form>
                             </td>
 
+                             <td>
+                                <form method="post" asp-controller="Transient" asp-action="ImportNormalExcel" enctype="multipart/form-data">
+
+                                    <input type="file" name="postedFile" />
+                                    <input type="submit" value="Import Excel" />
+
+                                </form>
+                            </td>
+
                             <td style="width: 200px;">
                                 <span id="message">
                                 </span>
@@ -144,16 +153,16 @@
                                     </td>
                                    
                                     <td>
-                                        @item.NameOfCondition
+                                        @item.NameofConditions
                                     </td>
                                     <td>
                                         @item.AllowableNumber
                                     </td>
                                      <td>
-                                        @item.Date
+                                        @item.Dates
                                     </td>
                                     <td>
-                                        @item.Occurrances
+                                        @item.Occurrance
                                     </td>
                                     <td>
                                         <a class="btn-edit-equip" onclick="Edit(@item.OperationalId)">

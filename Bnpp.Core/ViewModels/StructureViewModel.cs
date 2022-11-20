@@ -21,4 +21,15 @@ namespace Bnpp.Core.ViewModels
 
         public DateTime CreateDate { get; set; }
     }
+
+    public class ReportListViewModel
+    {
+        public int ID { get; set; }
+
+        [Display(Name = "ConstructionName")]
+        [Required(ErrorMessage = "please insert  {0}")]
+        public string Totaldamageabilityofequipment { get; set; }
+
+       
+    }
 }

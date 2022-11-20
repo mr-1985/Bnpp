@@ -15,7 +15,7 @@ namespace Bnpp.Core.Services.Interfaces
     {
         #region Normal Operation
 
-        List<NormalOperationListViewModel> GetAllNormalOperations();
+        List<OperationalData> GetAllNormalOperations();
         int AddNormalOperation(OperationalData normalOperational);
         OperationalData GetNormalOperationalById(int normalId);
 

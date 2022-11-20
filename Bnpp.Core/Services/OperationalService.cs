@@ -21,18 +21,21 @@ namespace Bnpp.Core.Services
         {
             _context = context;
         }
-        public List<NormalOperationListViewModel> GetAllNormalOperations()
+        public List<OperationalData> GetAllNormalOperations()
         {
-            return _context.OperationalData.Where(e => e.IsDelete == false).
-                Select(e => new NormalOperationListViewModel()
-                {
-                    OperationalId = e.OperationalId,
-                    AllowableNumber = e.AllowableNumber,
-                    NameOfCondition = e.NameofConditions,
-                    Occurrances = e.Occurrance,
-                    Date=e.Dates,
-                    CreateDate = e.CreateDate
-                }).ToList();
+            //return _context.OperationalData.Where(e => e.IsDelete == false).
+            //    Select(e => new NormalOperationListViewModel()
+            //    {
+            //        OperationalId = e.OperationalId,
+            //        AllowableNumber = e.AllowableNumber,
+            //        NameOfCondition = e.NameofConditions,
+            //        Occurrances = e.Occurrance,
+            //        Dates=e.Dates,
+            //        CreateDate = e.CreateDate,
+            //        IsDelete=e.IsDelete
+            //    }).ToList();
+
+            return _context.OperationalData.Where(c => c.IsDelete == false).ToList();
         }
 
         public int AddNormalOperation(OperationalData normalOperational)
@@ -71,7 +74,7 @@ namespace Bnpp.Core.Services
                     AllowableNumber = e.AllowableNumber,
                     NameOfCondition = e.NameofConditions,
                     Occurrances = e.Occurrances,
-                    OccurranceDate = e.OccuranceDate,
+                    Date = e.Dates,
                     CreateDate = e.CreateDate
                 }).ToList();
         }
@@ -91,6 +94,7 @@ namespace Bnpp.Core.Services
 
         public void UpdateOccurance(Occurance occurance)
         {
+            occurance.CreateDate = DateTime.Now;
             _context.Occurances.Update(occurance);
             _context.SaveChanges();
         }
@@ -111,7 +115,7 @@ namespace Bnpp.Core.Services
                     AllowableNumber = e.AllowableNumber,
                     NameOfCondition = e.NameofConditions,
                     Occurrances = e.Occurrance,
-                    BasisDate = e.DesignBasisDate,
+                    Date = e.Dates,
                     CreateDate = e.CreateDate
                 }).ToList();
         }
@@ -130,6 +134,7 @@ namespace Bnpp.Core.Services
 
         public void UpdateBasisAccident(DesignBasis designBasis)
         {
+            designBasis.CreateDate = DateTime.Now;
             _context.DesignBasis.Update(designBasis);
             _context.SaveChanges();
         }

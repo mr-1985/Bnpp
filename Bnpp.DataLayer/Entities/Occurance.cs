@@ -21,7 +21,9 @@ namespace Bnpp.DataLayer.Entities
         [MaxLength(200)]
         public string Occurrances { get; set; }
 
-        public DateTime OccuranceDate { get; set; }
+        [MaxLength(200)]
+        public string Dates { get; set; }
+
         public DateTime CreateDate { get; set; }
         public bool IsDelete { get; set; }
     }

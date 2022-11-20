@@ -13,6 +13,9 @@ namespace Bnpp.DataLayer.Entities
         public int ID { get; set; }
 
         [MaxLength(200)]
+        public string Akz { get; set; }
+
+        [MaxLength(200)]
         public string Totaldamageabilityofequipment { get; set; }
 
         [MaxLength(200)]
@@ -42,6 +45,8 @@ namespace Bnpp.DataLayer.Entities
         [MaxLength(200)]
         public string ChangingRatio { get; set; }
 
+        [MaxLength(200)]
+        public string DateOfReport { get; set; }
 
 
         public DateTime ReportDate { get; set; }

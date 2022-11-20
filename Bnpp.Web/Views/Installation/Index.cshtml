@@ -30,29 +30,24 @@
         </a>
     </div>
 
-<h1 id="iH1">
-    Installation & Commissioning
-</h1>
+    <h1 id="iH1">
+        Installation & Commissioning
+    </h1>
     <div id="iContent">
 
-       
+
 
         <div id="tab1" class="tab-item" style="display: block;">
 
-            
+
 
             <div class="bevel-box">
                 <table cellpadding="3" cellspacing="0">
                     <tbody>
                         <tr>
-                           
-                            <td>
-                                <input type="file" name="uploadedFile" id="uploadedFile" style="direction: ltr; text-align: left;">
-                              @*  <input onclick="__doPostBack('upload','')" name="upload" type="button" id="upload" value="Import Excel" style="direction: ltr; text-align: left;">*@
-                            </td>
 
                             <td>
-                                <form method="post" asp-controller="Installation" asp-action="ExportInstallation">
+                                <form id="exportexcel" method="post" asp-controller="Installation" asp-action="ExportInstallation" enctype="multipart/form-data">
                                     <input type="submit" value="Export Excel" />
                                 </form>
                             </td>
@@ -65,10 +60,10 @@
                                 </form>
                             </td>
 
-                         @*   <form asp-controller="Home" asp-action="Index" method="post" enctype="multipart/form-data">
+                            @*   <form asp-controller="Home" asp-action="Index" method="post" enctype="multipart/form-data">
                                 <input type="file" name="postedFile" />
                                 <input type="submit" value="Import" />
-                            </form>*@
+                                </form>*@
 
                             <td style="width: 200px;">
                                 <span id="message">
@@ -82,10 +77,10 @@
                         </tr>
                     </tbody>
                 </table>
-               
+
             </div>
 
-            <div  id="newPage">
+            <div id="newPage">
                 <div>
 
                     <div id="iLoading22" style="display: none;">
@@ -95,6 +90,7 @@
 
                     <a class="btn-new-equip" style="cursor: pointer" onclick="Create()">New</a>
                     <input type="button" id="delete" class="btn-delete-equip" value="Delete">
+                    @*<input type="button" id="Export" value="excel" class="butn-save" style="direction: ltr; text-align: left;">*@
                     <br />
                     @{
                         int rowCount = 1;
@@ -106,19 +102,19 @@
                                     <input type="checkbox" id="checkAll" />
                                 </th>
                                 <th></th>
-                                <th >
+                                <th>
                                     <b>Parameter1</b>
                                 </th>
-                                <th >
+                                <th>
                                     <b>Parameter2</b>
                                 </th>
-                                <th >
+                                <th>
                                     <b>Parameter3</b>
                                 </th>
-                                <th >
+                                <th>
                                     <b>Parameter4</b>
                                 </th>
-                                <th >
+                                <th>
                                     <b>Actions</b>
                                 </th>
                             </tr>
@@ -146,6 +142,7 @@
                                         @item.Parameter4
                                     </td>
                                     <td>
+
                                         <a class="btn-edit-equip" onclick="Edit(@item.CommissioningId)">
                                             Edit
                                         </a>
@@ -161,6 +158,8 @@
     </div>
 </div>
 
+@section Scripts
+    {
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
 
@@ -183,13 +182,15 @@
         $("#newPage").load("/Installation/EditCommissioning/"+id);
     }
 
-    
+
     $("#checkAll").click(function () {
         $(".checkBox").prop('checked',
             $(this).prop('checked'));
     });
 
-    $("#delete").click(function () {
+
+
+     $("#delete").click(function () {
         var selectedIDs = new Array();
 
         $('input:checkbox.checkBox').each(function () {
@@ -206,7 +207,7 @@
             data: { "commissioningId": selectedIDs },
 
             success: function (response) {
-               window.location.href = "/Installation/";
+                     window.location.href = "/Installation/";
             },
             failure: function (response) {
                 alert(response.responseText);
@@ -221,9 +222,51 @@
     });
 
 
+     //$("#Export").click(function () {
+     //   var selectedIDs = new Array();
+
+     //   $('input:checkbox.checkBox').each(function () {
+     //       if ($(this).prop('checked')) {
+     //           selectedIDs.push($(this).val());
+     //       }
+     //   });
+
+     // alert(selectedIDs);
+     //   $.ajax({
+     //       type: "POST",
+     //       url: "/Installation/Export",
+     //       data: { "comissioningId": selectedIDs },
+
+
+
+
+     //       success: function (response) {
+     //          window.location.href = "/Installation/";
+     //       },
+     //       failure: function (response) {
+     //           alert(response.responseText);
+     //       }
+     //       ,
+     //       error: function (response) {
+     //           alert(response.responseText,encoding="utf-8");
+     //       }
+
+     //   });
+
+         //$.ajax({
+         //       type: 'POST',
+         //       url: "/Installation/Export",
+         //       data:{ "comissioningId": selectedIDs },
+         //       processData: false,
+         //       contentType: false
+         //   }).done(function() {
+         //      window.location.href = "/Installation/";
+         //   });
+
+    //});
 </script>
 
-
+}
 
 
 

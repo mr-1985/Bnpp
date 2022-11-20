@@ -1134,6 +1134,10 @@ namespace Bnpp.DataLayer.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<string>("Akz")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<string>("AllowableCUF")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
@@ -1198,8 +1202,9 @@ namespace Bnpp.DataLayer.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DesignBasisDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Dates")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
@@ -2260,15 +2265,16 @@ namespace Bnpp.DataLayer.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Dates")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<string>("NameofConditions")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime>("OccuranceDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Occurrances")
                         .HasMaxLength(200)

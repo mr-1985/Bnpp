@@ -13,6 +13,8 @@ using System.Data.OleDb;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using System.Data;
+//using System.Collections;
+using System.Collections.Generic;
 
 namespace Bnpp.Web.Controllers
 {
@@ -76,6 +78,7 @@ namespace Bnpp.Web.Controllers
                 _commissioning.DeleteCommissioning(Convert.ToInt32(id));
             }
             return new JsonResult("success");
+           
         }
 
 
@@ -173,8 +176,35 @@ namespace Bnpp.Web.Controllers
             //return View();
         }
 
+        [HttpPost]
+        public IActionResult Export(string[] comissioningId)
+        {
+           var res = new List<Commissioning>();
 
+            
+
+            foreach (string id in comissioningId)
+            {
+                var excelDocument = _commissioning.GetCommissioningById(Convert.ToInt32(id));
+                res.Add(excelDocument);
+            }
+
+           
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(res.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Installation&Commissioning.xlsx");
+                }
+            }
+
+            //return RedirectToAction("index");
+        }
 
         #endregion
     }
 }
+
