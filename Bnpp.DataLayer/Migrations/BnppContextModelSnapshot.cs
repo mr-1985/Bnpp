@@ -1161,6 +1161,10 @@ namespace Bnpp.DataLayer.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<string>("DateOfReport")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 

@@ -13,7 +13,8 @@ namespace Bnpp.Core.Services.Interfaces
         List<ReportListViewModel> GetAllTotalReports();
         List<DamageabilityReport> GetAllReports();
         int AddNewDamageabilityReport(DamageabilityReport report);
-        void UpdateDamageabilityReport(DamageabilityReport report);
+        void UpdateDamageabilityReport(string allowableCuf,string allowableLifeTime);
         DamageabilityReport GetDamageabilityReportById(int reportId);
+        void DeleteDamageabilityReport(int reportId);
     }
 }

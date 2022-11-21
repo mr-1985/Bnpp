@@ -108,27 +108,58 @@
         </form>
         <br />
         <br />
+
+        <form id="DesignDocumentForm" asp-action="EditDamageabilityReport" method="post" enctype="multipart/form-data">
+            <table cellpadding="3" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>
+                            Allowable CUF:
+                        </td>
+                        <td>
+                            <input  name="allowablecuf" type="text" style="direction: ltr; text-align: left;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Allowable Life Time:
+                        </td>
+                        <td>
+                            <input name="allowablelifetime" type="text" style="direction: ltr; text-align: left;">
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            @*<input type="file" name="fileReport" style="direction: ltr; text-align: left;">*@
+                            <input type="submit" id="upload" value="Edit" style="direction: ltr; text-align: left;">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+
         <br />
 
         <input type="button" value="Back" onclick="location='/Admin'" class="butn-cancel" style="direction: ltr; text-align: left;">
-        @*<input type="button" id="delete" class="btn-delete-equip" value="Delete">*@
+        <input type="button" id="delete" class="btn-delete-equip" value="Delete">
         <br />
 
         @{
             int rowCount = 1;
         }
-       @* <table border="0" cellspacing="5" cellpadding="5">
+        @* <table border="0" cellspacing="5" cellpadding="5">
             <tbody>
-                <tr>
-                    <td>Date from:</td>
-                    <td><input type="text" id="min" name="min"></td>
-                </tr>
-                <tr>
-                    <td>To:</td>
-                    <td><input type="text" id="max" name="max"></td>
-                </tr>
+            <tr>
+            <td>Date from:</td>
+            <td><input type="text" id="min" name="min"></td>
+            </tr>
+            <tr>
+            <td>To:</td>
+            <td><input type="text" id="max" name="max"></td>
+            </tr>
             </tbody>
-        </table>*@
+            </table>*@
         <table id="myTable" cellpadding="3" cellspacing="0" class="show-table">
             <thead>
                 <tr role="row">
@@ -138,6 +169,9 @@
                     <th></th>
                     <th>
                         <b>AKZ</b>
+                    </th>
+                    <th>
+                        <b>Date</b>
                     </th>
                     <th>
                         <b>Location of the checkpoint</b>
@@ -185,7 +219,7 @@
                     </th>
                     <th>
                         <b>
-                            Report Date
+                            File Date
                         </b>
                     </th>
 
@@ -206,6 +240,9 @@
                         </td>
                         <td>
                             @item.Akz
+                        </td>
+                        <td>
+                            @item.DateOfReport
                         </td>
                         <td>
                             @item.Locationofthecheckpoint
@@ -329,10 +366,10 @@ https://cdn.datatables.net/datetime/1.2.0/js/dataTables.dateTime.min.js
                 if (result) {
                     $.ajax({
                         type: "POST",
-                        url: "/Structure/DeletStructure",
-                        data: { "structureId": selectedIDs },
+                        url: "/Import/DeleteDamageabilityReport",
+                        data: { "damagingId": selectedIDs },
                         success: function (response) {
-                            window.location.href = "/Structure";
+                            window.location.href = "/SACOR-446";
                         },
                         failure: function (response) {
                             alert(response.responseText);
@@ -345,7 +382,7 @@ https://cdn.datatables.net/datetime/1.2.0/js/dataTables.dateTime.min.js
             });
 
             // Search Date
-            
+
     //        $.fn.dataTable.ext.search.push(
     //    function( settings, data, dataIndex ) {
 

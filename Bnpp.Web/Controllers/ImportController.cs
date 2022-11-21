@@ -32,6 +32,8 @@ namespace Bnpp.Web.Controllers
 
         [BindProperty] public DamageabilityReport Report { get; set; }
 
+        [BindProperty] public List<DamageabilityReport> DamageReports { get; set; }
+
         [Route("SACOR-446")]
         public IActionResult Index()
         {
@@ -50,23 +52,35 @@ namespace Bnpp.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditDamageabilityReport()
+        public IActionResult EditDamageabilityReport(string allowablecuf, string allowablelifetime)
         {
             //if (!ModelState.IsValid)
             //    return View();
+           
 
-            _reportService.UpdateDamageabilityReport(Report);
+            _reportService.UpdateDamageabilityReport(allowablecuf, allowablelifetime);
+            return RedirectToAction("index");
+        }
+
+
+        public IActionResult DeleteDamageabilityReport(string[] damagingId)
+        {
+            foreach (string id in damagingId)
+            {
+                _reportService.DeleteDamageabilityReport(Convert.ToInt32(id));
+            }
             return new JsonResult("success");
+
         }
 
         [HttpPost]
         public IActionResult CreateDamageabilityReport(IFormFile fileReport, string reportDate = "", string allowablecuf = "", string allowablelifetime = "", string Changingratio = "")
         {
             var totalReports = _reportService.GetAllReports();
-            
+
             if (totalReports.Count == 0)
             {
-
+                var Date = "";
                 var Akz = "";
                 var location = "";
                 var Totaldamageabilityofequipment = "";
@@ -100,16 +114,22 @@ namespace Bnpp.Web.Controllers
 
                 for (int i = 0; i < datatable.Rows.Count; i++)
                 {
-                    if (i == 3)
+                    if (i == 2)
                     {
+                        var rowSelected = datatable.Rows[i][0].ToString();
+                        var splitData = rowSelected.Substring(29).Trim().Split(" ");
 
+                        Date = splitData[0];
                     }
+
+
                     if (i > 17 && i < 116)
                     {
 
                         var rowSelected = datatable.Rows[i][0].ToString();
                         var Identifier = rowSelected.Substring(0, 9);
                         var splitData = rowSelected.Substring(9).Trim().Split("   ");
+
 
                         Akz = Identifier;
                         location = splitData[0];
@@ -133,6 +153,7 @@ namespace Bnpp.Web.Controllers
                         report.AllowableCUF = allowablecuf;
                         report.AllowableLifeTime = allowablelifetime;
                         report.Akz = Akz;
+                        report.DateOfReport = Date;
 
                         //report.ChangingRatio = Changingratio;
 
@@ -164,6 +185,7 @@ namespace Bnpp.Web.Controllers
                 //    btotal = bt;
                 //}
 
+                var Date = "";
                 var Akz = "";
                 var location = "";
                 var Totaldamageabilityofequipment = "";
@@ -197,6 +219,13 @@ namespace Bnpp.Web.Controllers
 
                 for (int i = 0; i < datatable.Rows.Count; i++)
                 {
+                    if (i == 2)
+                    {
+                        var rowSelected = datatable.Rows[i][0].ToString();
+                        var splitData = rowSelected.Substring(29).Trim().Split(" ");
+
+                        Date = splitData[0];
+                    }
                     if (i > 17 && i < 116)
                     {
 
@@ -224,7 +253,7 @@ namespace Bnpp.Web.Controllers
                         report.Actionperiodofequipment = Actionperiodofequipment;
                         report.Locationofthecheckpoint = location;
                         report.Akz = Akz;
-
+                        report.DateOfReport = Date;
 
                         //report.ChangingRatio = Changingratio;
 
@@ -254,14 +283,14 @@ namespace Bnpp.Web.Controllers
                             var allowcuf = a.AllowableCUF;
                             var allowlifetime = a.AllowableLifeTime;
                             allowableCuf = allowcuf;
-                            allowableLifeTime=allowlifetime;
+                            allowableLifeTime = allowlifetime;
                             break;
                         }
 
                         report.AllowableCUF = allowableCuf;
                         report.AllowableLifeTime = allowableLifeTime;
 
-                       
+
 
                         if (reportDate != "")
                         {

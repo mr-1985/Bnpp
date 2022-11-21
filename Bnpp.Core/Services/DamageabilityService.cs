@@ -30,6 +30,14 @@ namespace Bnpp.Core.Services
             return report.ID;
         }
 
+        public void DeleteDamageabilityReport(int reportId)
+        {
+            var damageReport = GetDamageabilityReportById(reportId);
+            damageReport.IsDelete = true;
+            _context.Update(damageReport);
+            _context.SaveChanges();
+        }
+
         public List<DamageabilityReport> GetAllReports()
         {
             
@@ -68,13 +76,18 @@ namespace Bnpp.Core.Services
             return _context.DamageabilityReports.Find(reportId);
         }
 
-        public void UpdateDamageabilityReport(DamageabilityReport report)
+        public void UpdateDamageabilityReport(string allowableCuf, string allowableLifeTime)
         {
-            var totality = GetAllReports();
-            //report.CreateDate = DateTime.Now;
-            
-            _context.Update(totality);
-            _context.SaveChanges();
+            var totality = _context.DamageabilityReports.ToList();
+           
+            foreach (var report in totality)
+            {
+                report.AllowableCUF = allowableCuf;
+                report.AllowableLifeTime = allowableLifeTime;
+                _context.Update(report);
+                _context.SaveChanges();
+            }
+
         }
     }
 }
