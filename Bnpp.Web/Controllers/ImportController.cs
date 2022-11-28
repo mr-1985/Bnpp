@@ -7,11 +7,15 @@ using System.Globalization;
 using Bnpp.Core.Convertors;
 using System.IO;
 using System;
+using System.Web;
 using Bnpp.Core.Services;
 using System.Linq;
+using ClosedXML;
 using ClosedXML.Excel;
 using Bnpp.Core.ViewModels;
 using System.Collections.Generic;
+using System.Configuration;
+
 
 namespace Bnpp.Web.Controllers
 {
@@ -35,9 +39,9 @@ namespace Bnpp.Web.Controllers
         [BindProperty] public List<DamageabilityReport> DamageReports { get; set; }
 
         [Route("SACOR-446")]
-        public IActionResult Index()
+        public IActionResult Index(string filter = "", string date = "", string fileDate = "")
         {
-            return View(_reportService.GetAllReports());
+            return View(_reportService.GetAllReports(filter, date,fileDate));
         }
 
         public IActionResult CreateDamageabilityReport()
@@ -56,7 +60,7 @@ namespace Bnpp.Web.Controllers
         {
             //if (!ModelState.IsValid)
             //    return View();
-           
+
 
             _reportService.UpdateDamageabilityReport(allowablecuf, allowablelifetime);
             return RedirectToAction("index");
@@ -322,6 +326,8 @@ namespace Bnpp.Web.Controllers
             using (XLWorkbook wb = new XLWorkbook())
             {
                 wb.Worksheets.Add(Commons.ToDataTable(sacorreport.ToList()));
+
+
                 using (MemoryStream stream = new MemoryStream())
                 {
                     wb.SaveAs(stream);
@@ -345,14 +351,15 @@ namespace Bnpp.Web.Controllers
                 res.Add(excelDocument);
             }
 
-
-
             using (XLWorkbook wb = new XLWorkbook())
             {
                 wb.Worksheets.Add(Commons.ToDataTable(res.ToList()));
                 using (MemoryStream stream = new MemoryStream())
                 {
                     wb.SaveAs(stream);
+
+
+
                     return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "SACOR-446.xlsx");
                 }
             }

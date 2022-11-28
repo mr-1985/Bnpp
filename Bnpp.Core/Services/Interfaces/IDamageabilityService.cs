@@ -11,7 +11,7 @@ namespace Bnpp.Core.Services.Interfaces
     public interface IDamageabilityService
     {
         List<ReportListViewModel> GetAllTotalReports();
-        List<DamageabilityReport> GetAllReports();
+        List<DamageabilityReport> GetAllReports(string filter = "",string date="",string fileDate="");
         int AddNewDamageabilityReport(DamageabilityReport report);
         void UpdateDamageabilityReport(string allowableCuf,string allowableLifeTime);
         DamageabilityReport GetDamageabilityReportById(int reportId);

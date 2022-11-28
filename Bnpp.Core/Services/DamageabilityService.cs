@@ -38,37 +38,41 @@ namespace Bnpp.Core.Services
             _context.SaveChanges();
         }
 
-        public List<DamageabilityReport> GetAllReports()
+        public List<DamageabilityReport> GetAllReports(string filter = "", string date = "", string fileDate = "")
         {
-            
-            return _context.DamageabilityReports.Where(b => b.IsDelete == false).ToList();
+            IQueryable<DamageabilityReport> result = _context.DamageabilityReports;
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+                result = result.Where(c => c.Akz.Contains(filter));
+            }
+
+            if (!string.IsNullOrEmpty(date))
+            {
+                result = result.Where(c => c.DateOfReport == date);
+            }
+
+
+
+            if (!string.IsNullOrEmpty(fileDate))
+            {
+                var datefile = DateTime.Parse(fileDate);
+                result = result.Where(c => c.ReportDate == datefile);
+            }
+
+            return result.ToList();
         }
 
         public List<ReportListViewModel> GetAllTotalReports()
         {
-
-
             var max = _context.DamageabilityReports.Max(m => m.CreateDate.Date);
 
-
-
-            //return _context.DamageabilityReports.Where(b => b.IsDelete == false).ToList();
-
-
-            //return _context.DamageabilityReports.Where(b => b.IsDelete == false && b.CreateDate.Date == max).Select(t => new ReportListViewModel()
-            //{
-            //    ID = t.ID,
-            //    Totaldamageabilityofequipment = t.Totaldamageabilityofequipment
-            //}).ToList();
 
             return _context.DamageabilityReports.Where(b => b.IsDelete == false && b.CreateDate.Date == max).Select(t => new ReportListViewModel()
             {
                 ID = t.ID,
                 Totaldamageabilityofequipment = t.Totaldamageabilityofequipment
             }).Take(98).ToList();
-
-
-
         }
 
         public DamageabilityReport GetDamageabilityReportById(int reportId)

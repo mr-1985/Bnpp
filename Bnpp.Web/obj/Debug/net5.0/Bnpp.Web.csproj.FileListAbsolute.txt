@@ -940,7 +940,6 @@ C:\Users\mohsen\Source\Repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\ref\Bnpp.Web.dll
 C:\Users\mohsen\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Technical\MechanicalProperties.cshtml.g.cs
 C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\appsettings.json
-C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\Bnpp.Web.StaticWebAssets.xml
 C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\Bnpp.Web.exe
 C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\Bnpp.Web.deps.json
 C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\Bnpp.Web.runtimeconfig.json
@@ -960,7 +959,6 @@ C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\Microsoft.CodeAnalys
 C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\Microsoft.CodeAnalysis.Razor.dll
 C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\Microsoft.CodeAnalysis.Workspaces.dll
 C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
-C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
@@ -1367,3 +1365,4 @@ C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Reports\
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Reports\ICEquipments.cshtml.g.cs
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Reports\StructuresReport.cshtml.g.cs
 C:\Users\mohsen\source\New folder\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Import\EditDamageabilityReport.cshtml.g.cs
+C:\Users\mohsen\source\New folder\Bnpp.Web\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll

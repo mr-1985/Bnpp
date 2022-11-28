@@ -90,7 +90,7 @@
 
                     <a class="btn-new-equip" style="cursor: pointer" onclick="Create()">New</a>
                     <input type="button" id="delete" class="btn-delete-equip" value="Delete">
-                    @*<input type="button" id="Export" value="excel" class="butn-save" style="direction: ltr; text-align: left;">*@
+                    <input type="button" id="Export" value="excel" class="butn-save" style="direction: ltr; text-align: left;">
                     <br />
                     @{
                         int rowCount = 1;
@@ -218,9 +218,37 @@
 
         });
         }
-
     });
 
+     $("#Export").click(function () {
+        var selectedIDs = new Array();
+
+        $('input:checkbox.checkBox').each(function () {
+            if ($(this).prop('checked')) {
+                selectedIDs.push($(this).val());
+            }
+        });
+
+        var result = confirm("are you sure you want to delete?");
+        if (result) {
+        $.ajax({
+            type: "POST",
+            url: "/Installation/Export",
+            data: { "commissioningId": selectedIDs },
+
+            success: function (response) {
+                     window.location.href = "/Installation/";
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            }
+
+        });
+        }
+    });
 
      //$("#Export").click(function () {
      //   var selectedIDs = new Array();
@@ -231,27 +259,44 @@
      //       }
      //   });
 
-     // alert(selectedIDs);
-     //   $.ajax({
-     //       type: "POST",
-     //       url: "/Installation/Export",
-     //       data: { "comissioningId": selectedIDs },
+     //   debugger;
 
+      //alert(selectedIDs);
+       //window.location.href = "/Installation/Export/"+$.param(selectedIDs);
+        //$.ajax({
+        //    type: "POST",
+        //    url: "/Installation/ExportTeamMembersInExcel",
+        //    data: { "comissioningId": selectedIDs },
 
+        //    dataType:JSON,
+        //    "success": function (result) {
 
+        //var bytes = new Uint8Array(result.FileContents);
+        //var blob = new Blob([bytes], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+        //var link = document.createElement('a');
+        //link.href = window.URL.createObjectURL(blob);
+        //link.download = "myFileName.xlsx";
+        //link.click();
+    //    window.location.href = "/Installation/";
+    //  },
+    //"error": function () {
+    //    alert("error");
+    //}
+            //alert(data);
 
-     //       success: function (response) {
-     //          window.location.href = "/Installation/";
-     //       },
-     //       failure: function (response) {
-     //           alert(response.responseText);
-     //       }
-     //       ,
-     //       error: function (response) {
-     //           alert(response.responseText,encoding="utf-8");
-     //       }
+            //success: function (response) {
+            //   window.location.href = "/Installation/";
+            //   Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"; // or "application/vnd.ms-excel"
+            //},
+            //failure: function (response) {
+            //    alert(response.responseText);
+            //}
+            //,
+            //error: function (response) {
+            //    alert(response.responseText,encoding="utf-8");
+            //}
 
-     //   });
+        //});
 
          //$.ajax({
          //       type: 'POST',

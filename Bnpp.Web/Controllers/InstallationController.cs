@@ -78,7 +78,7 @@ namespace Bnpp.Web.Controllers
                 _commissioning.DeleteCommissioning(Convert.ToInt32(id));
             }
             return new JsonResult("success");
-           
+
         }
 
 
@@ -179,9 +179,9 @@ namespace Bnpp.Web.Controllers
         [HttpPost]
         public IActionResult Export(string[] comissioningId)
         {
-           var res = new List<Commissioning>();
+            var res = new List<Commissioning>();
 
-            
+
 
             foreach (string id in comissioningId)
             {
@@ -189,19 +189,61 @@ namespace Bnpp.Web.Controllers
                 res.Add(excelDocument);
             }
 
-           
+            string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            string fileName = "InstallationCommissioning.xlsx";
 
             using (XLWorkbook wb = new XLWorkbook())
             {
                 wb.Worksheets.Add(Commons.ToDataTable(res.ToList()));
+
                 using (MemoryStream stream = new MemoryStream())
                 {
                     wb.SaveAs(stream);
-                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Installation&Commissioning.xlsx");
+                    byte[]  content = stream.ToArray();
+                    return File(content, contentType, fileName);
+
                 }
             }
 
+
             //return RedirectToAction("index");
+        }
+
+        //[HttpGet]
+        //public virtual ActionResult Download()
+        //{
+        //    byte[] data = TempData["file"] as byte[];
+        //    return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Summarized_KeepAndShare_File.xlsx");
+
+        //}
+
+        [HttpPost]
+        public JsonResult ExportTeamMembersInExcel(string[] comissioningId)
+        {
+            var res = new List<Commissioning>();
+
+
+
+            foreach (string id in comissioningId)
+            {
+                var excelDocument = _commissioning.GetCommissioningById(Convert.ToInt32(id));
+                res.Add(excelDocument);
+            }
+
+            MemoryStream stream = new MemoryStream();
+            FileContentResult robj;
+            //DataTable data = objuserservice.ExportTeamToExcel(res);
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(Commons.ToDataTable(res.ToList()));
+                //wb.Worksheets.Add(res);
+                using (stream)
+                {
+                    wb.SaveAs(stream);
+                }
+            }
+            robj = File(stream.ToArray(), System.Net.Mime.MediaTypeNames.Application.Octet, "TeamMembers.xlsx");
+            return Json(robj);
         }
 
         #endregion
