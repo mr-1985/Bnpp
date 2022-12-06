@@ -41,7 +41,7 @@ namespace Bnpp.Web.Controllers
         [Route("SACOR-446")]
         public IActionResult Index(string filter = "", string date = "", string fileDate = "")
         {
-            return View(_reportService.GetAllReports(filter, date,fileDate));
+            return View(_reportService.GetAllReports(filter, date, fileDate));
         }
 
         public IActionResult CreateDamageabilityReport()
@@ -78,7 +78,7 @@ namespace Bnpp.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateDamageabilityReport(IFormFile fileReport, string reportDate = "", string allowablecuf = "", string allowablelifetime = "", string Changingratio = "")
+        public IActionResult CreateDamageabilityReport(IFormFile fileReport, string reportDate = "", string allowablecuf = "", string allowablelifetime = "", string Changingratio = "", string allowableChangingratio = "")
         {
             var totalReports = _reportService.GetAllReports();
 
@@ -156,6 +156,7 @@ namespace Bnpp.Web.Controllers
                         report.Locationofthecheckpoint = location;
                         report.AllowableCUF = allowablecuf;
                         report.AllowableLifeTime = allowablelifetime;
+                        report.AllowableChangingRatio = allowableChangingratio;
                         report.Akz = Akz;
                         report.DateOfReport = Date;
 
@@ -220,6 +221,7 @@ namespace Bnpp.Web.Controllers
                     datatable.Rows.Add(datarow);
                 }
 
+                
 
                 for (int i = 0; i < datatable.Rows.Count; i++)
                 {
@@ -230,9 +232,9 @@ namespace Bnpp.Web.Controllers
 
                         Date = splitData[0];
                     }
+
                     if (i > 17 && i < 116)
                     {
-
                         var rowSelected = datatable.Rows[i][0].ToString();
                         var Identifier = rowSelected.Substring(0, 9);
                         var splitData = rowSelected.Substring(9).Trim().Split("   ");
@@ -263,20 +265,28 @@ namespace Bnpp.Web.Controllers
 
                         // ChangingRatio
                         var btotal = "";
-                        //var j = 18;
+                        var j = 18;
                         foreach (var p in beforeTotal)
                         {
-                            //if (i == j)
-                            //{
-                            var bt = p.Totaldamageabilityofequipment;
-                            btotal = bt;
-                            //}
-                            //j++;
+                            if (i == j)
+                            {
+                                var bt = p.Totaldamageabilityofequipment;
+                                btotal = bt;
+                            }
+                            j++;
+                            //break;
                             //goto endofloop;
                         }
                         //endofloop:
-                        decimal ratio = (Convert.ToDecimal(btotal) - Convert.ToDecimal(Totaldamageabilityofequipment)) / Convert.ToDecimal(btotal);
-                        report.ChangingRatio = ratio.ToString();
+                        if (Convert.ToDecimal(btotal) != 0)
+                        {
+                            decimal ratio = (Convert.ToDecimal(btotal) - Convert.ToDecimal(Totaldamageabilityofequipment)) / Convert.ToDecimal(btotal);
+                            report.ChangingRatio = ratio.ToString();
+                        }
+                        //else
+                        //{
+                        //    report.ChangingRatio = Convert.ToDecimal(0);
+                        //}
 
                         //AllowableCUF & AllowableLifeTime
                         var allowableCuf = "";

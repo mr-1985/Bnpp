@@ -52,14 +52,17 @@ namespace Bnpp.Core.Services
                 result = result.Where(c => c.DateOfReport == date);
             }
 
-
-
             if (!string.IsNullOrEmpty(fileDate))
             {
                 var datefile = DateTime.Parse(fileDate);
                 result = result.Where(c => c.ReportDate == datefile);
             }
 
+            //return result.GroupBy(d => d.Akz).Select(s => new DamageabilityReport()).ToList();
+            //return result.GroupBy(d => d.Akz);
+            ////return result.GroupBy(d => d.Akz).Select(s => { GroupName = s.Key, Members = s }).ToList();
+
+            //return result.OrderBy(d => d.Akz).Distinct().ToList();
             return result.ToList();
         }
 

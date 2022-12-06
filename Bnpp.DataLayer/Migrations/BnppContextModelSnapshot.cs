@@ -1142,6 +1142,10 @@ namespace Bnpp.DataLayer.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<string>("AllowableChangingRatio")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<string>("AllowableLifeTime")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");

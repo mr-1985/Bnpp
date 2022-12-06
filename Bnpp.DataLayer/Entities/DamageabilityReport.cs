@@ -46,6 +46,9 @@ namespace Bnpp.DataLayer.Entities
         public string ChangingRatio { get; set; }
 
         [MaxLength(200)]
+        public string AllowableChangingRatio { get; set; }
+
+        [MaxLength(200)]
         public string DateOfReport { get; set; }
 
 

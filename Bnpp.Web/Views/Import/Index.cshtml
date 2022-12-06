@@ -82,6 +82,15 @@
                     </tr>
                     <tr>
                         <td>
+                            Allowable Changing Ratio:
+                        </td>
+                        <td>
+                            <input name="allowableChangingratio" type="text" style="direction: ltr; text-align: left;">
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
                             Date:
                         </td>
                         <td>
@@ -181,7 +190,7 @@
                                 <input name="filter" type="text" style="direction: ltr; text-align: left;">
                             </td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>
                                 Date:
                             </td>
@@ -189,7 +198,7 @@
                                 <input name="date" id="srchDate" type="text" style="direction: ltr; text-align: left;">
                             </td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>
                                 File Date:
                             </td>
@@ -211,7 +220,7 @@
                             <td>
                                 @*<input type="file" name="fileReport" style="direction: ltr; text-align: left;">*@
                                 <input type="submit" value="Search" style="direction: ltr; text-align: left;">
-                                <input type="button"  onclick="location='/SACOR-446'" class="butn-cancel" style="direction: ltr; text-align: center;margin-bottom:-7px;">
+                                <input type="button" onclick="location='/SACOR-446'" class="butn-cancel" style="direction: ltr; text-align: center;margin-bottom:-7px;">
                             </td>
                         </tr>
                     </tbody>
@@ -301,12 +310,17 @@
                     </th>
                     <th>
                         <b>
-                            Allowable Life Time
+                            Allowable Remaining Life Time
                         </b>
                     </th>
                     <th>
                         <b>
                             Changing Ratio
+                        </b>
+                    </th>
+                    <th>
+                        <b>
+                            Allowable Changing Ratio
                         </b>
                     </th>
                     <th>
@@ -378,8 +392,21 @@
                         <td>
                             @item.AllowableLifeTime
                         </td>
+                        @if ((Convert.ToDecimal(item.AllowableChangingRatio)) <= (Convert.ToDecimal(item.ChangingRatio)))
+                        {
+                            <td style="background-color:red;">
+                                @item.ChangingRatio
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.ChangingRatio
+                            </td>
+                        }
+
                         <td>
-                            @item.ChangingRatio
+                            @item.AllowableChangingRatio
                         </td>
                         <td>
                             @item.ReportDate.ToString("yyyy/MM/dd")
@@ -529,7 +556,7 @@
 
               };
 
-              
+
                function GetSearchhDate() {
             var date = $('#searchfileDate').val();
 
