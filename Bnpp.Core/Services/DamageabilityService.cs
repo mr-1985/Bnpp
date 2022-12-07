@@ -58,12 +58,18 @@ namespace Bnpp.Core.Services
                 result = result.Where(c => c.ReportDate == datefile);
             }
 
-            //return result.GroupBy(d => d.Akz).Select(s => new DamageabilityReport()).ToList();
+            //            return result.GroupBy(d => d.Akz).OrderBy(d => d.Key)
+            //.Select(s => new { Key = s.Key, studentobj = s.OrderBy(y => y.Totaldamageabilityofequipment) }).ToList();
             //return result.GroupBy(d => d.Akz);
-            ////return result.GroupBy(d => d.Akz).Select(s => { GroupName = s.Key, Members = s }).ToList();
+            ////return result.GroupBy(d => d.Akz).Select(s => new DamageabilityReport()).ToList();
 
-            //return result.OrderBy(d => d.Akz).Distinct().ToList();
+
             return result.ToList();
+        }
+
+        public List<DamageabilityReport> GetAllReportsForCompare()
+        {
+            return _context.DamageabilityReports.Where(r=>r.CreateDate.Date==DateTime.Now.Date).ToList();
         }
 
         public List<ReportListViewModel> GetAllTotalReports()
