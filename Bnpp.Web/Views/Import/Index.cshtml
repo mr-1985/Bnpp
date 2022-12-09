@@ -6,20 +6,6 @@
 }
 
 <div class="dcontent">
-    @*@if (ViewBag.IsExistFile != null)
-        {
-        <div class="alert alert-danger">
-        <p>
-        This report has already been uploaded
-        </p>
-        </div>
-        }*@
-    @if (ViewBag.IsExistReport == true)
-    {
-        <div class="alert alert-danger">
-            This report has already been uploaded
-        </div>
-    }
     <div style="margin-top: 10px; background-color: #6b8d9e; padding-top: 5px; padding-bottom: 5px; padding-right: 10px; border-radius: 5px; border: solid 1px #cccccc; background: repeating-linear-gradient(-45deg, #7fa1b3, #6b8d9e 1px, #6b8d9e 1px, #6b8d9e 20px);">
         &nbsp;
     </div>
@@ -53,7 +39,13 @@
                         </td>*@
 
                     <td>
-                        <form method="post" asp-controller="Import" asp-action="ExportSACOR">
+                        <form method="post" asp-controller="Import" asp-action="Export">
+                            <input type="text" id="exportSelectedData" name="reportId" style="display:none" />
+                           @* @if(<script>$("#exportSelectedData").val()==null</script>){
+                                <form method="post" asp-controller="Import" asp-action="ExportSACOR">
+									<input type="submit" value="Export Excel" />
+								</form>
+                            }*@
                             <input type="submit" value="Export Excel" />
                         </form>
                     </td>
@@ -76,7 +68,7 @@
         <h1>Import New Report</h1>
 
         <form id="DesignDocumentForm" asp-action="CreateDamageabilityReport" method="post" enctype="multipart/form-data">
-           
+
             <table cellpadding="3" cellspacing="0">
                 <tbody>
                     <tr>
@@ -122,13 +114,19 @@
                     </tr>
                 </tbody>
             </table>
-             @if (ViewBag.IsExistReport == true)
+
+            @if (ViewBag.IsExistReport == true)
             {
                 <div class="alert alert-danger">
-                   <p class="text-danger" style="background-color:red;color:white;text-align:center">
+                    <p class="text-danger" style="background-color:red;color:white;text-align:center">
                         This report has already been uploaded
-                   </p>
+                    </p>
                 </div>
+                <script>
+                    // Your delay in milliseconds
+                    var delay = 5000;
+                    setTimeout(function () { window.location = "/SACOR-446"; }, delay);
+                </script>
             }
         </form>
     </div>
@@ -261,23 +259,6 @@
         @{
             int rowCount = 1;
         }
-
-        @* <div class="bevel-box">
-            <table cellpadding="3" cellspacing="0">
-            <tbody>
-            <tr>
-            <td>Minimum date:</td>
-            <td><input type="text" id="min" name="min"></td>
-            </tr>
-            <tr>
-            <td>Maximum date:</td>
-            <td><input type="text" id="max" name="max"></td>
-            </tr>
-            </tbody>
-            </table>
-
-            </div>*@
-
 
         <table id="myTable" cellpadding="3" cellspacing="0" class="show-table">
             <br />
@@ -486,158 +467,84 @@
     });
 </script>
 
-@*<script>
-
-    var minDate, maxDate;
-
-    // Custom filtering function which will search data in column four between two values
-    $.fn.dataTable.ext.search.push(
-    function( settings, data, dataIndex ) {
-    var min = minDate.val();
-    var max = maxDate.val();
-    var date = new Date( data[4] );
-
-    if (
-    ( min === null && max === null ) ||
-    ( min === null && date <= max ) ||
-    ( min <= date   && max === null ) ||
-    ( min <= date   && date <= max )
-    ) {
-    return true;
-    }
-    return false;
-    }
-    );
-
-    $(document).ready(function() {
-    // Create date inputs
-    minDate = new DateTime($('#min'), {
-    format: 'MMMM Do YYYY'
-    });
-    maxDate = new DateTime($('#max'), {
-    format: 'MMMM Do YYYY'
-    });
-
-    // DataTables initialisation
-    var table = $('#myTable').DataTable();
-
-    // Refilter the table
-    $('#min, #max').on('change', function () {
-    table.draw();
-    });
-    });
-
-    </script>*@
 
 <script>
 
-        function Edit(id) {
-           $("#newPage").load("/Import/EditDamageabilityReport/"+id);
-        }
+       function Edit(id) {
+          $("#newPage").load("/Import/EditDamageabilityReport/"+id);
+       }
 
-            $("#checkAll").click(function () {
-                $(".checkBox").prop('checked',
-                    $(this).prop('checked'));
-            });
-            $("#delete").click(function () {
-                var selectedIDs = new Array();
-                $('input:checkbox.checkBox').each(function () {
-                    if ($(this).prop('checked')) {
-                        selectedIDs.push($(this).val());
-                    }
-                });
-                var result = confirm("are you sure you want to delete?");
-                if (result) {
-                    $.ajax({
-                        type: "POST",
-                        url: "/Import/DeleteDamageabilityReport",
-                        data: { "damagingId": selectedIDs },
-                        success: function (response) {
-                            window.location.href = "/SACOR-446";
-                        },
-                        failure: function (response) {
-                            alert(response.responseText);
-                        },
-                        error: function (response) {
-                            alert(response.responseText);
-                        }
-                    });
-                }
-            });
+       $('input:checkbox.checkBox').change(function () {
+            var selectedIDs = new Array();
+               $('input:checkbox.checkBox').each(function () {
+                   if ($(this).prop('checked')) {
+                       selectedIDs.push($(this).val());
+                   }
+               });
 
+               $('#exportSelectedData').val(selectedIDs);
+       //alert(selectedIDs);
+    });
+           $("#checkAll").click(function () {
+               $(".checkBox").prop('checked',
+                   $(this).prop('checked'));
+           });
 
-             function GetDate() {
-            var date = $('#searchDate').val();
-
-            $('input[type=search]').val(date);
-
-            $('input[type=search]').focus();
-
-            //$('searchDate').on('change', function () {
-            //table.draw();
-
-
-            $('#searchDate').val("");
-
-              };
+           $("#delete").click(function () {
+               var selectedIDs = new Array();
+               $('input:checkbox.checkBox').each(function () {
+                   if ($(this).prop('checked')) {
+                       selectedIDs.push($(this).val());
+                   }
+               });
+               var result = confirm("are you sure you want to delete?");
+               if (result) {
+                   $.ajax({
+                       type: "POST",
+                       url: "/Import/DeleteDamageabilityReport",
+                       data: { "damagingId": selectedIDs },
+                       success: function (response) {
+                           window.location.href = "/SACOR-446";
+                       },
+                       failure: function (response) {
+                           alert(response.responseText);
+                       },
+                       error: function (response) {
+                           alert(response.responseText);
+                       }
+                   });
+               }
+           });
 
 
-               function GetSearchhDate() {
-            var date = $('#searchfileDate').val();
+            function GetDate() {
+           var date = $('#searchDate').val();
 
-            $('#schfileDate').val(date);
+           $('input[type=search]').val(date);
 
-            //$('input[type=search]').focus();
+           $('input[type=search]').focus();
 
-            //$('searchDate').on('change', function () {
-            //table.draw();
+           //$('searchDate').on('change', function () {
+           //table.draw();
 
 
-            $('#searchfileDate').val("");
+           $('#searchDate').val("");
 
-              };
+             };
 
-            // Search Date
 
-    //        $.fn.dataTable.ext.search.push(
-    //    function( settings, data, dataIndex ) {
 
-    //        var minDate=$("#min");
-    //        var maxDate=$("#max");
 
-    //       var min = minDate.val();
-    //    var max = maxDate.val();
-    //        var date = new Date( data[4] );
+             function GetSearchhDate() {
+           var date = $('#searchfileDate').val();
 
-    //        if (
-    //            ( min === null && max === null ) ||
-    //            ( min === null && date <= max ) ||
-    //            ( min <= date   && max === null ) ||
-    //            ( min <= date   && date <= max )
-    //        ) {
-    //            return true;
-    //        }
-    //        return false;
-    //    }
-    //);
+           $('#schfileDate').val(date);
 
-    //$(document).ready(function() {
-    //    // Create date inputs
-    //    minDate = new DateTime($('#min'), {
-    //        format: 'MMMM Do YYYY'
-    //    });
-    //    maxDate = new DateTime($('#max'), {
-    //        format: 'MMMM Do YYYY'
-    //    });
+           $('#searchfileDate').val("");
 
-    //    // DataTables initialisation
-    //    var table = $('#myTable').DataTable();
+             };
 
-    //    // Refilter the table
-    //    $('#min, #max').on('change', function () {
-    //        table.draw();
-    //    });
-    //});
+
 </script>
 
     }

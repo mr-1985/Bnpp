@@ -16,9 +16,6 @@
                     <select class="form-control" style="direction: ltr; text-align: left;" asp-for="MaintenanceType" asp-items="@(ViewData["Types"] as SelectList)"></select>
                 </td>
             </tr>
-
-          
-
             <tr>
                 <td>R.R: </td>
                 <td><textarea asp-for="RR" id="iRR" style='width:400px;height:100px' onclick='focused(this);'></textarea></td>

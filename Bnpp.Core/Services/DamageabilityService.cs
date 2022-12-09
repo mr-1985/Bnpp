@@ -61,8 +61,18 @@ namespace Bnpp.Core.Services
             //            return result.GroupBy(d => d.Akz).OrderBy(d => d.Key)
             //.Select(s => new { Key = s.Key, studentobj = s.OrderBy(y => y.Totaldamageabilityofequipment) }).ToList();
             //return result.GroupBy(d => d.Akz);
-            ////return result.GroupBy(d => d.Akz).Select(s => new DamageabilityReport()).ToList();
+            //return result.GroupBy(d => d.Akz).Select(s => new DamageabilityReport()).ToList();
 
+            //var groupedResult = from s in result
+            //                    group s by s.Akz;
+
+            //foreach (var akzGroup in groupedResult)
+            //{
+            //    Console.WriteLine("Age Group: {0}", akzGroup.Key); //Each group has a key 
+
+            //    foreach (DamageabilityReport s in akzGroup) // Each group has inner collection
+            //        Console.WriteLine("Student Name: {0}", s.Akz);
+            //}
 
             return result.ToList();
         }

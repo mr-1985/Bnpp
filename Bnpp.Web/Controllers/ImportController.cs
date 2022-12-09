@@ -185,11 +185,7 @@ namespace Bnpp.Web.Controllers
                 var compareforexistReport = _reportService.GetAllReportsForCompare();
                 if (compareforexistReport.Count !=0)
                 {
-                    //ModelState.AddModelError("allowablecuf", "This report has already been uploaded");
-
                     return Redirect("/SACOR-446?IsExistReport=true");
-                    //ViewBag.IsExistFile = true;
-                    //return RedirectToAction("Index");
                 }
                 else
                 {
@@ -363,31 +359,46 @@ namespace Bnpp.Web.Controllers
 
 
         [HttpPost]
-        public IActionResult Export(string[] reportId)
+        public IActionResult Export(string reportId)
         {
-            var res = new List<DamageabilityReport>();
-
-
-
-            foreach (string id in reportId)
+            if (reportId == null)
             {
-                var excelDocument = _reportService.GetDamageabilityReportById(Convert.ToInt32(id));
-                res.Add(excelDocument);
-            }
-
-            using (XLWorkbook wb = new XLWorkbook())
-            {
-                wb.Worksheets.Add(Commons.ToDataTable(res.ToList()));
-                using (MemoryStream stream = new MemoryStream())
+                var sacorreport = _reportService.GetAllReports().ToList();
+                using (XLWorkbook wb = new XLWorkbook())
                 {
-                    wb.SaveAs(stream);
+                    wb.Worksheets.Add(Commons.ToDataTable(sacorreport.ToList()));
 
 
-
-                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "SACOR-446.xlsx");
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        wb.SaveAs(stream);
+                        return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "SACOR Report.xlsx");
+                    }
                 }
             }
+            else
+            {
+                var res = new List<DamageabilityReport>();
 
+                string[] std = reportId.Split(',');
+
+                foreach (string id in std)
+                {
+                    var excelDocument = _reportService.GetDamageabilityReportById(Convert.ToInt32(id));
+                    res.Add(excelDocument);
+                }
+
+                using (XLWorkbook wb = new XLWorkbook())
+                {
+                    wb.Worksheets.Add(Commons.ToDataTable(res.ToList()));
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        wb.SaveAs(stream);
+
+                        return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "SACOR-446.xlsx");
+                    }
+                }
+            }
             //return RedirectToAction("index");
         }
     }
