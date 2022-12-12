@@ -1,7 +1,7 @@
 ﻿@model Bnpp.DataLayer.Entities.DamageabilityReport
 @{
     ViewData["Title"] = "EditDamageabilityReport";
-    Layout = null;
+     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
 
@@ -9,14 +9,7 @@
 <div id="normal">
     <form id="designForm" asp-action="EditDamageabilityReport" method="post">
         <input type="hidden" asp-for="ID"/>
-        <input type="hidden" asp-for="Totaldamageabilityofequipment"/>
-        <input type="hidden" asp-for="ReportDate"/>
-        <input type="hidden" asp-for="Damageabilitypercoiledcycles"/>
-        <input type="hidden" asp-for="Damageabilityperuncoiledcycles"/>
-        <input type="hidden" asp-for="Lifetimeofequipmentindesign"/>
-        <input type="hidden" asp-for="LifetimeofequipmentperRALDS"/>
-        <input type="hidden" asp-for="Actionperiodofequipment"/>
-        <input type="hidden" asp-for="Locationofthecheckpoint"/>
+       
         <table cellpadding="3" cellspacing="0">
             <tbody>
             <tr>
@@ -24,7 +17,7 @@
                      Allowable CUF:
                 </td>
                 <td>
-                    <input asp-for="AllowableCUF" type="text" style="direction: ltr; text-align: left;">
+                    <input name="allowablecuf" type="text" style="direction: ltr; text-align: left;">
                 </td>
                 <td>
                     <span asp-validation-for="AllowableCUF"></span>
@@ -36,7 +29,7 @@
                     Allowable Life Time:
                 </td>
                 <td>
-                    <input asp-for="AllowableLifeTime" type="text" style="direction: ltr; text-align: left;">
+                    <input name="allowablelifetime" type="text" style="direction: ltr; text-align: left;">
                 </td>
                 <td>
                     <span asp-validation-for="AllowableLifeTime"></span>

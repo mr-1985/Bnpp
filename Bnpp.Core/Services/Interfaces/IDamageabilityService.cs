@@ -14,7 +14,7 @@ namespace Bnpp.Core.Services.Interfaces
         List<DamageabilityReport> GetAllReports(string filter = "",string date="",string fileDate="");
         List<DamageabilityReport> GetAllReportsForCompare();
         int AddNewDamageabilityReport(DamageabilityReport report);
-        void UpdateDamageabilityReport(string allowableCuf,string allowableLifeTime);
+        void UpdateDamageabilityReport(string allowableCuf,string allowableLifeTime, int reportId);
         DamageabilityReport GetDamageabilityReportById(int reportId);
         void DeleteDamageabilityReport(int reportId);
     }

@@ -56,14 +56,25 @@ namespace Bnpp.Web.Controllers
             return View(_reportService.GetDamageabilityReportById(id));
         }
 
+        //[HttpPost]
+        //public IActionResult EditDamageabilityReport(string allowablecuf, string allowablelifetime)
+        //{
+        //    //if (!ModelState.IsValid)
+        //    //    return View();
+
+
+        //    _reportService.UpdateDamageabilityReport(allowablecuf, allowablelifetime);
+        //    return RedirectToAction("index");
+        //}
+
         [HttpPost]
-        public IActionResult EditDamageabilityReport(string allowablecuf, string allowablelifetime)
+        public IActionResult EditDamageabilityReport(string allowablecuf, string allowablelifetime,int id)
         {
             //if (!ModelState.IsValid)
             //    return View();
 
 
-            _reportService.UpdateDamageabilityReport(allowablecuf, allowablelifetime);
+            _reportService.UpdateDamageabilityReport(allowablecuf, allowablelifetime,id);
             return RedirectToAction("index");
         }
 
@@ -78,7 +89,7 @@ namespace Bnpp.Web.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost]                                                                                      
         public IActionResult CreateDamageabilityReport(IFormFile fileReport, string reportDate = "", string allowablecuf = "", string allowablelifetime = "", string Changingratio = "", string allowableChangingratio = "")
         {
             var totalReports = _reportService.GetAllReports();
@@ -299,18 +310,22 @@ namespace Bnpp.Web.Controllers
                             //AllowableCUF & AllowableLifeTime
                             var allowableCuf = "";
                             var allowableLifeTime = "";
+                            var allowablesChangingratio = "";
 
                             foreach (var a in totalReports)
                             {
                                 var allowcuf = a.AllowableCUF;
                                 var allowlifetime = a.AllowableLifeTime;
+                                var allowratio = a.AllowableChangingRatio;
                                 allowableCuf = allowcuf;
                                 allowableLifeTime = allowlifetime;
+                                allowablesChangingratio = allowratio;
                                 break;
                             }
 
                             report.AllowableCUF = allowableCuf;
                             report.AllowableLifeTime = allowableLifeTime;
+                            report.AllowableChangingRatio = allowablesChangingratio;
 
 
 

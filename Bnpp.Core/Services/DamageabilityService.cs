@@ -74,7 +74,7 @@ namespace Bnpp.Core.Services
             //        Console.WriteLine("Student Name: {0}", s.Akz);
             //}
 
-            return result.ToList();
+            return result.Where(r=>r.IsDelete==false).ToList();
         }
 
         public List<DamageabilityReport> GetAllReportsForCompare()
@@ -99,15 +99,40 @@ namespace Bnpp.Core.Services
             return _context.DamageabilityReports.Find(reportId);
         }
 
-        public void UpdateDamageabilityReport(string allowableCuf, string allowableLifeTime)
+        public void UpdateDamageabilityReport(string allowableCuf, string allowableLifeTime, int reportId)
         {
-            var totality = _context.DamageabilityReports.ToList();
-           
-            foreach (var report in totality)
+
+            #region Edit AllowableCUF & AllowableLifeTime in all of records
+
+            //var totality = _context.DamageabilityReports.ToList();
+
+            //foreach (var report in totality)
+            //{
+            //    report.AllowableCUF = allowableCuf;
+            //    report.AllowableLifeTime = allowableLifeTime;
+            //    _context.Update(report);
+            //    _context.SaveChanges();
+            //}
+
+            #endregion
+
+            var report =GetDamageabilityReportById(reportId);
+            var dateOfReport = report.CreateDate.Date;
+
+            var firstRecord=_context.DamageabilityReports.FirstOrDefault(r=>r.CreateDate.Date==dateOfReport).ID;
+
+            var numberofRow = reportId - firstRecord;
+
+            var firstId = _context.DamageabilityReports.Min(i => i.ID);
+            var endId= _context.DamageabilityReports.Max(i => i.ID);
+            var start = firstId + numberofRow;
+
+            for(int i = start; i <= endId; i += 98)
             {
-                report.AllowableCUF = allowableCuf;
-                report.AllowableLifeTime = allowableLifeTime;
-                _context.Update(report);
+                var editingreport = GetDamageabilityReportById(i);
+                editingreport.AllowableCUF= allowableCuf;
+                editingreport.AllowableLifeTime= allowableLifeTime;
+                _context.Update(editingreport);
                 _context.SaveChanges();
             }
 

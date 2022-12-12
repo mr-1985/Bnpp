@@ -72,4 +72,3 @@ C:\Users\mohsen\source\New folder\Bnpp.DataLayer\obj\Debug\net5.0\Bnpp.DataLayer
 C:\Users\mohsen\source\New folder\Bnpp.DataLayer\obj\Debug\net5.0\Bnpp.DataLayer.genruntimeconfig.cache
 C:\Users\mohsen\source\New folder\Bnpp.DataLayer\obj\Debug\net5.0\ref\Bnpp.DataLayer.dll
 C:\Users\mohsen\source\New folder\Bnpp.DataLayer\bin\Debug\net5.0\ref\Bnpp.DataLayer.dll
-C:\Users\mohsen\source\New folder\Bnpp.DataLayer\obj\Debug\net5.0\Bnpp.DataLayer.csproj.AssemblyReference.cache
