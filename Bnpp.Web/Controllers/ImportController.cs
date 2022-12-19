@@ -194,22 +194,22 @@ namespace Bnpp.Web.Controllers
             else
             {
                 var compareforexistReport = _reportService.GetAllReportsForCompare();
-                if (compareforexistReport.Count !=0)
-                {
-                    return Redirect("/SACOR-446?IsExistReport=true");
-                }
-                else
-                {
-                    var beforeTotal = _reportService.GetAllTotalReports();
+                //if (compareforexistReport.Count !=0)
+                //{
+                //    return Redirect("/SACOR-446?IsExistReport=true");
+                //}
+                //else
+                //{
+                var beforeTotal = _reportService.GetAllTotalReports();
 
-                    //var btotal = "";
-                    //foreach (var p in beforeTotal)
-                    //{
-                    //    var bt = p.Totaldamageabilityofequipment;
-                    //    btotal = bt;
-                    //}
+                //var btotal = "";
+                //foreach (var p in beforeTotal)
+                //{
+                //    var bt = p.Totaldamageabilityofequipment;
+                //    btotal = bt;
+                //}
 
-                    var Date = "";
+                var Date = "";
                     var Akz = "";
                     var location = "";
                     var Totaldamageabilityofequipment = "";
@@ -343,7 +343,7 @@ namespace Bnpp.Web.Controllers
 
                         }
                     }
-                }
+                //}
 
             }
             //

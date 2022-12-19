@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
+
 <div class="dcontent">
     <div style="margin-top: 10px; background-color: #6b8d9e; padding-top: 5px; padding-bottom: 5px; padding-right: 10px; border-radius: 5px; border: solid 1px #cccccc; background: repeating-linear-gradient(-45deg, #7fa1b3, #6b8d9e 1px, #6b8d9e 1px, #6b8d9e 20px);">
         &nbsp;
@@ -235,7 +236,7 @@
                             </tr>
                         <tr>
                             <td>
-                                <input type="file" name="fileReport" style="direction: ltr; text-align: left;">
+                               @* <input type="file" name="fileReport" style="direction: ltr; text-align: left;">*@
                                 <input type="submit" value="Search" style="direction: ltr; text-align: left;">
                                 <input type="button" onclick="location='/SACOR-446'" class="butn-cancel" style="direction: ltr; text-align: center;margin-bottom:-7px;">
                             </td>
@@ -413,8 +414,11 @@
                         <td>
                             @item.AllowableChangingRatio
                         </td>
-                        <td>
+                        @*<td>
                             @item.ReportDate.ToString("yyyy/MM/dd")
+                        </td>*@
+                         <td>
+                            @item.CreateDate.ToString("yyyy/MM/dd")
                         </td>
                         <td>
                             <a class="btn-edit-equip" href="/Import/EditDamageabilityReport/@item.ID">
@@ -433,10 +437,11 @@
 
 @section Scripts
     {
-
+        <script src="/js/grid.js"></script>
 
 <link href="/css/kendo.common.min.css" rel="stylesheet" />
 <link href="/css/kendo.default.min.css" rel="stylesheet" />
+<link href="/css/jquery.dataTables.min.css" rel="stylesheet" />
 
 @*<link href="/css/jquery.dataTables.min.css" />
     <link href="/css/dataTables.dateTime.min.css" rel="stylesheet" />
@@ -466,9 +471,9 @@
 <script src="/js/datatables.min.js"></script>
 
 <script>
-    $(document).ready(function () {
-        $("#myTable").DataTable();
-    });
+    //$(document).ready(function () {
+    //    $("#myTable").DataTable();
+    //});
 </script>
 
 
@@ -482,7 +487,7 @@
 
        function refreshPage() {
           // Your delay in milliseconds
-                    var delay = 1000;
+                    var delay = 3000;
                     setTimeout(function () { window.location = "/SACOR-446"; }, delay);
        }
 
@@ -570,6 +575,44 @@
              };
 
 
+
+             //group
+             $(document).ready(function () {
+    var groupColumn = 2;
+    var table = $('#myTable').DataTable({
+        columnDefs: [{ visible: false, targets: groupColumn }],
+        order: [[groupColumn, 'asc']],
+        displayLength: 25,
+        drawCallback: function (settings) {
+            var api = this.api();
+            var rows = api.rows({ page: 'current' }).nodes();
+            var last = null;
+ 
+            api
+                .column(groupColumn, { page: 'current' })
+                .data()
+                .each(function (group, i) {
+                    if (last !== group) {
+                        $(rows)
+                            .eq(i)
+                            .before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+ 
+                        last = group;
+                    }
+                });
+        },
+    });
+ 
+    // Order by the grouping
+    $('#example tbody').on('click', 'tr.group', function () {
+        var currentOrder = table.order()[0];
+        if (currentOrder[0] === groupColumn && currentOrder[1] === 'asc') {
+            table.order([groupColumn, 'desc']).draw();
+        } else {
+            table.order([groupColumn, 'asc']).draw();
+        }
+    });
+});
 </script>
 
     }

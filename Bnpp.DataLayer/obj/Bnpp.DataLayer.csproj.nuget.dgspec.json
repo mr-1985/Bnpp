@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mohsen\\source\\New folder\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj": {}
+    "C:\\Users\\taban\\source\\repos\\Bnpp\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mohsen\\source\\New folder\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj": {
+    "C:\\Users\\taban\\source\\repos\\Bnpp\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mohsen\\source\\New folder\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj",
+        "projectUniqueName": "C:\\Users\\taban\\source\\repos\\Bnpp\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj",
         "projectName": "Bnpp.DataLayer",
-        "projectPath": "C:\\Users\\mohsen\\source\\New folder\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj",
-        "packagesPath": "C:\\Users\\mohsen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mohsen\\source\\New folder\\Bnpp.DataLayer\\obj\\",
+        "projectPath": "C:\\Users\\taban\\source\\repos\\Bnpp\\Bnpp.DataLayer\\Bnpp.DataLayer.csproj",
+        "packagesPath": "C:\\Users\\taban\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\taban\\source\\repos\\Bnpp\\Bnpp.DataLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mohsen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\taban\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,7 +61,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -70,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.111\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

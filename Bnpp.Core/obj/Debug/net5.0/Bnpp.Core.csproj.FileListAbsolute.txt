@@ -88,3 +88,21 @@ C:\Users\mohsen\source\New folder\Bnpp.Core\obj\Debug\net5.0\Bnpp.Core.pdb
 C:\Users\mohsen\source\New folder\Bnpp.Core\obj\Debug\net5.0\Bnpp.Core.genruntimeconfig.cache
 C:\Users\mohsen\source\New folder\Bnpp.Core\obj\Debug\net5.0\ref\Bnpp.Core.dll
 C:\Users\mohsen\source\New folder\Bnpp.Core\bin\Debug\net5.0\ref\Bnpp.Core.dll
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\bin\Debug\net5.0\Bnpp.Core.deps.json
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\bin\Debug\net5.0\Bnpp.Core.runtimeconfig.json
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\bin\Debug\net5.0\Bnpp.Core.runtimeconfig.dev.json
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\bin\Debug\net5.0\Bnpp.Core.dll
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\bin\Debug\net5.0\Bnpp.Core.pdb
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\bin\Debug\net5.0\Bnpp.DataLayer.dll
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\bin\Debug\net5.0\Bnpp.DataLayer.pdb
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\obj\Debug\net5.0\Bnpp.Core.csproj.AssemblyReference.cache
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\obj\Debug\net5.0\Bnpp.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\obj\Debug\net5.0\Bnpp.Core.AssemblyInfoInputs.cache
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\obj\Debug\net5.0\Bnpp.Core.AssemblyInfo.cs
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\obj\Debug\net5.0\Bnpp.Core.csproj.CoreCompileInputs.cache
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\obj\Debug\net5.0\Bnpp.Core.csproj.CopyComplete
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\obj\Debug\net5.0\Bnpp.Core.dll
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\obj\Debug\net5.0\refint\Bnpp.Core.dll
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\obj\Debug\net5.0\Bnpp.Core.pdb
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\obj\Debug\net5.0\Bnpp.Core.genruntimeconfig.cache
+C:\Users\taban\Source\Repos\Bnpp\Bnpp.Core\obj\Debug\net5.0\ref\Bnpp.Core.dll
