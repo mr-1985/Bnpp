@@ -15,6 +15,12 @@ using ClosedXML.Excel;
 using Bnpp.Core.ViewModels;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Net.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
+
+
 
 
 namespace Bnpp.Web.Controllers
@@ -32,6 +38,44 @@ namespace Bnpp.Web.Controllers
         //public IActionResult Index()
         //{
         //    return View(_reportService.GetAllReports());
+        //}
+
+        //public IActionResult ListOfReports()
+        //{
+
+        //    IEnumerable<DamageabilityReport> allReports = null;
+
+        //    using (var client = new HttpClient())
+        //    {
+        //        client.BaseAddress = new Uri("https://localhost:44340/api/ReportApi/");
+        //        //HTTP GET
+        //        var responseTask = client.GetAsync("https://localhost:44340/api/ReportApi/");
+        //        responseTask.Wait();
+
+        //        var result = responseTask.Result;
+        //        if (result.IsSuccessStatusCode)
+        //        {
+        //            var readTask = result.Content.ReadAsAsync<IList<DamageabilityReport>>();
+        //            readTask.Wait();
+
+        //            allReports = readTask.Result;
+        //        }
+        //        else //web api sent error response 
+        //        {
+        //            //log response status here..
+
+        //            allReports = Enumerable.Empty<DamageabilityReport>();
+
+        //            ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+        //        }
+        //    }
+
+        //    return View(allReports);
+        //}
+
+        //public IActionResult ListOfReports(string filter = "", string date = "", string fileDate = "", bool IsExistReport = false)
+        //{
+        //    return View(_reportService.GetAllReports(filter, date, fileDate));
         //}
 
         [BindProperty] public DamageabilityReport Report { get; set; }
@@ -68,13 +112,13 @@ namespace Bnpp.Web.Controllers
         //}
 
         [HttpPost]
-        public IActionResult EditDamageabilityReport(string allowablecuf, string allowablelifetime,int id)
+        public IActionResult EditDamageabilityReport(string allowablecuf, string allowablelifetime, string allowablechangingratio, int id)
         {
             //if (!ModelState.IsValid)
             //    return View();
 
 
-            _reportService.UpdateDamageabilityReport(allowablecuf, allowablelifetime,id);
+            _reportService.UpdateDamageabilityReport(allowablecuf, allowablelifetime, allowablechangingratio, id);
             return RedirectToAction("index");
         }
 
@@ -89,7 +133,7 @@ namespace Bnpp.Web.Controllers
 
         }
 
-        [HttpPost]                                                                                      
+        [HttpPost]
         public IActionResult CreateDamageabilityReport(IFormFile fileReport, string reportDate = "", string allowablecuf = "", string allowablelifetime = "", string Changingratio = "", string allowableChangingratio = "")
         {
             var totalReports = _reportService.GetAllReports();
@@ -170,21 +214,29 @@ namespace Bnpp.Web.Controllers
                         report.AllowableLifeTime = allowablelifetime;
                         report.AllowableChangingRatio = allowableChangingratio;
                         report.Akz = Akz;
-                        report.DateOfReport = Date;
+                        //report.DateOfReport = Date;
 
                         //report.ChangingRatio = Changingratio;
 
-
-
-                        if (reportDate != "")
+                        if (Date != "")
                         {
-                            string[] std = reportDate.Split('/');
+                            string[] std = Date.Split('.');
                             report.ReportDate = new DateTime(int.Parse(std[2]),
-                                int.Parse(std[0]),
                                 int.Parse(std[1]),
+                                int.Parse(std[0]),
                                 new GregorianCalendar()
                             );
                         }
+
+                        //if (reportDate != "")
+                        //{
+                        //    string[] std = reportDate.Split('/');
+                        //    report.ReportDate = new DateTime(int.Parse(std[2]),
+                        //        int.Parse(std[0]),
+                        //        int.Parse(std[1]),
+                        //        new GregorianCalendar()
+                        //    );
+                        //}
 
                         _reportService.AddNewDamageabilityReport(report);
 
@@ -210,139 +262,147 @@ namespace Bnpp.Web.Controllers
                 //}
 
                 var Date = "";
-                    var Akz = "";
-                    var location = "";
-                    var Totaldamageabilityofequipment = "";
-                    var Damageabilityperuncoiledcycles = "";
-                    var Damageabilitypercoiledcycles = "";
-                    var LifetimeofequipmentperRALDS = "";
-                    var Lifetimeofequipmentindesign = "";
-                    var Actionperiodofequipment = "";
+                var Akz = "";
+                var location = "";
+                var Totaldamageabilityofequipment = "";
+                var Damageabilityperuncoiledcycles = "";
+                var Damageabilitypercoiledcycles = "";
+                var LifetimeofequipmentperRALDS = "";
+                var Lifetimeofequipmentindesign = "";
+                var Actionperiodofequipment = "";
 
-                    DataTable datatable = new DataTable();
+                DataTable datatable = new DataTable();
 
-                    var stream = fileReport.OpenReadStream();
+                var stream = fileReport.OpenReadStream();
 
-                    StreamReader streamreader = new StreamReader(stream);
-                    //StreamReader streamreader = new StreamReader(@"G:\New folder\bsh1_2021_10_06_damage.txt");
-                    char[] delimiter = new char[] { '\t' };
-                    string[] columnheaders = streamreader.ReadLine().Split(delimiter);
+                StreamReader streamreader = new StreamReader(stream);
+                //StreamReader streamreader = new StreamReader(@"G:\New folder\bsh1_2021_10_06_damage.txt");
+                char[] delimiter = new char[] { '\t' };
+                string[] columnheaders = streamreader.ReadLine().Split(delimiter);
 
-                    foreach (string columnheader in columnheaders)
+                foreach (string columnheader in columnheaders)
+                {
+                    datatable.Columns.Add(columnheader); // I've added the column headers here.
+                }
+
+                while (streamreader.Peek() > 0)
+                {
+                    DataRow datarow = datatable.NewRow();
+                    datarow.ItemArray = streamreader.ReadLine().Split(delimiter);
+                    datatable.Rows.Add(datarow);
+                }
+
+
+
+                for (int i = 0; i < datatable.Rows.Count; i++)
+                {
+                    if (i == 2)
                     {
-                        datatable.Columns.Add(columnheader); // I've added the column headers here.
+                        var rowSelected = datatable.Rows[i][0].ToString();
+                        var splitData = rowSelected.Substring(29).Trim().Split(" ");
+
+                        Date = splitData[0];
                     }
 
-                    while (streamreader.Peek() > 0)
+                    if (i > 17 && i < 116)
                     {
-                        DataRow datarow = datatable.NewRow();
-                        datarow.ItemArray = streamreader.ReadLine().Split(delimiter);
-                        datatable.Rows.Add(datarow);
-                    }
+                        var rowSelected = datatable.Rows[i][0].ToString();
+                        var Identifier = rowSelected.Substring(0, 9);
+                        var splitData = rowSelected.Substring(9).Trim().Split("   ");
 
+                        Akz = Identifier;
+                        location = splitData[0];
+                        Totaldamageabilityofequipment = splitData[splitData.Length - 1];
+                        Damageabilityperuncoiledcycles = splitData[splitData.Length - 2];
+                        Damageabilitypercoiledcycles = splitData[splitData.Length - 3];
+                        LifetimeofequipmentperRALDS = splitData[splitData.Length - 4];
+                        Lifetimeofequipmentindesign = splitData[splitData.Length - 5];
+                        Actionperiodofequipment = splitData[splitData.Length - 6];
 
+                        //اینجا اینزرت کن تو جدول 
 
-                    for (int i = 0; i < datatable.Rows.Count; i++)
-                    {
-                        if (i == 2)
+                        DamageabilityReport report = new DamageabilityReport();
+                        report.Totaldamageabilityofequipment = Totaldamageabilityofequipment;
+                        report.Damageabilityperuncoiledcycles = Damageabilityperuncoiledcycles;
+                        report.Damageabilitypercoiledcycles = Damageabilitypercoiledcycles;
+                        report.LifetimeofequipmentperRALDS = LifetimeofequipmentperRALDS;
+                        report.Lifetimeofequipmentindesign = Lifetimeofequipmentindesign;
+                        report.Actionperiodofequipment = Actionperiodofequipment;
+                        report.Locationofthecheckpoint = location;
+                        report.Akz = Akz;
+                        //report.DateOfReport = Date;
+
+                        //report.ChangingRatio = Changingratio;
+
+                        // ChangingRatio
+                        var btotal = "";
+                        var j = 18;
+                        foreach (var p in beforeTotal)
                         {
-                            var rowSelected = datatable.Rows[i][0].ToString();
-                            var splitData = rowSelected.Substring(29).Trim().Split(" ");
+                            if (i == j)
+                            {
+                                var bt = p.Totaldamageabilityofequipment;
+                                btotal = bt;
+                            }
+                            j++;
+                            //break;
+                            //goto endofloop;
+                        }
+                        //endofloop:
+                        if (Convert.ToDecimal(btotal) != 0)
+                        {
+                            decimal ratio = (Convert.ToDecimal(btotal) - Convert.ToDecimal(Totaldamageabilityofequipment)) / Convert.ToDecimal(btotal);
+                            report.ChangingRatio = ratio.ToString();
+                        }
+                        //else
+                        //{
+                        //    report.ChangingRatio = Convert.ToDecimal(0);
+                        //}
 
-                            Date = splitData[0];
+                        //AllowableCUF & AllowableLifeTime
+                        var allowableCuf = "";
+                        var allowableLifeTime = "";
+                        var allowablesChangingratio = "";
+
+                        foreach (var a in totalReports)
+                        {
+                            var allowcuf = a.AllowableCUF;
+                            var allowlifetime = a.AllowableLifeTime;
+                            var allowratio = a.AllowableChangingRatio;
+                            allowableCuf = allowcuf;
+                            allowableLifeTime = allowlifetime;
+                            allowablesChangingratio = allowratio;
+                            break;
                         }
 
-                        if (i > 17 && i < 116)
+                        report.AllowableCUF = allowableCuf;
+                        report.AllowableLifeTime = allowableLifeTime;
+                        report.AllowableChangingRatio = allowablesChangingratio;
+
+                        if (Date != "")
                         {
-                            var rowSelected = datatable.Rows[i][0].ToString();
-                            var Identifier = rowSelected.Substring(0, 9);
-                            var splitData = rowSelected.Substring(9).Trim().Split("   ");
-
-                            Akz = Identifier;
-                            location = splitData[0];
-                            Totaldamageabilityofequipment = splitData[splitData.Length - 1];
-                            Damageabilityperuncoiledcycles = splitData[splitData.Length - 2];
-                            Damageabilitypercoiledcycles = splitData[splitData.Length - 3];
-                            LifetimeofequipmentperRALDS = splitData[splitData.Length - 4];
-                            Lifetimeofequipmentindesign = splitData[splitData.Length - 5];
-                            Actionperiodofequipment = splitData[splitData.Length - 6];
-
-                            //اینجا اینزرت کن تو جدول 
-
-                            DamageabilityReport report = new DamageabilityReport();
-                            report.Totaldamageabilityofequipment = Totaldamageabilityofequipment;
-                            report.Damageabilityperuncoiledcycles = Damageabilityperuncoiledcycles;
-                            report.Damageabilitypercoiledcycles = Damageabilitypercoiledcycles;
-                            report.LifetimeofequipmentperRALDS = LifetimeofequipmentperRALDS;
-                            report.Lifetimeofequipmentindesign = Lifetimeofequipmentindesign;
-                            report.Actionperiodofequipment = Actionperiodofequipment;
-                            report.Locationofthecheckpoint = location;
-                            report.Akz = Akz;
-                            report.DateOfReport = Date;
-
-                            //report.ChangingRatio = Changingratio;
-
-                            // ChangingRatio
-                            var btotal = "";
-                            var j = 18;
-                            foreach (var p in beforeTotal)
-                            {
-                                if (i == j)
-                                {
-                                    var bt = p.Totaldamageabilityofequipment;
-                                    btotal = bt;
-                                }
-                                j++;
-                                //break;
-                                //goto endofloop;
-                            }
-                            //endofloop:
-                            if (Convert.ToDecimal(btotal) != 0)
-                            {
-                                decimal ratio = (Convert.ToDecimal(btotal) - Convert.ToDecimal(Totaldamageabilityofequipment)) / Convert.ToDecimal(btotal);
-                                report.ChangingRatio = ratio.ToString();
-                            }
-                            //else
-                            //{
-                            //    report.ChangingRatio = Convert.ToDecimal(0);
-                            //}
-
-                            //AllowableCUF & AllowableLifeTime
-                            var allowableCuf = "";
-                            var allowableLifeTime = "";
-                            var allowablesChangingratio = "";
-
-                            foreach (var a in totalReports)
-                            {
-                                var allowcuf = a.AllowableCUF;
-                                var allowlifetime = a.AllowableLifeTime;
-                                var allowratio = a.AllowableChangingRatio;
-                                allowableCuf = allowcuf;
-                                allowableLifeTime = allowlifetime;
-                                allowablesChangingratio = allowratio;
-                                break;
-                            }
-
-                            report.AllowableCUF = allowableCuf;
-                            report.AllowableLifeTime = allowableLifeTime;
-                            report.AllowableChangingRatio = allowablesChangingratio;
-
-
-
-                            if (reportDate != "")
-                            {
-                                string[] std = reportDate.Split('/');
-                                report.ReportDate = new DateTime(int.Parse(std[2]),
-                                    int.Parse(std[0]),
-                                    int.Parse(std[1]),
-                                    new GregorianCalendar()
-                                );
-                            }
-
-                            _reportService.AddNewDamageabilityReport(report);
-
+                            string[] std = Date.Split('.');
+                            report.ReportDate = new DateTime(int.Parse(std[2]),
+                                int.Parse(std[1]),
+                                int.Parse(std[0]),
+                                new GregorianCalendar()
+                            );
                         }
+
+                        //if (reportDate != "")
+                        //{
+                        //    string[] std = reportDate.Split('/');
+                        //    report.ReportDate = new DateTime(int.Parse(std[2]),
+                        //        int.Parse(std[0]),
+                        //        int.Parse(std[1]),
+                        //        new GregorianCalendar()
+                        //    );
+                        //}
+
+                        _reportService.AddNewDamageabilityReport(report);
+
                     }
+                }
                 //}
 
             }
@@ -416,5 +476,6 @@ namespace Bnpp.Web.Controllers
             }
             //return RedirectToAction("index");
         }
+
     }
 }

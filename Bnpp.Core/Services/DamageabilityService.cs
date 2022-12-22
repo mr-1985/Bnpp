@@ -49,13 +49,14 @@ namespace Bnpp.Core.Services
 
             if (!string.IsNullOrEmpty(date))
             {
-                result = result.Where(c => c.DateOfReport == date);
+                var date1 = DateTime.Parse(date);
+                result = result.Where(c => c.ReportDate.Date == date1.Date);
             }
 
             if (!string.IsNullOrEmpty(fileDate))
             {
                 var datefile = DateTime.Parse(fileDate);
-                result = result.Where(c => c.ReportDate == datefile);
+                result = result.Where(c => c.CreateDate.Date == datefile.Date);
             }
 
             //            return result.GroupBy(d => d.Akz).OrderBy(d => d.Key)
@@ -99,7 +100,7 @@ namespace Bnpp.Core.Services
             return _context.DamageabilityReports.Find(reportId);
         }
 
-        public void UpdateDamageabilityReport(string allowableCuf, string allowableLifeTime, int reportId)
+        public void UpdateDamageabilityReport(string allowableCuf, string allowableLifeTime, string allowablechangingratio, int reportId)
         {
 
             #region Edit AllowableCUF & AllowableLifeTime in all of records
@@ -132,6 +133,7 @@ namespace Bnpp.Core.Services
                 var editingreport = GetDamageabilityReportById(i);
                 editingreport.AllowableCUF= allowableCuf;
                 editingreport.AllowableLifeTime= allowableLifeTime;
+                editingreport.AllowableChangingRatio = allowablechangingratio;
                 _context.Update(editingreport);
                 _context.SaveChanges();
             }

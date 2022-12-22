@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5ge42nDnfvFVEnYu4b27CHfj1cCw7ivUBnrPrgW6SUTDjGTRZzQfAvV7C5hbGqsFYc6mY6e3yY1My19+1BLN4g==",
+  "dgSpecHash": "ghHy5J9r4yufQtL5fO0Ij5r+ZKDPgGpYChfd8pfnbTlhkETtBzsuux49WJ1k+3B/zeUVGTRqVJpoJpy4/J7u2A==",
   "success": true,
   "projectFilePath": "C:\\Users\\taban\\source\\repos\\Bnpp\\Bnpp.Web\\Bnpp.Web.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,10 @@
     "C:\\Users\\taban\\.nuget\\packages\\excelnumberformat\\1.0.10\\excelnumberformat.1.0.10.nupkg.sha512",
     "C:\\Users\\taban\\.nuget\\packages\\freespire.office\\7.7.1\\freespire.office.7.7.1.nupkg.sha512",
     "C:\\Users\\taban\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\taban\\.nuget\\packages\\jquery\\1.9.1\\jquery.1.9.1.nupkg.sha512",
+    "C:\\Users\\taban\\.nuget\\packages\\jquery.validation\\1.9.0\\jquery.validation.1.9.0.nupkg.sha512",
+    "C:\\Users\\taban\\.nuget\\packages\\kendouicore\\2022.3.1109\\kendouicore.2022.3.1109.nupkg.sha512",
+    "C:\\Users\\taban\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.9\\microsoft.aspnet.webapi.client.5.2.9.nupkg.sha512",
     "C:\\Users\\taban\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\taban\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\taban\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
@@ -112,6 +116,7 @@
     "C:\\Users\\taban\\.nuget\\packages\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\taban\\.nuget\\packages\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\taban\\.nuget\\packages\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "C:\\Users\\taban\\.nuget\\packages\\syncfusion.javascript\\20.3.0.61\\syncfusion.javascript.20.3.0.61.nupkg.sha512",
     "C:\\Users\\taban\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\taban\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\taban\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

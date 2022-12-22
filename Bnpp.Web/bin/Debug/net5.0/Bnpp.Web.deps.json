@@ -37,10 +37,13 @@
           "Bnpp.DataLayer": "1.0.0",
           "ClosedXML": "0.95.4",
           "FreeSpire.Office": "7.7.1",
+          "KendoUICore": "2022.3.1109",
+          "Microsoft.AspNet.WebApi.Client": "5.2.9",
           "Microsoft.EntityFrameworkCore": "5.0.8",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.8",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.8",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "5.0.2",
+          "Syncfusion.JavaScript": "20.3.0.61",
           "System.Data.OleDb": "6.0.0",
           "Microsoft.AspNetCore.Antiforgery.Reference": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions.Reference": "5.0.0.0",
@@ -428,6 +431,32 @@
             "assemblyVersion": "2.8.0.0",
             "fileVersion": "2.8.26.1919"
           }
+        }
+      },
+      "jQuery/1.9.1": {},
+      "jQuery.Validation/1.9.0": {
+        "dependencies": {
+          "jQuery": "1.9.1"
+        }
+      },
+      "KendoUICore/2022.3.1109": {
+        "dependencies": {
+          "jQuery": "1.9.1"
+        }
+      },
+      "Microsoft.AspNet.WebApi.Client/5.2.9": {
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json.Bson": "1.0.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Net.Http.Formatting.dll": {
+            "assemblyVersion": "5.2.9.0",
+            "fileVersion": "5.2.61129.10"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/System.Net.Http.Formatting.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/2.2.0": {
@@ -1568,6 +1597,12 @@
       "runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
+      "Syncfusion.JavaScript/20.3.0.61": {
+        "dependencies": {
+          "jQuery": "1.9.1",
+          "jQuery.Validation": "1.9.0"
+        }
+      },
       "System.AppContext/4.3.0": {
         "dependencies": {
           "System.Runtime": "4.3.0"
@@ -4421,6 +4456,34 @@
       "path": "humanizer.core/2.8.26",
       "hashPath": "humanizer.core.2.8.26.nupkg.sha512"
     },
+    "jQuery/1.9.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HiX9icLyiJGgiL5EOIn0d1MBPHVV2M9mzWT4mANdniDNR51RvAFTyKEXEd2+5yQJ4PJ5xePOR61Vjj/omQzYcw==",
+      "path": "jquery/1.9.1",
+      "hashPath": "jquery.1.9.1.nupkg.sha512"
+    },
+    "jQuery.Validation/1.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ACp4/WHT2EEklKpL9dSMCJowGpVs7KRYA0L3Lp7YdVTrNubjDW2eyw+nuQpJJmRh+r5SBwF61UG0dO6+SzqA7A==",
+      "path": "jquery.validation/1.9.0",
+      "hashPath": "jquery.validation.1.9.0.nupkg.sha512"
+    },
+    "KendoUICore/2022.3.1109": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Qojjvs2WSDem9AhgfIgQlDDig70eV3jgrURd4x69Gdjo2b6hqLAOBT0jMJBiO7U+3mGbZv70abpmFjUeJf6JPA==",
+      "path": "kendouicore/2022.3.1109",
+      "hashPath": "kendouicore.2022.3.1109.nupkg.sha512"
+    },
+    "Microsoft.AspNet.WebApi.Client/5.2.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cuVhPjjNMSEFpKXweMNBbsG4RUFuuZpFBm8tSyw309U9JEjcnbB6n3EPb4xwgcy9bJ38ctIbv5G8zXUBhlrPWw==",
+      "path": "microsoft.aspnet.webapi.client/5.2.9",
+      "hashPath": "microsoft.aspnet.webapi.client.5.2.9.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.Antiforgery/2.2.0": {
       "type": "package",
       "serviceable": true,
@@ -5134,6 +5197,13 @@
       "sha512": "sha512-VB5cn/7OzUfzdnC8tqAIMQciVLiq2epm2NrAm1E9OjNRyG4lVhfR61SMcLizejzQP8R8Uf/0l5qOIbUEi+RdEg==",
       "path": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "hashPath": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512"
+    },
+    "Syncfusion.JavaScript/20.3.0.61": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-K6ZeYB5/NZiClQYl4wgF8woYxDaO3doiIjYv8o1PLrF2whtx2gzhZWWG1GF6VXZ/I0fqmwYSRYGS3eunJEE2Jg==",
+      "path": "syncfusion.javascript/20.3.0.61",
+      "hashPath": "syncfusion.javascript.20.3.0.61.nupkg.sha512"
     },
     "System.AppContext/4.3.0": {
       "type": "package",

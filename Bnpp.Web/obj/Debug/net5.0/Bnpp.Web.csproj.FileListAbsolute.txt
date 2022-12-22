@@ -1799,3 +1799,4 @@ C:\Users\taban\Source\Repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\refint\Bnpp.Web.dll
 C:\Users\taban\Source\Repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Bnpp.Web.pdb
 C:\Users\taban\Source\Repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Bnpp.Web.genruntimeconfig.cache
 C:\Users\taban\Source\Repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\ref\Bnpp.Web.dll
+C:\Users\taban\source\repos\Bnpp\Bnpp.Web\bin\Debug\net5.0\System.Net.Http.Formatting.dll
