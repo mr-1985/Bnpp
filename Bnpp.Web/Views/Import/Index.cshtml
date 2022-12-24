@@ -592,9 +592,10 @@
         };
 
         $(document).ready(function () {
-            $('tr[role="row"]').hide();
+            $('tbody tr[role="row"]').hide();
         });
 
+       
         //group
         $(document).ready(function () {
             var groupColumn = 2;
@@ -629,38 +630,11 @@
             // Order by the grouping
             $('#myTable tbody').on('click', 'tr.group', function () {
 
-                var groupid = $(this).prop('id');
-                //var next = $("#groupId");
-                //$("#id tr").nextAll("#id tr").hide();
-                //alert(groupid);
-                //var tr = $(this).nextAll(".group").first();
-                //var next = $(".group").first();
-                //debugger;
-
-                //var s = $($(this).prop('id'));
-                //alert(s);
-                //var column = groupColumn;
-                //alert(id);
-
-                //$('tr[role="row"]').css('display', 'none');
-
-                //$(".group").nextUntil(".group").filter('tr[role="row"]').toggle();
+               
 
                 $($(this)).nextUntil(".group").filter('tr[role="row"]').toggle();
 
-                //$($(this).prop('id')).first().filter('tr[role="row"]').toggle();
-
-                //$('$(this).prop('id')').nextUntil("#group_5").filter('tr[role="row"]').toggle();
-
-                //$(this).prop('id').nextUntil("#group_5").filter('tr[role="row"]').toggle();
-                //$('tr[role="row"]').toggle();
-
-                //if (!$('tr[role="row"]').css('display') != 'none') {
-                //    $('tr[role="row"]').css('display', 'none');
-                //}
-
             });
-
 
         });
 
