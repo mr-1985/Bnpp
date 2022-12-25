@@ -89,6 +89,21 @@ namespace Bnpp.Web.Controllers
             return View(_reportService.GetAllReports(filter, date, fileDate));
         }
 
+        #region Group By Date
+
+        public IActionResult GroupByDate(string filter = "", string date = "", string fileDate = "", bool IsExistReport = false)
+        {
+            ViewBag.IsExistReport = IsExistReport;
+            return View(_reportService.GetAllReports(filter, date, fileDate));
+        }
+
+        public IActionResult GroupByDatessss(string filter = "", string date = "", string fileDate = "", bool IsExistReport = false)
+        {
+            ViewBag.IsExistReport = IsExistReport;
+            return View(_reportService.GetAllReports(filter, date, fileDate));
+        }
+        #endregion
+
         public IActionResult CreateDamageabilityReport()
         {
             return View();
@@ -245,7 +260,7 @@ namespace Bnpp.Web.Controllers
             }
             else
             {
-                var compareforexistReport = _reportService.GetAllReportsForCompare();
+                //var compareforexistReport = _reportService.GetAllReportsForCompare();
                 //if (compareforexistReport.Count !=0)
                 //{
                 //    return Redirect("/SACOR-446?IsExistReport=true");
@@ -303,6 +318,8 @@ namespace Bnpp.Web.Controllers
 
                         Date = splitData[0];
                     }
+
+                   
 
                     if (i > 17 && i < 116)
                     {
@@ -389,15 +406,15 @@ namespace Bnpp.Web.Controllers
                             );
                         }
 
-                        //if (reportDate != "")
-                        //{
-                        //    string[] std = reportDate.Split('/');
-                        //    report.ReportDate = new DateTime(int.Parse(std[2]),
-                        //        int.Parse(std[0]),
-                        //        int.Parse(std[1]),
-                        //        new GregorianCalendar()
-                        //    );
-                        //}
+                        #region  Comoare the Date of This report with Date of before reports
+
+                        
+                        var compareforexistReport = _reportService.GetAllReportsForCompare(report.ReportDate);
+                        if (compareforexistReport.Count != 0)
+                        {
+                            return Redirect("/SACOR-446?IsExistReport=true");
+                        }
+                        #endregion
 
                         _reportService.AddNewDamageabilityReport(report);
 

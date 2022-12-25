@@ -78,9 +78,10 @@ namespace Bnpp.Core.Services
             return result.Where(r=>r.IsDelete==false).ToList();
         }
 
-        public List<DamageabilityReport> GetAllReportsForCompare()
+        public List<DamageabilityReport> GetAllReportsForCompare(DateTime date)
         {
-            return _context.DamageabilityReports.Where(r=>r.CreateDate.Date==DateTime.Now.Date).ToList();
+            //var date1 = DateTime.Parse(date);
+            return _context.DamageabilityReports.Where(r=>r.ReportDate.Date==date.Date).ToList();
         }
 
         public List<ReportListViewModel> GetAllTotalReports()

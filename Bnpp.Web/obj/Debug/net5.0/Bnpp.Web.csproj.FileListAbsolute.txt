@@ -1800,3 +1800,5 @@ C:\Users\taban\Source\Repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Bnpp.Web.pdb
 C:\Users\taban\Source\Repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Bnpp.Web.genruntimeconfig.cache
 C:\Users\taban\Source\Repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\ref\Bnpp.Web.dll
 C:\Users\taban\source\repos\Bnpp\Bnpp.Web\bin\Debug\net5.0\System.Net.Http.Formatting.dll
+C:\Users\taban\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Import\GroupByDate.cshtml.g.cs
+C:\Users\taban\source\repos\Bnpp\Bnpp.Web\obj\Debug\net5.0\Razor\Views\Import\GroupByDatessss.cshtml.g.cs

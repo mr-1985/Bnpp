@@ -250,195 +250,202 @@
 
         <input type="button" value="Back" onclick="location='/Admin'" class="butn-cancel" style="direction: ltr; text-align: left;">
         <input type="button" id="delete" class="btn-delete-equip" value="Delete">
-        <br />
 
-        @{
-            int rowCount = 1;
-        }
 
-        <table id="myTable" @*cellpadding="3" cellspacing="0"*@ aria-describedby="example_info" class="display dataTable">
+        <div id="GroupBy">
+
             <br />
-            <div id="myTable_filter" class="dataTables_filter">
-                <label>
-                    Search Date: <input name="searchDate" id="searchDate" onchange="GetDate();" style="direction: ltr; text-align: left;">
-                </label>
-            </div>
-            <br />
-            <thead>
-                <tr role="row">
-                    <th>
-                        <input type="checkbox" id="checkAll" />
-                    </th>
-                    <th></th>
-                    <th>
-                        <b>AKZ</b>
-                    </th>
-                    <th>
-                        <b>Date</b>
-                    </th>
-                    <th>
-                        <b>Location of the checkpoint</b>
-                    </th>
-                    <th>
-                        <b>Action period of equipment (years)</b>
-                    </th>
-                    <th>
-                        <b>Life time of equipment in design (years)</b>
-                    </th>
-                    <th>
-                        <b>
-                            Life time of equipment per RALDS (years)
-                        </b>
-                    </th>
-                    <th>
-                        <b>
-                            Damageability per coiled cycles
-                        </b>
-                    </th>
-                    <th>
-                        <b>
-                            Damageability per uncoiled cycles
-                        </b>
-                    </th>
-                    <th>
-                        <b>
-                            Total damageability of equipment
-                        </b>
-                    </th>
-                    <th>
-                        <b>
-                            Allowable CUF
-                        </b>
-                    </th>
-                    <th>
-                        <b>
-                            Allowable Remaining Life Time
-                        </b>
-                    </th>
-                    <th>
-                        <b>
-                            Changing Ratio
-                        </b>
-                    </th>
-                    <th>
-                        <b>
-                            Allowable Changing Ratio
-                        </b>
-                    </th>
-                    <th>
-                        <b>
-                            File Date
-                        </b>
-                    </th>
-                    <th>
-                        <b>
 
-                        </b>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+            @{
+                int rowCount = 1;
+            }
+
+            <table id="myTable" @*cellpadding="3" cellspacing="0"*@ aria-describedby="example_info" class="display dataTable">
+                <br />
+                <div id="myTable_filter" class="dataTables_filter">
+                    <label>
+                        Search Date: <input name="searchDate" id="searchDate" onchange="GetDate();" style="direction: ltr; text-align: left;">
+                    </label>
+                </div>
+                <br />
+                <thead>
                     <tr role="row">
-                        <td>
-                            <input type="checkbox" class="checkBox" value="@item.ID" />
-                        </td>
-                        <td>
-                            @rowCount
-                        </td>
-                        <td>
-                            @item.Akz
-                        </td>
-                        <td>
-                            @item.ReportDate.ToString("yyyy/MM/dd")
-                        </td>
-                        <td>
-                            @item.Locationofthecheckpoint
-                        </td>
-                        <td>
-                            @item.Actionperiodofequipment
-                        </td>
-                        <td>
-                            @item.Lifetimeofequipmentindesign
-                        </td>
-                        @if ((Convert.ToDecimal(item.LifetimeofequipmentperRALDS)) <= (Convert.ToDecimal(item.AllowableLifeTime)))
-                        {
-                            <td style="background-color:red;">
-                                @item.LifetimeofequipmentperRALDS
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                @item.LifetimeofequipmentperRALDS
-                            </td>
-                        }
-                        <td>
-                            @item.Damageabilitypercoiledcycles
-                        </td>
-                        <td>
-                            @item.Damageabilityperuncoiledcycles
-                        </td>
-                        @if ((Convert.ToDecimal(item.Totaldamageabilityofequipment)) >= (Convert.ToDecimal(item.AllowableCUF)))
-                        {
-                            <td style="background-color:red;">
-                                @item.Totaldamageabilityofequipment
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                @item.Totaldamageabilityofequipment
-                            </td>
-                        }
+                        <th>
+                            <input type="checkbox" id="checkAll" />
+                        </th>
+                        <th></th>
+                        <th>
+                            <b>AKZ</b>
+                        </th>
+                        <th >
+                            <b>Date</b>
+                        </th>
+                        <th>
+                            <b>Location of the checkpoint</b>
+                        </th>
+                        <th>
+                            <b>Action period of equipment (years)</b>
+                        </th>
+                        <th>
+                            <b>Life time of equipment in design (years)</b>
+                        </th>
+                        <th>
+                            <b>
+                                Life time of equipment per RALDS (years)
+                            </b>
+                        </th>
+                        <th>
+                            <b>
+                                Damageability per coiled cycles
+                            </b>
+                        </th>
+                        <th>
+                            <b>
+                                Damageability per uncoiled cycles
+                            </b>
+                        </th>
+                        <th>
+                            <b>
+                                Total damageability of equipment
+                            </b>
+                        </th>
+                        <th>
+                            <b>
+                                Allowable CUF
+                            </b>
+                        </th>
+                        <th>
+                            <b>
+                                Allowable Remaining Life Time
+                            </b>
+                        </th>
+                        <th>
+                            <b>
+                                Changing Ratio
+                            </b>
+                        </th>
+                        <th>
+                            <b>
+                                Allowable Changing Ratio
+                            </b>
+                        </th>
+                        <th>
+                            <b>
+                                File Date
+                            </b>
+                        </th>
+                        <th>
+                            <b>
 
-                        <td>
-                            @item.AllowableCUF
-                        </td>
-                        <td>
-                            @item.AllowableLifeTime
-                        </td>
-                        @if ((Convert.ToDecimal(item.AllowableChangingRatio)) <= (Convert.ToDecimal(item.ChangingRatio)))
-                        {
-                            <td style="background-color:red;">
-                                @item.ChangingRatio
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                @item.ChangingRatio
-                            </td>
-                        }
-
-                        <td>
-                            @item.AllowableChangingRatio
-                        </td>
-                        @*<td>
-                    @item.ReportDate.ToString("yyyy/MM/dd")
-                    </td>*@
-                        <td>
-                            @item.CreateDate.ToString("yyyy/MM/dd")
-                        </td>
-                        <td>
-                            <a class="btn-edit-equip" href="/Import/EditDamageabilityReport/@item.ID">
-                                Edit
-                            </a>
-                        </td>
+                            </b>
+                        </th>
                     </tr>
-                    rowCount++;
-                }
-            </tbody>
-        </table>
-        <br>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr role="row">
+                            <td>
+                                <input type="checkbox" class="checkBox" value="@item.ID" />
+                            </td>
+                            <td>
+                                @rowCount
+                            </td>
+                            <td>
+                                @item.Akz
+                            </td>
+                            <td>
+                                @item.ReportDate.ToString("yyyy/MM/dd")
+                            </td>
+                            <td>
+                                @item.Locationofthecheckpoint
+                            </td>
+                            <td>
+                                @item.Actionperiodofequipment
+                            </td>
+                            <td>
+                                @item.Lifetimeofequipmentindesign
+                            </td>
+                            @if ((Convert.ToDecimal(item.LifetimeofequipmentperRALDS)) <= (Convert.ToDecimal(item.AllowableLifeTime)))
+                            {
+                                <td style="background-color:red;">
+                                    @item.LifetimeofequipmentperRALDS
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    @item.LifetimeofequipmentperRALDS
+                                </td>
+                            }
+                            <td>
+                                @item.Damageabilitypercoiledcycles
+                            </td>
+                            <td>
+                                @item.Damageabilityperuncoiledcycles
+                            </td>
+                            @if ((Convert.ToDecimal(item.Totaldamageabilityofequipment)) >= (Convert.ToDecimal(item.AllowableCUF)))
+                            {
+                                <td style="background-color:red;">
+                                    @item.Totaldamageabilityofequipment
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    @item.Totaldamageabilityofequipment
+                                </td>
+                            }
+
+                            <td>
+                                @item.AllowableCUF
+                            </td>
+                            <td>
+                                @item.AllowableLifeTime
+                            </td>
+                            @if ((Convert.ToDecimal(item.AllowableChangingRatio)) <= (Convert.ToDecimal(item.ChangingRatio)))
+                            {
+                                <td style="background-color:red;">
+                                    @item.ChangingRatio
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    @item.ChangingRatio
+                                </td>
+                            }
+
+                            <td>
+                                @item.AllowableChangingRatio
+                            </td>
+                            @*<td>
+                        @item.ReportDate.ToString("yyyy/MM/dd")
+                        </td>*@
+                            <td>
+                                @item.CreateDate.ToString("yyyy/MM/dd")
+                            </td>
+                            <td>
+                                <a class="btn-edit-equip" href="/Import/EditDamageabilityReport/@item.ID">
+                                    Edit
+                                </a>
+                            </td>
+                        </tr>
+                        rowCount++;
+                    }
+                </tbody>
+            </table>
+            <br>
+
+        </div>
+
     </div>
 </div>
 
 
 @section Scripts
     {
-  
+
 
     <link href="/css/kendo.common.min.css" rel="stylesheet" />
     <link href="/css/kendo.default.min.css" rel="stylesheet" />
@@ -491,7 +498,11 @@
             $("#newPage").load("/Import/EditDamageabilityReport/" + id);
         }
 
+        //function GetGroupByDate() {
+        //    $("#GroupBy").load("/Import/GroupByDatessss/");
+        //}
 
+        
 
         function refreshPage() {
             // Your delay in milliseconds
@@ -595,7 +606,9 @@
             $('tbody tr[role="row"]').hide();
         });
 
-       
+        //Group By Date
+
+
         //group
         $(document).ready(function () {
             var groupColumn = 2;
@@ -606,7 +619,7 @@
                 drawCallback: function (settings) {
                     var api = this.api();
                     var rows = api.rows({ page: 'current' }).nodes();
-                   
+
                     var last = null;
 
                     api
@@ -617,7 +630,7 @@
                                 $(rows)
                                     .eq(i)
                                     .before('<tr class="group" id="group_' + i + '" style="background-color: rgba(0, 0, 0, 0.15);"><td class="dt-control"></td><td colspan="16">' + group + '</td></tr>');
-                               
+
                                 last = group;
 
                             }
@@ -630,7 +643,7 @@
             // Order by the grouping
             $('#myTable tbody').on('click', 'tr.group', function () {
 
-               
+
 
                 $($(this)).nextUntil(".group").filter('tr[role="row"]').toggle();
 

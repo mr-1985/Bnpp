@@ -1,0 +1,225 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<div id="Tabs">
+
+</div>
+
+
+@section Scripts
+    {
+
+
+    <link href="/css/kendo.common.min.css" rel="stylesheet" />
+    <link href="/css/kendo.default.min.css" rel="stylesheet" />
+    <link href="/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    @*<link href="/css/jquery.dataTables.min.css" />
+    <link href="/css/dataTables.dateTime.min.css" rel="stylesheet" />
+*@
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/kendo.all.min.js"></script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+
+    @*<script src="/js/jquery-3.5.1.js"></script>
+    <script src="/js/jquery.dataTables.min.js"></script>
+    <script src="/js/moment.min.js"></script>
+    <script src="/js/dataTables.dateTime.min.js"></script>*@
+    <script>
+        // create DatePicker from input HTML element
+        $("#reportDate").kendoDatePicker();
+        $("#searchDate").kendoDatePicker();
+        $("#searchfileDate").kendoDatePicker(
+            {
+                format: "yyyy/MM/dd"
+            });
+
+        $("#schDate").kendoDatePicker(
+            {
+                format: "yyyy/MM/dd"
+            });
+
+
+    </script>
+
+    <script src="/js/jquery.min.js"></script>
+
+    <script src="/js/datatables.min.js"></script>
+
+    <script>
+        //$(document).ready(function () {
+        //    $("#myTable").DataTable();
+        //});
+
+        $(document).ready(function () {
+            $("#Tabs").load("/Import/GroupByDate/");
+        });
+    </script>
+
+
+    <script>
+
+        function Edit(id) {
+            $("#newPage").load("/Import/EditDamageabilityReport/" + id);
+        }
+
+        function GetGroupByDate() {
+            $("#GroupBy").load("/Import/GroupByDatessss/");
+        }
+
+
+
+        function refreshPage() {
+            // Your delay in milliseconds
+            var delay = 3000;
+            setTimeout(function () { window.location = "/SACOR-446"; }, delay);
+        }
+
+        $('input:checkbox.checkBox').change(function () {
+            var selectedIDs = new Array();
+            $('input:checkbox.checkBox').each(function () {
+                if ($(this).prop('checked')) {
+                    selectedIDs.push($(this).val());
+                }
+            });
+
+            $('#exportSelectedData').val(selectedIDs);
+
+
+            //alert(selectedIDs);
+        });
+
+        // $('input:checkbox.checkBox').prop('checked',function () {
+        //        var selectedIDs = new Array();
+        //           $('input:checkbox.checkBox').each(function () {
+        //               if ($(this).prop('checked')) {
+        //                   selectedIDs.push($(this).val());
+        //               }
+        //           });
+
+        //           $('#exportSelectedData').val(selectedIDs);
+
+
+        //   alert(selectedIDs);
+        //});
+        $("#checkAll").click(function () {
+            $(".checkBox").prop('checked',
+                $(this).prop('checked'));
+        });
+
+        $("#delete").click(function () {
+            var selectedIDs = new Array();
+            $('input:checkbox.checkBox').each(function () {
+                if ($(this).prop('checked')) {
+                    selectedIDs.push($(this).val());
+                }
+            });
+            var result = confirm("are you sure you want to delete?");
+            if (result) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Import/DeleteDamageabilityReport",
+                    data: { "damagingId": selectedIDs },
+                    success: function (response) {
+                        window.location.href = "/SACOR-446";
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            }
+        });
+
+
+        function GetDate() {
+            var date = $('#searchDate').val();
+
+            $('input[type=search]').val(date);
+
+            $('input[type=search]').focus();
+
+            //$('searchDate').on('change', function () {
+            //table.draw();
+
+
+            $('#searchDate').val("");
+
+        };
+
+        function GetSearchhDate() {
+            var date = $('#searchfileDate').val();
+
+            $('#schfileDate').val(date);
+
+            $('#searchfileDate').val("");
+
+        };
+
+        function GetSearchfromDate() {
+            var date = $('#schDate').val();
+
+            $('#srchDate').val(date);
+
+            $('#schDate').val("");
+
+        };
+
+        $(document).ready(function () {
+            $('tbody tr[role="row"]').hide();
+        });
+
+        //Group By Date
+
+
+        //group
+        $(document).ready(function () {
+            var groupColumn = 2;
+            var table = $('#myTable').DataTable({
+                columnDefs: [{ visible: false, targets: groupColumn }],
+                order: [[groupColumn, 'asc']],
+                displayLength: 25,
+                drawCallback: function (settings) {
+                    var api = this.api();
+                    var rows = api.rows({ page: 'current' }).nodes();
+
+                    var last = null;
+
+                    api
+                        .column(groupColumn, { page: 'current' })
+                        .data()
+                        .each(function (group, i) {
+                            if (last !== group) {
+                                $(rows)
+                                    .eq(i)
+                                    .before('<tr class="group" id="group_' + i + '" style="background-color: rgba(0, 0, 0, 0.15);"><td class="dt-control"></td><td colspan="16">' + group + '</td></tr>');
+
+                                last = group;
+
+                            }
+                        });
+                },
+            });
+
+
+            //Add parameter to class  class="group'+i+'"
+            // Order by the grouping
+            $('#myTable tbody').on('click', 'tr.group', function () {
+
+
+
+                $($(this)).nextUntil(".group").filter('tr[role="row"]').toggle();
+
+            });
+
+        });
+
+    </script>
+
+    }
