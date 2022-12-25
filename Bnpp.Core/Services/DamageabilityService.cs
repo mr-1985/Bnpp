@@ -117,16 +117,20 @@ namespace Bnpp.Core.Services
 
             #endregion
 
-            var report =GetDamageabilityReportById(reportId);
-            var dateOfReport = report.CreateDate.Date;
+            //var report =GetDamageabilityReportById(reportId);
+            //var dateOfReport = report.CreateDate.Date;
 
-            var firstRecord=_context.DamageabilityReports.FirstOrDefault(r=>r.CreateDate.Date==dateOfReport).ID;
+            //var firstRecord=_context.DamageabilityReports.FirstOrDefault(r=>r.CreateDate.Date==dateOfReport).ID;
 
-            var numberofRow = reportId - firstRecord;
+            //var numberofRow = reportId - firstRecord;
 
             var firstId = _context.DamageabilityReports.Min(i => i.ID);
-            var endId= _context.DamageabilityReports.Max(i => i.ID);
-            var start = firstId + numberofRow;
+
+            var difference=reportId- firstId;
+            var number = difference % 98;
+
+            var endId = _context.DamageabilityReports.Max(i => i.ID);
+            var start = firstId + number;
 
             for(int i = start; i <= endId; i += 98)
             {
