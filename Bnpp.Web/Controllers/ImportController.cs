@@ -149,9 +149,21 @@ namespace Bnpp.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateDamageabilityReport(IFormFile fileReport, string reportDate = "", string allowablecuf = "", string allowablelifetime = "", string Changingratio = "", string allowableChangingratio = "")
+        public IActionResult CreateDamageabilityReport(IFormFile fileReport, string reportDates, string reportDate = "", string allowablecuf = "", string allowablelifetime = "", string Changingratio = "", string allowableChangingratio = "")
         {
             var totalReports = _reportService.GetAllReports();
+
+            var daterepo = reportDates.Substring(5, 10).ToString();
+            DateTime dateForCompare = DateTime.MinValue;
+            if (reportDates != "")
+            {
+                string[] std = daterepo.Split('_');
+                dateForCompare = new DateTime(int.Parse(std[0]),
+                    int.Parse(std[1]),
+                    int.Parse(std[2]),
+                    new GregorianCalendar()
+                );
+            }
 
             if (totalReports.Count == 0)
             {
@@ -189,13 +201,13 @@ namespace Bnpp.Web.Controllers
 
                 for (int i = 0; i < datatable.Rows.Count; i++)
                 {
-                    if (i == 2)
-                    {
-                        var rowSelected = datatable.Rows[i][0].ToString();
-                        var splitData = rowSelected.Substring(29).Trim().Split(" ");
+                    //if (i == 2)
+                    //{
+                    //    var rowSelected = datatable.Rows[i][0].ToString();
+                    //    var splitData = rowSelected.Substring(29).Trim().Split(" ");
 
-                        Date = splitData[0];
-                    }
+                    //    Date = splitData[0];
+                    //}
 
 
                     if (i > 17 && i < 116)
@@ -229,19 +241,20 @@ namespace Bnpp.Web.Controllers
                         report.AllowableLifeTime = allowablelifetime;
                         report.AllowableChangingRatio = allowableChangingratio;
                         report.Akz = Akz;
-                        //report.DateOfReport = Date;
+                        report.ReportDate = dateForCompare;
+
 
                         //report.ChangingRatio = Changingratio;
 
-                        if (Date != "")
-                        {
-                            string[] std = Date.Split('.');
-                            report.ReportDate = new DateTime(int.Parse(std[2]),
-                                int.Parse(std[1]),
-                                int.Parse(std[0]),
-                                new GregorianCalendar()
-                            );
-                        }
+                        //if (Date != "")
+                        //{
+                        //    string[] std = Date.Split('.');
+                        //    report.ReportDate = new DateTime(int.Parse(std[2]),
+                        //        int.Parse(std[1]),
+                        //        int.Parse(std[0]),
+                        //        new GregorianCalendar()
+                        //    );
+                        //}
 
                         //if (reportDate != "")
                         //{
@@ -260,14 +273,28 @@ namespace Bnpp.Web.Controllers
             }
             else
             {
-                //var compareforexistReport = _reportService.GetAllReportsForCompare();
-                //if (compareforexistReport.Count !=0)
+                //var daterepo = reportDates.Substring(5,10).ToString();
+                //DateTime dateForCompare = DateTime.MinValue;
+                //if (reportDates != "")
                 //{
-                //    return Redirect("/SACOR-446?IsExistReport=true");
+                //    string[] std = daterepo.Split('_');
+                //    dateForCompare = new DateTime(int.Parse(std[0]),
+                //        int.Parse(std[1]),
+                //        int.Parse(std[2]),
+                //        new GregorianCalendar()
+                //    );
                 //}
-                //else
-                //{
-                var beforeTotal = _reportService.GetAllTotalReports();
+
+
+                var compareforexistReport = _reportService.GetAllReportsForCompare(dateForCompare);
+                
+                if (compareforexistReport.Count != 0)
+                {
+                    return Redirect("/SACOR-446?IsExistReport=true");
+                }
+                else
+                {
+                    var beforeTotal = _reportService.GetAllTotalReports();
 
                 //var btotal = "";
                 //foreach (var p in beforeTotal)
@@ -311,13 +338,13 @@ namespace Bnpp.Web.Controllers
 
                 for (int i = 0; i < datatable.Rows.Count; i++)
                 {
-                    if (i == 2)
-                    {
-                        var rowSelected = datatable.Rows[i][0].ToString();
-                        var splitData = rowSelected.Substring(29).Trim().Split(" ");
+                    //if (i == 2)
+                    //{
+                    //    var rowSelected = datatable.Rows[i][0].ToString();
+                    //    var splitData = rowSelected.Substring(29).Trim().Split(" ");
 
-                        Date = splitData[0];
-                    }
+                    //    Date = splitData[0];
+                    //}
 
                    
 
@@ -347,7 +374,7 @@ namespace Bnpp.Web.Controllers
                         report.Actionperiodofequipment = Actionperiodofequipment;
                         report.Locationofthecheckpoint = location;
                         report.Akz = Akz;
-                        //report.DateOfReport = Date;
+                        report.ReportDate = dateForCompare;
 
                         //report.ChangingRatio = Changingratio;
 
@@ -396,33 +423,33 @@ namespace Bnpp.Web.Controllers
                         report.AllowableLifeTime = allowableLifeTime;
                         report.AllowableChangingRatio = allowablesChangingratio;
 
-                        if (Date != "")
-                        {
-                            string[] std = Date.Split('.');
-                            report.ReportDate = new DateTime(int.Parse(std[2]),
-                                int.Parse(std[1]),
-                                int.Parse(std[0]),
-                                new GregorianCalendar()
-                            );
-                        }
+                        //if (Date != "")
+                        //{
+                        //    string[] std = Date.Split('.');
+                        //    report.ReportDate = new DateTime(int.Parse(std[2]),
+                        //        int.Parse(std[1]),
+                        //        int.Parse(std[0]),
+                        //        new GregorianCalendar()
+                        //    );
+                        //}
 
-                        #region  Comoare the Date of This report with Date of before reports
+                        //#region  Comoare the Date of This report with Date of before reports
 
                         
-                        var compareforexistReport = _reportService.GetAllReportsForCompare(report.ReportDate);
-                        if (compareforexistReport.Count != 0)
-                        {
-                            return Redirect("/SACOR-446?IsExistReport=true");
-                        }
-                        #endregion
+                        //var compareforexistReport = _reportService.GetAllReportsForCompare(report.ReportDate);
+                        //if (compareforexistReport.Count != 0)
+                        //{
+                        //    return Redirect("/SACOR-446?IsExistReport=true");
+                        //}
+                        //#endregion
 
                         _reportService.AddNewDamageabilityReport(report);
 
                     }
                 }
-                //}
-
             }
+
+        }
             //
 
             //return View();

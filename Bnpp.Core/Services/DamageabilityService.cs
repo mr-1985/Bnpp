@@ -81,7 +81,8 @@ namespace Bnpp.Core.Services
         public List<DamageabilityReport> GetAllReportsForCompare(DateTime date)
         {
             //var date1 = DateTime.Parse(date);
-            return _context.DamageabilityReports.Where(r=>r.ReportDate.Date==date.Date).ToList();
+           
+            return _context.DamageabilityReports.Where(r=>r.ReportDate.Date==date.Date).Take(98).ToList();
         }
 
         public List<ReportListViewModel> GetAllTotalReports()

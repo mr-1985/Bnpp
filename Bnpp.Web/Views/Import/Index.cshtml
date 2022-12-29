@@ -90,16 +90,12 @@
                         <td>
                             <input name="allowableChangingratio" type="text" style="direction: ltr; text-align: left;">
                         </td>
-
                     </tr>
-                    @* <tr>
-                    <td>
-                    Date:
-                    </td>
-                    <td>
-                    <input name="reportDate" id="reportDate" style="direction: ltr; text-align: left;">
-                    </td>
-                    </tr>*@
+                    <tr>
+                        <td>
+                            <input name="reportDates" id="reportDates" type="text" style="display:none">
+                        </td>
+                    </tr>
                     <tr>
                         <td>
 
@@ -277,7 +273,7 @@
                         <th>
                             <b>AKZ</b>
                         </th>
-                        <th >
+                        <th>
                             <b>Date</b>
                         </th>
                         <th>
@@ -502,7 +498,7 @@
         //    $("#GroupBy").load("/Import/GroupByDatessss/");
         //}
 
-        
+
 
         function refreshPage() {
             // Your delay in milliseconds
@@ -615,7 +611,7 @@
             var table = $('#myTable').DataTable({
                 columnDefs: [{ visible: false, targets: groupColumn }],
                 order: [[groupColumn, 'asc']],
-                displayLength: 25,
+                displayLength: 1000,
                 drawCallback: function (settings) {
                     var api = this.api();
                     var rows = api.rows({ page: 'current' }).nodes();
@@ -649,6 +645,12 @@
 
             });
 
+        });
+
+
+        $('input[type=file]').change(function () {
+
+            $('#reportDates').attr('value', this.files[0].name);
         });
 
     </script>
