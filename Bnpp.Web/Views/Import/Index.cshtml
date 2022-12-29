@@ -611,7 +611,12 @@
             var table = $('#myTable').DataTable({
                 columnDefs: [{ visible: false, targets: groupColumn }],
                 order: [[groupColumn, 'asc']],
-                displayLength: 1000,
+                //displayLength: 1000,
+                lengthMenu: [
+                    [-1,10, 25, 50],
+                    ['All',10, 25, 50],
+                ],
+               
                 drawCallback: function (settings) {
                     var api = this.api();
                     var rows = api.rows({ page: 'current' }).nodes();

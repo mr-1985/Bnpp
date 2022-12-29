@@ -75,7 +75,7 @@ namespace Bnpp.Core.Services
             //        Console.WriteLine("Student Name: {0}", s.Akz);
             //}
 
-            return result.Where(r=>r.IsDelete==false).ToList();
+            return result.Where(r=>r.IsDelete==false).OrderByDescending(r=>r.ReportDate).ToList();
         }
 
         public List<DamageabilityReport> GetAllReportsForCompare(DateTime date)
