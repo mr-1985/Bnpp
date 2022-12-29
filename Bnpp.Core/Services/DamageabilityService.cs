@@ -87,10 +87,19 @@ namespace Bnpp.Core.Services
 
         public List<ReportListViewModel> GetAllTotalReports()
         {
-            var max = _context.DamageabilityReports.Max(m => m.CreateDate.Date);
+            //var max = _context.DamageabilityReports.Max(m => m.CreateDate.Date);
 
 
-            return _context.DamageabilityReports.Where(b => b.IsDelete == false && b.CreateDate.Date == max).Select(t => new ReportListViewModel()
+            //return _context.DamageabilityReports.Where(b => b.IsDelete == false && b.CreateDate.Date == max).Select(t => new ReportListViewModel()
+            //{
+            //    ID = t.ID,
+            //    Totaldamageabilityofequipment = t.Totaldamageabilityofequipment
+            //}).Take(98).ToList();
+
+            var max = _context.DamageabilityReports.Max(m => m.ReportDate.Date);
+
+
+            return _context.DamageabilityReports.Where(b => b.IsDelete == false && b.ReportDate.Date == max).Select(t => new ReportListViewModel()
             {
                 ID = t.ID,
                 Totaldamageabilityofequipment = t.Totaldamageabilityofequipment
