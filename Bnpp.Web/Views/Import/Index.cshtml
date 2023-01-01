@@ -266,66 +266,68 @@
                 <br />
                 <thead>
                     <tr role="row">
-                        <th>
+                        <th data-orderable="false">
                             <input type="checkbox" id="checkAll" />
                         </th>
-                        <th></th>
-                        <th>
+                        <th data-orderable="false">
+
+                        </th>
+                        <th data-orderable="false">
                             <b>AKZ</b>
                         </th>
-                        <th>
+                        <th data-orderable="false">
                             <b>Date</b>
                         </th>
-                        <th>
+                        <th data-orderable="false">
                             <b>Location of the checkpoint</b>
                         </th>
-                        <th>
+                        <th data-orderable="false">
                             <b>Action period of equipment (years)</b>
                         </th>
-                        <th>
+                        <th data-orderable="false">
                             <b>Life time of equipment in design (years)</b>
                         </th>
-                        <th>
+                        <th data-orderable="false">
                             <b>
                                 Life time of equipment per RALDS (years)
                             </b>
-                        </th>
-                        <th>
+                        </th >
+                        <th data-orderable="false">
                             <b>
                                 Damageability per coiled cycles
                             </b>
                         </th>
-                        <th>
+                        <th data-orderable="false">
                             <b>
                                 Damageability per uncoiled cycles
                             </b>
                         </th>
-                        <th>
+                        <th data-orderable="false">
                             <b>
                                 Total damageability of equipment
                             </b>
                         </th>
-                        <th>
+                        <th data-orderable="false">
                             <b>
                                 Allowable CUF
                             </b>
                         </th>
-                        <th>
+                        <th data-orderable="false">
                             <b>
                                 Allowable Remaining Life Time
                             </b>
                         </th>
-                        <th>
+                        <th data-orderable="false">
                             <b>
                                 Changing Ratio
                             </b>
                         </th>
-                        <th>
+                        <th data-orderable="false">
                             <b>
                                 Allowable Changing Ratio
                             </b>
                         </th>
-                        <th>
+                        <th data-orderable="false">
                             <b>
                                 File Date
                             </b>
@@ -611,6 +613,10 @@
             var table = $('#myTable').DataTable({
                 columnDefs: [{ visible: false, targets: groupColumn }],
                 order: [[groupColumn, 'asc']],
+                //"ordering": false,
+
+               
+
                 //displayLength: 1000,
                 lengthMenu: [
                     [-1,10, 25, 50],
