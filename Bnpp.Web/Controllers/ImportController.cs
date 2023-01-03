@@ -16,8 +16,8 @@ using Bnpp.Core.ViewModels;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Net.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 
 
@@ -25,6 +25,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Bnpp.Web.Controllers
 {
+    [Authorize]
     public class ImportController : Controller
     {
         private IDamageabilityService _reportService;
@@ -151,6 +152,7 @@ namespace Bnpp.Web.Controllers
         [HttpPost]
         public IActionResult CreateDamageabilityReport(IFormFile fileReport, string reportDates, string reportDate = "", string allowablecuf = "", string allowablelifetime = "", string Changingratio = "", string allowableChangingratio = "")
         {
+            
             var totalReports = _reportService.GetAllReports();
 
             var daterepo = reportDates.Substring(5, 10).ToString();
@@ -287,7 +289,7 @@ namespace Bnpp.Web.Controllers
 
 
                 var compareforexistReport = _reportService.GetAllReportsForCompare(dateForCompare);
-                
+
                 if (compareforexistReport.Count != 0)
                 {
                     return Redirect("/SACOR-446?IsExistReport=true");
@@ -296,160 +298,162 @@ namespace Bnpp.Web.Controllers
                 {
                     var beforeTotal = _reportService.GetAllTotalReports();
 
-                //var btotal = "";
-                //foreach (var p in beforeTotal)
-                //{
-                //    var bt = p.Totaldamageabilityofequipment;
-                //    btotal = bt;
-                //}
-
-                var Date = "";
-                var Akz = "";
-                var location = "";
-                var Totaldamageabilityofequipment = "";
-                var Damageabilityperuncoiledcycles = "";
-                var Damageabilitypercoiledcycles = "";
-                var LifetimeofequipmentperRALDS = "";
-                var Lifetimeofequipmentindesign = "";
-                var Actionperiodofequipment = "";
-
-                DataTable datatable = new DataTable();
-
-                var stream = fileReport.OpenReadStream();
-
-                StreamReader streamreader = new StreamReader(stream);
-                //StreamReader streamreader = new StreamReader(@"G:\New folder\bsh1_2021_10_06_damage.txt");
-                char[] delimiter = new char[] { '\t' };
-                string[] columnheaders = streamreader.ReadLine().Split(delimiter);
-
-                foreach (string columnheader in columnheaders)
-                {
-                    datatable.Columns.Add(columnheader); // I've added the column headers here.
-                }
-
-                while (streamreader.Peek() > 0)
-                {
-                    DataRow datarow = datatable.NewRow();
-                    datarow.ItemArray = streamreader.ReadLine().Split(delimiter);
-                    datatable.Rows.Add(datarow);
-                }
-
-
-
-                for (int i = 0; i < datatable.Rows.Count; i++)
-                {
-                    //if (i == 2)
+                    //var btotal = "";
+                    //foreach (var p in beforeTotal)
                     //{
-                    //    var rowSelected = datatable.Rows[i][0].ToString();
-                    //    var splitData = rowSelected.Substring(29).Trim().Split(" ");
-
-                    //    Date = splitData[0];
+                    //    var bt = p.Totaldamageabilityofequipment;
+                    //    btotal = bt;
                     //}
 
-                   
+                    var Date = "";
+                    var Akz = "";
+                    var location = "";
+                    var Totaldamageabilityofequipment = "";
+                    var Damageabilityperuncoiledcycles = "";
+                    var Damageabilitypercoiledcycles = "";
+                    var LifetimeofequipmentperRALDS = "";
+                    var Lifetimeofequipmentindesign = "";
+                    var Actionperiodofequipment = "";
 
-                    if (i > 17 && i < 116)
+                    DataTable datatable = new DataTable();
+
+                    var stream = fileReport.OpenReadStream();
+
+                    StreamReader streamreader = new StreamReader(stream);
+                    //StreamReader streamreader = new StreamReader(@"G:\New folder\bsh1_2021_10_06_damage.txt");
+                    char[] delimiter = new char[] { '\t' };
+                    string[] columnheaders = streamreader.ReadLine().Split(delimiter);
+
+                    foreach (string columnheader in columnheaders)
                     {
-                        var rowSelected = datatable.Rows[i][0].ToString();
-                        var Identifier = rowSelected.Substring(0, 9);
-                        var splitData = rowSelected.Substring(9).Trim().Split("   ");
+                        datatable.Columns.Add(columnheader); // I've added the column headers here.
+                    }
 
-                        Akz = Identifier;
-                        location = splitData[0];
-                        Totaldamageabilityofequipment = splitData[splitData.Length - 1];
-                        Damageabilityperuncoiledcycles = splitData[splitData.Length - 2];
-                        Damageabilitypercoiledcycles = splitData[splitData.Length - 3];
-                        LifetimeofequipmentperRALDS = splitData[splitData.Length - 4];
-                        Lifetimeofequipmentindesign = splitData[splitData.Length - 5];
-                        Actionperiodofequipment = splitData[splitData.Length - 6];
+                    while (streamreader.Peek() > 0)
+                    {
+                        DataRow datarow = datatable.NewRow();
+                        datarow.ItemArray = streamreader.ReadLine().Split(delimiter);
+                        datatable.Rows.Add(datarow);
+                    }
 
-                        //اینجا اینزرت کن تو جدول 
 
-                        DamageabilityReport report = new DamageabilityReport();
-                        report.Totaldamageabilityofequipment = Totaldamageabilityofequipment;
-                        report.Damageabilityperuncoiledcycles = Damageabilityperuncoiledcycles;
-                        report.Damageabilitypercoiledcycles = Damageabilitypercoiledcycles;
-                        report.LifetimeofequipmentperRALDS = LifetimeofequipmentperRALDS;
-                        report.Lifetimeofequipmentindesign = Lifetimeofequipmentindesign;
-                        report.Actionperiodofequipment = Actionperiodofequipment;
-                        report.Locationofthecheckpoint = location;
-                        report.Akz = Akz;
-                        report.ReportDate = dateForCompare;
 
-                        //report.ChangingRatio = Changingratio;
+                    for (int i = 0; i < datatable.Rows.Count; i++)
+                    {
+                        //if (i == 2)
+                        //{
+                        //    var rowSelected = datatable.Rows[i][0].ToString();
+                        //    var splitData = rowSelected.Substring(29).Trim().Split(" ");
 
-                        // ChangingRatio
-                        var btotal = "";
-                        var j = 18;
-                        foreach (var p in beforeTotal)
+                        //    Date = splitData[0];
+                        //}
+
+
+
+                        if (i > 17 && i < 116)
                         {
-                            if (i == j)
+                            var rowSelected = datatable.Rows[i][0].ToString();
+                            var Identifier = rowSelected.Substring(0, 9);
+                            var splitData = rowSelected.Substring(9).Trim().Split("   ");
+
+                            Akz = Identifier;
+                            location = splitData[0];
+                            Totaldamageabilityofequipment = splitData[splitData.Length - 1];
+                            Damageabilityperuncoiledcycles = splitData[splitData.Length - 2];
+                            Damageabilitypercoiledcycles = splitData[splitData.Length - 3];
+                            LifetimeofequipmentperRALDS = splitData[splitData.Length - 4];
+                            Lifetimeofequipmentindesign = splitData[splitData.Length - 5];
+                            Actionperiodofequipment = splitData[splitData.Length - 6];
+
+                            //اینجا اینزرت کن تو جدول 
+
+                            DamageabilityReport report = new DamageabilityReport();
+                            report.Totaldamageabilityofequipment = Totaldamageabilityofequipment;
+                            report.Damageabilityperuncoiledcycles = Damageabilityperuncoiledcycles;
+                            report.Damageabilitypercoiledcycles = Damageabilitypercoiledcycles;
+                            report.LifetimeofequipmentperRALDS = LifetimeofequipmentperRALDS;
+                            report.Lifetimeofequipmentindesign = Lifetimeofequipmentindesign;
+                            report.Actionperiodofequipment = Actionperiodofequipment;
+                            report.Locationofthecheckpoint = location;
+                            report.Akz = Akz;
+                            report.ReportDate = dateForCompare;
+
+                            //report.ChangingRatio = Changingratio;
+
+                            // ChangingRatio
+                            var btotal = "";
+                            var j = 18;
+                            foreach (var p in beforeTotal)
                             {
-                                var bt = p.Totaldamageabilityofequipment;
-                                btotal = bt;
+                                if (i == j)
+                                {
+                                    var bt = p.Totaldamageabilityofequipment;
+                                    btotal = bt;
+                                }
+                                j++;
+                                //break;
+                                //goto endofloop;
                             }
-                            j++;
-                            //break;
-                            //goto endofloop;
+                            //endofloop:
+                            if (Convert.ToDecimal(btotal) != 0)
+                            {
+                                decimal ratio = (Convert.ToDecimal(Totaldamageabilityofequipment) - Convert.ToDecimal(btotal)) / Convert.ToDecimal(btotal);
+                                report.ChangingRatio = ratio.ToString();
+                            }
+                            //else
+                            //{
+                            //    report.ChangingRatio = Convert.ToDecimal(0);
+                            //}
+
+                            //AllowableCUF & AllowableLifeTime & AllowableChangingRatio
+
+                            var initialReport = _reportService.GetDamageabilityReportForUseSomeData();
+                            //var allowableCuf = "";
+                            //var allowableLifeTime = "";
+                            //var allowablesChangingratio = "";
+
+                            //foreach (var a in initialReport)
+                            //{
+                            //    var allowcuf = a.AllowableCUF;
+                            //    var allowlifetime = a.AllowableLifeTime;
+                            //    var allowratio = a.AllowableChangingRatio;
+                            //    allowableCuf = allowcuf;
+                            //    allowableLifeTime = allowlifetime;
+                            //    allowablesChangingratio = allowratio;
+                            //    break;
+                            //}
+
+                            report.AllowableCUF = initialReport.AllowableCUF;
+                            report.AllowableLifeTime = initialReport.AllowableLifeTime;
+                            report.AllowableChangingRatio = initialReport.AllowableChangingRatio;
+
+                            //if (Date != "")
+                            //{
+                            //    string[] std = Date.Split('.');
+                            //    report.ReportDate = new DateTime(int.Parse(std[2]),
+                            //        int.Parse(std[1]),
+                            //        int.Parse(std[0]),
+                            //        new GregorianCalendar()
+                            //    );
+                            //}
+
+                            //#region  Comoare the Date of This report with Date of before reports
+
+
+                            //var compareforexistReport = _reportService.GetAllReportsForCompare(report.ReportDate);
+                            //if (compareforexistReport.Count != 0)
+                            //{
+                            //    return Redirect("/SACOR-446?IsExistReport=true");
+                            //}
+                            //#endregion
+
+                            _reportService.AddNewDamageabilityReport(report);
+
                         }
-                        //endofloop:
-                        if (Convert.ToDecimal(btotal) != 0)
-                        {
-                            decimal ratio = (Convert.ToDecimal(btotal) - Convert.ToDecimal(Totaldamageabilityofequipment)) / Convert.ToDecimal(btotal);
-                            report.ChangingRatio = ratio.ToString();
-                        }
-                        //else
-                        //{
-                        //    report.ChangingRatio = Convert.ToDecimal(0);
-                        //}
-
-                        //AllowableCUF & AllowableLifeTime
-                        var allowableCuf = "";
-                        var allowableLifeTime = "";
-                        var allowablesChangingratio = "";
-
-                        foreach (var a in totalReports)
-                        {
-                            var allowcuf = a.AllowableCUF;
-                            var allowlifetime = a.AllowableLifeTime;
-                            var allowratio = a.AllowableChangingRatio;
-                            allowableCuf = allowcuf;
-                            allowableLifeTime = allowlifetime;
-                            allowablesChangingratio = allowratio;
-                            break;
-                        }
-
-                        report.AllowableCUF = allowableCuf;
-                        report.AllowableLifeTime = allowableLifeTime;
-                        report.AllowableChangingRatio = allowablesChangingratio;
-
-                        //if (Date != "")
-                        //{
-                        //    string[] std = Date.Split('.');
-                        //    report.ReportDate = new DateTime(int.Parse(std[2]),
-                        //        int.Parse(std[1]),
-                        //        int.Parse(std[0]),
-                        //        new GregorianCalendar()
-                        //    );
-                        //}
-
-                        //#region  Comoare the Date of This report with Date of before reports
-
-                        
-                        //var compareforexistReport = _reportService.GetAllReportsForCompare(report.ReportDate);
-                        //if (compareforexistReport.Count != 0)
-                        //{
-                        //    return Redirect("/SACOR-446?IsExistReport=true");
-                        //}
-                        //#endregion
-
-                        _reportService.AddNewDamageabilityReport(report);
-
                     }
                 }
-            }
 
-        }
+            }
             //
 
             //return View();

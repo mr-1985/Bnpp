@@ -111,6 +111,12 @@ namespace Bnpp.Core.Services
             return _context.DamageabilityReports.Find(reportId);
         }
 
+        public DamageabilityReport GetDamageabilityReportForUseSomeData()
+        {
+            var min = _context.DamageabilityReports.Min(m => m.ID);
+            return _context.DamageabilityReports.FirstOrDefault(d => d.ID == min);
+        }
+
         public void UpdateDamageabilityReport(string allowableCuf, string allowableLifeTime, string allowablechangingratio, int reportId)
         {
 

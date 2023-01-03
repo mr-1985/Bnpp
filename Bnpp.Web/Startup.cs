@@ -45,7 +45,7 @@ namespace Bnpp.Web
 
             }).AddCookie(options =>
             {
-                options.LoginPath = "/Login";
+                options.LoginPath = "/home/Login";
                 options.LogoutPath = "/Logout";
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(43200);
             });

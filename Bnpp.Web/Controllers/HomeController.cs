@@ -35,7 +35,7 @@ namespace Bnpp.Web.Controllers
 
         [HttpPost]
         //[Route("Login")]
-        public ActionResult Login(LoginViewModel login, string ReturnUrl = "/")
+        public ActionResult Login(LoginViewModel login/*, string ReturnUrl = "/"*/)
         {
             if (!ModelState.IsValid)
             {
@@ -62,10 +62,10 @@ namespace Bnpp.Web.Controllers
                     HttpContext.SignInAsync(principal, properties);
 
                     ViewBag.IsSuccess = true;
-                    if (ReturnUrl != "/")
-                    {
-                        return Redirect(ReturnUrl);
-                    }
+                    //if (ReturnUrl != "/")
+                    //{
+                    //    return Redirect(ReturnUrl);
+                    //}
                     return View();
                 }
                 else

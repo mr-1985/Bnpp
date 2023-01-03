@@ -246,7 +246,7 @@
 
         <input type="button" value="Back" onclick="location='/Admin'" class="butn-cancel" style="direction: ltr; text-align: left;">
         <input type="button" id="delete" class="btn-delete-equip" value="Delete">
-
+        
 
         <div id="GroupBy">
 
@@ -258,11 +258,17 @@
 
             <table id="myTable" @*cellpadding="3" cellspacing="0"*@ aria-describedby="example_info" class="display dataTable">
                 <br />
+
                 <div id="myTable_filter" class="dataTables_filter">
                     <label>
                         Search Date: <input name="searchDate" id="searchDate" onchange="GetDate();" style="direction: ltr; text-align: left;">
                     </label>
+                    <label>
+                        Show: <input id="ShowEntries" onchange="dddd();" style="direction: ltr; text-align: left;">  entries
+                        <input type="button" onclick="location='/SACOR-446'" class="butn-cancel" style="direction: ltr; text-align: center;margin-bottom:-7px;">
+                    </label>
                 </div>
+
                 <br />
                 <thead>
                     <tr role="row">
@@ -272,7 +278,7 @@
                         <th data-orderable="false">
 
                         </th>
-                        <th data-orderable="false">
+                        <th>
                             <b>AKZ</b>
                         </th>
                         <th data-orderable="false">
@@ -291,7 +297,7 @@
                             <b>
                                 Life time of equipment per RALDS (years)
                             </b>
-                        </th >
+                        </th>
                         <th data-orderable="false">
                             <b>
                                 Damageability per coiled cycles
@@ -332,7 +338,7 @@
                                 File Date
                             </b>
                         </th>
-                        <th>
+                        <th data-orderable="false">
                             <b>
 
                             </b>
@@ -364,6 +370,7 @@
                             <td>
                                 @item.Lifetimeofequipmentindesign
                             </td>
+
                             @if ((Convert.ToDecimal(item.LifetimeofequipmentperRALDS)) <= (Convert.ToDecimal(item.AllowableLifeTime)))
                             {
                                 <td style="background-color:red;">
@@ -376,12 +383,16 @@
                                     @item.LifetimeofequipmentperRALDS
                                 </td>
                             }
+
+
+
                             <td>
                                 @item.Damageabilitypercoiledcycles
                             </td>
                             <td>
                                 @item.Damageabilityperuncoiledcycles
                             </td>
+
                             @if ((Convert.ToDecimal(item.Totaldamageabilityofequipment)) >= (Convert.ToDecimal(item.AllowableCUF)))
                             {
                                 <td style="background-color:red;">
@@ -398,9 +409,11 @@
                             <td>
                                 @item.AllowableCUF
                             </td>
+
                             <td>
                                 @item.AllowableLifeTime
                             </td>
+
                             @if ((Convert.ToDecimal(item.AllowableChangingRatio)) <= (Convert.ToDecimal(item.ChangingRatio)))
                             {
                                 <td style="background-color:red;">
@@ -414,12 +427,11 @@
                                 </td>
                             }
 
+
                             <td>
                                 @item.AllowableChangingRatio
                             </td>
-                            @*<td>
-                        @item.ReportDate.ToString("yyyy/MM/dd")
-                        </td>*@
+
                             <td>
                                 @item.CreateDate.ToString("yyyy/MM/dd")
                             </td>
@@ -522,19 +534,9 @@
             //alert(selectedIDs);
         });
 
-        // $('input:checkbox.checkBox').prop('checked',function () {
-        //        var selectedIDs = new Array();
-        //           $('input:checkbox.checkBox').each(function () {
-        //               if ($(this).prop('checked')) {
-        //                   selectedIDs.push($(this).val());
-        //               }
-        //           });
-
-        //           $('#exportSelectedData').val(selectedIDs);
 
 
-        //   alert(selectedIDs);
-        //});
+
         $("#checkAll").click(function () {
             $(".checkBox").prop('checked',
                 $(this).prop('checked'));
@@ -600,11 +602,32 @@
 
         };
 
+        //<------ Show Selected Items ----->
+
+        function dddd() {
+            var valuesw = $("#ShowEntries").val();
+            //alert(valuesw);
+
+            for (i = valuesw; i <= 98; i++) {
+                $("#" + i).hide();
+            }
+
+            $('#searchDate').val("");
+        }
+
+        //function ShowSelectedItems() {
+        //    for (i = 10; i <= 98; i++) {
+        //        $("#" + i).hide();
+        //    }
+        //}
+
+        //<------End Show Selected Items ----->
+
         $(document).ready(function () {
             $('tbody tr[role="row"]').hide();
         });
 
-        //Group By Date
+        //Group By Akz
 
 
         //group
@@ -613,16 +636,21 @@
             var table = $('#myTable').DataTable({
                 columnDefs: [{ visible: false, targets: groupColumn }],
                 order: [[groupColumn, 'asc']],
-                //"ordering": false,
 
-               
 
+                // hide "Showing 1 of N Entries" with the dataTables.js library
+                "info": false,
+                //"ordering": true,
+                //columnDefs: [{
+                //    orderable: false,
+                //    targets: "no-sort"
+                //}],
                 //displayLength: 1000,
                 lengthMenu: [
-                    [-1,10, 25, 50],
-                    ['All',10, 25, 50],
+                    [-1, 10, 25, 50],
+                    ['All', 10, 25, 50],
                 ],
-               
+
                 drawCallback: function (settings) {
                     var api = this.api();
                     var rows = api.rows({ page: 'current' }).nodes();
@@ -636,7 +664,7 @@
                             if (last !== group) {
                                 $(rows)
                                     .eq(i)
-                                    .before('<tr class="group" id="group_' + i + '" style="background-color: rgba(0, 0, 0, 0.15);"><td class="dt-control"></td><td colspan="16">' + group + '</td></tr>');
+                                    .before('<tr class="group" id="' + (i / 5) + '" style="background-color: rgba(0, 0, 0, 0.15);"><td class="dt-control"></td><td colspan="16">' + group + '</td></tr>');
 
                                 last = group;
 
@@ -649,8 +677,6 @@
             //Add parameter to class  class="group'+i+'"
             // Order by the grouping
             $('#myTable tbody').on('click', 'tr.group', function () {
-
-
 
                 $($(this)).nextUntil(".group").filter('tr[role="row"]').toggle();
 
