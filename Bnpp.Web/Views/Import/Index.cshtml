@@ -265,7 +265,7 @@
                     </label>
                     <label>
                         Show: <input id="ShowEntries" onchange="dddd();" style="direction: ltr; text-align: left;">  entries
-                        <input type="button" onclick="location='/SACOR-446'" class="butn-cancel" style="direction: ltr; text-align: center;margin-bottom:-7px;">
+                        <input type="button" onclick="location='/SACOR-446'" @*onclick="ShowAllRecords()"*@ class="butn-cancel" style="direction: ltr; text-align: center;margin-bottom:-7px;">
                     </label>
                 </div>
 
@@ -520,6 +520,10 @@
             setTimeout(function () { window.location = "/SACOR-446"; }, delay);
         }
 
+        function ShowAllRecords(){
+            window.location = "/SACOR-446";
+        }
+
         $('input:checkbox.checkBox').change(function () {
             var selectedIDs = new Array();
             $('input:checkbox.checkBox').each(function () {
@@ -612,14 +616,8 @@
                 $("#" + i).hide();
             }
 
-            $('#searchDate').val("");
+            //$('#ShowEntries').val("");
         }
-
-        //function ShowSelectedItems() {
-        //    for (i = 10; i <= 98; i++) {
-        //        $("#" + i).hide();
-        //    }
-        //}
 
         //<------End Show Selected Items ----->
 

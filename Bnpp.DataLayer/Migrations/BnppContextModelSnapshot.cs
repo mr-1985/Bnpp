@@ -1602,6 +1602,36 @@ namespace Bnpp.DataLayer.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("Bnpp.DataLayer.Entities.InitialData", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AllowableCUF")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("AllowableChangingRatio")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("AllowableLifeTime")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("initialData");
+                });
+
             modelBuilder.Entity("Bnpp.DataLayer.Entities.InspectionData.InspectionDocument", b =>
                 {
                     b.Property<int>("InspectionId")
