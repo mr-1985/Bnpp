@@ -152,7 +152,18 @@ namespace Bnpp.Web.Controllers
         [HttpPost]
         public IActionResult CreateDamageabilityReport(IFormFile fileReport, string reportDates, string reportDate = "", string allowablecuf = "", string allowablelifetime = "", string Changingratio = "", string allowableChangingratio = "")
         {
-            
+            //<------Add Initial data to Table----->
+            var initialParmeter=_reportService.GetAllInitialData();
+            if (initialParmeter.Count == 0)
+            {
+                InitialData initial = new InitialData();
+                initial.AllowableCUF = allowablecuf;
+                initial.AllowableLifeTime = allowablelifetime;
+                initial.AllowableChangingRatio = allowableChangingratio;
+                _reportService.AddInitialData(initial);
+            }
+            //<------End Add Initial data to Table----->
+
             var totalReports = _reportService.GetAllReports();
 
             var daterepo = reportDates.Substring(5, 10).ToString();
@@ -248,26 +259,6 @@ namespace Bnpp.Web.Controllers
 
                         //report.ChangingRatio = Changingratio;
 
-                        //if (Date != "")
-                        //{
-                        //    string[] std = Date.Split('.');
-                        //    report.ReportDate = new DateTime(int.Parse(std[2]),
-                        //        int.Parse(std[1]),
-                        //        int.Parse(std[0]),
-                        //        new GregorianCalendar()
-                        //    );
-                        //}
-
-                        //if (reportDate != "")
-                        //{
-                        //    string[] std = reportDate.Split('/');
-                        //    report.ReportDate = new DateTime(int.Parse(std[2]),
-                        //        int.Parse(std[0]),
-                        //        int.Parse(std[1]),
-                        //        new GregorianCalendar()
-                        //    );
-                        //}
-
                         _reportService.AddNewDamageabilityReport(report);
 
                     }
@@ -275,19 +266,7 @@ namespace Bnpp.Web.Controllers
             }
             else
             {
-                //var daterepo = reportDates.Substring(5,10).ToString();
-                //DateTime dateForCompare = DateTime.MinValue;
-                //if (reportDates != "")
-                //{
-                //    string[] std = daterepo.Split('_');
-                //    dateForCompare = new DateTime(int.Parse(std[0]),
-                //        int.Parse(std[1]),
-                //        int.Parse(std[2]),
-                //        new GregorianCalendar()
-                //    );
-                //}
-
-
+               
                 var compareforexistReport = _reportService.GetAllReportsForCompare(dateForCompare);
 
                 if (compareforexistReport.Count != 0)
@@ -407,45 +386,20 @@ namespace Bnpp.Web.Controllers
 
                             //AllowableCUF & AllowableLifeTime & AllowableChangingRatio
 
-                            var initialReport = _reportService.GetDamageabilityReportForUseSomeData();
-                            //var allowableCuf = "";
-                            //var allowableLifeTime = "";
-                            //var allowablesChangingratio = "";
+                            //var initialReport = _reportService.GetDamageabilityReportForUseSomeData();
+                            
 
-                            //foreach (var a in initialReport)
-                            //{
-                            //    var allowcuf = a.AllowableCUF;
-                            //    var allowlifetime = a.AllowableLifeTime;
-                            //    var allowratio = a.AllowableChangingRatio;
-                            //    allowableCuf = allowcuf;
-                            //    allowableLifeTime = allowlifetime;
-                            //    allowablesChangingratio = allowratio;
-                            //    break;
-                            //}
+                            //report.AllowableCUF = initialReport.AllowableCUF;
+                            //report.AllowableLifeTime = initialReport.AllowableLifeTime;
+                            //report.AllowableChangingRatio = initialReport.AllowableChangingRatio;
 
+                            var initialReport=_reportService.GetInitialDataForUseSomeData();
                             report.AllowableCUF = initialReport.AllowableCUF;
-                            report.AllowableLifeTime = initialReport.AllowableLifeTime;
-                            report.AllowableChangingRatio = initialReport.AllowableChangingRatio;
-
-                            //if (Date != "")
-                            //{
-                            //    string[] std = Date.Split('.');
-                            //    report.ReportDate = new DateTime(int.Parse(std[2]),
-                            //        int.Parse(std[1]),
-                            //        int.Parse(std[0]),
-                            //        new GregorianCalendar()
-                            //    );
-                            //}
-
-                            //#region  Comoare the Date of This report with Date of before reports
+                            report.AllowableLifeTime= initialReport.AllowableLifeTime;
+                            report.AllowableChangingRatio= initialReport.AllowableChangingRatio;
 
 
-                            //var compareforexistReport = _reportService.GetAllReportsForCompare(report.ReportDate);
-                            //if (compareforexistReport.Count != 0)
-                            //{
-                            //    return Redirect("/SACOR-446?IsExistReport=true");
-                            //}
-                            //#endregion
+
 
                             _reportService.AddNewDamageabilityReport(report);
 

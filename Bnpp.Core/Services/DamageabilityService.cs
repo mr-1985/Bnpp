@@ -19,6 +19,19 @@ namespace Bnpp.Core.Services
             _context = context;
         }
 
+        public int AddInitialData(InitialData initial)
+        {
+            initial.CreateDate=DateTime.Now;
+            _context.Add(initial);
+            _context.SaveChanges();
+
+            return initial.ID;
+        }
+
+        public List<InitialData> GetAllInitialData()
+        {
+            return _context.initialData.ToList();
+        }
 
         public int AddNewDamageabilityReport(DamageabilityReport report)
         {
@@ -37,6 +50,8 @@ namespace Bnpp.Core.Services
             _context.Update(damageReport);
             _context.SaveChanges();
         }
+
+       
 
         public List<DamageabilityReport> GetAllReports(string filter = "", string date = "", string fileDate = "")
         {
@@ -159,6 +174,12 @@ namespace Bnpp.Core.Services
                 _context.SaveChanges();
             }
 
+        }
+
+        public InitialData GetInitialDataForUseSomeData()
+        {
+            var min = _context.initialData.Min(m => m.ID);
+            return _context.initialData.FirstOrDefault(d => d.ID == min);
         }
     }
 }

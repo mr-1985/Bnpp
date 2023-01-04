@@ -18,5 +18,9 @@ namespace Bnpp.Core.Services.Interfaces
         DamageabilityReport GetDamageabilityReportById(int reportId);
         DamageabilityReport GetDamageabilityReportForUseSomeData();
         void DeleteDamageabilityReport(int reportId);
+
+        int AddInitialData(InitialData initial);
+        List<InitialData> GetAllInitialData();
+        InitialData GetInitialDataForUseSomeData();
     }
 }
