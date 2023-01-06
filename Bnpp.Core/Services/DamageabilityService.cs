@@ -97,7 +97,7 @@ namespace Bnpp.Core.Services
         {
             //var date1 = DateTime.Parse(date);
            
-            return _context.DamageabilityReports.Where(r=>r.ReportDate.Date==date.Date).Take(98).ToList();
+            return _context.DamageabilityReports.Where(r=>r.ReportDate.Date==date.Date &&r.IsDelete==false).Take(98).ToList();
         }
 
         public List<ReportListViewModel> GetAllTotalReports()
@@ -111,7 +111,7 @@ namespace Bnpp.Core.Services
             //    Totaldamageabilityofequipment = t.Totaldamageabilityofequipment
             //}).Take(98).ToList();
 
-            var max = _context.DamageabilityReports.Max(m => m.ReportDate.Date);
+            var max = _context.DamageabilityReports.Where(r=>r.IsDelete==false).Max(m => m.ReportDate.Date);
 
 
             return _context.DamageabilityReports.Where(b => b.IsDelete == false && b.ReportDate.Date == max).Select(t => new ReportListViewModel()
@@ -128,7 +128,7 @@ namespace Bnpp.Core.Services
 
         public DamageabilityReport GetDamageabilityReportForUseSomeData()
         {
-            var min = _context.DamageabilityReports.Min(m => m.ID);
+            var min = _context.DamageabilityReports.Where(r => r.IsDelete == false).Min(m => m.ID);
             return _context.DamageabilityReports.FirstOrDefault(d => d.ID == min);
         }
 
@@ -156,7 +156,7 @@ namespace Bnpp.Core.Services
 
             //var numberofRow = reportId - firstRecord;
 
-            var firstId = _context.DamageabilityReports.Min(i => i.ID);
+            var firstId = _context.DamageabilityReports.Where(r=>r.IsDelete==false).Min(i => i.ID);
 
             var difference=reportId- firstId;
             var number = difference % 98;
@@ -178,8 +178,8 @@ namespace Bnpp.Core.Services
 
         public InitialData GetInitialDataForUseSomeData()
         {
-            var min = _context.initialData.Min(m => m.ID);
-            return _context.initialData.FirstOrDefault(d => d.ID == min);
+             var min = _context.DamageabilityReports.Where(r=>r.IsDelete==false).Min(m => m.CreateDate.Date);
+            return _context.initialData.FirstOrDefault(d => d.CreateDate.Date == min);
         }
     }
 }

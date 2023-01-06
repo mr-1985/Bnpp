@@ -116,16 +116,7 @@ namespace Bnpp.Web.Controllers
             return View(_reportService.GetDamageabilityReportById(id));
         }
 
-        //[HttpPost]
-        //public IActionResult EditDamageabilityReport(string allowablecuf, string allowablelifetime)
-        //{
-        //    //if (!ModelState.IsValid)
-        //    //    return View();
-
-
-        //    _reportService.UpdateDamageabilityReport(allowablecuf, allowablelifetime);
-        //    return RedirectToAction("index");
-        //}
+        
 
         [HttpPost]
         public IActionResult EditDamageabilityReport(string allowablecuf, string allowablelifetime, string allowablechangingratio, int id)
@@ -152,17 +143,7 @@ namespace Bnpp.Web.Controllers
         [HttpPost]
         public IActionResult CreateDamageabilityReport(IFormFile fileReport, string reportDates, string reportDate = "", string allowablecuf = "", string allowablelifetime = "", string Changingratio = "", string allowableChangingratio = "")
         {
-            //<------Add Initial data to Table----->
-            var initialParmeter=_reportService.GetAllInitialData();
-            if (initialParmeter.Count == 0)
-            {
-                InitialData initial = new InitialData();
-                initial.AllowableCUF = allowablecuf;
-                initial.AllowableLifeTime = allowablelifetime;
-                initial.AllowableChangingRatio = allowableChangingratio;
-                _reportService.AddInitialData(initial);
-            }
-            //<------End Add Initial data to Table----->
+            
 
             var totalReports = _reportService.GetAllReports();
 
@@ -180,6 +161,19 @@ namespace Bnpp.Web.Controllers
 
             if (totalReports.Count == 0)
             {
+
+                //<------Add Initial data to Table----->
+                
+                    InitialData initial = new InitialData();
+                    initial.AllowableCUF = allowablecuf;
+                    initial.AllowableLifeTime = allowablelifetime;
+                    initial.AllowableChangingRatio = allowableChangingratio;
+                    _reportService.AddInitialData(initial);
+                
+                //<------End Add Initial data to Table----->
+
+
+
                 var Date = "";
                 var Akz = "";
                 var location = "";
