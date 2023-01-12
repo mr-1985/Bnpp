@@ -180,6 +180,7 @@ namespace Bnpp.Core.Services
         {
              var min = _context.DamageabilityReports.Where(r=>r.IsDelete==false).Min(m => m.CreateDate.Date);
             return _context.initialData.FirstOrDefault(d => d.CreateDate.Date == min);
+               
         }
     }
 }
